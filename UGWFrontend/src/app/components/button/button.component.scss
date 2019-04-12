@@ -1,0 +1,16 @@
+@import "../../../colors";
+div {
+  display: inline-block;
+  background: $dark;
+  color: $light;
+  padding: 16px 26px;
+  position:relative;
+  box-shadow: 5px 5px 0 0 $primary;
+  transition: all 0.1s;
+  cursor: pointer;
+  &:hover {
+    transform: translate(2.5px, 2.5px);
+    box-shadow: 0 0  0 0 $primary;
+  }
+
+}

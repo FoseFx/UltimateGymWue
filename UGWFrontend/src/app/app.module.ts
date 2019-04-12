@@ -11,12 +11,14 @@ import { MenuComponent } from './components/menu/menu.component';
 import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    MenuComponent
+    MenuComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
