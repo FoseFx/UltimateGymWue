@@ -10,13 +10,15 @@ export interface AppState {
   meta: {
     version: string;
   };
+  menuOpen: boolean;
 }
 
 export function createInitialState(): AppState {
   return {
     meta: {
       version: '0.0.1'
-    }
+    },
+    menuOpen: false
   };
 }
 

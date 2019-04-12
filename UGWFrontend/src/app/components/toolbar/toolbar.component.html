@@ -1,4 +1,4 @@
 <div class="toolbar">
-  <i class="material-icons">menu</i>
+  <i class="material-icons" (click)="service.changeMenuState()">menu</i>
   <h3 *ngIf="!(showTitle$ | async)">Ultimate Gym Wue</h3>
 </div>

@@ -1,0 +1,14 @@
+<div id="menu"
+     *ngIf="query.menuOpen$ | async"
+     [@menuOpen]="(query.menuOpen$ | async) ? 'open' : 'closed'">
+
+</div>
+
+<!-- Backdrop -->
+<div id="backdrop"
+     *ngIf="query.menuOpen$ | async"
+     (click)="service.changeMenuState()"
+     [@backdropVisible]="(query.menuOpen$ | async) ? 'open' : 'closed'">
+
+</div>
+

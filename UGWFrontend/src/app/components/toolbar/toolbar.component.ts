@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {AppService} from '../../state/app.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +12,7 @@ export class ToolbarComponent implements OnInit {
 
   showTitle$;
 
-  constructor() { }
+  constructor(public service: AppService) { }
 
   ngOnInit() {
     this.showTitle$ = fromEvent(window, 'resize')
