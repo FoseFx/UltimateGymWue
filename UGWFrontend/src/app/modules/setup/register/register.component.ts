@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const regex = /^\w{2,} \w{2,}$/;
+    const regex = /^[A-ZÜÄÖ][a-züäöß]+ [A-ZÜÄÖ][a-züäöß]+$/;
     this.nameValid$ = this.name$.pipe(
       debounceTime(200),
       map((name: string) => regex.test(name))
