@@ -1,11 +1,41 @@
 <app-card>
   <h1 style="text-align: center; padding-top: 2rem">Register</h1>
 
+  <p>
+    Bevor du Ultimate Gym Wue verwenden kannst, musst du dich erst registrieren.
+    Fülle dafür die folgenden Felder aus.
+  </p>
+
   <form>
 
-    <app-input>text</app-input>
-    <app-input type="email">email</app-input>
-    <app-input type="number">number</app-input>
+    <app-input (input)="newName($event)">Vor- und Nachname</app-input>
+    <p class="hint">Dein Klarname kann von dir erstellten Ereignissen höhere Glaubwürdigkeit geben.</p>
+
+    <br>
+    <app-button
+      [accent]="true"
+      class="center-button"
+      [disabled]="!(nameValid$ | async)">
+      Weiter mit Email und Password
+    </app-button>
+
+    <br>
+    <app-hr style="width: 90%; margin: 0 auto; display: block;">Weiter mit Dritten</app-hr>
+    <br>
+
+    <div id="third-parties">
+
+      <app-button class="center-button" [disabled]="!(nameValid$ | async)">
+        <span style="display: block">Weiter mit</span>
+        <img style="height: 50px; margin-top: 10px" alt="Google" src="/assets/google.png">
+      </app-button>
+
+      <app-button class="center-button" [disabled]="!(nameValid$ | async)">
+        <span style="display: block">Weiter mit</span>
+        <img style="height: 50px; margin-top: 10px" alt="Instagram" src="/assets/instagram.png">
+      </app-button>
+
+    </div>
 
   </form>
 

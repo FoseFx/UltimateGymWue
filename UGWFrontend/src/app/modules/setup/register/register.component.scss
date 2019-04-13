@@ -11,3 +11,22 @@ app-input {
   margin-left: auto;
   margin-right: auto;
 }
+
+p {
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+p.hint {
+  width: 90%; // same as inputs
+  padding: 0;
+  font-size: 14px;
+}
+
+#third-parties {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 50% 50%;
+}

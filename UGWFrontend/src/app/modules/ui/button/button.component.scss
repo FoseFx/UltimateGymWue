@@ -1,7 +1,7 @@
 @import "../../../../colors";
 div {
   display: inline-block;
-  background: $dark;
+  background: $bg;
   color: $light;
   padding: 16px 26px;
   position:relative;
@@ -11,14 +11,28 @@ div {
 
   &.swap {
     background: $primary;
-    box-shadow: 5px 5px 0 0 $dark;
+    box-shadow: 5px 5px 0 0 $bg;
     color: $bg;
   }
 
-  &:hover {
+  &.accent {
+    background: $primary;
+    box-shadow: 5px 5px 0 0 $accent;
+    color: $bg;
+  }
+
+  &.disabled {
+    filter: blur(1px) grayscale(0.5);
+    box-shadow: 0 0 0 0 black;
+    cursor: default;
+  }
+
+  &:not(.disabled):hover {
     transform: translate(2.5px, 2.5px);
     box-shadow: 0 0  0 0 $primary;
   }
+
+
 
 
 }

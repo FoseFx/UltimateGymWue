@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class InputComponent implements OnInit {
 
   @Input() type: 'text'|'email'|'number' = 'text';
+  @Output() input = new EventEmitter();
   focused = false;
   labelColored = false;
 

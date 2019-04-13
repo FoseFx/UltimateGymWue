@@ -2,7 +2,7 @@
 :host {
   position:relative;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: block;
   width: 100%;
 }
@@ -19,6 +19,7 @@ input[type=number] {
   opacity: 0.95;
   transition: all 0.2s linear;
   box-shadow: 3px 3px 0 0 $primary;
+  font-size: 17px;
 
   &:focus {
     opacity: 1;

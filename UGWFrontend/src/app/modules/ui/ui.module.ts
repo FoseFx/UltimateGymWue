@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
 import { InputComponent } from './input/input.component';
+import { HrComponent } from './hr/hr.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     CardComponent,
-    InputComponent
+    InputComponent,
+    HrComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { InputComponent } from './input/input.component';
   exports: [
     ButtonComponent,
     CardComponent,
-    InputComponent
+    InputComponent,
+    HrComponent
   ]
 })
 export class UiModule { }
