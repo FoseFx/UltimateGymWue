@@ -7,8 +7,12 @@ const routes: Routes = [
     loadChildren: './modules/setup/setup.module#SetupModule'
   },
   {
+    path: 'legal',
+    redirectTo: 'setup/legal'
+  },
+  {
     path: '',
-    redirectTo: 'setup',
+    redirectTo: 'setup/welcome',
     pathMatch: 'full'
   }
 ];

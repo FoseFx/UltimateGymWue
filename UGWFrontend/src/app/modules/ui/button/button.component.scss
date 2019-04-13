@@ -1,4 +1,4 @@
-@import "../../../colors";
+@import "../../../../colors";
 div {
   display: inline-block;
   background: $dark;
@@ -8,9 +8,18 @@ div {
   box-shadow: 5px 5px 0 0 $primary;
   transition: all 0.1s;
   cursor: pointer;
+
+  &.swap {
+    background: $primary;
+    box-shadow: 5px 5px 0 0 $dark;
+    color: $bg;
+  }
+
   &:hover {
     transform: translate(2.5px, 2.5px);
     box-shadow: 0 0  0 0 $primary;
   }
 
+
 }
+

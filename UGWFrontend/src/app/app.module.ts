@@ -11,19 +11,19 @@ import { MenuComponent } from './components/menu/menu.component';
 import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ButtonComponent } from './components/button/button.component';
+import { UiModule} from './modules/ui/ui.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    MenuComponent,
-    ButtonComponent
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    UiModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [

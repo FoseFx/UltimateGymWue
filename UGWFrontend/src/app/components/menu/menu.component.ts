@@ -13,10 +13,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         transform: 'none'
       })),
       state('void', style({
-        transform: 'translateX(-100vh)'
+        transform: 'translateX(-380px)'
       })),
       transition('open <=> void', [
-        animate('90ms')
+        animate('100ms')
       ])
     ]),
     trigger('backdropVisible', [
@@ -27,7 +27,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         opacity: 0
       })),
       transition('open <=> void', [
-        animate('90ms')
+        animate('100ms')
       ])
     ]),
 
