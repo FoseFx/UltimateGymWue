@@ -1,0 +1,5 @@
+<label for="input" [ngClass]="{'focused': focused, 'colored': labelColored}" ><ng-content></ng-content></label>
+
+<input *ngIf="type === 'text'"    (focusin)="focusIn()" (focusout)="focusOut($event)" id="input" type="text">
+<input *ngIf="type === 'email'"   (focusin)="focusIn()" (focusout)="focusOut($event)" id="input" type="email">
+<input *ngIf="type === 'number'"  (focusin)="focusIn()" (focusout)="focusOut($event)" id="input" type="number">

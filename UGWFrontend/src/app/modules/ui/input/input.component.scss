@@ -1,0 +1,49 @@
+@import "../../../../colors";
+:host {
+  position:relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+}
+
+input[type=text],
+input[type=email],
+input[type=number] {
+  display: block;
+  width: calc(100% - 2 * 10px); // 100% - padding for each side (x2)
+  padding: 10px;
+  border: 2px solid $light;
+  background: transparent;
+  color: $light;
+  opacity: 0.95;
+  transition: all 0.2s linear;
+  box-shadow: 3px 3px 0 0 $primary;
+
+  &:focus {
+    opacity: 1;
+    color: $primary;
+    border: 2px solid $primary;
+  }
+}
+
+label {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 3;
+  font-size: 17px;
+  padding: 0 3px;
+  transition: transform 150ms ease-out, font-size 150ms ease-out;
+
+  &.focused {
+    transform: translateY(-115%);
+    background: $dark;
+    padding: 0 3px;
+    font-size: 16px;
+  }
+  &.colored {
+    color: $primary;
+  }
+}
+

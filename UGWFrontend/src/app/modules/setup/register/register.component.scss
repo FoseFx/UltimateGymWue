@@ -1,0 +1,13 @@
+app-card {
+  padding-right: 15px;
+  max-width: 550px;
+  @media (max-width: 622px){
+    width: 100%;
+    padding-left: 0;
+  }
+}
+app-input {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}

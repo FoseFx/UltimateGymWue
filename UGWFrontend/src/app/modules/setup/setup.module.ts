@@ -9,11 +9,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { StufeComponent } from './stufe/stufe.component';
 import { KurseComponent } from './kurse/kurse.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent],
   imports: [
     CommonModule,
+    FormsModule,
     SetupRoutingModule,
     UiModule
   ]
