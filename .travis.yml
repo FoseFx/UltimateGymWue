@@ -1,0 +1,22 @@
+matrix:
+  include:
+  - language: node_js
+    node_js:
+      - 10
+
+    addons:
+    - chrome: stable
+
+    cache:
+      # Caches $HOME/.npm when npm ci is default script command
+      # Caches node_modules in all other cases
+      npm: true
+      directories:
+        # we also need to cache folder with Cypress binary
+        - ~/.cache
+    install:
+      - cd UGWFrontend
+      - npm ci
+    script:
+      - npm run test # unit tests
+      - npm run e2e  # integration tests
