@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "colors";
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -67,6 +67,9 @@ p.hint {
   opacity: 0.8;
 }
 
+p.hint.warning {
+  color: $attention;
+}
 .center-button {
   text-align: center;
   display: block;

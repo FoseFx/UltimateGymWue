@@ -9,22 +9,28 @@ export class InputComponent implements OnInit {
 
   @Input() type: 'text'|'email'|'number' = 'text';
   @Output() input = new EventEmitter();
-  focused = false;
-  labelColored = false;
+  private focused = false;
+  private labelColored = false;
+  public dirty = false;
 
   constructor() { }
 
-  focusIn() {
+  private focusIn() {
     this.focused = true;
     this.labelColored = true;
   }
 
-  focusOut(event: FocusEvent) {
+  private focusOut(event: FocusEvent) {
     this.labelColored = false;
     const target: HTMLInputElement = (event.target) as HTMLInputElement;
     if (target.value.replace(/[\n\t ]/g, '').trim() === '') {
       this.focused = !this.focused;
     }
+  }
+
+  private onInput(event) {
+    this.dirty = true;
+    this.input.emit(event);
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {debounceTime, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {debounceTime, map, tap} from 'rxjs/operators';
+import {SetupService} from '../state/setup.service';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +10,18 @@ import {debounceTime, map} from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
 
-  nameValid$;
+  nameValid$: Observable<boolean>;      // used in html
+  private nameValid: boolean;           // used in this file
   name$ = new BehaviorSubject('');
-  constructor() { }
+  private name: string;
+  constructor(private setupService: SetupService) { }
 
   ngOnInit() {
     const regex = /^[A-ZÜÄÖ][a-züäöß]+ [A-ZÜÄÖ][a-züäöß]+$/;
     this.nameValid$ = this.name$.pipe(
       debounceTime(200),
-      map((name: string) => regex.test(name))
+      map((name: string) => regex.test(name)),
+      tap(value => this.nameValid = value)
     );
   }
 
@@ -25,6 +29,16 @@ export class RegisterComponent implements OnInit {
     const target: HTMLInputElement = (event.target) as HTMLInputElement;
     const value = target.value.trim();
     this.name$.next(value);
+    this.name = value;
+  }
+
+  onClick(type: 'normal'|'google'|'insta') {
+    if (!this.nameValid) {
+      return;
+    }
+    this.setupService.lockName(this.name);
+    // todo route
+    console.log(type);
   }
 
 }

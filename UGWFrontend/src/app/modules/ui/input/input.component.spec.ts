@@ -22,4 +22,24 @@ describe('InputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be dirty after first input', () => {
+    expect(component.dirty).toEqual(false);
+    // @ts-ignore
+    component.onInput({});
+    expect(component.dirty).toEqual(true);
+  });
+
+  it('should pass "input" event to @Output "input"', (done) => {
+    const EVENT = {someUnique: 'value'};
+    component.input.subscribe((event) => {
+      expect(JSON.stringify(event)).toEqual(JSON.stringify(EVENT));
+      done();
+    });
+    // @ts-ignore
+    component.onInput(EVENT);
+
+  });
+
+
 });

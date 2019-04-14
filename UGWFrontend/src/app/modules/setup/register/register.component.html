@@ -8,14 +8,21 @@
 
   <form>
 
-    <app-input (input)="newName($event)">Vor- und Nachname</app-input>
+    <app-input #name (input)="newName($event)">Vor- und Nachname</app-input>
+    <p
+      class="hint warning"
+      *ngIf="!(nameValid$ | async) && name.dirty">
+      Muss wie folgt aussehen: "Vorname Nachname" (Groß- / Kleinschreibung beachten!)
+    </p>
     <p class="hint">Dein Klarname kann von dir erstellten Ereignissen höhere Glaubwürdigkeit geben.</p>
 
     <br>
     <app-button
       [accent]="true"
       class="center-button"
-      [disabled]="!(nameValid$ | async)">
+      [disabled]="!(nameValid$ | async)"
+      (click)="onClick('normal')"
+    >
       Weiter mit Email und Password
     </app-button>
 
@@ -25,12 +32,20 @@
 
     <div id="third-parties">
 
-      <app-button class="center-button" [disabled]="!(nameValid$ | async)">
+      <app-button
+        class="center-button"
+        [disabled]="!(nameValid$ | async)"
+        (click)="onClick('google')"
+      >
         <span style="display: block">Weiter mit</span>
         <img style="height: 50px; margin-top: 10px" alt="Google" src="/assets/google.png">
       </app-button>
 
-      <app-button class="center-button" [disabled]="!(nameValid$ | async)">
+      <app-button
+        class="center-button"
+        [disabled]="!(nameValid$ | async)"
+        (click)="onClick('insta')"
+      >
         <span style="display: block">Weiter mit</span>
         <img style="height: 50px; margin-top: 10px" alt="Instagram" src="/assets/instagram.png">
       </app-button>

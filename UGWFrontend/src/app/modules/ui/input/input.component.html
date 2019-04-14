@@ -1,7 +1,7 @@
 <label for="input" [ngClass]="{'focused': focused, 'colored': labelColored}" ><ng-content></ng-content></label>
 
 <input
-  (input)="input.emit($event)"
+  (input)="onInput($event)"
   (focusin)="focusIn()"
   (focusout)="focusOut($event)"
   id="input"

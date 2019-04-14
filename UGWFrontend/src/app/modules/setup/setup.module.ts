@@ -10,6 +10,9 @@ import { RegisterComponent } from './register/register.component';
 import { StufeComponent } from './stufe/stufe.component';
 import { KurseComponent } from './kurse/kurse.component';
 import {FormsModule} from '@angular/forms';
+import {SetupStore} from './state/setup.store';
+import {SetupQuery} from './state/setup.query';
+import {SetupService} from './state/setup.service';
 
 @NgModule({
   declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent],
@@ -18,6 +21,11 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     SetupRoutingModule,
     UiModule
+  ],
+  providers: [
+    SetupStore,
+    SetupQuery,
+    SetupService
   ]
 })
 export class SetupModule { }

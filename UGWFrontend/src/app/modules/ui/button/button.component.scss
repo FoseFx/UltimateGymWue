@@ -8,6 +8,7 @@ div {
   box-shadow: 5px 5px 0 0 $primary;
   transition: all 0.1s;
   cursor: pointer;
+  user-select: none;
 
   &.swap {
     background: $primary;
@@ -22,8 +23,7 @@ div {
   }
 
   &.disabled {
-    filter: blur(1px) grayscale(0.5);
-    box-shadow: 0 0 0 0 black;
+    filter: blur(0.5px) grayscale(0.8);
     cursor: default;
   }
 

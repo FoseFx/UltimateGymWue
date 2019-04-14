@@ -1,7 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
 import {UiModule} from '../../ui/ui.module';
+import {SetupStore} from '../state/setup.store';
+import {SetupService} from '../state/setup.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -10,7 +12,8 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ UiModule ],
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent ],
+      providers: [SetupStore, SetupService]
     })
     .compileComponents();
   }));
@@ -69,6 +72,46 @@ describe('RegisterComponent', () => {
         done();
       });
     }));
+
+
+  });
+
+  describe('onClick', () => {
+
+    it('should lock full name, when valid', () => {
+      inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
+
+        const spy = spyOn(service, 'lockName');
+        spy.and.callFake((val: string) => {
+          expect(val).toEqual('Some Name');
+        });
+        // @ts-ignore
+        component.name = 'Some Name';
+        // @ts-ignore
+        component.nameValid = true;
+        component.onClick('normal');
+        expect(service.lockName).toHaveBeenCalled();
+
+      }))();
+    });
+
+
+    it('should not lock full name, when not valid', () => {
+      inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
+
+        const spy = spyOn(service, 'lockName');
+        spy.and.callFake((val: string) => {
+          expect(val).toEqual('Somename');
+        });
+        // @ts-ignore
+        component.name = 'Somename';
+        // @ts-ignore
+        component.nameValid = false;
+        component.onClick('normal');
+        expect(service.lockName).not.toHaveBeenCalled();
+
+      }))();
+    });
 
 
   });
