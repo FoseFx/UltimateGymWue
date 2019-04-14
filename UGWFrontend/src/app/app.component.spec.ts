@@ -1,16 +1,30 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {ToolbarComponent} from './components/toolbar/toolbar.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {UiModule} from './modules/ui/ui.module';
+import {AppStore} from './state/app.store';
+import {AppQuery} from './state/app.query';
+import {AppService} from './state/app.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        UiModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        ToolbarComponent,
+        MenuComponent
       ],
+      providers: [
+        AppStore,
+        AppQuery,
+        AppService
+      ]
     }).compileComponents();
   }));
 
@@ -19,7 +33,7 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-
+/*
   it(`should have as title 'UGWFrontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
@@ -32,4 +46,5 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to UGWFrontend!');
   });
+  */
 });
