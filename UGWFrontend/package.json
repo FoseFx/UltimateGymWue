@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "cypress": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && cypress open\" --success first --kill-others",
-    "e2e": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && cypress run\" --success first --kill-others"
+    "e2e-chrome": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && $(npm bin)/cypress run --browser chrome\" --success first --kill-others",
+    "e2e": "npm run e2e-chrome"
   },
   "private": true,
   "dependencies": {
