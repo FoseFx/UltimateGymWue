@@ -21,8 +21,7 @@ matrix:
       - npm run test # unit tests
       - npm run e2e  # integration tests
   - language: rust
-    rust:
-      - nightly
+    rust: nightly
     cache: cargo
     script:
     - cd UGWBackend
