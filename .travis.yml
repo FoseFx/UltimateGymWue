@@ -12,4 +12,4 @@ install:
   - cd UGWFrontend
   - npm ci
 script:
-  - $(npm bin)/cypress run --record
+  - npm run e2e
