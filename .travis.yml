@@ -20,3 +20,11 @@ matrix:
     script:
       - npm run test # unit tests
       - npm run e2e  # integration tests
+  - language: rust
+    rust:
+    - nightly
+    cache: cargo
+    script:
+    - cd UGWBackend
+    - cargo build --verbose --all
+    - cargo test --verbose --all
