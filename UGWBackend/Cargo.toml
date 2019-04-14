@@ -1,0 +1,7 @@
+[package]
+name = "UGWBackend"
+version = "0.1.0"
+authors = ["FoseFx <fosefx@pm.me>"]
+edition = "2018"
+
+[dependencies]
