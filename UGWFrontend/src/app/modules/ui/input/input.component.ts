@@ -9,18 +9,18 @@ export class InputComponent implements OnInit {
 
   @Input() type: 'text'|'email'|'number' = 'text';
   @Output() input = new EventEmitter();
-  private focused = false;
-  private labelColored = false;
+  focused = false;
+  labelColored = false;
   public dirty = false;
 
   constructor() { }
 
-  private focusIn() {
+  focusIn() {
     this.focused = true;
     this.labelColored = true;
   }
 
-  private focusOut(event: FocusEvent) {
+  focusOut(event: FocusEvent) {
     this.labelColored = false;
     const target: HTMLInputElement = (event.target) as HTMLInputElement;
     if (target.value.replace(/[\n\t ]/g, '').trim() === '') {
@@ -28,7 +28,7 @@ export class InputComponent implements OnInit {
     }
   }
 
-  private onInput(event) {
+  onInput(event) {
     this.dirty = true;
     this.input.emit(event);
   }
