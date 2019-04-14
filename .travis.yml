@@ -12,4 +12,5 @@ install:
   - cd UGWFrontend
   - npm ci
 script:
+  - npm test
   - npm run e2e
