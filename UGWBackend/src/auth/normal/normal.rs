@@ -8,6 +8,8 @@ use rocket_contrib::json::{Json};
 #[derive(Deserialize)]
 #[derive(Debug)]
 pub struct NormalRegisterData {
+    fullname: String,
+    email: String,
     password: String
 }
 
