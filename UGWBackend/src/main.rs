@@ -6,8 +6,13 @@ extern crate rocket_contrib;
 #[macro_use] extern crate serde_json;
 
 mod auth;
+mod db;
 
 use rocket::Rocket;
+
+
+pub struct SecretMgt(String);
+
 
 #[get("/health")]
 fn status() -> &'static str{
@@ -16,11 +21,32 @@ fn status() -> &'static str{
 
 
 fn rocket() -> Rocket {
-    return rocket::ignite().mount("/", routes![
-        status,
-        auth::normal::normal::normal_handler
-    ]);
+    return rocket::ignite()
+        .manage(get_secret())
+        .mount(
+            "/",
+            routes![
+            status,
+            auth::normal::normal::normal_handler
+            ]
+        );
 }
+
+
+fn get_secret() -> SecretMgt {
+
+    let mut secret: Option<String> = None;
+    for (env_key, val) in std::env::vars(){
+        if env_key == "SECRET" {
+            secret = Some(val);
+        }
+    }
+    if secret.is_none() {
+        panic!("No Secret variable found");
+    }
+    return SecretMgt(secret.unwrap());
+}
+
 
 fn main() {
     rocket().launch();
