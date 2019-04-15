@@ -83,7 +83,7 @@ mod test {
 
     #[test]
     fn test_hash_passw(){
-        let (hash, salt) = hash_passw("Secure Password".to_string());
+        let (hash, salt) = hash_passw(&"Secure Password".to_string());
         // we assume verify_passw works
         assert_eq!(
             verify_passw(
