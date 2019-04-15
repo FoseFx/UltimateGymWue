@@ -7,4 +7,5 @@ export class SetupQuery extends Query<SetupState> {
   constructor(protected store: SetupStore) {
     super(store);
   }
+  selectName$ = this.select('name');
 }

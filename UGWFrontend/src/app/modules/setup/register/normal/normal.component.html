@@ -1,0 +1,16 @@
+<app-card>
+  <h1 style="text-align: center; padding-top: 2rem">Hey {{query.selectName$ | async}}</h1>
+
+  <app-input type="email">Email</app-input>
+  <app-input type="password">Passwort</app-input>
+  <app-input type="password">Passwort</app-input>
+
+  <app-button
+    [accent]="true"
+    [disabled]="true"
+    class="center-button"
+  >
+    Registrieren
+  </app-button>
+
+</app-card>

@@ -9,6 +9,7 @@
 
 input[type=text],
 input[type=email],
+input[type=password],
 input[type=number] {
   display: block;
   width: calc(100% - 2 * 10px); // 100% - padding for each side (x2)

@@ -4,6 +4,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LegalComponent } from './legal/legal.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {NormalComponent} from './register/normal/normal.component';
+import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +19,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'register/normal',
+    component: NormalComponent,
+    canActivate: [RegistersteptwoGuard]
   },
   {
     path: 'welcome',

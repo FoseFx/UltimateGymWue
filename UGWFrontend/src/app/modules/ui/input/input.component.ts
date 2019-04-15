@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
-  @Input() type: 'text'|'email'|'number' = 'text';
+  @Input() type: 'text'|'email'|'number'|'password' = 'text';
   @Output() input = new EventEmitter();
   focused = false;
   labelColored = false;

@@ -4,6 +4,7 @@ import { RegisterComponent } from './register.component';
 import {UiModule} from '../../ui/ui.module';
 import {SetupStore} from '../state/setup.store';
 import {SetupService} from '../state/setup.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -11,7 +12,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ UiModule ],
+      imports: [ UiModule, RouterTestingModule, ],
       declarations: [ RegisterComponent ],
       providers: [SetupStore, SetupService]
     })

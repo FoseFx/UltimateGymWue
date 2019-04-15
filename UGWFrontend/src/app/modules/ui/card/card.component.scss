@@ -2,14 +2,18 @@
 :host {
   display: block;
   margin: 15px auto 0; // half of padding (see below)
-  padding: 10px;
-  width: 95%;
   height: calc(90vh - 56px - 30px); // 90vh - height of toolbar - padding
   background: $dark;
   box-shadow: 5px 5px 0 0 $primary;
   color: $light;
   overflow: hidden;
-
+  padding: 10px 15px 10px 10px;
+  max-width: 550px;
+  @media (max-width: 622px){
+    width: 100%;
+    padding-left: 0;
+  }
+  width: 90%;
 
   #scroll {
     overflow-y: auto;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, map, tap} from 'rxjs/operators';
 import {SetupService} from '../state/setup.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   private nameValid: boolean;           // used in this file
   name$ = new BehaviorSubject('');
   private name: string;
-  constructor(private setupService: SetupService) { }
+  constructor(private setupService: SetupService, private router: Router) { }
 
   ngOnInit() {
     const regex = /^[A-ZÜÄÖ][a-züäöß]+ [A-ZÜÄÖ][a-züäöß]+$/;
@@ -37,6 +38,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.setupService.lockName(this.name);
+    if (type === 'normal') {
+      this.router.navigate(['/setup/register/normal']);
+    }
     // todo route
     console.log(type);
   }

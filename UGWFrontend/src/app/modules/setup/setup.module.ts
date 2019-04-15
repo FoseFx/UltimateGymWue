@@ -13,9 +13,11 @@ import {FormsModule} from '@angular/forms';
 import {SetupStore} from './state/setup.store';
 import {SetupQuery} from './state/setup.query';
 import {SetupService} from './state/setup.service';
+import { NormalComponent } from './register/normal/normal.component';
+import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
 
 @NgModule({
-  declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent],
+  declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent, NormalComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -25,7 +27,8 @@ import {SetupService} from './state/setup.service';
   providers: [
     SetupStore,
     SetupQuery,
-    SetupService
+    SetupService,
+    RegistersteptwoGuard
   ]
 })
 export class SetupModule { }
