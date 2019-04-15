@@ -23,6 +23,8 @@ matrix:
   - language: rust
     rust: nightly
     cache: cargo
+    env:
+    - SECRET=test
     script:
     - cd UGWBackend
     - cargo build --verbose --all
