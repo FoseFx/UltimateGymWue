@@ -32,11 +32,19 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
        return status::Custom(Status::BadRequest, format!("Email not valid"));
     }
 
-    // password enforcment here
+    let exists_res = crate::db::exists_email(&data.email, &secret);
+    if exists_res.is_err() {
+        println!("{:?}", exists_res.unwrap_err());
+        return status::Custom(Status::InternalServerError, format!("Server Error"));
+    }
+    let exists_res = exists_res.unwrap();
+    if exists_res {
+        return status::Custom(Status::Unauthorized, format!("Email benutzt"));
+    }
 
     let (hash, salt) = passw::hash_passw(&data.password);
 
-    println!("{:#?}", crate::db::add_user(
+    let uid_res = crate::db::add_user(
         crate::db::User {
             fullname: (&data.fullname).to_owned(),
             normal: Some(crate::db::NormalLoginData {
@@ -46,8 +54,12 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
             })
         },
         secret
-    ));
+    );
 
+    if uid_res.is_err() {
+        return status::Custom(Status::InternalServerError, format!("Server Error"));
+    }
+    println!("Added user ID {}", uid_res.unwrap());
     return status::Custom(Status::Ok, format!("Ok"));
     
 }

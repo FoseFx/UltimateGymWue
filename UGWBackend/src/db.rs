@@ -49,3 +49,23 @@ pub fn add_user(user: User, secret: String) -> Result<String, String> {
     return Ok(res);
 
 }
+
+pub fn exists_email(email: &String, secret: &String) -> Result<bool, String> {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/existsemail/{}", email)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+
+    let res = res.unwrap().error_for_status();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+    let mut res = res.unwrap();
+    let res = res.text().unwrap();
+
+    return Ok(res == "true");
+
+}

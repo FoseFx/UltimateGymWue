@@ -15,11 +15,15 @@ http.createServer((req, res) => {
     return res.end("Unauthorized");
   }
 
+  if (/^\/existsemail\/.*$/.test(req.url)){
+    return existsEmail(req, res);
+  }
+
   if (/^\/register\/.*$/.test(req.url)) {
     return registerUser(req, res);
   }
-    
 
+  res.statusCode = 404;
   res.end();
 }).listen(8080, () => {
     console.log("DB Middleware server listening on port 8080");
@@ -39,4 +43,25 @@ function registerUser(req, res){
     res.end("err");
   });
   
+}
+
+function existsEmail(req, res) {
+  console.log(req.url.replace('/existsemail/', '').replace('/', ''));
+  
+  db.collection('users').where('normal.email', '==', req.url.replace('/existsemail/', '').replace('/', '')).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      
+      return res.end("false");
+    }
+    console.log("true");
+    
+    res.end("true");
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("Err");
+  });
 }
