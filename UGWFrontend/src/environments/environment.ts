@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   urls: {
-    registerNormal: 'http://localhost:8000/auth/normal/register'
+    registerNormal: 'https://backend.development/api/auth/normal/register'
   }
 };
 

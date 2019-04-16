@@ -7,6 +7,7 @@ extern crate rocket_contrib;
 
 mod auth;
 mod db;
+mod responses;
 
 use rocket::Rocket;
 use std::path::PathBuf;
@@ -29,7 +30,7 @@ impl<'r> Responder<'r> for CORSResponder {
     fn respond_to(self, _: &rocket::request::Request) -> response::Result<'r> {
         Response::build()
             .sized_body(Cursor::new(self.0))
-            .raw_header("Access-Control-Allow-Origin", format!("*"))
+            .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type"))
             .ok()
     }
@@ -46,7 +47,7 @@ fn rocket() -> Rocket {
     return rocket::ignite()
         .manage(get_secret())
         .mount(
-            "/",
+            "/api",
             routes![
             status,
             auth::normal::normal::normal_handler,
@@ -75,7 +76,6 @@ fn main() {
     rocket().launch();
 }
 
-
 #[cfg(test)]
 mod integration {
     use super::rocket;
@@ -85,7 +85,7 @@ mod integration {
     #[test]
     fn test_health() {
         let client = Client::new(rocket()).unwrap();
-        let mut response = client.get("/health").dispatch();
+        let mut response = client.get("/api/health").dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.body_string(), Some("Ok".into()));
     }
@@ -93,14 +93,12 @@ mod integration {
     #[test]
     fn test_cors() {
         let client = Client::new(rocket()).unwrap();
-        let response = client.options("/jdisanj/sjdakldljakk/jsjkadhiuqwdjn/sodsajk").dispatch();
+        let response = client.options("/api/jdisanj/sjdakldljakk/jsjkadhiuqwdjn/sodsajk").dispatch();
         assert_eq!(response.status(), Status::Ok);
         let headers = response.headers();
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
-        assert_eq!(origin, Some("*".into()));
+        assert_eq!(origin, Some("http://localhost:4200".into()));
         assert_eq!(allow_headers, Some("Content-Type".into()));
-
-
     }
 }
