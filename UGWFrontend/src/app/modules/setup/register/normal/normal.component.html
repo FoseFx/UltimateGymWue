@@ -1,13 +1,21 @@
-<app-card>
+<app-card [disabled]="loading">
   <h1 style="text-align: center; padding-top: 2rem">Hey {{query.selectName$ | async}}</h1>
 
-  <app-input type="email">Email</app-input>
-  <app-input type="password">Passwort</app-input>
-  <app-input type="password">Passwort</app-input>
-
+  <app-input type="email" #email>Email</app-input>
+  <p class="hint warning" *ngIf="email.invalid">Bitte korrekte E-Mail adresse eingeben</p>
+  <app-input type="password" #passw>Passwort</app-input>
+  <p class="hint warning" *ngIf="passw.invalid">Passwort muss mindestens acht Zeichen lang sein</p>
+  <app-input type="password" #passwwdh>Passwort Wdh.</app-input>
+  <p
+    class="hint warning"
+    *ngIf="passwwdh.value !== passw.value && (passw.dirty || passwwdh.dirty)"
+  >
+    Passwörter müssen gleich sein
+  </p>
   <app-button
     [accent]="true"
-    [disabled]="true"
+    (click)="onClick(email, passw, passwwdh)"
+    [disabled]="email.value === '' || passw.value === '' || email.invalid || passw.invalid || passw.value !== passwwdh.value"
     class="center-button"
   >
     Registrieren

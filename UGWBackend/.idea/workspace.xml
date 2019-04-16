@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/db-middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/normal/normal.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/normal/normal.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,16 +142,15 @@
       <workItem from="1555320531895" duration="8855000" />
       <workItem from="1555329879974" duration="83000" />
       <workItem from="1555330034831" duration="207000" />
-      <workItem from="1555348845654" duration="5555000" />
+      <workItem from="1555348845654" duration="5894000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14700000" />
+    <option name="totallyTimeSpent" value="15039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20117396" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

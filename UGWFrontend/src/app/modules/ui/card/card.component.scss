@@ -20,7 +20,15 @@
     width: 100%;
     height: 99%;
     padding-right: 30px;
+    position: relative;
 
-
+    #backdrop {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: $dark;
+      z-index: 4;
+      opacity: 0.8;
+    }
   }
 }

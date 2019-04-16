@@ -21,6 +21,9 @@ input[type=number] {
   transition: all 0.2s linear;
   box-shadow: 3px 3px 0 0 $primary;
   font-size: 17px;
+  &.invalid {
+    box-shadow: 3px 3px 0 0 $attention;
+  }
 
   &:focus {
     opacity: 1;
@@ -49,3 +52,6 @@ label {
   }
 }
 
+.invalid {
+  color: $attention!important;
+}

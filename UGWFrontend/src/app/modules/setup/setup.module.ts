@@ -15,6 +15,7 @@ import {SetupQuery} from './state/setup.query';
 import {SetupService} from './state/setup.service';
 import { NormalComponent } from './register/normal/normal.component';
 import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent, NormalComponent],
@@ -22,6 +23,7 @@ import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
     CommonModule,
     FormsModule,
     SetupRoutingModule,
+    HttpClientModule,
     UiModule
   ],
   providers: [

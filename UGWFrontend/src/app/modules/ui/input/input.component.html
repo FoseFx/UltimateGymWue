@@ -1,9 +1,20 @@
-<label for="input" [ngClass]="{'focused': focused, 'colored': labelColored}" ><ng-content></ng-content></label>
+<label
+  for="input"
+  [ngClass]="{
+      'focused': focused,
+      'colored': labelColored,
+      'invalid': invalid
+  }"
+>
+  <ng-content></ng-content>
+</label>
 
 <input
+  [ngClass]="{'invalid': invalid}"
   (input)="onInput($event)"
   (focusin)="focusIn()"
   (focusout)="focusOut($event)"
+  (keyup.enter)="enter.emit()"
   id="input"
   type="{{type}}"
 >

@@ -47,4 +47,23 @@ describe("register component", () => {
 
     });
 
+    describe("Redirects", () => {
+
+      beforeEach(() => {
+        cy.get("@name").type("Some Name");
+        cy.wait(300);
+      });
+      describe("Normal Redirects", () => {
+
+        it("should redirect on button click", () => {
+          cy.get("@normalbtn").click();
+          cy.url().should("contain", "/setup/register/normal");
+        });
+        it("should redirect on input enter", () => {
+          cy.get("@name").type("{enter}");
+          cy.url().should("contain", "/setup/register/normal");
+        });
+      });
+
+    });
 });

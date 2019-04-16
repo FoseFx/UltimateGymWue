@@ -8,7 +8,7 @@
 
   <form>
 
-    <app-input #name (input)="newName($event)">Vor- und Nachname</app-input>
+    <app-input #name (input)="newName($event)" (enter)="onClick('normal')">Vor- und Nachname</app-input>
     <p
       class="hint warning"
       *ngIf="!(nameValid$ | async) && name.dirty">
