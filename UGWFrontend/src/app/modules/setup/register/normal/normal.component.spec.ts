@@ -4,6 +4,7 @@ import { NormalComponent } from './normal.component';
 import {UiModule} from '../../../ui/ui.module';
 import {SetupQuery} from '../../state/setup.query';
 import {SetupStore} from '../../state/setup.store';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('NormalComponent', () => {
   let component: NormalComponent;
@@ -12,7 +13,7 @@ describe('NormalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NormalComponent ],
-      imports: [UiModule],
+      imports: [UiModule, HttpClientModule],
       providers: [SetupQuery, SetupStore]
     })
     .compileComponents();
