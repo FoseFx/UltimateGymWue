@@ -9,7 +9,9 @@ mod auth;
 mod db;
 
 use rocket::Rocket;
-
+use std::path::PathBuf;
+use std::io::Cursor;
+use rocket::response::{self, Response, Responder};
 
 pub struct SecretMgt(String);
 
@@ -19,6 +21,26 @@ fn status() -> &'static str{
     return "Ok";
 }
 
+//
+// CORS
+//
+struct CORSResponder(String);
+impl<'r> Responder<'r> for CORSResponder {
+    fn respond_to(self, _: &rocket::request::Request) -> response::Result<'r> {
+        Response::build()
+            .sized_body(Cursor::new(self.0))
+            .raw_header("Access-Control-Allow-Origin", format!("*"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type"))
+            .ok()
+    }
+}
+#[options("/<_path..>")]
+fn cors(_path: PathBuf) -> CORSResponder {
+    // Access-Control-Allow-Origin *
+    return CORSResponder("Ok".to_string());
+}
+//////
+
 
 fn rocket() -> Rocket {
     return rocket::ignite()
@@ -27,7 +49,8 @@ fn rocket() -> Rocket {
             "/",
             routes![
             status,
-            auth::normal::normal::normal_handler
+            auth::normal::normal::normal_handler,
+            cors
             ]
         );
 }
@@ -65,5 +88,19 @@ mod integration {
         let mut response = client.get("/health").dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.body_string(), Some("Ok".into()));
+    }
+
+    #[test]
+    fn test_cors() {
+        let client = Client::new(rocket()).unwrap();
+        let response = client.options("/jdisanj/sjdakldljakk/jsjkadhiuqwdjn/sodsajk").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+        let headers = response.headers();
+        let origin = headers.get("Access-Control-Allow-Origin").next();
+        let allow_headers = headers.get("Access-Control-Allow-Headers").next();
+        assert_eq!(origin, Some("*".into()));
+        assert_eq!(allow_headers, Some("Content-Type".into()));
+
+
     }
 }
