@@ -4,13 +4,12 @@
 extern crate rand;
 use super::passw;
 use rocket_contrib::json::{Json};
-use rocket::response::status::Custom;
-use rocket::response::status;
 use rocket::http::Status;
 use super::super::regexes;
 use crate::SecretMgt;
 use rocket::State;
 use std::ops::Deref;
+use crate::responses::CustomResponse;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -21,25 +20,25 @@ pub struct NormalRegisterData {
 }
 
 #[post("/auth/normal/register", data = "<data>")]
-pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -> status::Custom<String> {
+pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -> CustomResponse {
 
     let secret: String = secret.0.deref().to_string();
 
     if !regexes::is_valid_name(&data.fullname) {
-       return status::Custom(Status::BadRequest, format!("Fullname not valid"));
+        return CustomResponse::error(format!("Fullname not valid"), Status::BadRequest);
     }
     if !regexes::is_valid_email(&data.email) {
-       return status::Custom(Status::BadRequest, format!("Email not valid"));
+        return CustomResponse::error(format!("Email not valid"), Status::BadRequest);
     }
 
     let exists_res = crate::db::exists_email(&data.email, &secret);
     if exists_res.is_err() {
         println!("{:?}", exists_res.unwrap_err());
-        return status::Custom(Status::InternalServerError, format!("Server Error"));
+        return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
     }
     let exists_res = exists_res.unwrap();
     if exists_res {
-        return status::Custom(Status::Unauthorized, format!("Email benutzt"));
+        return CustomResponse::error(format!("Email benutzt"), Status::Unauthorized);
     }
 
     let (hash, salt) = passw::hash_passw(&data.password);
@@ -57,9 +56,9 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
     );
 
     if uid_res.is_err() {
-        return status::Custom(Status::InternalServerError, format!("Server Error"));
+        return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
     }
     println!("Added user ID {}", uid_res.unwrap());
-    return status::Custom(Status::Ok, format!("Ok"));
+    return CustomResponse::message(format!("Ok"));
     
 }
