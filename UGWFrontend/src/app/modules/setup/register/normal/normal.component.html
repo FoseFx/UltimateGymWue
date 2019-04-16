@@ -2,7 +2,7 @@
   <h1 style="text-align: center; padding-top: 2rem">Hey {{query.selectName$ | async}}</h1>
 
   <app-input type="email" #email>Email</app-input>
-  <p class="hint warning" *ngIf="email.invalid">Bitte korrekte E-Mail adresse eingeben</p>
+  <p class="hint warning" *ngIf="email.invalid">Bitte korrekte E-Mail Adresse eingeben</p>
   <app-input type="password" #passw>Passwort</app-input>
   <p class="hint warning" *ngIf="passw.invalid">Passwort muss mindestens acht Zeichen lang sein</p>
   <app-input type="password" #passwwdh>Passwort Wdh.</app-input>
