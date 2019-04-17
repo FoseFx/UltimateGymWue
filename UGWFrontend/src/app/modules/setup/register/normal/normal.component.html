@@ -1,6 +1,10 @@
 <app-card [disabled]="loading">
   <h1 style="text-align: center; padding-top: 2rem">Hey {{query.selectName$ | async}}</h1>
 
+
+  <h3 class="warning" *ngIf="!!error">Fehler: {{error}}</h3>
+
+
   <app-input type="email" #email>Email</app-input>
   <p class="hint warning" *ngIf="email.invalid">Bitte korrekte E-Mail Adresse eingeben</p>
   <app-input type="password" #passw>Passwort</app-input>
@@ -20,5 +24,6 @@
   >
     Registrieren
   </app-button>
+
 
 </app-card>

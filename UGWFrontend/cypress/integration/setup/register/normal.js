@@ -45,7 +45,6 @@ describe("register component", () => {
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
 
-
     it("should not be able to click, when only password is filled out", () => {
       cy.get("app-input > input").eq(1).type("testtesttest");
       cy.get("app-button").invoke("attr", "ng-reflect-disabled").should("equal", "true");
@@ -56,7 +55,6 @@ describe("register component", () => {
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
 
-
     it("should not be able to click, when password is invalidly filled out", () => {
       cy.get("app-input > input").eq(1).type("test");
       cy.get("app-button").invoke("attr", "ng-reflect-disabled").should("equal", "true");
@@ -66,7 +64,6 @@ describe("register component", () => {
       cy.get("app-button").click();
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
-
 
     it("should not be able to click, when password and passwordwdh is invalidly filled out", () => {
       cy.get("app-input > input").eq(1).type("test");
@@ -79,7 +76,6 @@ describe("register component", () => {
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
 
-
     it("should not be able to click, when password and passwordwdh is invalidly filled out and different", () => {
       cy.get("app-input > input").eq(1).type("test");
       cy.get("app-input > input").eq(2).type("testt");
@@ -90,7 +86,6 @@ describe("register component", () => {
       cy.get("app-button").click();
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
-
 
     it("should not be able to click, when password and passwordwdh is filled out but different", () => {
       cy.get("app-input > input").eq(1).type("testtesttest");
@@ -103,8 +98,6 @@ describe("register component", () => {
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
 
-
-
     it("should not be able to click, when email is filled out", () => {
       cy.get("app-input > input").eq(0).type("test@test.com");
       cy.get("app-button").invoke("attr", "ng-reflect-disabled").should("equal", "true");
@@ -114,8 +107,6 @@ describe("register component", () => {
       cy.get("app-button").click();
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
-
-
 
     it("should not be able to click, when email is filled out incorrectly", () => {
       cy.get("app-input > input").eq(0).type("testtest.com");

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SetupQuery} from '../../state/setup.query';
 import {InputComponent} from '../../../ui/input/input.component';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
+import {SetupService} from '../../state/setup.service';
 
 @Component({
   selector: 'app-normal',
@@ -11,9 +12,10 @@ import {environment} from '../../../../../environments/environment';
 })
 export class NormalComponent implements OnInit {
 
-  constructor(public query: SetupQuery, private http: HttpClient) { }
+  constructor(public query: SetupQuery, private service: SetupService, private http: HttpClient) { }
 
   loading = false;
+  error: string = null;
   ngOnInit() {
   }
 
@@ -34,9 +36,15 @@ export class NormalComponent implements OnInit {
 
     ).subscribe((data: string) => {
         console.log(data);
+        // todo login and route
       },
-      (err) => {
+      (err: HttpErrorResponse) => {
         console.log(err);
+        this.error = err.error.msg;
+        if (typeof this.error === 'undefined') {
+          this.error = err.statusText;
+        }
+        this.loading = false;
       }
     );
   }
