@@ -3,6 +3,7 @@ extern crate reqwest;
 extern crate base64;
 
 use std::error::Error;
+use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize)]
 pub struct NormalLoginData {
@@ -77,5 +78,48 @@ pub fn verify_email(email: &String, secret: &String) {
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     println!("{:?}", res);
+}
 
+#[derive(Debug)]
+pub struct LoginData {
+    pub hash: String,
+    pub salt: String,
+    pub uid: String,
+    pub fullname: String,
+    pub email: String,
+    pub email_verified: bool
+}
+
+pub fn get_login_data(email: &String, secret: &String) -> Result<LoginData, String> {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/login_normal/{}", email)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+
+    let res = res.unwrap().error_for_status();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+    let mut res = res.unwrap();
+
+    let hashmaps: Vec<HashMap<String, String>> = res.json().unwrap();
+    
+    if hashmaps.len() == 0 {
+        return Err("Kein Account mit dieser Email gefunden".to_string());
+    }
+
+    let acc = hashmaps.get(0).unwrap();
+    let acc = LoginData {
+        hash: acc.get("hash").unwrap().to_string(),
+        salt: acc.get("salt").unwrap().to_string(),
+        uid: acc.get("uid").unwrap().to_string(),
+        fullname: acc.get("fullname").unwrap().to_string(),
+        email: acc.get("email").unwrap().to_string(),
+        email_verified: acc.get("email_verified").unwrap() == "true",
+    };
+
+    return Ok(acc);
 }

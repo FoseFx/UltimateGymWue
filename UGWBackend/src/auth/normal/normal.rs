@@ -2,6 +2,7 @@
 // Handler for "normal" (email/pwd) login
 //
 extern crate rand;
+extern crate jsonwebtoken;
 use super::passw;
 use rocket_contrib::json::{Json};
 use rocket::http::Status;
@@ -88,7 +89,7 @@ pub fn normal_verify_email_handler(secret: State<SecretMgt>,
     let secret: String = secret.0.deref().to_string();
     let redis_conn: &redis::Connection = redis_conn.0.deref();
 
-    let opt = super::email::verify_email(redis_conn, key, secret.to_owned());
+    let opt = super::email::verify_email(redis_conn, key);
 
     if opt.is_none() {
         return "Fehler. Der Link ist vermutlich abgelaufen. Bitte forder eine erneute Verifizierung an.".to_string();
@@ -100,4 +101,45 @@ pub fn normal_verify_email_handler(secret: State<SecretMgt>,
     return format!("{} wurde verifiziert.", email);
 
 
+}
+#[derive(Deserialize)]
+#[derive(Debug)]
+pub struct LoginRequest {
+    email: String,
+    password: String
+}
+
+#[post("/auth/normal/login", data = "<data>")]
+pub fn normal_login_handler(secret: State<SecretMgt>, data: Json<LoginRequest>) -> CustomResponse {
+    
+    let secret: String = secret.0.deref().to_string();
+    let login_data = crate::db::get_login_data(&data.email, &secret);
+
+    if login_data.is_err() {
+        return CustomResponse::error(login_data.unwrap_err(), Status::Unauthorized);
+    }
+    let login_data = login_data.unwrap();
+
+    let is_same_password = super::passw::verify_passw(&data.password, login_data.hash, login_data.salt);
+
+    if !is_same_password {
+        return CustomResponse::error(format!("Passwort falsch"), Status::Unauthorized);
+    }
+
+    let claim = crate::auth::jwt::UserClaim {
+        uid: login_data.uid,
+        fullname: login_data.fullname,
+        provider: vec![format!("normal")],
+        normal: Some(crate::auth::jwt::NormalClaim {
+            email: login_data.email,
+            email_verified: login_data.email_verified
+        })
+    };
+    
+    let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &claim, secret.as_ref()).unwrap();
+
+    return CustomResponse::data(json!({
+        "token": token,
+        "claim": claim
+    }));
 }

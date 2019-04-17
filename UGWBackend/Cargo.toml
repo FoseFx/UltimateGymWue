@@ -1,5 +1,5 @@
 [package]
-name = "UGWBackend"
+name = "ugw-backend"
 version = "0.1.0"
 authors = ["FoseFx <fosefx@pm.me>"]
 edition = "2018"
@@ -17,6 +17,7 @@ base64 = "0.10.1"
 redis = "0.10.0"
 r2d2 = "*"
 r2d2_redis = "*"
+jsonwebtoken = "5.0.1"
 
 [dependencies.rocket_contrib]
 version = "0.4.0"

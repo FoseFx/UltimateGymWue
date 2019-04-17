@@ -97,7 +97,7 @@ fn generate_email_verify_link(redis_conn: &redis::Connection, to: &String) -> St
         .collect::<String>();
 
     let key = base64::encode(&format!("{}:{}", to, secret));
-    let set_res: RedisResult<i8> = redis_conn.set_ex(format!("email_verify_{}", key), true, 10 * 60); // 10 min
+    let _set_res: RedisResult<i8> = redis_conn.set_ex(format!("email_verify_{}", key), true, 10 * 60); // 10 min
 
     let url = format!("{}/auth/normal/verify_email/{}", SERVER_HOST, key);
     println!("New Verify URL: {}", url);
@@ -105,7 +105,7 @@ fn generate_email_verify_link(redis_conn: &redis::Connection, to: &String) -> St
 
 }
 
-pub fn verify_email(redis_conn: &redis::Connection, key: String, secret: String) -> Option<String> {
+pub fn verify_email(redis_conn: &redis::Connection, key: String) -> Option<String> {
 
     let get_res: RedisResult<String> = redis_conn.get(format!("email_verify_{}", key));
 
@@ -115,9 +115,13 @@ pub fn verify_email(redis_conn: &redis::Connection, key: String, secret: String)
         return None;
     }
 
-    let del_res: RedisResult<bool> = redis_conn.del(format!("email_verify_{}", key));
+    let _del_res: RedisResult<bool> = redis_conn.del(format!("email_verify_{}", key));
 
-    let decoded = base64::decode(&key).unwrap();
+    let decoded = base64::decode(&key);
+    if decoded.is_err() {
+        return None;
+    }
+    let decoded = decoded.unwrap();
     let as_string = to_ascii(decoded);
 
     let email = as_string.split(":").next().unwrap().to_string();

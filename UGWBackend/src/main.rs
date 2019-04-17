@@ -59,7 +59,8 @@ fn rocket() -> Rocket {
             status,
             auth::normal::normal::normal_handler,
             cors,
-            auth::normal::normal::normal_verify_email_handler
+            auth::normal::normal::normal_verify_email_handler,
+            auth::normal::normal::normal_login_handler
             ]
         );
 }
@@ -112,6 +113,11 @@ pub fn to_ascii(vec: Vec<u8>) -> String {
     }
     return s;
 }
+
+
+
+
+
 
 #[cfg(test)]
 mod integration {

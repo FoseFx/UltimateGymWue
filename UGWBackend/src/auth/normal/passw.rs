@@ -29,7 +29,7 @@ fn sha1(string: String) -> String {
     return hex;
 }
 
-pub fn verify_passw(passw: String, hash: String, salt: String) -> bool {
+pub fn verify_passw(passw: &String, hash: String, salt: String) -> bool {
     let hex = sha1(format!("{}{}", passw, salt));
     return hex == hash;
 }

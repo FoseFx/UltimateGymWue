@@ -23,6 +23,10 @@ http.createServer((req, res) => {
     return verify_email(req, res);
   }
 
+  if (/^\/login_normal\/.*$/.test(req.url)){
+    return login_normal(req, res);
+  }
+
   if (/^\/register\/.*$/.test(req.url)) {
     return registerUser(req, res);
   }
@@ -98,5 +102,39 @@ function verify_email(req, res){
     console.error(err);
     res.statusCode = 500;
     res.end("Err");
+  });
+}
+
+function login_normal(req, res){
+  console.log(req.url.replace('/login_normal/', '').replace('/', ''));
+  db.collection('users').where('normal.email', '==', req.url.replace('/login_normal/', '').replace('/', '')).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      
+      return res.end("[]");
+    }
+    
+    let arr = [];
+    snapshot.forEach((doc) => {
+      let data = doc.data();
+      data = data.normal;
+      arr.push({
+        hash: data.password_hash,
+        salt: data.password_salt,
+        uid: doc.id,
+        fullname: doc.data().fullname,
+        email_verified: data.email_verified + "",
+        email: data.email
+      });
+    });
+    return res.end(JSON.stringify(arr));
+   
+    
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("[]");
   });
 }
