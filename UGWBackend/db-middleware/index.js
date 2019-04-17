@@ -19,6 +19,10 @@ http.createServer((req, res) => {
     return existsEmail(req, res);
   }
 
+  if (/^\/verify_email\/.*$/.test(req.url)){
+    return verify_email(req, res);
+  }
+
   if (/^\/register\/.*$/.test(req.url)) {
     return registerUser(req, res);
   }
@@ -58,6 +62,37 @@ function existsEmail(req, res) {
     console.log("true");
     
     res.end("true");
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("Err");
+  });
+}
+
+
+function verify_email(req, res){
+  console.log(req.url.replace('/verify_email/', '').replace('/', ''));
+  db.collection('users').where('normal.email', '==', req.url.replace('/verify_email/', '').replace('/', '')).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      
+      return res.end("false");
+    }
+    
+    snapshot.forEach((doc) => {
+      db.collection('users')
+      .doc(doc.id + "")
+      .set({normal: {email_verified: true}}, {merge: true})
+      .then(() => {
+        res.end("true");
+      }).catch(() => {
+        res.end("false");
+      });
+    });
+   
+    
   })
   .catch((err) => {
     console.error(err);

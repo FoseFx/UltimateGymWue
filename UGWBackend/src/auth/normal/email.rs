@@ -1,6 +1,7 @@
-use crate::{EMAIL_DOMAIN, SERVER_HOST};
+use crate::{EMAIL_DOMAIN, SERVER_HOST, to_ascii};
 use rand::Rng;
 use rand::distributions::Alphanumeric;
+use redis::{Commands, RedisResult};
 
 fn send_email(api_user: &String,
               api_key: &String,
@@ -69,12 +70,13 @@ fn get_auth_header(user: &String, passw: &String) -> (String, String) {
 
 }
 
-pub fn send_register_email(api_user: &String,
+pub fn send_register_email(redis_conn: &redis::Connection,
+                           api_user: &String,
                            api_key: &String,
                            to: &String,
                            fullname: &String){
 
-    let link = generate_email_verify_link(&to);
+    let link = generate_email_verify_link(redis_conn, &to);
     send_email(
         api_user,
         api_key,
@@ -88,18 +90,36 @@ pub fn send_register_email(api_user: &String,
     );
 }
 
-fn generate_email_verify_link(to: &String) -> String {
+fn generate_email_verify_link(redis_conn: &redis::Connection, to: &String) -> String {
     let secret = rand::thread_rng()
         .sample_iter(&Alphanumeric)
         .take(24)
         .collect::<String>();
 
-    // todo: save in redis
-
     let key = base64::encode(&format!("{}:{}", to, secret));
+    let set_res: RedisResult<i8> = redis_conn.set_ex(format!("email_verify_{}", key), true, 10 * 60); // 10 min
 
     let url = format!("{}/auth/normal/verify_email/{}", SERVER_HOST, key);
     println!("New Verify URL: {}", url);
     return url;
 
+}
+
+pub fn verify_email(redis_conn: &redis::Connection, key: String, secret: String) -> Option<String> {
+
+    let get_res: RedisResult<String> = redis_conn.get(format!("email_verify_{}", key));
+
+    println!("{:?}", &get_res);
+
+    if get_res.is_err() {
+        return None;
+    }
+
+    let del_res: RedisResult<bool> = redis_conn.del(format!("email_verify_{}", key));
+
+    let decoded = base64::decode(&key).unwrap();
+    let as_string = to_ascii(decoded);
+
+    let email = as_string.split(":").next().unwrap().to_string();
+    return Some(email);
 }

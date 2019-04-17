@@ -70,3 +70,12 @@ pub fn exists_email(email: &String, secret: &String) -> Result<bool, String> {
     return Ok(res == "true");
 
 }
+
+pub fn verify_email(email: &String, secret: &String) {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/verify_email/{}", email)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    println!("{:?}", res);
+
+}

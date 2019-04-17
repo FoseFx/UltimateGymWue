@@ -1,6 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 extern crate crypto;
 extern crate rocket_contrib;
+extern crate redis;
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate serde_json;
@@ -8,6 +9,7 @@ extern crate rocket_contrib;
 mod auth;
 mod db;
 mod responses;
+mod redismw;
 
 use rocket::Rocket;
 use std::path::PathBuf;
@@ -50,12 +52,14 @@ fn rocket() -> Rocket {
     return rocket::ignite()
         .manage(get_secret())
         .manage(get_mailjet_creds())
+        .manage(redismw::pool())
         .mount(
             "/api",
             routes![
             status,
             auth::normal::normal::normal_handler,
-            cors
+            cors,
+            auth::normal::normal::normal_verify_email_handler
             ]
         );
 }
@@ -98,6 +102,15 @@ fn get_mailjet_creds() -> MailJetMgt {
 
 fn main() {
     rocket().launch();
+}
+
+pub fn to_ascii(vec: Vec<u8>) -> String {
+    let mut s = String::new();
+    for c in vec {
+        let charr = c as char;
+        s.push(charr);
+    }
+    return s;
 }
 
 #[cfg(test)]
