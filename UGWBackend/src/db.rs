@@ -7,6 +7,7 @@ use std::error::Error;
 #[derive(Serialize, Deserialize)]
 pub struct NormalLoginData {
     pub email: String,
+    pub email_verified: bool,
     pub password_hash: String,
     pub password_salt: String
 }

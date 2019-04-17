@@ -15,7 +15,9 @@ use std::io::Cursor;
 use rocket::response::{self, Response, Responder};
 
 pub struct SecretMgt(String);
+pub struct MailJetMgt {user: String, key: String}
 
+pub const EMAIL_DOMAIN: &'static str = "ugw.fosefx.com";
 
 #[get("/health")]
 fn status() -> &'static str{
@@ -46,6 +48,7 @@ fn cors(_path: PathBuf) -> CORSResponder {
 fn rocket() -> Rocket {
     return rocket::ignite()
         .manage(get_secret())
+        .manage(get_mailjet_creds())
         .mount(
             "/api",
             routes![
@@ -69,6 +72,26 @@ fn get_secret() -> SecretMgt {
         panic!("No Secret variable found");
     }
     return SecretMgt(secret.unwrap());
+}
+fn get_mailjet_creds() -> MailJetMgt {
+    let mut user: Option<String> = None;
+    let mut key: Option<String> = None;
+    for (env_key, val) in std::env::vars(){
+        if env_key == "MAIL_JET_USER" {
+            user = Some(val);
+        }
+        if env_key == "MAIL_JET_KEY" {
+            key = Some(val);
+        }
+    }
+    if user.is_none()  {
+        panic!("No MAIL_JET_USER variable found");
+    }
+    if key.is_none()  {
+        panic!("No MAIL_JET_KEY variable found");
+    }
+
+    return MailJetMgt {user: user.unwrap(), key: key.unwrap()}
 }
 
 

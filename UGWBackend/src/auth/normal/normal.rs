@@ -48,6 +48,7 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
             fullname: (&data.fullname).to_owned(),
             normal: Some(crate::db::NormalLoginData {
                 email: (&data.email).to_owned(),
+                email_verified: false,
                 password_hash: hash,
                 password_salt: salt
             })
@@ -62,3 +63,4 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
     return CustomResponse::message(format!("Ok"));
     
 }
+// git commit -S -m "[New] [Backend] Added Send-Email-Function and added creds"

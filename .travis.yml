@@ -25,6 +25,8 @@ matrix:
     cache: cargo
     env:
     - SECRET=test
+    - MAIL_JET_USER=test
+    - MAIL_JET_KEY=test
     script:
     - cd UGWBackend
     - cargo build --verbose --all
