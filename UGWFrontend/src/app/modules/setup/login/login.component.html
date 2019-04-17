@@ -1,3 +1,42 @@
-<p>
-  login works!
-</p>
+<app-card>
+  <h1 style="text-align: center; padding-top: 2rem">Login</h1>
+
+  <form>
+
+    <app-input #email     type="email"    (enter)="onSubmit(email, password)">Email</app-input>
+    <app-input #password  type="password" (enter)="onSubmit(email, password)">Passwort</app-input>
+
+    <br>
+    <app-button
+      [accent]="true"
+      (click)="onSubmit(email, password)"
+      [disabled]="!allow(email, password)"
+      class="center-button">
+      Login
+    </app-button>
+
+    <br>
+    <app-hr style="width: 90%; margin: 0 auto; display: block;">Login mit Dritten</app-hr>
+    <br>
+
+    <div id="third-parties">
+
+      <app-button
+        class="center-button"
+      >
+        <span style="display: block">Login mit</span>
+        <img style="height: 50px; margin-top: 10px" alt="Google" src="/assets/google.png">
+      </app-button>
+
+      <app-button
+        class="center-button">
+        <span style="display: block">Weiter mit</span>
+        <img style="height: 50px; margin-top: 10px" alt="Instagram" src="/assets/instagram.png">
+      </app-button>
+
+    </div>
+
+  </form>
+
+
+</app-card>

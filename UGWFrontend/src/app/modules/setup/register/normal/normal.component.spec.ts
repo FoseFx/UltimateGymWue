@@ -5,6 +5,7 @@ import {UiModule} from '../../../ui/ui.module';
 import {SetupQuery} from '../../state/setup.query';
 import {SetupStore} from '../../state/setup.store';
 import {HttpClientModule} from '@angular/common/http';
+import {SetupService} from '../../state/setup.service';
 
 describe('NormalComponent', () => {
   let component: NormalComponent;
@@ -14,7 +15,7 @@ describe('NormalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ NormalComponent ],
       imports: [UiModule, HttpClientModule],
-      providers: [SetupQuery, SetupStore]
+      providers: [SetupQuery, SetupStore, SetupService]
     })
     .compileComponents();
   }));

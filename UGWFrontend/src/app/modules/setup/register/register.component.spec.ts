@@ -12,7 +12,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ UiModule, RouterTestingModule, ],
+      imports: [ UiModule, RouterTestingModule],
       declarations: [ RegisterComponent ],
       providers: [SetupStore, SetupService]
     })
