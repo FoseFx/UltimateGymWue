@@ -1,7 +1,9 @@
-use crate::EMAIL_DOMAIN;
+use crate::{EMAIL_DOMAIN, SERVER_HOST};
+use rand::Rng;
+use rand::distributions::Alphanumeric;
 
-fn send_email(api_user: String,
-              api_key: String,
+fn send_email(api_user: &String,
+              api_key: &String,
               sender: String,
               sender_name: &str,
               to: &String,
@@ -51,7 +53,7 @@ fn send_email(api_user: String,
 
 }
 
-fn get_auth_header(user: String, passw: String) -> (String, String) {
+fn get_auth_header(user: &String, passw: &String) -> (String, String) {
     let auth_header_payload =
         format!(
             "Basic {}",
@@ -67,11 +69,12 @@ fn get_auth_header(user: String, passw: String) -> (String, String) {
 
 }
 
-pub fn send_register_email(api_user: String,
-                           api_key: String,
+pub fn send_register_email(api_user: &String,
+                           api_key: &String,
                            to: &String,
-                           fullname: &String,
-                           register_link: &String){
+                           fullname: &String){
+
+    let link = generate_email_verify_link(&to);
     send_email(
         api_user,
         api_key,
@@ -80,7 +83,23 @@ pub fn send_register_email(api_user: String,
         to,
         fullname,
         format!("Verifiziere diese Email Adresse, um UGW nutzen zu können!"),
-        format!("Klicke auf den Link, oder Kopiere den folgenden Link in deinen Browser: "), // todo
-        format!("") // todo
+        format!("Klicke auf den Link, oder Kopiere den folgenden Link in deinen Browser: {}", link), // todo
+        format!("<a href=\"{}\">Klicke hier, um dich zu registrieren</a>", link) // todo
     );
+}
+
+fn generate_email_verify_link(to: &String) -> String {
+    let secret = rand::thread_rng()
+        .sample_iter(&Alphanumeric)
+        .take(24)
+        .collect::<String>();
+
+    // todo: save in redis
+
+    let key = base64::encode(&format!("{}:{}", to, secret));
+
+    let url = format!("{}/auth/normal/verify_email/{}", SERVER_HOST, key);
+    println!("New Verify URL: {}", url);
+    return url;
+
 }

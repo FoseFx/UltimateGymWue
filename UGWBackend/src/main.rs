@@ -18,6 +18,7 @@ pub struct SecretMgt(String);
 pub struct MailJetMgt {user: String, key: String}
 
 pub const EMAIL_DOMAIN: &'static str = "ugw.fosefx.com";
+pub const SERVER_HOST: &'static str = "https://ugw.fosefx.com/api";
 
 #[get("/health")]
 fn status() -> &'static str{

@@ -1,3 +1,4 @@
 target
 **/node_modules
 **/service-account.json
+run_dev.sh
