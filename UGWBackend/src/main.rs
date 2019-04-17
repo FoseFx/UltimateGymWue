@@ -80,7 +80,7 @@ fn get_mailjet_creds() -> MailJetMgt {
         if env_key == "MAIL_JET_USER" {
             user = Some(val);
         }
-        if env_key == "MAIL_JET_KEY" {
+        else if env_key == "MAIL_JET_KEY" {
             key = Some(val);
         }
     }

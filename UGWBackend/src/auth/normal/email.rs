@@ -34,13 +34,13 @@ fn send_email(api_user: String,
     let client = reqwest::Client::new();
     let req = client
         .post("https://api.mailjet.com/v3.1/send")
-        .json(payload)
-        .header(auth_header.0, auth_header.1)
+        .json(&payload)
+        .header(&auth_header.0[..], &auth_header.1[..])
         .build();
     if req.is_ok() {
         let res = client.execute(req.unwrap());
         if res.is_ok() {
-            println!("Made email-send-request: {}", res.text());
+            println!("Made email-send-request: {:?}", res);
         } else {
             println!("Error making email-send-request {:?}", res.unwrap_err());
         }
@@ -56,7 +56,7 @@ fn get_auth_header(user: String, passw: String) -> (String, String) {
         format!(
             "Basic {}",
             base64::encode(
-                format!(
+                &format!(
                     "{}:{}",
                     user,
                     passw

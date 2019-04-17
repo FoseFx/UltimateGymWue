@@ -63,4 +63,3 @@ pub fn normal_handler(secret: State<SecretMgt>,data: Json<NormalRegisterData>) -
     return CustomResponse::message(format!("Ok"));
     
 }
-// git commit -S -m "[New] [Backend] Added Send-Email-Function and added creds"
