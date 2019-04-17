@@ -1,4 +1,6 @@
 <div id="scroll">
-  <div id="backdrop" *ngIf="disabled"></div>
+  <div id="backdrop" *ngIf="loading || disabled">
+    <app-spinner *ngIf="loading" style="transform: translateY(-30px)"></app-spinner>
+  </div>
   <ng-content></ng-content>
 </div>
