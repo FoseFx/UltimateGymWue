@@ -1,7 +1,9 @@
-<app-card>
+<app-card [loading]="loading">
   <h1 style="text-align: center; padding-top: 2rem">Login</h1>
 
   <form>
+
+    <h3 class="warning" *ngIf="!!errorMsg">Fehler: {{errorMsg}}</h3>
 
     <app-input #email     type="email"    (enter)="onSubmit(email, password)">Email</app-input>
     <app-input #password  type="password" (enter)="onSubmit(email, password)">Passwort</app-input>

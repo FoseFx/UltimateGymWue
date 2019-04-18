@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {LoginGuard} from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'setup',
-    loadChildren: './modules/setup/setup.module#SetupModule'
+    loadChildren: './modules/setup/setup.module#SetupModule',
+    canActivate: [LoginGuard]
   },
   {
     path: 'legal',

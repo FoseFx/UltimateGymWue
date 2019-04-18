@@ -12,6 +12,7 @@ import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UiModule} from './modules/ui/ui.module';
+import {LoginGuard} from './guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UiModule} from './modules/ui/ui.module';
   providers: [
     AppStore,
     AppQuery,
-    AppService
+    AppService,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })

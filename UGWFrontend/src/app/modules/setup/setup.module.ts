@@ -16,7 +16,7 @@ import {SetupService} from './state/setup.service';
 import { NormalComponent } from './register/normal/normal.component';
 import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
 import {HttpClientModule} from '@angular/common/http';
-
+import {LoginService} from './login/login.service';
 @NgModule({
   declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent, NormalComponent],
   imports: [
@@ -30,7 +30,8 @@ import {HttpClientModule} from '@angular/common/http';
     SetupStore,
     SetupQuery,
     SetupService,
-    RegistersteptwoGuard
+    RegistersteptwoGuard,
+    LoginService
   ]
 })
 export class SetupModule { }

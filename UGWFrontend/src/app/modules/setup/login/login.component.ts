@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {InputComponent} from '../../ui/input/input.component';
+import {LoginService} from './login.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  subs: Subscription[] = [];
+  errorMsg: string = null;
+  loading = false;
+
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -21,7 +27,32 @@ export class LoginComponent implements OnInit {
     if (!this.allow(email, password)) {
       return;
     }
-    console.log('Ok');
+    this.loading = true;
+
+    this.subs.push(
+      this.loginService.normalLogin(email.value, password.value)
+        .subscribe(
+          (value) => {
+            console.log('subs', value);
+            // todo route
+          },
+          (error) => {
+            console.log(!!error.error);
+            console.error('error', error);
+            if (!!error.error) { // http error
+              this.errorMsg = error.error.msg;
+            } else {
+              this.errorMsg = error.message;
+            }
+            this.loading = false;
+          })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(value => {
+      value.unsubscribe();
+    });
   }
 
 }
