@@ -5,6 +5,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {SetupService} from '../../state/setup.service';
 import {LoginService} from '../../login/login.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-normal',
@@ -16,7 +17,8 @@ export class NormalComponent implements OnInit {
   constructor(public query: SetupQuery,
               private service: SetupService,
               private http: HttpClient,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private router: Router) { }
 
   loading = false;
   error: string = null;
@@ -43,7 +45,9 @@ export class NormalComponent implements OnInit {
         console.log(data);
         this.loginService.normalLogin(email.value, passw.value).subscribe(
           (res) => {
-            // todo route
+
+            this.router.navigate(['/setup/basics']);
+
           },
           (error) => {
             console.log(error);

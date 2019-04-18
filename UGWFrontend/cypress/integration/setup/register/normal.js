@@ -139,7 +139,7 @@ describe("register component", () => {
       cy.get("app-button").click();
       cy.get("#backdrop").should("not.exist"); // todo replace with network stub
     });
-
+/*
     it("should be able to click, when everything is filled out", () => {
       cy.get("app-input > input").eq(0).type("test@test.com");
       cy.get("app-input > input").eq(1).type("testtesttest");
@@ -151,6 +151,7 @@ describe("register component", () => {
       cy.get("app-button").click();
       cy.get("#backdrop").should("exist"); // todo replace with network stub
     });
+*/
     it("should not be able to click, when everything is filled out incorrectly", () => {
       cy.get("app-input > input").eq(0).type("testtest.com");
       cy.get("app-input > input").eq(1).type("test");

@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {InputComponent} from '../../ui/input/input.component';
 import {LoginService} from './login.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMsg: string = null;
   loading = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -32,9 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.loginService.normalLogin(email.value, password.value)
         .subscribe(
-          (value) => {
-            console.log('subs', value);
-            // todo route
+          (_) => {
+            this.router.navigate(['/setup/basics']);
           },
           (error) => {
             console.log(!!error.error);

@@ -12,7 +12,7 @@ import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UiModule} from './modules/ui/ui.module';
-import {LoginGuard} from './guards/login.guard';
+import {NeedsSetupGuard} from './guards/needs-setup.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import {LoginGuard} from './guards/login.guard';
     AppStore,
     AppQuery,
     AppService,
-    LoginGuard
+    NeedsSetupGuard
   ],
   bootstrap: [AppComponent]
 })

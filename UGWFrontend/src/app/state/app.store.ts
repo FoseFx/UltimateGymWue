@@ -19,6 +19,11 @@ export interface AppState {
     }
   };
   fullname: string;
+  basics: {
+    stufe: string,
+    stufe_id: string
+    // todo
+  };
   menuOpen: boolean;
 }
 
@@ -32,7 +37,8 @@ export function createInitialState(): AppState {
     },
     fullname: null,
     loginData: null,
-    menuOpen: false
+    menuOpen: false,
+    basics: null
   };
 }
 

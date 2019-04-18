@@ -9,6 +9,7 @@
   display: inline-grid;
   grid-template-columns: 60px 100%;
   grid-auto-rows: 100%;
+  user-select: none;
   i {
     font-size: 24px;
     margin-left: 40px - 24px;

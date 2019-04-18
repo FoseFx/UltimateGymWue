@@ -6,6 +6,9 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {NormalComponent} from './register/normal/normal.component';
 import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
+import {LoginGuard} from './guards/login.guard';
+import {StufeComponent} from './stufe/stufe.component';
+import {LoginnedGuard} from './guards/loginned.guard';
 
 const routes: Routes = [
   {
@@ -15,10 +18,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'register/normal',
@@ -27,7 +32,17 @@ const routes: Routes = [
   },
   {
     path: 'welcome',
-    component: WelcomeComponent
+    component: WelcomeComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'basics',
+    redirectTo: 'basics/stufe'
+  },
+  {
+    path: 'basics/stufe',
+    component: StufeComponent,
+    canActivate: [LoginnedGuard]
   }
 ];
 

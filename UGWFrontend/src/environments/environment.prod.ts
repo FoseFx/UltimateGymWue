@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  urls: {
+    registerNormal: 'https://ugw.fosefx.com/api/auth/normal/register',
+    loginNormal: 'https://ugw.fosefx.com/api/auth/normal/login',
+  }
 };
