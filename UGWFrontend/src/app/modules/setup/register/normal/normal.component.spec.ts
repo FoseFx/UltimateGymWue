@@ -6,6 +6,11 @@ import {SetupQuery} from '../../state/setup.query';
 import {SetupStore} from '../../state/setup.store';
 import {HttpClientModule} from '@angular/common/http';
 import {SetupService} from '../../state/setup.service';
+import {LoginService} from '../../login/login.service';
+import {AppStore} from '../../../../state/app.store';
+import {AppQuery} from '../../../../state/app.query';
+import {AppService} from '../../../../state/app.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NormalComponent', () => {
   let component: NormalComponent;
@@ -14,8 +19,8 @@ describe('NormalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NormalComponent ],
-      imports: [UiModule, HttpClientModule],
-      providers: [SetupQuery, SetupStore, SetupService]
+      imports: [UiModule, HttpClientModule, RouterTestingModule],
+      providers: [SetupQuery, SetupStore, SetupService, LoginService, AppService, AppStore, AppQuery]
     })
     .compileComponents();
   }));
