@@ -65,7 +65,7 @@ mod test {
     fn test_verify_passw() {
         assert_eq!(
             verify_passw(
-                format!("Secure Password"),
+                &format!("Secure Password"),
                 format!("e842a1b305ba638037ca7783a55adcdf643ae219"),
                 format!("cj7nrY5PXVc173KrtU2GFCcC")
             ),
@@ -73,7 +73,7 @@ mod test {
         );
         assert_eq!(
             verify_passw(
-                format!("Secure Password"),
+                &format!("Secure Password"),
                 format!("842a1b305ba638037ca7783a55adcdf643ae219"),
                 format!("cj7nrY5PXVc173KrtU2GFCcC")
             ),
@@ -87,7 +87,7 @@ mod test {
         // we assume verify_passw works
         assert_eq!(
             verify_passw(
-                format!("Secure Password"),
+                &format!("Secure Password"),
                 hash,
                 salt
             ),
