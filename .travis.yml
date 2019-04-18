@@ -27,6 +27,7 @@ matrix:
     - SECRET=test
     - MAIL_JET_USER=test
     - MAIL_JET_KEY=test
+    - REDIS_PATH="redis://0.0.0.0/"
     script:
     - cd UGWBackend
     - cargo build --verbose --all
