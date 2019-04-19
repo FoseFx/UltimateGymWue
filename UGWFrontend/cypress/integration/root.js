@@ -6,7 +6,7 @@ describe('root', () => {
 
     it('should route to /setup/welcome, when nothing set', function () {
       localStorage.clear();
-      cy.visit('/');
+      cy.visit('http://localhost:4200/');
       cy.url().should('equal', 'http://localhost:4200/setup/welcome');
       localStorage.clear();
     });
@@ -31,7 +31,7 @@ describe('root', () => {
         basics: null,
         menuOpen: false
       });
-      cy.visit('/');
+      cy.visit('http://localhost:4200/');
       cy.wait(500);
       console.log('localstorage', localStorage);
       cy.url().should('equal', 'http://localhost:4200/setup/basics/stufen');
@@ -60,7 +60,7 @@ describe('root', () => {
         },
         menuOpen: false
       });
-      cy.visit('/');
+      cy.visit('http://localhost:4200/');
       cy.wait(500);
       console.log('localstorage', JSON.parse(localStorage.app_state));
       cy.url().should('equal', 'http://localhost:4200/basics/landing');

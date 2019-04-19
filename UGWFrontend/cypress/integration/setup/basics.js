@@ -26,7 +26,7 @@ describe('basics', () => {
         },
         menuOpen: false
       });
-      cy.visit('/basics/landing');
+      cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/basics/landing');
 
@@ -51,7 +51,7 @@ describe('basics', () => {
         basics: null,
         menuOpen: false
       });
-      cy.visit('/basics/landing');
+      cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/setup/basics/stufe');
     });
@@ -71,7 +71,7 @@ describe('basics', () => {
         },
         menuOpen: false
       });
-      cy.visit('/basics/landing');
+      cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/setup/welcome');
     });
@@ -91,7 +91,7 @@ describe('basics', () => {
         },
         menuOpen: false
       });
-      cy.visit('/basics/landing');
+      cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/setup/welcome');
     });

@@ -27,7 +27,7 @@ describe('login', () => {
         fullname: 'some name',
         menuOpen: false
       });
-      cy.visit('/setup/login');
+      cy.visit('http://localhost:4200/setup/login');
       cy.wait(300);
       cy.url().should('not.equal', 'http://localhost:4200/setup/login');
       localStorage.clear();
@@ -49,7 +49,7 @@ describe('login', () => {
         },
         menuOpen: false
       });
-      cy.visit('/setup/login');
+      cy.visit('http://localhost:4200/setup/login');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/setup/login');
       localStorage.clear();
@@ -59,7 +59,7 @@ describe('login', () => {
     it('should allow, when not logged in and no basics', () => {
 
       localStorage.clear();
-      cy.visit('/setup/login');
+      cy.visit('http://localhost:4200/setup/login');
       cy.wait(300);
       cy.url().should('equal', 'http://localhost:4200/setup/login');
       localStorage.clear();

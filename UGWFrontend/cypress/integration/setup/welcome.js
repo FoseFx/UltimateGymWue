@@ -3,7 +3,7 @@
 describe("welcome component", () => {
 
     beforeEach(() => {
-        cy.visit("/setup/welcome");
+        cy.visit("http://localhost:4200/setup/welcome");
         cy.get("app-button").eq(0).as("registerbtn");
         cy.get("app-button").eq(1).as("loginbtn");
 
