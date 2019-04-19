@@ -1,5 +1,5 @@
 <app-card [loading]="loading">
-  <h1 style="text-align: center; padding-top: 2rem">Hey {{query.selectName$ | async}}</h1>
+  <app-card-header>Hey {{query.selectName$ | async}}</app-card-header>
 
 
   <h3 class="warning" *ngIf="!!error">Fehler: {{error}}</h3>

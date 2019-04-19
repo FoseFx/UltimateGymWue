@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
-import {tap} from "rxjs/internal/operators/tap";
+import {tap} from 'rxjs/internal/operators/tap';
 
 @Component({
   selector: 'app-input',
@@ -10,20 +10,39 @@ import {tap} from "rxjs/internal/operators/tap";
 })
 export class InputComponent implements OnInit, OnDestroy {
 
-  @Input() type: 'text'|'email'|'number'|'password' = 'text';
+  @Input() type: 'text'|'email'|'number'|'password'|'dropdown' = 'text';
+  @Input('dropdownOptions')
+  set dropdownOptions(val: string[] ) {
+    this.ddOptions = val;
+    this.value = '';
+    this.ddFilterValue$.next('');
+  }
+  private ddOptions: string[] = [];
   @Output() input = new EventEmitter();
   @Output() enter = new EventEmitter();
   focused = false;
+  ddfocused = false;
   labelColored = false;
   private validSub: Subscription;
   public dirty = false;
   public value = '';
   public invalid = false;
 
+  ddFilterValue$ = new BehaviorSubject('');
+
+  dropdownOptionsVisible$: Observable<string[]> = this.ddFilterValue$.pipe(
+    debounceTime(100),
+    map((filter: string) => {
+      const re = new RegExp(`.*${filter}.*`, 'i');
+      return this.ddOptions.filter((val: string) => re.test(val));
+    })
+  );
+
   constructor() { }
 
   focusIn() {
     this.focused = true;
+    this.ddfocused = true;
     this.labelColored = true;
   }
 
@@ -35,39 +54,63 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
+  focusOutDD() {
+    setTimeout(() => {
+      if (this.value.replace(/[\n\t ]/g, '').trim() === '') {
+        this.focused = false;
+      }
+      this.ddfocused = false;
+      this.labelColored = false;
+    }, 200);
+  }
+
   onInput(event) {
     this.dirty = true;
     this.input.emit(event);
   }
 
   ngOnInit() {
-    this.validSub = this.input.pipe(
-      debounceTime(100),
-      map((event: Event) => {
-        const target = event.target as HTMLInputElement;
-        return target.value;
-      }),
-      tap((val) => this.value = val),
-      map((input) => {
-        if (this.type === 'text') {
-          return input.length !== 0;
-        } else if (this.type === 'password') {
-          return input.length > 7;
-        } else if (this.type === 'email') {
-          return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
-        } else { // number
-          return true;
-        }
-      })
-    ).subscribe((valid: boolean) => {
-      this.invalid = !valid;
-    });
+    if (this.type !== 'dropdown') {
+      this.validSub = this.input.pipe(
+        debounceTime(100),
+        map((event: Event) => {
+          const target = event.target as HTMLInputElement;
+          return target.value;
+        }),
+        tap((val) => this.value = val),
+        map((input) => {
+          if (this.type === 'text') {
+            return input.length !== 0;
+          } else if (this.type === 'password') {
+            return input.length > 7;
+          } else if (this.type === 'email') {
+            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
+          } else { // number
+            return true;
+          }
+        })
+      ).subscribe((valid: boolean) => {
+        this.invalid = !valid;
+      });
+    }
   }
 
   ngOnDestroy() {
     this.validSub.unsubscribe();
   }
 
+
+  dropdownSelect(value: string) {
+    this.value = value;
+    this.input.emit(value);
+    this.dirty = true;
+    this.ddFilterValue$.next('');
+  }
+
+  onDDInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.ddFilterValue$.next(target.value);
+  }
 
 
 }

@@ -55,3 +55,24 @@ label {
 .invalid {
   color: $attention!important;
 }
+
+.dropdown {
+  list-style-type: none;
+  padding: 0 5px;
+  transform: translateY(-10px);
+  li {
+    display: block;
+    margin: 4px auto;
+    padding: 10px 5px;
+    width: 100%;
+    background: $primary;
+    color: $dark;
+    font-size: 17px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s linear;
+    &:hover {
+      background-color: $accent;
+    }
+  }
+}

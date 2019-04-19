@@ -5,6 +5,7 @@ import { CardComponent } from './card/card.component';
 import { InputComponent } from './input/input.component';
 import { HrComponent } from './hr/hr.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { CardHeaderComponent } from './card/card-header/card-header.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     CardComponent,
     InputComponent,
     HrComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CardHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ButtonComponent,
     CardComponent,
     InputComponent,
-    HrComponent
+    HrComponent,
+    CardHeaderComponent
   ]
 })
 export class UiModule { }

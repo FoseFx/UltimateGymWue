@@ -10,6 +10,7 @@
 </label>
 
 <input
+  *ngIf="type !== 'dropdown'"
   [ngClass]="{'invalid': invalid}"
   (input)="onInput($event)"
   (focusin)="focusIn()"
@@ -18,3 +19,18 @@
   id="input"
   type="{{type}}"
 >
+
+<ng-template [ngIf]="type === 'dropdown'">
+  <input
+    (focusin)="focusIn()"
+    (focusout)="focusOutDD()"
+    id="input"
+    type="text"
+    (input)="onDDInput($event)"
+    [value]="value"
+  >
+  <ul class="dropdown" *ngIf="ddfocused">
+    <li *ngFor="let option of dropdownOptionsVisible$ | async" (click)="dropdownSelect(option)">{{option}}</li>
+  </ul>
+
+</ng-template>
