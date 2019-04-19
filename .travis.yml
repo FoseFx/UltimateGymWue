@@ -23,11 +23,13 @@ matrix:
   - language: rust
     rust: nightly
     cache: cargo
+    services:
+    - redis-server
     env:
     - SECRET=test
     - MAIL_JET_USER=test
     - MAIL_JET_KEY=test
-    - REDIS_PATH="redis://0.0.0.0/"
+    - REDIS_PATH="redis://localhost:6379/"
     script:
     - cd UGWBackend
     - cargo build --verbose --all

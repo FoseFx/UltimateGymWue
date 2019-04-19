@@ -4,7 +4,8 @@ describe('login', () => {
 
 
   describe('routing', () => {
-/*
+/* todo
+
     it('should not allow, when logged in', () => {
 
       localStorage.clear();
