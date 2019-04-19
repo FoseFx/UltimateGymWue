@@ -5,7 +5,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {SetupService} from '../../state/setup.service';
 import {LoginService} from '../../login/login.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-normal',
@@ -29,7 +29,7 @@ export class NormalComponent implements OnInit {
   }
 
   onClick(email: InputComponent, passw: InputComponent, passwwdh: InputComponent) {
-    if (email.value === '' || passw.value === '' || email.invalid || passw.invalid || passw.value !== passwwdh.value){
+    if (email.value === '' || passw.value === '' || email.invalid || passw.invalid || passw.value !== passwwdh.value) {
       return;
     }
     this.loading = true;

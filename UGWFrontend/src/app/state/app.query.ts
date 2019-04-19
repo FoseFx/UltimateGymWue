@@ -6,7 +6,7 @@
 import {Query} from '@datorama/akita';
 import {Injectable} from '@angular/core';
 import {AppState, AppStore} from './app.store';
-import {map} from "rxjs/operators";
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AppQuery extends Query<AppState> {

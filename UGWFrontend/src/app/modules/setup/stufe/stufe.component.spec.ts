@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StufeComponent } from './stufe.component';
+import {UiModule} from '../../ui/ui.module';
 
 describe('StufeComponent', () => {
   let component: StufeComponent;
@@ -8,6 +9,7 @@ describe('StufeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [UiModule],
       declarations: [ StufeComponent ]
     })
     .compileComponents();

@@ -16,7 +16,7 @@ export class RegistersteptwoGuard implements CanActivate {
     const allow = this.query.getValue().name !== null;
     console.log(allow);
 
-    if (!allow){
+    if (!allow) {
       this.router.navigate(['/setup/register']);
     }
 
