@@ -60,7 +60,8 @@ fn rocket() -> Rocket {
             auth::normal::normal::normal_handler,
             cors,
             auth::normal::normal::normal_verify_email_handler,
-            auth::normal::normal::normal_login_handler
+            auth::normal::normal::normal_login_handler,
+            auth::google::register::handler::google_register_handler
             ]
         );
 }

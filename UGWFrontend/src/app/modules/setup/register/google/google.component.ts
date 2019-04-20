@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {environment} from '../../../../../environments/environment';
 
 declare const gapi: any;
 
@@ -28,7 +29,11 @@ export class GoogleComponent implements OnInit {
       token: googleUser.getAuthResponse().id_token
     };
     console.log(payload);
-    // todo send to server
+    this.http.post(environment.urls.registerGoogle, payload).subscribe(
+      (data: any) => {},
+      (error: HttpErrorResponse) => {}
+    );
+    // todo
   }
 
 }

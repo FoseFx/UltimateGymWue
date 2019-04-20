@@ -7,6 +7,7 @@ export const environment = {
   urls: {
     registerNormal: 'https://backend.development/api/auth/normal/register',
     loginNormal: 'https://backend.development/api/auth/normal/login',
+    registerGoogle: 'https://backend.development/api/auth/google/register'
   }
 };
 
