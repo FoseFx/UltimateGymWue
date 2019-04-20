@@ -29,8 +29,15 @@
     (input)="onDDInput($event)"
     [value]="value"
   >
-  <ul class="dropdown" *ngIf="ddfocused">
-    <li *ngFor="let option of dropdownOptionsVisible$ | async" (click)="dropdownSelect(option)">{{option}}</li>
+  <ul
+    class="dropdown"
+    *ngIf="ddfocused"
+    [@dropdown]="'open'"
+  >
+    <li
+      *ngFor="let option of dropdownOptionsVisible$ | async"
+      (click)="dropdownSelect(option)"
+    >{{option}}</li>
   </ul>
 
 </ng-template>

@@ -19,9 +19,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from './login/login.service';
 import {LoginGuard} from './guards/login.guard';
 import {LoginnedGuard} from './guards/loginned.guard';
+import {GoogleComponent, GoogleSigninComponent} from './register/google/google.component';
 
 @NgModule({
-  declarations: [WelcomeComponent, LegalComponent, LoginComponent, RegisterComponent, StufeComponent, KurseComponent, NormalComponent],
+  declarations: [
+    WelcomeComponent,
+    LegalComponent,
+    LoginComponent,
+    RegisterComponent,
+    StufeComponent,
+    KurseComponent,
+    NormalComponent,
+    GoogleComponent,
+    GoogleSigninComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

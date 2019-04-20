@@ -9,6 +9,7 @@ import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
 import {LoginGuard} from './guards/login.guard';
 import {StufeComponent} from './stufe/stufe.component';
 import {LoginnedGuard} from './guards/loginned.guard';
+import {GoogleComponent} from './register/google/google.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'register/normal',
     component: NormalComponent,
+    canActivate: [RegistersteptwoGuard]
+  },
+  {
+    path: 'register/google',
+    component: GoogleComponent,
     canActivate: [RegistersteptwoGuard]
   },
   {

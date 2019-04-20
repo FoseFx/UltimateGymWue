@@ -40,6 +40,8 @@ export class RegisterComponent implements OnInit {
     this.setupService.lockName(this.name);
     if (type === 'normal') {
       this.router.navigate(['/setup/register/normal']);
+    } else if (type === 'google') {
+      this.router.navigate(['/setup/register/google']);
     }
     // todo route
     console.log(type);

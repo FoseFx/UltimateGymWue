@@ -4,7 +4,12 @@
     Super! Jetzt kannst du UGW einrichten. Gib dazu zunächtst deine Stufe an.
   </p>
 
-  {{dd.value}}
-  <app-input #dd type="dropdown" [dropdownOptions]="['opt1','opt2','opt3']">Dropdown</app-input>
+  <app-input #dd type="dropdown" [dropdownOptions]="['opt1','opt2','opt3','opt4','opt5','opt6','opt7']">Stufe</app-input>
 
+  <app-button class="center-button"
+              accent="true"
+              [disabled]="!dd.value"
+  >
+    Weiter <span *ngIf="!!dd.value">mit {{ dd.value }}</span>
+  </app-button>
 </app-card>

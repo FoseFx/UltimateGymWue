@@ -2,11 +2,19 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
 import {tap} from 'rxjs/internal/operators/tap';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
+  animations: [
+    trigger('dropdown', [
+      state('void', style({transform: 'translateY(-20%)', opacity: '0'})),
+      state('open', style({transform: 'translateY(0)', opacity: '1'})),
+      transition('void <=> open', [animate('200ms')])
+    ])
+  ]
 })
 export class InputComponent implements OnInit, OnDestroy {
 

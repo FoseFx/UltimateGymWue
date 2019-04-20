@@ -57,9 +57,18 @@ label {
 }
 
 .dropdown {
+  display: block;
   list-style-type: none;
   padding: 0 5px;
   transform: translateY(-10px);
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   li {
     display: block;
     margin: 4px auto;
