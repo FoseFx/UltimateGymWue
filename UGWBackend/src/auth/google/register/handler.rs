@@ -3,6 +3,9 @@ use crate::responses::CustomResponse;
 use rocket::http::Status;
 use reqwest::Response;
 use std::error::Error;
+use crate::{GOOGLE_AUD, SecretMgt};
+use rocket::State;
+use std::ops::Deref;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -12,10 +15,12 @@ pub struct GoogleRegisterRequest {
 }
 
 #[post("/auth/google/register", data = "<data>")]
-pub fn google_register_handler(data: Json<GoogleRegisterRequest>) -> CustomResponse {
+pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<SecretMgt>) -> CustomResponse {
 
+    let secret: String = secret.0.deref().to_string();
     let token = &data.token;
     let fullname = &data.fullname;
+    let fullname = fullname.to_owned();
 
     //
     // Let Google verify token
@@ -62,14 +67,67 @@ pub fn google_register_handler(data: Json<GoogleRegisterRequest>) -> CustomRespo
         );
     }
 
-    // todo google account exists
+    if !google_resp.aud.contains(GOOGLE_AUD) {
+        return CustomResponse::error(
+            "Das Token gehört zu einer anderen App und kann nicht für UGW verwendet werden.".to_string(),
+            Status::Unauthorized
+        );
+    }
 
-    // todo email exists
-
-    // todo add to db
+    println!("{:#?}", &google_resp); // todo rm this
 
 
-    println!("{:#?}", google_resp); // todo rm this
+    // google account exists?
+
+    let g_exists_res = crate::db::exists_google_account(&google_resp.sub, &secret);
+    if g_exists_res.is_err() {
+        println!("FATAL ERROR CHECKING G ACCOUNT: {:?}", g_exists_res.unwrap_err());
+        return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
+    }
+    let g_exists_res = g_exists_res.unwrap();
+    if g_exists_res {
+        return CustomResponse::error(format!("Google Account wird bereits benutzt."), Status::Unauthorized);
+    }
+
+    // no
+
+
+
+    // email exists?
+    let exists_res = crate::db::exists_email(&google_resp.email, &secret);
+    if exists_res.is_err() {
+        println!("{:?}", exists_res.unwrap_err());
+        return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
+    }
+    let exists_res = exists_res.unwrap();
+    if exists_res {
+        return CustomResponse::error(format!("Email benutzt"), Status::Unauthorized);
+    }
+
+    // no
+
+    // Add to DB
+
+    let add_user_resp = crate::db::add_user(
+        crate::db::User {
+            fullname,
+            normal: None,
+            google: Some(crate::db::GoogleLoginData {
+                email: google_resp.email,
+                gid: google_resp.sub
+            })
+        },
+        secret
+    );
+
+    if add_user_resp.is_err() {
+        let err = add_user_resp.unwrap_err();
+        println!("FATAL ERROR ADDING USER TO DB: {:?}", err);
+        return CustomResponse::error(
+            "Fehler bei Kommunikation mit Datenbank.".to_string(),
+            Status::InternalServerError
+        );
+    }
 
 
     return CustomResponse::message("Ok".to_string());

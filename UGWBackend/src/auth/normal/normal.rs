@@ -59,7 +59,8 @@ pub fn normal_handler(
                 email_verified: false,
                 password_hash: hash,
                 password_salt: salt
-            })
+            }),
+            google: None
         },
         secret
     );

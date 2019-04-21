@@ -30,6 +30,9 @@ http.createServer((req, res) => {
   if (/^\/register\/.*$/.test(req.url)) {
     return registerUser(req, res);
   }
+  if (/^\/exists_google\/.*$/.test(req.url)) {
+    return existsGoogle(req, res);
+  }
 
   res.statusCode = 404;
   res.end();
@@ -54,18 +57,31 @@ function registerUser(req, res){
 }
 
 function existsEmail(req, res) {
-  console.log(req.url.replace('/existsemail/', '').replace('/', ''));
+  const email = req.url.replace('/existsemail/', '').replace('/', '');
+  console.log(email);
   
-  db.collection('users').where('normal.email', '==', req.url.replace('/existsemail/', '').replace('/', '')).get()
+  db.collection('users').where('normal.email', '==', email).get()
   .then((snapshot) => {
     if (snapshot.empty) {
-      console.log("false");
-      
-      return res.end("false");
+
+      db.collection('users').where('google.email', '==', email).get().then((snap) => {
+        if (snap.empty) {
+          console.log("false");
+          return res.end("false");        
+        }
+        console.log("true");
+        res.end("true");
+
+      }).catch((err) => {
+        console.error(err);
+        res.statusCode = 500;
+        res.end("Err");
+      });
+
+    } else {
+      console.log("true");
+      res.end("true");
     }
-    console.log("true");
-    
-    res.end("true");
   })
   .catch((err) => {
     console.error(err);
@@ -136,5 +152,27 @@ function login_normal(req, res){
     console.error(err);
     res.statusCode = 500;
     res.end("[]");
+  });
+}
+
+function existsGoogle(req, res) {
+  const gid = req.url.replace('/exists_google/', '').replace('/', '');
+  console.log(gid);
+  
+  db.collection('users').where('google.gid', '==', gid).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      res.end("false");
+
+    } else {
+      console.log("true");
+      res.end("true");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("Err");
   });
 }

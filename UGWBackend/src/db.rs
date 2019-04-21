@@ -14,9 +14,16 @@ pub struct NormalLoginData {
 }
 
 #[derive(Serialize, Deserialize)]
+pub struct GoogleLoginData {
+    pub email: String,
+    pub gid: String
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct User {
     pub fullname: String,
-    pub normal: Option<NormalLoginData>
+    pub normal: Option<NormalLoginData>,
+    pub google: Option<GoogleLoginData>
 }
 
 /// returns UserID
@@ -122,4 +129,24 @@ pub fn get_login_data(email: &String, secret: &String) -> Result<LoginData, Stri
     };
 
     return Ok(acc);
+}
+
+pub fn exists_google_account(gid: &String, secret: &String) -> Result<bool, String> {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/exists_google/{}", gid)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+
+    let res = res.unwrap().error_for_status();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+    let mut res = res.unwrap();
+    let res = res.text().unwrap();
+
+    return Ok(res == "true");
+
 }
