@@ -1,7 +1,9 @@
-<app-card>
+<app-card [loading]="loading">
   <app-card-header>Sign In with Google</app-card-header>
 
   <p>TOC und so weiter hier.</p>
+
+  <h3 class="warning" *ngIf="!!error">Fehler: {{error}}</h3>
 
   <app-google-signin (ok)="onOk($event)"></app-google-signin>
 

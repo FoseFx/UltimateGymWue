@@ -1,18 +1,31 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
+import {SetupQuery} from '../../state/setup.query';
 
 declare const gapi: any;
 
 @Component({
   selector: 'app-google',
   templateUrl: './google.component.html',
-  styleUrls: ['./google.component.scss']
+  styleUrls: ['./google.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class GoogleComponent implements OnInit {
   public auth2: any;
 
-  constructor(private http: HttpClient) { }
+  error: string;
+  loading = false;
+
+  constructor(private http: HttpClient, private query: SetupQuery) { }
 
 
   ngOnInit() {
@@ -25,15 +38,29 @@ export class GoogleComponent implements OnInit {
   }
 
   onOk(googleUser: GoogleUser) {
+    this.error = undefined;
+    this.loading = true;
+
     const payload = {
+      fullname: this.query.getValue().name,
       token: googleUser.getAuthResponse().id_token
     };
     console.log(payload);
     this.http.post(environment.urls.registerGoogle, payload).subscribe(
-      (data: any) => {},
-      (error: HttpErrorResponse) => {}
+      (data: any) => {
+        // todo
+        console.log(data);
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        console.log(error);
+        if (!!error.error.msg) {
+          this.error = error.error.msg;
+        } else {
+          this.error = error.message;
+        }
+      }
     );
-    // todo
   }
 
 }
