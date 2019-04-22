@@ -115,7 +115,8 @@ pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<
             google: Some(crate::db::GoogleLoginData {
                 email: google_resp.email,
                 gid: google_resp.sub
-            })
+            }),
+            instagram: None
         },
         secret
     );

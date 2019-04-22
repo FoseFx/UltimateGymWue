@@ -42,8 +42,9 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/setup/register/normal']);
     } else if (type === 'google') {
       this.router.navigate(['/setup/register/google']);
+    } else { // insta
+      this.router.navigate(['/setup/register/insta']);
     }
-    // todo route
     console.log(type);
   }
 

@@ -30,6 +30,8 @@ matrix:
     - MAIL_JET_USER=test
     - MAIL_JET_KEY=test
     - REDIS_PATH="redis://localhost:6379/"
+    - INSTA_CID="test"
+    - INSTA_SECRET="test"
     script:
     - cd UGWBackend
     - cargo build --verbose --all

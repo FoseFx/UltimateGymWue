@@ -24,7 +24,15 @@ pub struct GoogleLoginData {
 pub struct User {
     pub fullname: String,
     pub normal: Option<NormalLoginData>,
-    pub google: Option<GoogleLoginData>
+    pub google: Option<GoogleLoginData>,
+    pub instagram: Option<InstaLoginData>
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct InstaLoginData {
+    pub iid: String,
+    pub username: String,
+    pub token: String
 }
 
 /// returns UserID
@@ -183,4 +191,23 @@ pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::aut
     };
 
     return Ok(claim);
+}
+
+pub fn exists_insta_account(iid: &String, secret: &String) -> Result<bool, String> {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/exists_insta/{}", iid)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+
+    let res = res.unwrap().error_for_status();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+    let mut res = res.unwrap();
+    let res = res.text().unwrap();
+
+    return Ok(res == "true");
 }
