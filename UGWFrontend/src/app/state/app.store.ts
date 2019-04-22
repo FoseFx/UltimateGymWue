@@ -11,11 +11,16 @@ export interface AppState {
     version: string;
   };
   loginData: {
+    token: string,
     uid: string,
     provider: ('normal'|'google'|'insta')[],
     normal: {
       email: string,
       email_verified: boolean
+    },
+    google: {
+      email: string,
+      gid: string
     }
   };
   fullname: string;

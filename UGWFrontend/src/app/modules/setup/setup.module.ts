@@ -20,6 +20,7 @@ import {LoginService} from './login/login.service';
 import {LoginGuard} from './guards/login.guard';
 import {LoginnedGuard} from './guards/loginned.guard';
 import {GoogleComponent, GoogleSigninComponent} from './register/google/google.component';
+import { GoogleLoginComponent } from './login/google-login/google-login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {GoogleComponent, GoogleSigninComponent} from './register/google/google.c
     KurseComponent,
     NormalComponent,
     GoogleComponent,
-    GoogleSigninComponent
+    GoogleSigninComponent,
+    GoogleLoginComponent
   ],
   imports: [
     CommonModule,

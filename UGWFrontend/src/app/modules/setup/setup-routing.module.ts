@@ -10,6 +10,7 @@ import {LoginGuard} from './guards/login.guard';
 import {StufeComponent} from './stufe/stufe.component';
 import {LoginnedGuard} from './guards/loginned.guard';
 import {GoogleComponent} from './register/google/google.component';
+import {GoogleLoginComponent} from './login/google-login/google-login.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard]
+  },{
+    path: 'login/google',
+    component: GoogleLoginComponent,
     canActivate: [LoginGuard]
   },
   {

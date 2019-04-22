@@ -1,5 +1,5 @@
 <app-card [loading]="loading">
-  <app-card-header>Sign In with Google</app-card-header>
+  <app-card-header>Sign up with Google</app-card-header>
 
   <p>TOC und so weiter hier.</p>
 
@@ -7,5 +7,7 @@
 
   <app-google-signin (ok)="onOk($event)"></app-google-signin>
 
-
+  <p class="center-text">
+    <a [routerLink]="['/setup/login/google']">Stattdessen einloggen</a>
+  </p>
 </app-card>

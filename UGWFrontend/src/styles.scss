@@ -80,3 +80,12 @@ p.hint {
 }
 
 #googleBtn > * {margin: 0 auto;}
+
+a {
+  color: $accent;
+  opacity: 0.8;
+  transition: opacity 0.1s linear;
+  &:hover {
+    opacity: 1;
+  }
+}

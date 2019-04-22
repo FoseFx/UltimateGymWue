@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -10,6 +10,9 @@ import {
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {SetupQuery} from '../../state/setup.query';
+import {addGoogleScript} from '../../utils';
+import {LoginService} from "../../login/login.service";
+import {Router} from "@angular/router";
 
 declare const gapi: any;
 
@@ -25,21 +28,21 @@ export class GoogleComponent implements OnInit {
   error: string;
   loading = false;
 
-  constructor(private http: HttpClient, private query: SetupQuery) { }
+  constructor(private http: HttpClient,
+              private query: SetupQuery,
+              private changedetectionRef: ChangeDetectorRef,
+              private loginService: LoginService,
+              private router: Router) { }
 
 
   ngOnInit() {
-    const resource = document.createElement('script');
-    resource.async = true;
-    resource.defer = true;
-    resource.src = 'https://apis.google.com/js/platform.js';
-    const script = document.getElementsByTagName('script')[0];
-    script.parentNode.insertBefore(resource, script);
+    addGoogleScript();
   }
 
   onOk(googleUser: GoogleUser) {
     this.error = undefined;
     this.loading = true;
+    this.changedetectionRef.detectChanges();
 
     const payload = {
       fullname: this.query.getValue().name,
@@ -48,9 +51,25 @@ export class GoogleComponent implements OnInit {
     console.log(payload);
     this.http.post(environment.urls.registerGoogle, payload).subscribe(
       (data: any) => {
-        // todo
         console.log(data);
-      },
+        this.loginService.googleLogin(payload.token).subscribe(
+          (loginData) => {
+            this.router.navigate(['/setup/basics']);
+            console.log(loginData);
+          }, // next
+          (error) => {
+            if (!!error.error.msg) {
+              this.error = error.error.msg;
+            } else {
+              this.error = error.message;
+            }
+            this.error = 'Nach erfolgreicher Registrierung: ' + this.error;
+            this.changedetectionRef.detectChanges();
+          } // error
+        ); // googleLogin()
+
+        this.changedetectionRef.detectChanges();
+      }, // next
       (error: HttpErrorResponse) => {
         this.loading = false;
         console.log(error);
@@ -59,8 +78,9 @@ export class GoogleComponent implements OnInit {
         } else {
           this.error = error.message;
         }
-      }
-    );
+        this.changedetectionRef.detectChanges();
+      } // error
+    ); // post
   }
 
 }
@@ -129,7 +149,6 @@ export class GoogleSigninComponent implements AfterViewInit {
   checkAndInit() {
     setTimeout(() => {
       this.times++;
-      console.log(typeof gapi === 'undefined');
       if (typeof gapi === 'undefined') {
         this.checkAndInit();
       } else {
@@ -146,7 +165,7 @@ export class GoogleSigninComponent implements AfterViewInit {
 
 }
 
-class GoogleUser {
+export class GoogleUser {
   getBasicProfile: () => GoogleProfile;
   getAuthResponse: () => {id_token: string};
 

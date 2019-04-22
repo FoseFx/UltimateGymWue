@@ -26,6 +26,23 @@ export class LoginService {
       })
     );
   }
+
+  googleLogin(token: string): Observable<LoginResponse> {
+    return (
+      this.http.post(environment.urls.loginGoogle, {token}
+    ) as Observable<LoginResponse>).pipe(
+      map(res => {
+        if (res.error) {
+          throw new Error(res.msg);
+        }
+        return res;
+      }),
+      tap((res) => {
+        console.log('tap', res);
+        this.appService.onLogin(res); // todo edit function
+      })
+    );
+  }
 }
 
 export class LoginResponse {
@@ -40,6 +57,10 @@ export class LoginResponse {
       normal?: {
         email: string,
         email_verified: boolean
+      }
+      google?: {
+        gid: string,
+        email: string
       }
     }
   };

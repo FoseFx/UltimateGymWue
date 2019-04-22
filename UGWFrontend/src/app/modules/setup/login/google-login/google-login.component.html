@@ -1,0 +1,12 @@
+<app-card>
+  <app-card-header>Sign in with Google</app-card-header>
+
+  <p>Mehr Text hier</p>
+
+  <h3 class="warning" *ngIf="!!error">Fehler: {{error}}</h3>
+
+  <app-google-signin (ok)="onOk($event)">Bitte Warten...</app-google-signin>
+  <p class="center-text">
+    <a [routerLink]="['/setup/register']">Stattdessen registrieren</a>
+  </p>
+</app-card>
