@@ -36,7 +36,9 @@ http.createServer((req, res) => {
   if (/^\/login_google\/.*$/.test(req.url)) {
     return loginGoogle(req, res);
   }
-
+  if (/^\/exists_insta\/.*$/.test(req.url)) {
+    return existsInsta(req, res);
+  }
   res.statusCode = 404;
   res.end();
 }).listen(8080, () => {
@@ -204,5 +206,26 @@ function loginGoogle(req, res){
     console.error(err);
     res.statusCode = 500;
     res.end("[]");
+  });
+}
+function existsInsta(req, res) {
+  const iid = req.url.replace('/exists_insta/', '').replace('/', '');
+  console.log(iid);
+  
+  db.collection('users').where('instagram.iid', '==', iid).limit(1).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      res.end("false");
+
+    } else {
+      console.log("true");
+      res.end("true");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("Err");
   });
 }

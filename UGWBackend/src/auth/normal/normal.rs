@@ -60,7 +60,8 @@ pub fn normal_handler(
                 password_hash: hash,
                 password_salt: salt
             }),
-            google: None
+            google: None,
+            instagram: None
         },
         secret
     );

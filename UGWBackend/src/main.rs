@@ -18,6 +18,7 @@ use rocket::response::{self, Response, Responder};
 
 pub struct SecretMgt(String);
 pub struct MailJetMgt {user: String, key: String}
+pub struct InstaSecretMgt {client_id: String, client_secret: String}
 
 pub const EMAIL_DOMAIN: &'static str = "ugw.fosefx.com";
 pub const SERVER_HOST: &'static str = "https://ugw.fosefx.com/api";
@@ -52,6 +53,7 @@ fn cors(_path: PathBuf) -> CORSResponder {
 fn rocket() -> Rocket {
     return rocket::ignite()
         .manage(get_secret())
+        .manage(get_insta_secret())
         .manage(get_mailjet_creds())
         .manage(redismw::pool())
         .mount(
@@ -63,7 +65,9 @@ fn rocket() -> Rocket {
             auth::normal::normal::normal_verify_email_handler,
             auth::normal::normal::normal_login_handler,
             auth::google::register::handler::google_register_handler,
-            auth::google::login::handler::google_login_handler
+            auth::google::login::handler::google_login_handler,
+            auth::insta::register::insta_register_handler,
+            auth::insta::register::insta_register_code_handler
             ]
         );
 }
@@ -82,6 +86,7 @@ fn get_secret() -> SecretMgt {
     }
     return SecretMgt(secret.unwrap());
 }
+
 fn get_mailjet_creds() -> MailJetMgt {
     let mut user: Option<String> = None;
     let mut key: Option<String> = None;
@@ -101,6 +106,30 @@ fn get_mailjet_creds() -> MailJetMgt {
     }
 
     return MailJetMgt {user: user.unwrap(), key: key.unwrap()}
+}
+
+fn get_insta_secret() -> InstaSecretMgt {
+    let mut user: Option<String> = None;
+    let mut key: Option<String> = None;
+    for (env_key, val) in std::env::vars(){
+        if env_key == "INSTA_CID" {
+            user = Some(val);
+        }
+        else if env_key == "INSTA_SECRET" {
+            key = Some(val);
+        }
+    }
+    if user.is_none()  {
+        panic!("No INSTA_CID variable found");
+    }
+    if key.is_none()  {
+        panic!("No INSTA_SECRET variable found");
+    }
+
+    return InstaSecretMgt {
+        client_id: user.unwrap(),
+        client_secret: key.unwrap()
+    };
 }
 
 
