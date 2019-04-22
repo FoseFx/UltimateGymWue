@@ -11,6 +11,7 @@ import {StufeComponent} from './stufe/stufe.component';
 import {LoginnedGuard} from './guards/loginned.guard';
 import {GoogleComponent} from './register/google/google.component';
 import {GoogleLoginComponent} from './login/google-login/google-login.component';
+import {InstaComponent} from './register/insta/insta.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'register/google',
     component: GoogleComponent,
+    canActivate: [RegistersteptwoGuard]
+  },
+  {
+    path: 'register/insta',
+    component: InstaComponent,
     canActivate: [RegistersteptwoGuard]
   },
   {

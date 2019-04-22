@@ -8,7 +8,9 @@ export const environment = {
     registerNormal: 'https://backend.development/api/auth/normal/register',
     loginNormal: 'https://backend.development/api/auth/normal/login',
     registerGoogle: 'http://localhost:8000/api/auth/google/register',
-    loginGoogle: 'http://localhost:8000/api/auth/google/login'
+    loginGoogle: 'http://localhost:8000/api/auth/google/login',
+    registerInstaRediect: 'https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=https://backend.development/api/auth/insta/register-redirect&response_type=code',
+    registerInsta: 'https://backend.development/api/auth/insta/register-code'
   }
 };
 
