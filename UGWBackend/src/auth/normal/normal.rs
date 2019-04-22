@@ -134,7 +134,8 @@ pub fn normal_login_handler(secret: State<SecretMgt>, data: Json<LoginRequest>) 
         normal: Some(crate::auth::jwt::NormalClaim {
             email: login_data.email,
             email_verified: login_data.email_verified
-        })
+        }),
+        google: None
     };
     
     let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &claim, secret.as_ref()).unwrap();

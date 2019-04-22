@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="" />
+    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/auth/google/login/handler.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/auth/google/login/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db-middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/google/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/google/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/google/register/handler.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/google/register/handler.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/jwt.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/normal/normal.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/normal/normal.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/login/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/login/login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/register/google/google.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/register/google/google.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/setup-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/setup-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/setup.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/setup.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/ui/card/card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/ui/card/card.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.ts" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +31,17 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/auth/google/login/handler.rs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1548">
+              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -44,15 +73,18 @@
         <option value="$PROJECT_DIR$/src/auth/normal/mod.rs" />
         <option value="$PROJECT_DIR$/src/auth/normal/email.rs" />
         <option value="$PROJECT_DIR$/src/auth/normal/passw.rs" />
-        <option value="$PROJECT_DIR$/src/auth/mod.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/google.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/handler.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/register/mod.rs" />
-        <option value="$PROJECT_DIR$/src/auth/google/mod.rs" />
+        <option value="$PROJECT_DIR$/src/auth/google/login/mod.rs" />
         <option value="$PROJECT_DIR$/src/main.rs" />
-        <option value="$PROJECT_DIR$/src/auth/normal/normal.rs" />
-        <option value="$PROJECT_DIR$/src/db.rs" />
+        <option value="$PROJECT_DIR$/src/auth/google/mod.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/register/handler.rs" />
+        <option value="$PROJECT_DIR$/src/auth/jwt.rs" />
+        <option value="$PROJECT_DIR$/src/auth/normal/normal.rs" />
+        <option value="$PROJECT_DIR$/src/auth/mod.rs" />
+        <option value="$PROJECT_DIR$/src/db.rs" />
+        <option value="$PROJECT_DIR$/src/auth/google/login/handler.rs" />
       </list>
     </option>
   </component>
@@ -91,29 +123,14 @@
               <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="google" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="google" type="462c0819:PsiDirectoryNode" />
-              <item name="register" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
               <item name="normal" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -161,17 +178,19 @@
       <workItem from="1555667169922" duration="142000" />
       <workItem from="1555793070712" duration="4344000" />
       <workItem from="1555831109341" duration="5352000" />
+      <workItem from="1555925205401" duration="6888000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39851000" />
+    <option name="totallyTimeSpent" value="46739000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56427014" visible="true" weight="0.21611527" />
-      <window_info id="Structure" order="1" sideWeight="0.43572986" side_tool="true" visible="true" weight="0.21611527" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6020236" visible="true" weight="0.21824974" />
+      <window_info id="Structure" order="1" sideWeight="0.3979764" side_tool="true" visible="true" weight="0.21824974" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -184,7 +203,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.50108933" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3540305" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -281,21 +300,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/google/hsbdh.java" />
-    <entry file="file://$PROJECT_DIR$/src/auth/mod.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/google/register/mod.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/google/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-column="16" />
@@ -337,21 +342,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/google/register/handler.rs">
+    <entry file="file://$PROJECT_DIR$/src/auth/google/login/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="156" column="1" lean-forward="true" selection-start-line="156" selection-start-column="1" selection-end-line="156" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#31#0" />
-            <element signature="n#!!block;n#GoogleUser#0" />
-          </folding>
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1148">
-          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+        <state relative-caret-position="399">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
           <folding>
             <element signature="n#!!block;n#cors#0" />
             <element signature="n#!!block;n#get_secret#0" />
@@ -359,10 +360,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/google/mod.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/google/register/handler.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/mod.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/db.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+        <state relative-caret-position="241">
+          <caret line="182" column="6" lean-forward="true" selection-start-line="182" selection-start-column="6" selection-end-line="182" selection-end-column="6" />
           <folding>
             <element signature="n#!!block;n#NormalLoginData#0" />
             <element signature="n#!!block;n#GoogleLoginData#0" />
@@ -371,15 +393,29 @@
             <element signature="n#!!block;n#exists_email#0" />
             <element signature="n#!!block;n#verify_email#0" />
             <element signature="n#!!block;n#LoginData#0" />
-            <element signature="n#!!block;n#get_login_data#0" />
+            <element signature="n#!!block;n#exists_google_account#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/jwt.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/normal/normal.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="64" column="14" lean-forward="true" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+        <state relative-caret-position="239">
+          <caret line="140" column="16" selection-start-line="140" selection-end-line="141" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/google/login/handler.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1548">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
         </state>
       </provider>
     </entry>

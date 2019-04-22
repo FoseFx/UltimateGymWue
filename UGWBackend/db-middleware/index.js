@@ -33,6 +33,9 @@ http.createServer((req, res) => {
   if (/^\/exists_google\/.*$/.test(req.url)) {
     return existsGoogle(req, res);
   }
+  if (/^\/login_google\/.*$/.test(req.url)) {
+    return loginGoogle(req, res);
+  }
 
   res.statusCode = 404;
   res.end();
@@ -60,11 +63,11 @@ function existsEmail(req, res) {
   const email = req.url.replace('/existsemail/', '').replace('/', '');
   console.log(email);
   
-  db.collection('users').where('normal.email', '==', email).get()
+  db.collection('users').where('normal.email', '==', email).limit(1).get()
   .then((snapshot) => {
     if (snapshot.empty) {
 
-      db.collection('users').where('google.email', '==', email).get().then((snap) => {
+      db.collection('users').where('google.email', '==', email).limit(1).get().then((snap) => {
         if (snap.empty) {
           console.log("false");
           return res.end("false");        
@@ -93,7 +96,7 @@ function existsEmail(req, res) {
 
 function verify_email(req, res){
   console.log(req.url.replace('/verify_email/', '').replace('/', ''));
-  db.collection('users').where('normal.email', '==', req.url.replace('/verify_email/', '').replace('/', '')).get()
+  db.collection('users').where('normal.email', '==', req.url.replace('/verify_email/', '').replace('/', '')).limit(1).get()
   .then((snapshot) => {
     if (snapshot.empty) {
       console.log("false");
@@ -123,7 +126,7 @@ function verify_email(req, res){
 
 function login_normal(req, res){
   console.log(req.url.replace('/login_normal/', '').replace('/', ''));
-  db.collection('users').where('normal.email', '==', req.url.replace('/login_normal/', '').replace('/', '')).get()
+  db.collection('users').where('normal.email', '==', req.url.replace('/login_normal/', '').replace('/', '')).limit(1).get()
   .then((snapshot) => {
     if (snapshot.empty) {
       console.log("false");
@@ -159,7 +162,7 @@ function existsGoogle(req, res) {
   const gid = req.url.replace('/exists_google/', '').replace('/', '');
   console.log(gid);
   
-  db.collection('users').where('google.gid', '==', gid).get()
+  db.collection('users').where('google.gid', '==', gid).limit(1).get()
   .then((snapshot) => {
     if (snapshot.empty) {
       console.log("false");
@@ -174,5 +177,32 @@ function existsGoogle(req, res) {
     console.error(err);
     res.statusCode = 500;
     res.end("Err");
+  });
+}
+
+function loginGoogle(req, res){
+  const gid = req.url.replace('/login_google/', '').replace('/', '');
+  console.log(gid);
+  db.collection('users').where('google.gid', '==', gid).limit(1).get()
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("false");
+      
+      return res.end("[]");
+    }
+    
+    let arr = [];
+    snapshot.forEach((doc) => {
+      let data = doc.data();
+      data.uid = doc.id;
+      arr.push(data);
+    });
+    return res.end(JSON.stringify(arr));
+
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("[]");
   });
 }
