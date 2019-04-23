@@ -34,6 +34,10 @@ export interface AppState {
     // todo
   };
   menuOpen: boolean;
+  credentials: {
+    schueler: {username: string, password: string},
+    lehrer?: {username: string, password: string}
+  };
 }
 
 export function createInitialState(): AppState {
@@ -47,7 +51,8 @@ export function createInitialState(): AppState {
     fullname: null,
     loginData: null,
     menuOpen: false,
-    basics: null
+    basics: null,
+    credentials: null
   };
 }
 

@@ -19,6 +19,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class InputComponent implements OnInit, OnDestroy {
 
   @Input() type: 'text'|'email'|'number'|'password'|'dropdown' = 'text';
+  @Input() allowBadPsw = false;
   @Input('dropdownOptions')
   set dropdownOptions(val: string[] ) {
     this.ddOptions = val;
@@ -89,7 +90,7 @@ export class InputComponent implements OnInit, OnDestroy {
         map((input) => {
           if (this.type === 'text') {
             return input.length !== 0;
-          } else if (this.type === 'password') {
+          } else if (this.type === 'password' && !this.allowBadPsw) {
             return input.length > 7;
           } else if (this.type === 'email') {
             return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);

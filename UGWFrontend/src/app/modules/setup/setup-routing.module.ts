@@ -13,6 +13,8 @@ import {GoogleComponent} from './register/google/google.component';
 import {GoogleLoginComponent} from './login/google-login/google-login.component';
 import {InstaComponent} from './register/insta/insta.component';
 import {InstaLoginComponent} from './login/insta-login/insta-login.component';
+import {CredentialsComponent} from './credentials/credentials.component';
+import {HasCredsGuard} from './guards/has-creds.guard';
 
 const routes: Routes = [
   {
@@ -64,9 +66,14 @@ const routes: Routes = [
     redirectTo: 'basics/stufe'
   },
   {
+    path: 'basics/creds',
+    component: CredentialsComponent,
+    canActivate: [LoginnedGuard]
+  },
+  {
     path: 'basics/stufe',
     component: StufeComponent,
-    canActivate: [LoginnedGuard]
+    canActivate: [LoginnedGuard, HasCredsGuard]
   }
 ];
 

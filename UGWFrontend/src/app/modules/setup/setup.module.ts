@@ -23,6 +23,8 @@ import {GoogleComponent, GoogleSigninComponent} from './register/google/google.c
 import { GoogleLoginComponent } from './login/google-login/google-login.component';
 import { InstaComponent } from './register/insta/insta.component';
 import { InstaLoginComponent } from './login/insta-login/insta-login.component';
+import { CredentialsComponent } from './credentials/credentials.component';
+import {HasCredsGuard} from './guards/has-creds.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { InstaLoginComponent } from './login/insta-login/insta-login.component';
     GoogleSigninComponent,
     GoogleLoginComponent,
     InstaComponent,
-    InstaLoginComponent
+    InstaLoginComponent,
+    CredentialsComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ import { InstaLoginComponent } from './login/insta-login/insta-login.component';
     RegistersteptwoGuard,
     LoginService,
     LoginGuard,
-    LoginnedGuard
+    LoginnedGuard,
+    HasCredsGuard
   ]
 })
 export class SetupModule { }
