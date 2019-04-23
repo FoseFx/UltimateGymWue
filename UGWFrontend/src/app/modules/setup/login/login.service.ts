@@ -39,10 +39,31 @@ export class LoginService {
       }),
       tap((res) => {
         console.log('tap', res);
-        this.appService.onLogin(res); // todo edit function
+        this.appService.onLogin(res);
       })
     );
   }
+
+
+  instaLogin(code: string, href: string): Observable<LoginResponse> {
+    return (
+      this.http.post(environment.urls.loginInsta, {code, href}
+    ) as Observable<LoginResponse>).pipe(
+      map(res => {
+        if (res.error) {
+          throw new Error(res.msg);
+        }
+        return res;
+      }),
+      tap((res) => {
+        console.log('tap', res);
+        this.appService.onLogin(res);
+      })
+    );
+  }
+
+
+
 }
 
 export class LoginResponse {
@@ -61,6 +82,10 @@ export class LoginResponse {
       google?: {
         gid: string,
         email: string
+      }
+      insta?: {
+        iid: string,
+        token: string
       }
     }
   };

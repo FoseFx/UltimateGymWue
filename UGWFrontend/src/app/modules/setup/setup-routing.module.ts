@@ -12,6 +12,7 @@ import {LoginnedGuard} from './guards/loginned.guard';
 import {GoogleComponent} from './register/google/google.component';
 import {GoogleLoginComponent} from './login/google-login/google-login.component';
 import {InstaComponent} from './register/insta/insta.component';
+import {InstaLoginComponent} from './login/insta-login/insta-login.component';
 
 const routes: Routes = [
   {
@@ -22,9 +23,15 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [LoginGuard]
-  },{
+  },
+  {
     path: 'login/google',
     component: GoogleLoginComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'login/insta',
+    component: InstaLoginComponent,
     canActivate: [LoginGuard]
   },
   {

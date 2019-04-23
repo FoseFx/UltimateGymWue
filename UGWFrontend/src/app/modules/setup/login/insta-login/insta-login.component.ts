@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from '../../../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {SetupQuery} from '../../state/setup.query';
+import {LoginService} from '../login.service';
 import {Router} from '@angular/router';
-import {AppService} from '../../../../state/app.service';
-import {LoginResponse} from "../../login/login.service";
 
 @Component({
-  selector: 'app-insta',
-  templateUrl: './insta.component.html',
-  styleUrls: ['./insta.component.scss']
+  selector: 'app-insta-login',
+  templateUrl: './insta-login.component.html',
+  styleUrls: ['./insta-login.component.scss']
 })
-export class InstaComponent implements OnInit {
+export class InstaLoginComponent implements OnInit {
 
-  loading = false;
   error: string;
-
-  constructor(private http: HttpClient,
-              private query: SetupQuery,
-              private service: AppService,
-              private router: Router) { }
+  loading = false;
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -46,9 +39,10 @@ export class InstaComponent implements OnInit {
         this.onData(href);
       }
     }, 500);
+
   }
 
-  onData(href: string) {
+  onData(href) {
     const firstPart = href.split('?')[0];
     const queryStrings = href.split('/auth/insta/register-redirect?')[1].split('&');
     const querys: {code?: string, error?: string, error_description?: string, error_reason?: string} = {};
@@ -72,22 +66,18 @@ export class InstaComponent implements OnInit {
       return;
     }
 
-    const code = querys.code;
-    this.http.post(environment.urls.registerInsta, {code, href: firstPart, fullname: this.query.getValue().name}).subscribe(
-
-      (data: LoginResponse) => {
+    this.loginService.instaLogin(querys.code, firstPart).subscribe(
+      (data) => {
         console.log(data);
-        this.service.onLogin(data);
         this.router.navigate(['/setup/basics']);
-
       },
       (error) => {
-        if (error.error.msg) {
+        console.log(error);
+        if (!!error.error.msg) {
           this.error = error.error.msg;
         } else {
           this.error = error.message;
         }
-        console.log(error);
         this.loading = false;
       }
     );

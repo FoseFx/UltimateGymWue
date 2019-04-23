@@ -18,7 +18,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [UiModule, HttpClientModule, RouterTestingModule],
-      providers: [LoginService, AppService, AppStore, AppQuery]
+      providers: [LoginService, AppService, AppQuery, AppStore ]
     })
     .compileComponents();
   }));

@@ -22,6 +22,10 @@ export interface AppState {
       email: string,
       gid: string
     }
+    insta: {
+      iid: string,
+      token: string
+    }
   };
   fullname: string;
   basics: {
