@@ -109,11 +109,13 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
     let exists = exists_res.unwrap();
     if exists {
         return CustomResponse::error(
-            "Instagram Account bereits ist registriert".to_string(),
+            "Instagram Account ist bereits registriert".to_string(),
             Status::BadRequest
         );
     }
 
+    let iid = user.id;
+    let itoken = res.access_token.unwrap();
 
     let user = crate::db::User {
         fullname: data.fullname.to_owned(),
@@ -121,8 +123,8 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
         normal: None,
         instagram: Some(crate::db::InstaLoginData {
             username: user.username,
-            iid: user.id,
-            token: res.access_token.unwrap()
+            iid: iid.to_string(),
+            token: itoken.to_string()
         })
     };
 
@@ -136,5 +138,28 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
         );
     }
 
-    return CustomResponse::message("Ok".to_string());
+    //
+    // login part
+    //
+
+    let claim = crate::auth::jwt::UserClaim {
+        normal: None,
+        google: None,
+        fullname: data.fullname.to_string(),
+        uid: add_res.unwrap(),
+        provider: vec!["insta".to_string()],
+        insta: Some(crate::auth::jwt::InstaClaim {
+            token: itoken,
+            iid
+        })
+    };
+
+
+    let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &claim, secret.as_ref()).unwrap();
+
+    return CustomResponse::data(json!({
+        "claim": claim,
+        "token": token
+    }));
+
 }

@@ -5,7 +5,8 @@ pub struct UserClaim {
     pub fullname: String,
     pub provider: Vec<String>, // either 'normal' 'google' or 'insta'
     pub normal: Option<NormalClaim>,
-    pub google: Option<GoogleClaim>
+    pub google: Option<GoogleClaim>,
+    pub insta: Option<InstaClaim>
 }
 
 #[derive(Serialize, Deserialize)]
@@ -23,3 +24,9 @@ pub struct GoogleClaim {
     pub gid: String
 }
 
+#[derive(Serialize, Deserialize)]
+#[derive(Debug)]
+pub struct InstaClaim {
+    pub token: String,
+    pub iid: String
+}

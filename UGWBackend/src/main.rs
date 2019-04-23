@@ -67,7 +67,8 @@ fn rocket() -> Rocket {
             auth::google::register::handler::google_register_handler,
             auth::google::login::handler::google_login_handler,
             auth::insta::register::insta_register_handler,
-            auth::insta::register::insta_register_code_handler
+            auth::insta::register::insta_register_code_handler,
+            auth::insta::login::login_instagram_handler
             ]
         );
 }
