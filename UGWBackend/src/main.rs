@@ -10,6 +10,8 @@ mod auth;
 mod db;
 mod responses;
 mod redismw;
+mod basics;
+mod catcher;
 
 use rocket::Rocket;
 use std::path::PathBuf;
@@ -59,16 +61,23 @@ fn rocket() -> Rocket {
         .mount(
             "/api",
             routes![
-            status,
-            auth::normal::normal::normal_handler,
-            cors,
-            auth::normal::normal::normal_verify_email_handler,
-            auth::normal::normal::normal_login_handler,
-            auth::google::register::handler::google_register_handler,
-            auth::google::login::handler::google_login_handler,
-            auth::insta::register::insta_register_handler,
-            auth::insta::register::insta_register_code_handler,
-            auth::insta::login::login_instagram_handler
+                status,
+                auth::normal::normal::normal_handler,
+                cors,
+                auth::normal::normal::normal_verify_email_handler,
+                auth::normal::normal::normal_login_handler,
+                auth::google::register::handler::google_register_handler,
+                auth::google::login::handler::google_login_handler,
+                auth::insta::register::insta_register_handler,
+                auth::insta::register::insta_register_code_handler,
+                auth::insta::login::login_instagram_handler,
+                basics::stufen::get_stufen
+            ]
+        )
+        .register(catchers![
+                catcher::unauthorized,
+                catcher::bad_request,
+                catcher::internal_server_error,
             ]
         );
 }
