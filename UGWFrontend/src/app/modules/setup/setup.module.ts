@@ -22,6 +22,7 @@ import {LoginnedGuard} from './guards/loginned.guard';
 import {GoogleComponent, GoogleSigninComponent} from './register/google/google.component';
 import { GoogleLoginComponent } from './login/google-login/google-login.component';
 import { InstaComponent } from './register/insta/insta.component';
+import { InstaLoginComponent } from './login/insta-login/insta-login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { InstaComponent } from './register/insta/insta.component';
     GoogleComponent,
     GoogleSigninComponent,
     GoogleLoginComponent,
-    InstaComponent
+    InstaComponent,
+    InstaLoginComponent
   ],
   imports: [
     CommonModule,

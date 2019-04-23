@@ -5,6 +5,7 @@ extern crate base64;
 use std::error::Error;
 use std::collections::HashMap;
 use rocket_contrib::json::JsonValue;
+use crate::auth::jwt::{UserClaim, InstaClaim};
 
 #[derive(Serialize, Deserialize)]
 pub struct NormalLoginData {
@@ -176,6 +177,9 @@ pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::aut
     let mut res = res.unwrap();
 
     let list: Vec<HashMap<String, JsonValue>> = res.json().unwrap();
+    if list.len() == 0 {
+        return Err("Nutzer nicht gefunden".to_string());
+    }
 
     let user = list.get(0).unwrap();
 
@@ -187,7 +191,8 @@ pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::aut
         google: Some(crate::auth::jwt::GoogleClaim {
             gid: gid.to_string(),
             email: user.get("google").unwrap().get("email").unwrap().as_str().unwrap().to_string()
-        })
+        }),
+        insta: None
     };
 
     return Ok(claim);
@@ -210,4 +215,42 @@ pub fn exists_insta_account(iid: &String, secret: &String) -> Result<bool, Strin
     let res = res.text().unwrap();
 
     return Ok(res == "true");
+}
+
+
+pub fn login_insta(iid: &String, secret: &String) -> Result<UserClaim, String> {
+    let client = reqwest::Client::new();
+    let res = client.get(&format!("http://localhost:8080/login_insta/{}", iid)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+
+    let res = res.unwrap().error_for_status();
+    if res.is_err(){
+        return Err(format!("{:?}", res.unwrap_err()));
+    }
+    let mut res = res.unwrap();
+
+    let list: Vec<HashMap<String, JsonValue>> = res.json().unwrap();
+
+    if list.len() == 0 {
+        return Err("Nutzer nicht gefunden".to_string());
+    }
+    let user = list.get(0).unwrap();
+    println!("user {:#?}", &user);
+    let claim = crate::auth::jwt::UserClaim {
+        uid: user.get("uid").unwrap().as_str().unwrap().to_string(),
+        fullname: user.get("fullname").unwrap().as_str().unwrap().to_string(),
+        provider: vec!["insta".to_string()],
+        normal: None,
+        google: None,
+        insta: Some(InstaClaim {
+            iid: format!("{}", iid),
+            token: user.get("instagram").unwrap().get("token").unwrap().as_str().unwrap().to_string()
+        })
+    };
+
+    return Ok(claim);
 }

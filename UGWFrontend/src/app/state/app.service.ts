@@ -22,6 +22,7 @@ export class AppService {
           token: loginData.data.token,
           provider,
           google: null,
+          insta: null,
           normal: {
             email: loginData.data.claim.normal.email,
             email_verified: loginData.data.claim.normal.email_verified,
@@ -37,10 +38,27 @@ export class AppService {
           token: loginData.data.token,
           provider,
           normal: null,
+          insta: null,
           google: loginData.data.claim.google
         }
       });
     }
+
+
+
+    if (!!provider.find((val) => val === 'insta')) {
+      this.store.update({
+        loginData: {
+          uid: loginData.data.claim.uid,
+          token: loginData.data.token,
+          provider,
+          normal: null,
+          google: null,
+          insta: loginData.data.claim.insta
+        }
+      });
+    }
+
 
     this.store.update({
       fullname: loginData.data.claim.fullname

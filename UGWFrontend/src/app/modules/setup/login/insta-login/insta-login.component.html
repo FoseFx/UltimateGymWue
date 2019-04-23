@@ -1,0 +1,10 @@
+<app-card [loading]="loading">
+  <app-card-header>Anmelden mit Instagram</app-card-header>
+
+  <p></p>
+
+  <h3 *ngIf="!!error">Fehler: {{error}}</h3>
+
+  <app-button (click)="onClick()">Weiter</app-button>
+
+</app-card>

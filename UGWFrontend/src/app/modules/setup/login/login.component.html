@@ -24,6 +24,7 @@
     <div id="third-parties">
 
       <app-button
+        (click)="route(['/setup/login/google'])"
         class="center-button"
       >
         <span style="display: block">Login mit</span>
@@ -31,6 +32,7 @@
       </app-button>
 
       <app-button
+        (click)="route(['/setup/login/insta'])"
         class="center-button">
         <span style="display: block">Weiter mit</span>
         <img style="height: 50px; margin-top: 10px" alt="Instagram" src="/assets/instagram.png">
