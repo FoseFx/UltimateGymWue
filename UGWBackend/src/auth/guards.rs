@@ -1,11 +1,10 @@
 use crate::auth::jwt::UserClaim;
-use rocket::http::Status;
 use rocket::State;
 use crate::SecretMgt;
 
 #[derive(Debug)]
 pub struct AuthGuard {
-    claim: UserClaim
+    pub claim: UserClaim
 }
 #[derive(Debug)]
 pub enum AuthGuardError {
