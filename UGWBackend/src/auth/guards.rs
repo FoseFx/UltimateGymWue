@@ -73,7 +73,6 @@ fn get_claim(header: &str, secret: &String) -> UserClaim {
         &jsonwebtoken::Validation::default()
     );
 
-    println!("{:#?}", &d_res);
     let d_res = d_res.unwrap().claims;
 
     return d_res;

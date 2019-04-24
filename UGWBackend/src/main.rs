@@ -71,7 +71,8 @@ fn rocket() -> Rocket {
                 auth::insta::register::insta_register_handler,
                 auth::insta::register::insta_register_code_handler,
                 auth::insta::login::login_instagram_handler,
-                basics::stufen::get_stufen_handler
+                basics::stufen::get_stufen_handler,
+                basics::creds::add_creds_handler
             ]
         )
         .register(catchers![

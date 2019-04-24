@@ -73,7 +73,7 @@ fn get_navbar(redis_conn: &redis::Connection, creds: BasicCredsWrapper) -> Resul
 /// untested
 /// this will fetch and return the navbar-frame from /Schueler-Stundenplan/frames/navbar.htm
 /// creds must be schueler creds
-fn fetch_navbar(creds: BasicCredsWrapper) -> Result<String, reqwest::Error> {
+pub fn fetch_navbar(creds: BasicCredsWrapper) -> Result<String, reqwest::Error> {
     return super::utils::fetch_schul_server(
         format!("/Schueler-Stundenplan/frames/navbar.htm"),
         creds

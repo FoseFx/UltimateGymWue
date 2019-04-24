@@ -254,3 +254,7 @@ pub fn login_insta(iid: &String, secret: &String) -> Result<UserClaim, String> {
 
     return Ok(claim);
 }
+
+pub fn add_creds_to_user(uid: &String, secret: &String) {
+    // todo
+}
