@@ -5,6 +5,10 @@ import {UiModule} from '../../../ui/ui.module';
 import {HttpClientModule} from '@angular/common/http';
 import {SetupQuery} from '../../state/setup.query';
 import {SetupStore} from '../../state/setup.store';
+import {AppService} from '../../../../state/app.service';
+import {AppStore} from '../../../../state/app.store';
+import {AppQuery} from '../../../../state/app.query';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('InstaComponent', () => {
   let component: InstaComponent;
@@ -12,9 +16,9 @@ describe('InstaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule, HttpClientModule],
+      imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ InstaComponent ],
-      providers: [SetupQuery, SetupStore]
+      providers: [SetupQuery, SetupStore, AppService, AppStore, AppQuery]
     })
     .compileComponents();
   }));

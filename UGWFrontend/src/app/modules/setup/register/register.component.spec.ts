@@ -1,4 +1,4 @@
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
 import {UiModule} from '../../ui/ui.module';

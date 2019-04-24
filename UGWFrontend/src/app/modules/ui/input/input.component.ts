@@ -105,7 +105,11 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.validSub.unsubscribe();
+    try {
+      this.validSub.unsubscribe();
+    } catch(err) {
+
+    }
   }
 
 
