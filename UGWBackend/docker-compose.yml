@@ -3,6 +3,8 @@ services:
 
   db:
     build: ./db-middleware
+    ports:
+    - "8080"
   backend:
     build: .
     ports:
@@ -14,7 +16,9 @@ services:
     - "MAIL_JET_KEY=${MAIL_JET_KEY}"
     - "INSTA_CID=${INSTA_CID}"
     - "INSTA_SECRET=${INSTA_SECRET}"
-
+    depends_on :
+    - db
+    - cache
   cache:
     ports: 
     - "6379"
