@@ -7,7 +7,7 @@ use super::passw;
 use rocket_contrib::json::{Json};
 use rocket::http::Status;
 use super::super::regexes;
-use crate::{SecretMgt, MailJetMgt};
+use crate::{SecretMgt, MailJetMgt, calc_exp};
 use rocket::State;
 use std::ops::Deref;
 use crate::responses::CustomResponse;
@@ -129,6 +129,7 @@ pub fn normal_login_handler(secret: State<SecretMgt>, data: Json<LoginRequest>) 
     }
 
     let claim = crate::auth::jwt::UserClaim {
+        exp: calc_exp(),
         uid: login_data.uid,
         fullname: login_data.fullname,
         provider: vec![format!("normal")],

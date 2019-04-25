@@ -17,6 +17,7 @@ use rocket::Rocket;
 use std::path::PathBuf;
 use std::io::Cursor;
 use rocket::response::{self, Response, Responder};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 pub struct SecretMgt(String);
 pub struct MailJetMgt {user: String, key: String}
@@ -40,7 +41,7 @@ impl<'r> Responder<'r> for CORSResponder {
         Response::build()
             .sized_body(Cursor::new(self.0))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
-            .raw_header("Access-Control-Allow-Headers", format!("Content-Type"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization"))
             .ok()
     }
 }
@@ -157,6 +158,14 @@ pub fn to_ascii(vec: Vec<u8>) -> String {
     return s;
 }
 
+pub fn calc_exp() -> u64 {
+    let start = SystemTime::now();
+    let since_the_epoch = start.duration_since(UNIX_EPOCH)
+        .expect("Time went backwards");
+    let in_s = since_the_epoch.as_secs();
+
+    return in_s + (60 * 60 * 24 * 30 * 6);
+}
 
 
 
@@ -185,6 +194,6 @@ mod integration {
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
         assert_eq!(origin, Some("http://localhost:4200".into()));
-        assert_eq!(allow_headers, Some("Content-Type".into()));
+        assert_eq!(allow_headers, Some("Content-Type,authorization".into()));
     }
 }

@@ -6,6 +6,8 @@ use std::error::Error;
 use std::collections::HashMap;
 use rocket_contrib::json::JsonValue;
 use crate::auth::jwt::{UserClaim, InstaClaim};
+use crate::basics::utils::BasicCreds;
+use crate::calc_exp;
 
 #[derive(Serialize, Deserialize)]
 pub struct NormalLoginData {
@@ -184,6 +186,7 @@ pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::aut
     let user = list.get(0).unwrap();
 
     let claim = crate::auth::jwt::UserClaim {
+        exp: calc_exp(),
         uid: user.get("uid").unwrap().as_str().unwrap().to_string(),
         fullname: user.get("fullname").unwrap().as_str().unwrap().to_string(),
         provider: vec!["google".to_string()],
@@ -241,6 +244,7 @@ pub fn login_insta(iid: &String, secret: &String) -> Result<UserClaim, String> {
     let user = list.get(0).unwrap();
     println!("user {:#?}", &user);
     let claim = crate::auth::jwt::UserClaim {
+        exp: calc_exp(),
         uid: user.get("uid").unwrap().as_str().unwrap().to_string(),
         fullname: user.get("fullname").unwrap().as_str().unwrap().to_string(),
         provider: vec!["insta".to_string()],
@@ -255,6 +259,29 @@ pub fn login_insta(iid: &String, secret: &String) -> Result<UserClaim, String> {
     return Ok(claim);
 }
 
-pub fn add_creds_to_user(uid: &String, secret: &String) {
-    // todo
+pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String) -> Result<String, Box<Error>> {
+    let client = reqwest::Client::new();
+
+    let jsonv = json!({
+        "uid": uid,
+        "pl": creds
+    });
+
+    let json_res = serde_json::to_string(&jsonv)?;
+    println!("{:?}", json_res);
+
+    let base = base64::encode(&json_res);
+
+    let res = client.get(&format!("http://localhost:8080/add_creds/{}", base)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send()?;
+
+    let mut res = res.error_for_status()?;
+
+    return Ok(res.text()?);
 }
+/*
+pub fn get_creds_from_user(uid: &String, secret: &String) {
+    let client = reqwest::Client::new();
+
+}*/

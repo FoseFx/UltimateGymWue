@@ -35,8 +35,8 @@ export interface AppState {
   };
   menuOpen: boolean;
   credentials: {
-    schueler: {username: string, password: string},
-    lehrer?: {username: string, password: string}
+    token: string,
+    has_lehrer: boolean
   };
 }
 

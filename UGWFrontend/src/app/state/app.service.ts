@@ -67,6 +67,17 @@ export class AppService {
     this.save();
   }
 
+  addCreds(token: string) {
+    const claim = JSON.parse(atob(token.split('.')[1]));
+    this.store.update({
+      credentials: {
+        token,
+        has_lehrer: !!claim.lehrer
+      }
+    });
+    this.save();
+  }
+
 
   private save() {
     localStorage.app_state = JSON.stringify(this.query.getValue());

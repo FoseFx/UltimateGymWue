@@ -42,6 +42,16 @@ http.createServer((req, res) => {
   if (/^\/login_insta\/.*$/.test(req.url)) {
     return loginInsta(req, res);
   }
+
+  if (/^\/add_creds\/.*$/.test(req.url)) {
+    return addCreds(req, res);
+  }
+
+  if (/^\/get_creds\/.*$/.test(req.url)) {
+    return getCreds(req, res);
+  }
+
+  
   res.statusCode = 404;
   res.end();
 }).listen(8080, () => {
@@ -258,4 +268,44 @@ function loginInsta(req, res){
     res.statusCode = 500;
     res.end("[]");
   });
+}
+
+function addCreds(req, res) {
+  let base = req.url.replace("/add_creds/", "").replace("/", "");
+  let as_string = Buffer.from(base, 'base64').toString('ascii');
+  let as_obj = JSON.parse(as_string);
+  console.log(as_obj);
+  const user = as_obj.uid;
+  const pl = as_obj.pl;
+
+  let creds = {};
+  if (!!pl.schueler)
+    creds.schueler = pl.schueler;
+  if (!!pl.lehrer)
+  creds.lehrer = pl.lehrer;
+
+  db.collection('users').doc(user).set({creds: creds}, {merge: true}).then(ref => {
+    res.end("Ok");
+  }).catch((err) => {
+    console.error(err);
+    res.end("err");
+  });
+  
+}
+
+function getCreds(req, res) {
+  const uid = req.url.replace('/get_creds/', '').replace('/', '');
+  console.log(uid);
+
+  db.collection('users').doc(uid).get()
+  .then(snap => {
+    let data = snap.data();
+    res.end(JSON.stringify(data.creds));
+  })
+  .catch((err) => {
+    console.error(err);
+    res.statusCode = 500;
+    res.end("null");
+  });
+
 }

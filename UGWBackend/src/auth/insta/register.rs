@@ -4,7 +4,7 @@ use rocket::http::Status;
 use rocket_contrib::json::Json;
 use crate::responses::CustomResponse;
 use std::collections::HashMap;
-use crate::{InstaSecretMgt, SecretMgt};
+use crate::{InstaSecretMgt, SecretMgt, calc_exp};
 use rocket::State;
 use reqwest::Error;
 use std::ops::Deref;
@@ -143,6 +143,7 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
     //
 
     let claim = crate::auth::jwt::UserClaim {
+        exp: calc_exp(),
         normal: None,
         google: None,
         fullname: data.fullname.to_string(),

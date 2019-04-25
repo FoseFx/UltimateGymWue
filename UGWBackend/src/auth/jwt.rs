@@ -1,6 +1,7 @@
 #[derive(Serialize, Deserialize)]
 #[derive(Debug)]
 pub struct UserClaim {
+    pub exp: u64,
     pub uid: String,
     pub fullname: String,
     pub provider: Vec<String>, // either 'normal' 'google' or 'insta'

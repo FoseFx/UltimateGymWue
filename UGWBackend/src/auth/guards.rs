@@ -135,6 +135,7 @@ mod test {
             &"test".to_string()
         );
         let cmp = UserClaim {
+            exp: 0,
             uid: "test".to_string(),
             fullname: "Some Name".to_string(),
             provider: vec!["google".to_string()],
