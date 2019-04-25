@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  db:
+    build: ./db-middleware
+  backend:
+    build: .
+    ports:
+    - "8000:6655"
+    environment:
+    - "REDIS_PATH=${REDIS_PATH}"
+    - "SECRET=${SECRET}"
+    - "MAIL_JET_USER=${MAIL_JET_USER}"
+    - "MAIL_JET_KEY=${MAIL_JET_KEY}"
+    - "INSTA_CID=${INSTA_CID}"
+    - "INSTA_SECRET=${INSTA_SECRET}"
+
+  cache:
+    ports: 
+    - "6379"
+    image: "redis:alpine"
