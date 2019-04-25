@@ -5,3 +5,5 @@ run_dev.sh
 test_dev.sh
 Dockerfile
 docker-compose-yml
+build_prod.sh
+run_prod.sh
