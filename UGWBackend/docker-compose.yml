@@ -6,7 +6,7 @@ services:
   backend:
     build: .
     ports:
-    - "8000:6655"
+    - "6655:8000"
     environment:
     - "REDIS_PATH=${REDIS_PATH}"
     - "SECRET=${SECRET}"
