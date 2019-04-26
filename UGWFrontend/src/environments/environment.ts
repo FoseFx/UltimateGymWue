@@ -2,17 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const backendHost = 'https://backend.development';
 export const environment = {
   production: false,
   urls: {
-    registerNormal: 'https://backend.development/api/auth/normal/register',
-    loginNormal: 'https://backend.development/api/auth/normal/login',
-    registerGoogle: 'http://localhost:8000/api/auth/google/register',
-    loginGoogle: 'http://localhost:8000/api/auth/google/login',
-    registerInstaRediect: 'https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=https://backend.development/api/auth/insta/register-redirect&response_type=code',
-    registerInsta: 'https://backend.development/api/auth/insta/register-code',
-    loginInsta: 'https://backend.development/api/auth/insta/login',
-    addCredentials: 'http://localhost:8000/api/basics/add_creds'
+    loginNormal: `${backendHost}/api/auth/normal/login`,
+    registerNormal: `${backendHost}/api/auth/normal/register`,
+    registerGoogle: `${backendHost}/api/auth/google/register`,
+    loginGoogle: `${backendHost}/api/auth/google/login`,
+    registerInstaRediect: `https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=${backendHost}/api/auth/insta/register-redirect&response_type=code`,
+    registerInsta: `${backendHost}/api/auth/insta/register-code`,
+    loginInsta: `${backendHost}/api/auth/insta/login`,
+    addCredentials: `${backendHost}/api/basics/add_creds`,
+    fetchCredentials: `${backendHost}/api/basics/get_creds`
   }
 };
 

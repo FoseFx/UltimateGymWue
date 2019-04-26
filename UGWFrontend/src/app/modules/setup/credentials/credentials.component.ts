@@ -19,6 +19,25 @@ export class CredentialsComponent implements OnInit {
   constructor(private router: Router, private query: AppQuery, private http: HttpClient, private service: AppService) { }
 
   ngOnInit() {
+    if (this.query.getValue().loginData === null) {return;} // this line is only for the tests
+    this.loading = true;
+    const sub = this.http.get(
+      environment.urls.fetchCredentials,
+      {headers: {Authorization: this.query.loginToken}}
+    ).subscribe(
+      (next: {error: boolean, msg: string}) => {
+        console.log(next);
+        this.service.addCreds(next.msg);
+        this.router.navigate(['/setup/basics/stufe']);
+        sub.unsubscribe();
+      },
+      (error) => {
+        console.error(error);
+        // ignore errors caused by automatic network requests
+        this.loading = false;
+        sub.unsubscribe();
+      }
+    );
   }
 
   onClick(user: InputComponent, passw: InputComponent) {
@@ -26,15 +45,16 @@ export class CredentialsComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.http.post(
+    const sub = this.http.post(
       environment.urls.addCredentials,
       {username: user.value, password: passw.value, lehrer: false},
-      {headers: {Authorization: 'Bearer ' + this.query.getValue().loginData.token}}
+      {headers: {Authorization: this.query.loginToken}}
       ).subscribe(
       (next: {msg: string, error: boolean}) => {
         console.log(next);
         this.service.addCreds(next.msg);
         this.router.navigate(['/setup/basics/stufe']);
+        sub.unsubscribe();
       },
       (error) => {
         console.error(error);
@@ -44,6 +64,7 @@ export class CredentialsComponent implements OnInit {
           this.error = error.message;
         }
         this.loading = false;
+        sub.unsubscribe();
       }
     );
 

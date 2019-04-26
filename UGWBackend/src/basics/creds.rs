@@ -79,3 +79,25 @@ fn is_cached(creds: &AddCredsRequest, conn: &redis::Connection) -> bool {
     return get_res.unwrap() == str_concat;
 }
 
+#[get("/basics/get_creds")]
+pub fn get_creds_handler(user: AuthGuard, secret: State<SecretMgt>) -> CustomResponse {
+
+    let secret: &String = &secret.0.deref().to_string();
+    let uid = user.claim.uid;
+
+    let res = crate::db::get_creds_from_user(&uid, secret);
+
+    println!("error getting creds: {:?}", &res);
+
+    if res.is_ok() {
+        let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &res.unwrap(),  secret.as_ref());
+        if token.is_err() {
+            println!("error while creating creds token: {:?}", token);
+            return CustomResponse::error("Error while creating token".to_string(), rocket::http::Status::InternalServerError);
+        }
+        return CustomResponse::message(token.unwrap());
+
+    }
+
+    return CustomResponse::error("User not found".to_string(), rocket::http::Status::BadRequest);
+}

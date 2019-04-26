@@ -21,34 +21,35 @@ pub fn pool() -> r2d2::Pool<RedisConnectionManager> {
     }
 
     let slice: &str = &redis_full_path.unwrap()[..]; // convert to &str for open() call
-
     println!("🌪  \u{1b}[0m\u{1b}[31;1mRedis Server: '{}' \u{1b}[0m", slice);
-    let hostname: Vec<&str> = slice.split("://").collect();
-    let hostname = hostname[1];
-    let hostname: Vec<&str> = hostname.split(":").collect();
-    let after_host = hostname[1];
-    let hostname = hostname[0];
+    let re = regex::Regex::new(r"^redis://\d+\.\d+\.\d+.\d+:.*/$").unwrap();
+     if !(re.is_match(slice)) {
+         let hostname: Vec<&str> = slice.split("://").collect();
+         let hostname = hostname[1];
+         let hostname: Vec<&str> = hostname.split(":").collect();
+         let after_host = hostname[1];
+         let hostname = hostname[0];
 
-    let outp = Command::new("nslookup")
-    .arg(hostname)
-    .output()
-    .expect("failed to execute process");
-    let mut st = String::new();
-    for s in outp.stdout {
-        st = format!("{}{}", st, s as char);
-    }
-    let split: Vec<&str> = st.split("\n").collect();
-    let ip = split[2];
-    let ip: Vec<&str> = ip.split(" ").collect();
-    let ip = ip[2];
+         let outp = Command::new("nslookup")
+             .arg(hostname)
+             .output()
+             .expect("failed to execute process");
+         let mut st = String::new();
+         for s in outp.stdout {
+             st = format!("{}{}", st, s as char);
+         }
+         let split: Vec<&str> = st.split("\n").collect();
+         let ip = split[2];
+         let ip: Vec<&str> = ip.split(" ").collect();
+         let ip = ip[2];
 
-    println!("split: {:?}", split);
-    println!("ip {}", ip);
+         println!("split: {:?}", split);
+         println!("ip {}", ip);
 
-    let slice = format!("redis://{}:{}", ip, after_host);
+         let slice = format!("redis://{}:{}", ip, after_host);
 
-    println!("slice: {}", &slice);
-
+         println!("slice: {}", &slice);
+     }
     let manager = RedisConnectionManager::new(slice.as_ref()).expect("connection manager");
 
     return r2d2::Pool::new(manager).expect("db pool");

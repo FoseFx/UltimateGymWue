@@ -1,7 +1,14 @@
+const backendHost = 'https://ugw-api.fosefx.com';
 export const environment = {
   production: true,
   urls: {
-    registerNormal: 'https://ugw.fosefx.com/api/auth/normal/register',
-    loginNormal: 'https://ugw.fosefx.com/api/auth/normal/login',
+    loginNormal: `${backendHost}/api/auth/normal/login`,
+    registerNormal: `${backendHost}/api/auth/normal/register`,
+    registerGoogle: `${backendHost}/api/auth/google/register`,
+    loginGoogle: `${backendHost}/api/auth/google/login`,
+    registerInstaRediect: `https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=${backendHost}/api/auth/insta/register-redirect&response_type=code`,
+    registerInsta: `${backendHost}/api/auth/insta/register-code`,
+    loginInsta: `${backendHost}/api/auth/insta/login`,
+    addCredentials: `${backendHost}/api/basics/add_creds`
   }
 };

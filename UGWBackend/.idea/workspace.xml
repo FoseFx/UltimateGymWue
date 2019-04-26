@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/creds.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/creds.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redismw.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/redismw.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/credentials/credentials.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/credentials/credentials.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/guards/has-creds.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/modules/setup/guards/has-creds.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/app/state/app.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/app/state/app.query.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/auth/guards.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="137" column="18" lean-forward="true" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+            <state relative-caret-position="368">
+              <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
               <folding>
                 <element signature="e#0#32#0" />
               </folding>
@@ -31,32 +41,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.rs">
+        <entry file="file://$PROJECT_DIR$/src/redismw.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="196" column="66" selection-start-line="196" selection-start-column="66" selection-end-line="196" selection-end-column="66" />
+            <state relative-caret-position="515">
+              <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
+        <entry file="file://$PROJECT_DIR$/src/main.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-              <folding>
-                <element signature="e#0#31#0" />
-                <element signature="n#!!block;n#is_cached#0" />
-              </folding>
+            <state relative-caret-position="572">
+              <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/responses.rs">
+        <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="44" column="91" selection-start-line="44" selection-start-column="91" selection-end-line="44" selection-end-column="91" />
+            <state relative-caret-position="442">
+              <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#31#0" />
+                <element signature="n#!!block;n#AddCredsRequest#0" />
+                <element signature="n#!!block;n#add_creds_handler#0" />
+                <element signature="n#!!block;n#is_cached#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -64,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/db.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="286" column="3" lean-forward="true" selection-start-line="286" selection-start-column="3" selection-end-line="286" selection-end-column="3" />
+            <state relative-caret-position="591">
+              <caret line="295" column="1" lean-forward="true" selection-start-line="295" selection-start-column="1" selection-end-line="295" selection-end-column="1" />
               <folding>
                 <element signature="n#!!block;n#exists_insta_account#0" />
               </folding>
@@ -132,18 +144,20 @@
         <option value="$PROJECT_DIR$/src/auth/jwt.rs" />
         <option value="$PROJECT_DIR$/src/auth/normal/normal.rs" />
         <option value="$PROJECT_DIR$/src/auth/insta/register.rs" />
-        <option value="$PROJECT_DIR$/src/basics/creds.rs" />
-        <option value="$PROJECT_DIR$/src/db.rs" />
         <option value="$PROJECT_DIR$/src/auth/guards.rs" />
-        <option value="$PROJECT_DIR$/src/main.rs" />
         <option value="$PROJECT_DIR$/src/responses.rs" />
+        <option value="$PROJECT_DIR$/src/redismw.rs" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/src/db.rs" />
+        <option value="$PROJECT_DIR$/src/main.rs" />
+        <option value="$PROJECT_DIR$/src/basics/creds.rs" />
       </list>
     </option>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="pLevNGpR" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="855" />
     <option name="y" value="27" />
     <option name="width" value="1065" />
@@ -257,16 +271,17 @@
       <workItem from="1556124397266" duration="144000" />
       <workItem from="1556124580567" duration="3707000" />
       <workItem from="1556178415262" duration="5721000" />
+      <workItem from="1556262282620" duration="3219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84884000" />
+    <option name="totallyTimeSpent" value="88103000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5958702" visible="true" weight="0.16008538" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5958702" visible="true" weight="0.16168623" />
       <window_info id="Structure" order="1" sideWeight="0.4041298" side_tool="true" weight="0.22091782" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -280,7 +295,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.4466231" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33769062" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -460,13 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/redismw.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="37" column="55" lean-forward="true" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/catcher.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -562,48 +570,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
+    <entry file="file://$PROJECT_DIR$/src/responses.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-          <folding>
-            <element signature="e#0#31#0" />
-            <element signature="n#!!block;n#is_cached#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="286" column="3" lean-forward="true" selection-start-line="286" selection-start-column="3" selection-end-line="286" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!block;n#exists_insta_account#0" />
-          </folding>
+        <state relative-caret-position="836">
+          <caret line="44" column="91" selection-start-line="44" selection-start-column="91" selection-end-line="44" selection-end-column="91" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/guards.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="137" column="18" lean-forward="true" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+        <state relative-caret-position="368">
+          <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
           <folding>
             <element signature="e#0#32#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.rs">
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="196" column="66" selection-start-line="196" selection-start-column="66" selection-end-line="196" selection-end-column="66" />
+        <state relative-caret-position="407">
+          <caret line="23" column="41" lean-forward="true" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/responses.rs">
+    <entry file="file://$PROJECT_DIR$/src/redismw.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="44" column="91" selection-start-line="44" selection-start-column="91" selection-end-line="44" selection-end-column="91" />
+        <state relative-caret-position="515">
+          <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="295" column="1" lean-forward="true" selection-start-line="295" selection-start-column="1" selection-end-line="295" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!block;n#exists_insta_account#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#31#0" />
+            <element signature="n#!!block;n#AddCredsRequest#0" />
+            <element signature="n#!!block;n#add_creds_handler#0" />
+            <element signature="n#!!block;n#is_cached#0" />
+          </folding>
         </state>
       </provider>
     </entry>

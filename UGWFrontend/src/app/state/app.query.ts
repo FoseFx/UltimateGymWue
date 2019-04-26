@@ -15,4 +15,8 @@ export class AppQuery extends Query<AppState> {
   }
   menuOpen$ = this.select('menuOpen');
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
+  hasCredentials = () => this.getValue().credentials !== null;
+  get loginToken() {
+    return `Bearer ${this.getValue().loginData.token}`;
+  }
 }

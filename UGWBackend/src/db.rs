@@ -280,8 +280,17 @@ pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String) -> 
 
     return Ok(res.text()?);
 }
-/*
-pub fn get_creds_from_user(uid: &String, secret: &String) {
+
+pub fn get_creds_from_user(uid: &String, secret: &String) -> Result<BasicCreds, Box<Error>> {
     let client = reqwest::Client::new();
 
-}*/
+    let res = client.get(&format!("http://localhost:8080/get_creds/{}", uid))
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send()?;
+    let mut res = res.error_for_status()?;
+
+    let creds: BasicCreds = serde_json::from_str(res.text()?.as_ref())?;
+
+    return Ok(creds);
+
+}

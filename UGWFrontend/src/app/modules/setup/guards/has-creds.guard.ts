@@ -14,7 +14,7 @@ export class HasCredsGuard implements CanActivate {
 
 
 
-    const allow = this.query.getValue().credentials !== null;
+    const allow = this.query.hasCredentials();
 
     if (!allow) {
       this.router.navigate(['/setup/basics/creds']);
