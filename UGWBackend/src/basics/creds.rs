@@ -7,7 +7,7 @@ use crate::responses::CustomResponse;
 use crate::basics::utils::{BasicCredsWrapper, BasicCreds};
 use crate::SecretMgt;
 use rocket::State;
-
+use crate::calc_exp;
 
 #[derive(Deserialize,Serialize)]
 #[derive(Debug)]
@@ -90,7 +90,13 @@ pub fn get_creds_handler(user: AuthGuard, secret: State<SecretMgt>) -> CustomRes
     println!("error getting creds: {:?}", &res);
 
     if res.is_ok() {
-        let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &res.unwrap(),  secret.as_ref());
+        let unwrapped = res.unwrap();
+        let claim = json!({
+           "exp": calc_exp(),
+           "schueler": unwrapped.schueler,
+           "lehrer": unwrapped.lehrer
+        });
+        let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &claim,  secret.as_ref());
         if token.is_err() {
             println!("error while creating creds token: {:?}", token);
             return CustomResponse::error("Error while creating token".to_string(), rocket::http::Status::InternalServerError);

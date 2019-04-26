@@ -32,7 +32,7 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for AuthGuard {
     }
 }
 
-fn is_valid_jwt(header: &str, secret: &String) -> bool {
+pub fn is_valid_jwt(header: &str, secret: &String) -> bool {
 
     let header = header.to_string();
     if header.replace(" ", "").len() == 0 {

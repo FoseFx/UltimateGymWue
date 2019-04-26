@@ -19,4 +19,7 @@ export class AppQuery extends Query<AppState> {
   get loginToken() {
     return `Bearer ${this.getValue().loginData.token}`;
   }
+  get credentialsToken() {
+    return `Bearer ${this.getValue().credentials.token}`;
+  }
 }

@@ -4,14 +4,21 @@ use crate::redismw::RedisConnection;
 use std::ops::Deref;
 use std::error::Error;
 use crate::redis::Commands;
+use crate::basics::guards::HasCredsGuard;
+use crate::responses::CustomResponse;
 
 #[get("/basics/stufen")]
-pub fn get_stufen_handler(user: AuthGuard, redis_conn: RedisConnection) -> String {
+pub fn get_stufen_handler(user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisConnection) -> CustomResponse {
     let redis_conn: &redis::Connection = redis_conn.0.deref();
+    let creds = creds.pl.schueler;
 
-    let stufen_res = get_stufe(redis_conn, BasicCredsWrapper{username: "".to_string(), password: "!".to_string()});
+    let stufen_res = get_stufe(redis_conn, BasicCredsWrapper{username: creds.username, password: creds.password});
 
-    return format!("{:?}", stufen_res);
+    if stufen_res.is_err() {
+        return CustomResponse::error("Fehler bei Verbindung zum Schulserver, haben sich die Anmeldedaten geändert?".to_string(), rocket::http::Status::BadRequest);
+    }
+
+    return CustomResponse::data(json!(stufen_res.unwrap()));
 }
 
 

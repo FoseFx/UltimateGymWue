@@ -8,5 +8,8 @@ export class SetupService {
   lockName(name: string) {
     this.store.update({name});
   }
+  setAvailStufen(stufen: string[]) {
+    this.store.update({available_stufen: stufen});
+  }
 
 }

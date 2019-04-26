@@ -3,11 +3,13 @@ import {Injectable} from '@angular/core';
 
 export interface SetupState {
   name: string;
+  available_stufen: string[];
 }
 
 export function createInitialState() {
   return {
-    name: null
+    name: null,
+    available_stufen: []
   };
 }
 

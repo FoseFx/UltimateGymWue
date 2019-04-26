@@ -41,7 +41,7 @@ impl<'r> Responder<'r> for CORSResponder {
         Response::build()
             .sized_body(Cursor::new(self.0))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
-            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
             .ok()
     }
 }
@@ -195,6 +195,6 @@ mod integration {
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
         assert_eq!(origin, Some("http://localhost:4200".into()));
-        assert_eq!(allow_headers, Some("Content-Type,authorization".into()));
+        assert_eq!(allow_headers, Some("Content-Type,authorization,x-gw-auth".into()));
     }
 }

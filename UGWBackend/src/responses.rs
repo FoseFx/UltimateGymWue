@@ -42,7 +42,7 @@ impl<'r> Responder<'r> for ErrorResponse {
         Response::build()
             .sized_body(Cursor::new(format!("{}", json!({"error": true, "msg": self.0}))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
-            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
             .header(rocket::http::ContentType::JSON)
             .status(self.1)
             .ok()
@@ -54,7 +54,7 @@ impl<'r> Responder<'r> for MessageResponse {
         Response::build()
             .sized_body(Cursor::new(format!("{}", json!({"error": false, "msg": self.0}))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
-            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
             .header(rocket::http::ContentType::JSON)
             .ok()
     }
@@ -65,7 +65,7 @@ impl<'r> Responder<'r> for DataResponse {
         Response::build()
             .sized_body(Cursor::new(format!("{}", json!(json!({"error": false, "data": self.0})))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
-            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization"))
+            .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
             .header(rocket::http::ContentType::JSON)
             .ok()
     }
@@ -112,7 +112,7 @@ mod tests {
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
         assert_eq!(origin, Some("http://localhost:4200".into()));
-        assert_eq!(allow_headers, Some("Content-Type,authorization".into()));
+        assert_eq!(allow_headers, Some("Content-Type,authorization,x-gw-auth".into()));
     }
 
     #[test]
@@ -125,7 +125,7 @@ mod tests {
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
         assert_eq!(origin, Some("http://localhost:4200".into()));
-        assert_eq!(allow_headers, Some("Content-Type,authorization".into()));
+        assert_eq!(allow_headers, Some("Content-Type,authorization,x-gw-auth".into()));
     }
 
     #[test]
@@ -138,7 +138,7 @@ mod tests {
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
         assert_eq!(origin, Some("http://localhost:4200".into()));
-        assert_eq!(allow_headers, Some("Content-Type,authorization".into()));
+        assert_eq!(allow_headers, Some("Content-Type,authorization,x-gw-auth".into()));
     }
 
 

@@ -8,4 +8,6 @@ export class SetupQuery extends Query<SetupState> {
     super(store);
   }
   selectName$ = this.select('name');
+
+  availStufen$ = this.select('available_stufen');
 }

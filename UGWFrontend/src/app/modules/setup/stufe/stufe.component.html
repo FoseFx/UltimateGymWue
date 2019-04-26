@@ -1,10 +1,12 @@
-<app-card>
+<app-card [loading]="loading">
   <app-card-header>Stufe</app-card-header>
   <p class="center-text">
     Super! Jetzt kannst du UGW einrichten. Gib dazu zunächtst deine Stufe an.
   </p>
 
-  <app-input #dd type="dropdown" [dropdownOptions]="['opt1','opt2','opt3','opt4','opt5','opt6','opt7']">Stufe</app-input>
+  <h3 *ngIf="!!error">Fehler: {{error}}</h3>
+
+  <app-input #dd type="dropdown" [dropdownOptions]="this.setupQuery.availStufen$ | async">Stufe</app-input>
 
   <app-button class="center-button"
               accent="true"

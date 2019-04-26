@@ -14,7 +14,8 @@ export const environment = {
     registerInsta: `${backendHost}/api/auth/insta/register-code`,
     loginInsta: `${backendHost}/api/auth/insta/login`,
     addCredentials: `${backendHost}/api/basics/add_creds`,
-    fetchCredentials: `${backendHost}/api/basics/get_creds`
+    fetchCredentials: `${backendHost}/api/basics/get_creds`,
+    getStufen: `${backendHost}/api/basics/stufen`
   }
 };
 
