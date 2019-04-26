@@ -7,7 +7,7 @@ RUN rustup default nightly
 
 COPY . ./
 
-RUN cargo install --path .
+# RUN cargo install --path .
 
 RUN cargo build --release
 

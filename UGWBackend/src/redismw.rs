@@ -20,10 +20,10 @@ pub fn pool() -> r2d2::Pool<RedisConnectionManager> {
         panic!("No REDIS_PATH set");
     }
 
-    let slice: &str = &redis_full_path.unwrap()[..]; // convert to &str for open() call
+    let mut slice: String = redis_full_path.unwrap();
     println!("🌪  \u{1b}[0m\u{1b}[31;1mRedis Server: '{}' \u{1b}[0m", slice);
     let re = regex::Regex::new(r"^redis://\d+\.\d+\.\d+.\d+:.*/$").unwrap();
-     if !(re.is_match(slice)) {
+     if !(re.is_match(&slice[..])) {
          let hostname: Vec<&str> = slice.split("://").collect();
          let hostname = hostname[1];
          let hostname: Vec<&str> = hostname.split(":").collect();
@@ -46,7 +46,7 @@ pub fn pool() -> r2d2::Pool<RedisConnectionManager> {
          println!("split: {:?}", split);
          println!("ip {}", ip);
 
-         let slice = format!("redis://{}:{}", ip, after_host);
+         slice = format!("redis://{}:{}", ip, after_host);
 
          println!("slice: {}", &slice);
      }
