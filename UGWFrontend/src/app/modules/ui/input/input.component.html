@@ -29,6 +29,7 @@
     (input)="onDDInput($event)"
     [value]="value"
   >
+  <div class="arrow" [ngClass]="{'flip': ddfocused}"></div>
   <ul
     class="dropdown"
     *ngIf="ddfocused"

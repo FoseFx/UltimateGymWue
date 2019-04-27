@@ -11,6 +11,7 @@
   <app-button class="center-button"
               accent="true"
               [disabled]="!dd.value"
+              (click)="next(dd.value)"
   >
     Weiter <span *ngIf="!!dd.value">mit {{ dd.value }}</span>
   </app-button>

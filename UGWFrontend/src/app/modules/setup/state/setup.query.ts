@@ -10,4 +10,10 @@ export class SetupQuery extends Query<SetupState> {
   selectName$ = this.select('name');
 
   availStufen$ = this.select('available_stufen');
+
+  stufe$ = this.select('stufe');
+
+  get stufe(): string {
+    return this.getValue().stufe;
+  }
 }

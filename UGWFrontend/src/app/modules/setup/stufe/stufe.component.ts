@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stufe',
@@ -17,7 +18,9 @@ export class StufeComponent implements OnInit {
 
   constructor(public readonly setupQuery: SetupQuery,
               private http: HttpClient,
-              private appQuery: AppQuery, private setupService: SetupService) { }
+              private appQuery: AppQuery, 
+              private setupService: SetupService, 
+              private router: Router) { }
 
   ngOnInit() {
     if (!this.appQuery.hasCredentials()) {return;}
@@ -45,6 +48,15 @@ export class StufeComponent implements OnInit {
           sub.unsubscribe();
         }
       );
+  }
+
+  next(stufe: string) {
+    console.log(stufe, !!stufe);
+    if (!stufe) {
+      return;
+    }
+    this.setupService.setStufe(stufe);
+    // this.router.navigate(['']); // todo
   }
 
 }

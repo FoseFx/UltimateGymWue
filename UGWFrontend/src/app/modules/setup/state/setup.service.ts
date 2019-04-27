@@ -11,5 +11,7 @@ export class SetupService {
   setAvailStufen(stufen: string[]) {
     this.store.update({available_stufen: stufen});
   }
-
+  setStufe(stufe: string){
+    this.store.update({stufe});
+  }
 }
