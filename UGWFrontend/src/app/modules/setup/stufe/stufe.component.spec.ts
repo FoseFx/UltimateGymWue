@@ -9,6 +9,7 @@ import {SetupQuery} from '../state/setup.query';
 import {SetupStore} from '../state/setup.store';
 import {AppQuery} from '../../../state/app.query';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('StufeComponent', () => {
   let component: StufeComponent;
@@ -16,7 +17,7 @@ describe('StufeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule, HttpClientModule],
+      imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ StufeComponent ],
       providers: [AppQuery, AppStore, SetupService, SetupQuery, SetupStore]
     })
