@@ -32,6 +32,7 @@ matrix:
     - REDIS_PATH="redis://localhost:6379/"
     - INSTA_CID="test"
     - INSTA_SECRET="test"
+    - RUST_BACKTRACE=1
     script:
     - cd UGWBackend
     - cargo build --verbose --all

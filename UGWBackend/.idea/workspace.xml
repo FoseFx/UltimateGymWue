@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/basics/guards.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/guards.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/creds.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/creds.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/stufen.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/stufen.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/responses.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/responses.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,12 +251,12 @@
       <workItem from="1556124580567" duration="3707000" />
       <workItem from="1556178415262" duration="5721000" />
       <workItem from="1556262282620" duration="3839000" />
-      <workItem from="1556303424258" duration="4313000" />
+      <workItem from="1556303424258" duration="4842000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93036000" />
+    <option name="totallyTimeSpent" value="93565000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -283,7 +276,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.24945533" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.24945533" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />

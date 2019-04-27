@@ -4,12 +4,17 @@ import { RegistersteptwoGuard } from './registersteptwo.guard';
 import {SetupQuery} from '../state/setup.query';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SetupStore} from '../state/setup.store';
+import { RegisterComponent } from '../register/register.component';
+import { UiModule } from '../../ui/ui.module';
 
 describe('RegistersteptwoGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [RegistersteptwoGuard, SetupQuery, SetupStore],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule.withRoutes([
+        { path: 'setup/register', component: RegisterComponent}
+    ]), UiModule],
+    declarations: [RegisterComponent]
     });
   });
 
