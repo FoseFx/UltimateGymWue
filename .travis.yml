@@ -29,7 +29,7 @@ matrix:
     - SECRET=test
     - MAIL_JET_USER=test
     - MAIL_JET_KEY=test
-    - REDIS_PATH="redis://localhost:6379/"
+    - REDIS_PATH="redis://127.0.0.1:6379/"
     - INSTA_CID="test"
     - INSTA_SECRET="test"
     - RUST_BACKTRACE=1
