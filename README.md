@@ -3,11 +3,30 @@ The Ultimate Tool for the Students of my School.
 
 ## Features
 
+- User Management
+  - Email/Password
+  - Google OAuth
+  - Instagram OAuth
+  - Anmeldedaten für Schulserver
+- Setup
+  - Stufen 1/2
+
+## TODO
+
+- Setup
+  - Kurse
+- Landing / Main
+  - Stundenplan
+  - Vertretungsplan
+- Kalender
+- Freunde
+
+
 ## Before running the backend:
 
 1. Make sure you have a firebase project setup. 
 2. Download it's `service_account.json` and copy it to `./UGWBackend/db-middleware/service_account.json`
-3. Make sure Docker and DOcker-compose is installed
+3. Make sure Docker and Docker-compose is installed
 4. Run `docker-compose build` and `docker-compose up` with the following environment variables:
     - SECRET - used to sign JWTs
     - MAIL_JET_USER
