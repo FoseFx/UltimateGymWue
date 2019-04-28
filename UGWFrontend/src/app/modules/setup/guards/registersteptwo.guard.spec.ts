@@ -6,6 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {SetupStore} from '../state/setup.store';
 import { RegisterComponent } from '../register/register.component';
 import { UiModule } from '../../ui/ui.module';
+import {Router} from '@angular/router';
 
 describe('RegistersteptwoGuard', () => {
   beforeEach(() => {
@@ -22,12 +23,12 @@ describe('RegistersteptwoGuard', () => {
     expect(guard).toBeTruthy();
   }));
 
-  it('not activate when no name set',
+  it('route to \'/setup/register\' when no name set',
     inject(
-      [RegistersteptwoGuard, SetupQuery],
-      (guard: RegistersteptwoGuard, query: SetupQuery) => {
+      [RegistersteptwoGuard, SetupQuery, Router],
+      (guard: RegistersteptwoGuard, query: SetupQuery, router: Router) => {
         spyOn(query, 'getValue').and.returnValue({name: null});
-        expect(guard.canActivate(null, null)).toEqual(false);
+        expect(guard.canActivate(null, null)).toEqual(router.parseUrl('/setup/register'));
       }
     )
   );

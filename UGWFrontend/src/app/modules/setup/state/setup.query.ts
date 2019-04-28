@@ -13,7 +13,7 @@ export class SetupQuery extends Query<SetupState> {
 
   stufe$ = this.select('stufe');
 
-  get stufe(): string {
+  getStufe(): string {
     return this.getValue().stufe;
   }
 }

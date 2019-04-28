@@ -8,20 +8,19 @@ export class LoginGuard implements CanActivate {
   constructor(private query: AppQuery, private router: Router) {
   }
 
-  async canActivate(
+  canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Promise<boolean | UrlTree> {
+    state: RouterStateSnapshot): boolean | UrlTree {
 
 
 
     const allow = this.query.getValue().loginData === null;
-    console.log(allow);
 
     if (!allow) {
-      this.router.navigate(['/']);
+      return this.router.parseUrl('/');
     }
 
-    return allow;
+    return true;
   }
 
 }

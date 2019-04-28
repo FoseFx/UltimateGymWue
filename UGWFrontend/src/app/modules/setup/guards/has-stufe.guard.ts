@@ -3,24 +3,20 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import { Observable } from 'rxjs';
 import {SetupQuery} from '../state/setup.query';
 
-@Injectable()
-export class RegistersteptwoGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root'
+})
+export class HasStufeGuard implements CanActivate {
 
-  constructor(private query: SetupQuery, private router: Router) {
-  }
+  constructor(private setupQuery: SetupQuery, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    const allow = this.query.getValue().name !== null;
-    console.log(allow);
-
-    if (!allow) {
-      return this.router.parseUrl('/setup/register');
+    if (this.setupQuery.getStufe() !== null) {
+      return true;
     }
-
-    return true;
+    return this.router.parseUrl('/setup/basics/stufe');
   }
 
 }

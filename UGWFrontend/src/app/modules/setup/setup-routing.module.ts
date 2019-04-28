@@ -15,6 +15,8 @@ import {InstaComponent} from './register/insta/insta.component';
 import {InstaLoginComponent} from './login/insta-login/insta-login.component';
 import {CredentialsComponent} from './credentials/credentials.component';
 import {HasCredsGuard} from './guards/has-creds.guard';
+import {KurseComponent} from './kurse/kurse.component';
+import {HasStufeGuard} from './guards/has-stufe.guard';
 
 const routes: Routes = [
   {
@@ -74,6 +76,11 @@ const routes: Routes = [
     path: 'basics/stufe',
     component: StufeComponent,
     canActivate: [LoginnedGuard, HasCredsGuard]
+  },
+  {
+    path: 'basics/kurse',
+    component: KurseComponent,
+    canActivate: [LoginnedGuard, HasCredsGuard, HasStufeGuard]
   }
 ];
 
