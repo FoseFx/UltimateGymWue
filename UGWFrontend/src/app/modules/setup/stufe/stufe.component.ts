@@ -16,14 +16,14 @@ export class StufeComponent implements OnInit {
   loading = false;
   error: string;
 
-  constructor(public readonly setupQuery: SetupQuery,
+  constructor(public setupQuery: SetupQuery,
               private http: HttpClient,
-              private appQuery: AppQuery, 
-              private setupService: SetupService, 
+              private appQuery: AppQuery,
+              private setupService: SetupService,
               private router: Router) { }
 
   ngOnInit() {
-    if (!this.appQuery.hasCredentials()) {return;}
+    if (!this.appQuery.hasCredentials()) {return; }
     this.loading = true;
     const sub = this.http.get(
       environment.urls.getStufen,
@@ -56,7 +56,7 @@ export class StufeComponent implements OnInit {
       return;
     }
     this.setupService.setStufe(stufe);
-    // this.router.navigate(['']); // todo
+    this.router.navigate(['/setup/basics/kurse']).catch(err => console.error(err));
   }
 
 }

@@ -20,6 +20,10 @@ import {HasStufeGuard} from './guards/has-stufe.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'welcome'
+  },
+  {
     path: 'legal',
     component: LegalComponent
   },

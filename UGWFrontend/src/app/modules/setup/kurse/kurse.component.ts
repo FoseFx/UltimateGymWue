@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SetupQuery} from '../state/setup.query';
 
 @Component({
   selector: 'app-kurse',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KurseComponent implements OnInit {
 
-  constructor() { }
+  constructor(private setupQuery: SetupQuery) { }
 
   ngOnInit() {
   }

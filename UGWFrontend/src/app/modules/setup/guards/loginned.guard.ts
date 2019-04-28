@@ -8,9 +8,9 @@ export class LoginnedGuard implements CanActivate {
   constructor(private query: AppQuery, private router: Router) {
   }
 
-  async canActivate(
+  canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Promise<boolean | UrlTree> {
+    state: RouterStateSnapshot): boolean | UrlTree {
 
 
 
@@ -18,7 +18,7 @@ export class LoginnedGuard implements CanActivate {
     console.log(allow);
 
     if (!allow) {
-      this.router.navigate(['/setup/welcome']);
+      return this.router.parseUrl('/setup/welcome');
     }
 
     return allow;
