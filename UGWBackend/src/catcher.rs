@@ -10,6 +10,11 @@ pub fn bad_request() -> CustomResponse {
     return CustomResponse::error("Bad Request".to_string(), rocket::http::Status::BadRequest);
 }
 
+#[catch(404)]
+pub fn not_found() -> CustomResponse {
+    return CustomResponse::error("Not Found".to_string(), rocket::http::Status::NotFound);
+}
+
 
 #[catch(500)]
 pub fn internal_server_error() -> CustomResponse {

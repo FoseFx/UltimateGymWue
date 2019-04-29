@@ -8,7 +8,7 @@ use crate::basics::guards::HasCredsGuard;
 use crate::responses::CustomResponse;
 
 #[get("/basics/stufen")]
-pub fn get_stufen_handler(user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisConnection) -> CustomResponse {
+pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisConnection) -> CustomResponse {
     let redis_conn: &redis::Connection = redis_conn.0.deref();
     let creds = creds.pl.schueler;
 

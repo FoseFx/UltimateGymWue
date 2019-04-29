@@ -74,13 +74,16 @@ fn rocket() -> Rocket {
                 auth::insta::login::login_instagram_handler,
                 basics::stufen::get_stufen_handler,
                 basics::creds::add_creds_handler,
-                basics::creds::get_creds_handler
+                basics::creds::get_creds_handler,
+                basics::kurse::get_all_kurse
+
             ]
         )
         .register(catchers![
                 catcher::unauthorized,
                 catcher::bad_request,
-                catcher::internal_server_error,
+                catcher::not_found,
+                catcher::internal_server_error
             ]
         );
 }

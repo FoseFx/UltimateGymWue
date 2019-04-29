@@ -1,3 +1,7 @@
-<p>
-  kurse works!
-</p>
+<app-card [loading]="loading">
+  <app-card-header>Kurse</app-card-header>
+
+  <p>Bitte wähle deine Kurse</p>
+
+  <h3 class="warning" *ngIf="error">Fehler: {{error}}</h3>
+</app-card>

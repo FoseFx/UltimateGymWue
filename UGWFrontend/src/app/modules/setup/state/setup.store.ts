@@ -1,17 +1,22 @@
 import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
+import {Kurse} from '../../../../types/Kurs';
 
 export interface SetupState {
   name: string;
   available_stufen: string[];
   stufe: string;
+  available_kurse: Kurse;
+  selected_kurse: Kurse;
 }
 
 export function createInitialState() {
   return {
     name: null,
     available_stufen: [],
-    stufe: null
+    stufe: null,
+    available_kurse: [],
+    selected_kurse: [],
   };
 }
 

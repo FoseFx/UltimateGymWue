@@ -9,6 +9,9 @@ export const environment = {
     registerInstaRediect: `https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=${backendHost}/api/auth/insta/register-redirect&response_type=code`,
     registerInsta: `${backendHost}/api/auth/insta/register-code`,
     loginInsta: `${backendHost}/api/auth/insta/login`,
-    addCredentials: `${backendHost}/api/basics/add_creds`
+    addCredentials: `${backendHost}/api/basics/add_creds`,
+    fetchCredentials: `${backendHost}/api/basics/get_creds`,
+    getStufen: `${backendHost}/api/basics/stufen`,
+    getKurse: `${backendHost}/api/basics/kurse`
   }
 };
