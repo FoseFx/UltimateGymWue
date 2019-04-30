@@ -7,6 +7,10 @@ use crate::redismw::RedisConnection;
 use std::error::Error;
 use std::ops::Deref;
 use crate::basics::utils::BasicCredsWrapper;
+use redis::RedisResult;
+use crate::redis::Commands;
+use crate::SecretMgt;
+use rocket::State;
 
 #[derive(Serialize,Deserialize)]
 #[derive(Debug)]
@@ -15,13 +19,32 @@ pub struct Kurs {
 }
 
 #[get("/basics/kurse/<stufe>")]
-pub fn get_all_kurse(_user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisConnection, stufe: String) -> CustomResponse {
+pub fn get_all_kurse(_user: AuthGuard,
+                     creds: HasCredsGuard,
+                     redis_conn: RedisConnection,
+                     secret: State<SecretMgt>,
+                     stufe: String) -> CustomResponse {
+
     let redis_conn = redis_conn.0.deref();
+    let schueler_creds = creds.pl.schueler;
+    let secret: String = secret.0.deref().to_string();
+
     if !is_stufe(&stufe) {
         return CustomResponse::error("Nicht als Stufe erkannt".to_string(), Status::BadRequest);
     }
 
-    let kurse = get_kurse(redis_conn, creds.pl.schueler, stufe);
+    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, &stufe);
+    if stufe_id.is_none() {
+        return CustomResponse::error("Stufe nicht gefunden".to_string(), Status::BadRequest);
+    }
+    let stufe_id = stufe_id.unwrap();
+    println!("stufe_id: {}", &stufe_id);
+
+    println!("wochen: {:#?}", get_wochen(redis_conn, &schueler_creds));
+
+
+    let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id);
+    println!("kurse: {:?}", &kurse);
 
     if kurse.is_err() {
         return CustomResponse::error(kurse.unwrap_err().to_string(), Status::BadRequest);
@@ -30,26 +53,109 @@ pub fn get_all_kurse(_user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisCo
     return CustomResponse::data(kurse.unwrap());
 }
 
+/// tested
 fn is_stufe(string: &String) -> bool {
     let string = string.to_uppercase();
     let regex = Regex::new(r"^[A-Z0-9-]{2,5}$").unwrap();
     return regex.is_match(string.as_ref());
 }
 
-fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, stufe: String) -> Result<serde_json::Value, Box<Error>>{
-    if false {
-        fetch_kurse(creds, &stufe);
+/// untested
+/// creds: schueler-creds
+/// stufe: must be trusted
+/// stufe_id: must be trusted
+/// error: reqwest
+fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>) -> Result<serde_json::Value, Box<Error>>{
+
+    let key = format!("kurse_{}", &stufe_id);
+    let cached: RedisResult<String> = redis.get(&key); // will fail, when nil
+    if cached.is_ok() {
+        return Ok(serde_json::from_str(cached.unwrap().as_ref())?);
     }
-    return Ok(json!("NIY"));
+    let kurse = fetch_kurse(creds, secret, &stufe, stufe_id, wochen)?;
+    let _: RedisResult<u8> = redis.set_ex(key, kurse.as_str().unwrap(), 7 * 24 * 60 * 60);
+
+    return Ok(kurse);
 }
 
-fn fetch_kurse(creds: BasicCredsWrapper, stufe: &String) -> Result<serde_json::Value, Box<Error>>{
-    return Ok(json!("NIY"));
+/// untested
+/// creds: schueler-creds
+/// stufe: must be trusted
+/// stufe_id: must be trusted
+/// error: reqwest
+fn fetch_kurse(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<serde_json::Value, Box<Error>>{
+    let client = reqwest::Client::new();
+
+    let res = client
+        .get("http://localhost:8080/")
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send()?;
+    return Ok(json!("fetch_kurse"));
+}
+
+/// untested
+fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &String) -> Option<String>{
+    let stufen_arr = super::stufen::get_stufe(redis, creds);
+    if stufen_arr.is_err() {
+        return None;
+    }
+    let stufen_arr = stufen_arr.unwrap();
+    let mut id: Option<String> = None;
+
+    for (index, stufe) in stufen_arr.iter().enumerate() {
+        if stufe.to_uppercase().trim() == stufe.trim() {
+            id = Some(format!("c{}.htm", to_five(&index.to_string())));
+        }
+    }
+
+    return id;
+
+}
+
+/// unstested
+fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
+    let cache: RedisResult<String> = redis.get("wochen"); // will fail, when nil
+    if cache.is_ok() {
+        let cache = cache.unwrap();
+        let vec: Vec<&str> = cache.split(",").collect();
+        let mut ret: Vec<String> = vec![];
+        for v in vec.iter() {
+            ret.push(v.to_owned().to_owned());
+        }
+        return Ok(ret);
+    }
+
+    let nav = super::stufen::get_navbar(redis, creds)?;
+
+    let vec: Vec<&str> = nav.split("<option value=\"").collect();
+
+    let a = vec.get(1).unwrap().to_string();
+    let b = vec.get(2).unwrap().to_string();
+
+    let wochen: Vec<String> = vec![
+        a[0..2].to_string(),
+        b[0..2].to_string()
+    ];
+    let cache_str = format!("{},{}", &wochen[0], &wochen[1]);
+
+    let _: RedisResult<String> = redis.set_ex("wochen", cache_str, 7 * 24 * 60 * 60);
+
+    return Ok(wochen);
+}
+
+/// tested
+/// adds '0's in front of your string until it has the length of 5
+fn to_five(str: &String) -> String {
+    let mut ret = str.to_owned();
+    while ret.len() < 5 {
+        ret = format!("0{}", ret);
+    }
+    return ret;
 }
 
 #[cfg(test)]
 mod test {
-    use crate::basics::kurse::is_stufe;
+    use crate::basics::kurse::{is_stufe, to_five};
 
     #[test]
     fn test_is_stufe() {
@@ -62,4 +168,12 @@ mod test {
         assert_eq!(is_stufe(&"Q1".to_string()), true);
     }
 
+
+    #[test]
+    fn test_to_five() {
+        assert_eq!(to_five(&"1".to_string()), "00001");
+        assert_eq!(to_five(&"00001".to_string()), "00001");
+        assert_eq!(to_five(&"000001".to_string()), "000001");
+        assert_eq!(to_five(&"01010".to_string()), "01010");
+    }
 }

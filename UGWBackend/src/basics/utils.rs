@@ -20,7 +20,7 @@ pub struct BasicCredsWrapper {
 /// this sends a request to the school's server relative to the BASE_URL
 /// and returns the body on a 200, any other code will fail and return a
 /// reqwest::Error
-pub fn fetch_schul_server(path: String, creds: BasicCredsWrapper) -> Result<String, reqwest::Error> {
+pub fn fetch_schul_server(path: String, creds: &BasicCredsWrapper) -> Result<String, reqwest::Error> {
 
     let url = format!("{}{}", BASE_URL, path);
 
@@ -42,7 +42,7 @@ pub fn fetch_schul_server(path: String, creds: BasicCredsWrapper) -> Result<Stri
 }
 
 /// tested
-fn creds_wrapper_to_basic(creds: BasicCredsWrapper) -> String {
+fn creds_wrapper_to_basic(creds: &BasicCredsWrapper) -> String {
     return format!(
         "Basic {}",
         base64::encode(&format!("{}:{}", creds.username, creds.password)[..])

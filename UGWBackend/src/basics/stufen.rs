@@ -12,7 +12,7 @@ pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: Re
     let redis_conn: &redis::Connection = redis_conn.0.deref();
     let creds = creds.pl.schueler;
 
-    let stufen_res = get_stufe(redis_conn, BasicCredsWrapper{username: creds.username, password: creds.password});
+    let stufen_res = get_stufe(redis_conn, &BasicCredsWrapper{username: creds.username, password: creds.password});
 
     if stufen_res.is_err() {
         return CustomResponse::error("Fehler bei Verbindung zum Schulserver, haben sich die Anmeldedaten geändert?".to_string(), rocket::http::Status::BadRequest);
@@ -25,7 +25,7 @@ pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: Re
 /// untested
 /// this will try to gather the value using the redis cache, if not found it will fetch for it
 /// creds must be schueler creds
-fn get_stufe(redis_conn: &redis::Connection, creds: BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
+pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
 
     let get_res: redis::RedisResult<String> = redis_conn.get("stufen");
 
@@ -59,7 +59,7 @@ fn get_stufe(redis_conn: &redis::Connection, creds: BasicCredsWrapper) -> Result
 /// untested
 /// this will try to gather the value using the redis cache, if not found it will fetch for it
 /// creds must be schueler creds
-fn get_navbar(redis_conn: &redis::Connection, creds: BasicCredsWrapper) -> Result<String, Box<Error>> {
+pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> Result<String, Box<Error>> {
 
     let redis_res: redis::RedisResult<String> = redis_conn.get("navbar");
 
@@ -80,7 +80,7 @@ fn get_navbar(redis_conn: &redis::Connection, creds: BasicCredsWrapper) -> Resul
 /// untested
 /// this will fetch and return the navbar-frame from /Schueler-Stundenplan/frames/navbar.htm
 /// creds must be schueler creds
-pub fn fetch_navbar(creds: BasicCredsWrapper) -> Result<String, reqwest::Error> {
+pub fn fetch_navbar(creds: &BasicCredsWrapper) -> Result<String, reqwest::Error> {
     return super::utils::fetch_schul_server(
         format!("/Schueler-Stundenplan/frames/navbar.htm"),
         creds
