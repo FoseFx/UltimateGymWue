@@ -61,12 +61,12 @@ mod test {
     #[test]
     fn test_creds_wrapper_to_basic() {
         assert_eq!(creds_wrapper_to_basic(
-            BasicCredsWrapper {username: "indeedsome".to_string(), password: "test".to_string()}),
+            &BasicCredsWrapper {username: "indeedsome".to_string(), password: "test".to_string()}),
             "Basic aW5kZWVkc29tZTp0ZXN0"
         );
 
         assert_eq!(creds_wrapper_to_basic(
-            BasicCredsWrapper {username: "Ind3edsÖme".to_string(), password: "tÄst".to_string()}),
+            &BasicCredsWrapper {username: "Ind3edsÖme".to_string(), password: "tÄst".to_string()}),
             "Basic SW5kM2Vkc8OWbWU6dMOEc3Q="
         );
     }

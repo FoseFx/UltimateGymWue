@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/max.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/creds.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/creds.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/basics/kurse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/kurse.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/stufen.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/stufen.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/basics/utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/utils.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,17 +22,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/basics/kurse.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="411">
+              <caret line="109" column="51" lean-forward="true" selection-start-line="109" selection-start-column="51" selection-end-line="109" selection-end-column="51" />
               <folding>
                 <element signature="e#0#37#0" />
                 <element signature="n#!!block;n#is_stufe#0" />
                 <element signature="n#!!doc;n#fetch_kurse#0" />
-                <element signature="n#!!block;n#stufe_to_id#0" />
                 <element signature="n#!!block;n#get_wochen#0" />
                 <element signature="n#!!block;n#to_five#0" />
                 <element signature="n#test#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -158,9 +160,9 @@
         <option value="$PROJECT_DIR$/src/catcher.rs" />
         <option value="$PROJECT_DIR$/src/basics/mod.rs" />
         <option value="$PROJECT_DIR$/src/main.rs" />
-        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
         <option value="$PROJECT_DIR$/src/basics/creds.rs" />
         <option value="$PROJECT_DIR$/src/basics/stufen.rs" />
+        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
         <option value="$PROJECT_DIR$/src/basics/kurse.rs" />
       </list>
     </option>
@@ -286,12 +288,12 @@
       <workItem from="1556303424258" duration="4842000" />
       <workItem from="1556519042177" duration="2619000" />
       <workItem from="1556626796000" duration="1025000" />
-      <workItem from="1556639491939" duration="5490000" />
+      <workItem from="1556639491939" duration="5944000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102699000" />
+    <option name="totallyTimeSpent" value="103153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -311,7 +313,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.29411766" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.37254903" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -610,13 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="48" column="6" lean-forward="true" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -656,15 +651,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/kurse.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="411">
+          <caret line="109" column="51" lean-forward="true" selection-start-line="109" selection-start-column="51" selection-end-line="109" selection-end-column="51" />
           <folding>
             <element signature="e#0#37#0" />
             <element signature="n#!!block;n#is_stufe#0" />
             <element signature="n#!!doc;n#fetch_kurse#0" />
-            <element signature="n#!!block;n#stufe_to_id#0" />
             <element signature="n#!!block;n#get_wochen#0" />
             <element signature="n#!!block;n#to_five#0" />
             <element signature="n#test#0" />

@@ -40,10 +40,15 @@ pub fn get_all_kurse(_user: AuthGuard,
     let stufe_id = stufe_id.unwrap();
     println!("stufe_id: {}", &stufe_id);
 
-    println!("wochen: {:#?}", get_wochen(redis_conn, &schueler_creds));
+    let wochen = get_wochen(redis_conn, &schueler_creds);
+    if wochen.is_err() {
+        let err = wochen.unwrap_err();
+        println!("error while getiign wochen: {:#?}", &err);
+        return CustomResponse::error(err.to_string(), Status::InternalServerError);
+    }
+    let wochen = wochen.unwrap();
 
-
-    let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id);
+    let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id, &wochen);
     println!("kurse: {:?}", &kurse);
 
     if kurse.is_err() {
@@ -102,8 +107,9 @@ fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &Str
     let stufen_arr = stufen_arr.unwrap();
     let mut id: Option<String> = None;
 
-    for (index, stufe) in stufen_arr.iter().enumerate() {
-        if stufe.to_uppercase().trim() == stufe.trim() {
+    for (i, stf) in stufen_arr.iter().enumerate() {
+        let index = i + 1;
+        if stf.to_uppercase().trim() == stufe.trim() {
             id = Some(format!("c{}.htm", to_five(&index.to_string())));
         }
     }
