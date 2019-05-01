@@ -6,17 +6,11 @@ use crate::basics::guards::HasCredsGuard;
 use crate::redismw::RedisConnection;
 use std::error::Error;
 use std::ops::Deref;
-use crate::basics::utils::BasicCredsWrapper;
+use crate::basics::utils::{BasicCredsWrapper, TTWoche, Kurs};
 use redis::RedisResult;
 use crate::redis::Commands;
 use crate::SecretMgt;
 use rocket::State;
-
-#[derive(Serialize,Deserialize)]
-#[derive(Debug)]
-pub struct Kurs {
-
-}
 
 #[get("/basics/kurse/<stufe>")]
 pub fn get_all_kurse(_user: AuthGuard,
@@ -47,6 +41,7 @@ pub fn get_all_kurse(_user: AuthGuard,
         return CustomResponse::error(err.to_string(), Status::InternalServerError);
     }
     let wochen = wochen.unwrap();
+    println!("wochen: {:?}", wochen);
 
     let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id, &wochen);
     println!("kurse: {:?}", &kurse);
@@ -55,7 +50,7 @@ pub fn get_all_kurse(_user: AuthGuard,
         return CustomResponse::error(kurse.unwrap_err().to_string(), Status::BadRequest);
     }
 
-    return CustomResponse::data(kurse.unwrap());
+    return CustomResponse::data(json!(kurse.unwrap()));
 }
 
 /// tested
@@ -70,32 +65,61 @@ fn is_stufe(string: &String) -> bool {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>) -> Result<serde_json::Value, Box<Error>>{
+fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>) -> Result<Vec<Kurs>, Box<Error>>{
 
     let key = format!("kurse_{}", &stufe_id);
+    let tt_key = format!("tt_{}", &stufe_id);
     let cached: RedisResult<String> = redis.get(&key); // will fail, when nil
+    println!("cached: {:?}", &cached);
     if cached.is_ok() {
         return Ok(serde_json::from_str(cached.unwrap().as_ref())?);
     }
-    let kurse = fetch_kurse(creds, secret, &stufe, stufe_id, wochen)?;
-    let _: RedisResult<u8> = redis.set_ex(key, kurse.as_str().unwrap(), 7 * 24 * 60 * 60);
+    let kurse_and_tt = fetch_kurse_and_tt(creds, secret, &stufe, stufe_id, wochen)?;
+    let kurse = kurse_and_tt.kurse;
+    let tt = kurse_and_tt.tt;
+
+    let kurse_str = serde_json::to_string(&kurse)?;
+    let tt_str = serde_json::to_string(&tt)?;
+    let _: RedisResult<u8> = redis.set_ex(key, kurse_str, 7 * 24 * 60 * 60);
+    let _: RedisResult<u8> = redis.set_ex(tt_key, tt_str, 7 * 24 * 60 * 60);
 
     return Ok(kurse);
 }
+
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct FetchKurseAndTTResult {
+    tt: Vec<TTWoche>,
+    kurse: Vec<Kurs>
+}
+
 
 /// untested
 /// creds: schueler-creds
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-fn fetch_kurse(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<serde_json::Value, Box<Error>>{
+fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<FetchKurseAndTTResult, Box<Error>>{
     let client = reqwest::Client::new();
 
-    let res = client
-        .get("http://localhost:8080/")
+    let json = serde_json::to_string(&json!({
+        "stufe": stufe.to_string(),
+        "stufe_id": stufe_id.to_string(),
+        "wochen": wochen.to_owned(),
+        "creds": creds.to_base_string()
+    }))?;
+    println!("json: {:?}", &json);
+    let base = base64::encode(&json);
+    println!("base: {:?}", &base);
+
+    let mut res = client
+        .get(&format!("http://localhost:8080/getKurseAndTT/{}", base)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
-    return Ok(json!("fetch_kurse"));
+
+    let res_json: FetchKurseAndTTResult = res.json()?;
+
+    return Ok(res_json);
 }
 
 /// untested

@@ -15,6 +15,14 @@ pub struct BasicCredsWrapper {
     pub password: String
 }
 
+impl BasicCredsWrapper {
+    pub fn to_base_string(&self) -> String {
+        let str = format!("{}:{}", self.username, self.password);
+        let base = base64::encode(&str);
+        return base;
+    }
+}
+
 /// not tested
 /// UNCACHED:
 /// this sends a request to the school's server relative to the BASE_URL
@@ -50,6 +58,38 @@ fn creds_wrapper_to_basic(creds: &BasicCredsWrapper) -> String {
 }
 
 
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct Kurs {
+    pub title: String,
+    pub fach: String,
+    pub lehrer: String
+}
+
+
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct KursRaum {
+    pub kurs: String,
+    pub raum: String
+}
+
+#[allow(non_snake_case)]
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct TTKursField {
+    pub typ: Option<String>,
+    pub fach: Option<String>,
+    pub raeume: Option<Vec<KursRaum>>,
+    pub tag: Option<u8>,
+    pub isUsed: Option<bool>
+}
+
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct TTWoche {
+    pub days: Vec<Vec<TTKursField>>
+}
 
 
 

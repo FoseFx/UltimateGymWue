@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "encoding": "^0.1.12",
     "firebase-admin": "^7.2.0",
-    "jsdom": "^15.0.0"
+    "jsdom": "^15.0.0",
+    "node-fetch": "^2.5.0"
   }
 }

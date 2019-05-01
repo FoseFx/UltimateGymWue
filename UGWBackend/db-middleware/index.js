@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('./service-account.json');
 const http = require("http");
+const getKurseAndTT = require('./kurse').getKurseAndTT;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -50,8 +51,10 @@ http.createServer((req, res) => {
   if (/^\/get_creds\/.*$/.test(req.url)) {
     return getCreds(req, res);
   }
+  if (/^\/getKurseAndTT\/.*$/.test(req.url)) {
+    return api_getKurseAndTT(req, res);
+  }
 
-  
   res.statusCode = 404;
   res.end();
 }).listen(8080, () => {
@@ -308,4 +311,21 @@ function getCreds(req, res) {
     res.end("null");
   });
 
+}
+
+async function api_getKurseAndTT(req, res){
+  
+  let base = req.url.replace("/getKurseAndTT/", "").replace("/", "");
+  let as_string = Buffer.from(base, 'base64').toString('ascii');
+  let as_obj = JSON.parse(as_string);
+
+  try {
+    let kurse = await getKurseAndTT(as_obj.stufe, as_obj.stufe_id, as_obj.wochen, as_obj.creds);
+    console.log("ok");
+    return res.end(JSON.stringify(kurse).replace(/type/g, "typ"));
+  } catch (e) {
+    console.error(e);
+    return res.end("error");
+  }
+  
 }
