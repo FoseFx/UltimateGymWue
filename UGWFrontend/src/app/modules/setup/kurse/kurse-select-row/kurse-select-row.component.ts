@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Kurse} from '../../../../../types/Kurs';
+import {SetupQuery} from '../../state/setup.query';
+import {SetupService} from '../../state/setup.service';
 
 @Component({
   selector: 'app-kurse-select-row',
@@ -9,7 +11,8 @@ import {Kurse} from '../../../../../types/Kurs';
 export class KurseSelectRowComponent implements OnInit {
 
   @Input('kurse') kurse: Kurse;
-  constructor() { }
+  @Input('title') title: string;
+  constructor(public setupQuery: SetupQuery, public setupService: SetupService) { }
 
   ngOnInit() {
   }

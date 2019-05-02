@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KurseSelectRowComponent } from './kurse-select-row.component';
+import {SetupQuery} from '../../state/setup.query';
+import {SetupService} from '../../state/setup.service';
+import {SetupStore} from '../../state/setup.store';
 
 describe('KurseSelectRowComponent', () => {
   let component: KurseSelectRowComponent;
@@ -8,7 +11,8 @@ describe('KurseSelectRowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KurseSelectRowComponent ]
+      declarations: [ KurseSelectRowComponent ],
+      providers: [SetupQuery, SetupService, SetupStore]
     })
     .compileComponents();
   }));

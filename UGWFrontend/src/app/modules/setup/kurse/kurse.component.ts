@@ -4,9 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
-import {Kurse} from "../../../../types/Kurs";
-import {map} from "rxjs/operators";
-import {AvailableKurseMap} from "../state/setup.store";
+import {Kurse} from '../../../../types/Kurs';
+import {map} from 'rxjs/operators';
+import {AvailableKurseMap} from '../state/setup.store';
 
 @Component({
   selector: 'app-kurse',
@@ -50,6 +50,16 @@ export class KurseComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  onSetKurse() {
+    if (!this.setupQuery.getHasSelectedAllKurse()) {
+      return;
+    }
+    this.loading = true;
+    const selectedKurse = this.setupQuery.getSelectedKurse();
+    console.log(selectedKurse);
+    // todo send to server and route
   }
 
 }

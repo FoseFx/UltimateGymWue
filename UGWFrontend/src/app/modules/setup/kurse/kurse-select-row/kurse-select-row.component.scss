@@ -1,0 +1,61 @@
+@import "../../../../../colors";
+:host {
+  padding: 0 30px;
+  margin: 0 auto;
+  display: block;
+}
+
+.sel-btn {
+  user-select: none;
+  cursor: pointer;
+  background-color: $light;
+  color: $bg;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  display: grid;
+  grid-template-rows: 33% auto 33%;
+  grid-template-columns: 100%;
+  position: relative;
+  transition: all 0.2s linear;
+  border-radius: 5px;
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    &.lehrer {
+      position: absolute;
+      text-align: right;
+      bottom: 7px;
+      right: 10px;
+    }
+  }
+
+  &.active {
+    background-color: $primary;
+    color: $bg;
+  }
+
+  &:hover {
+    background-color: $primary;
+    color: $bg;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+h3 {
+  font-style: italic;
+  &.ok {
+    font-style: normal;
+    color: $primary;
+  }
+}

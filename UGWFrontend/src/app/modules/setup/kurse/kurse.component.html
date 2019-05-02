@@ -1,15 +1,39 @@
 <app-card [loading]="loading">
-  <app-card-header>Kurse</app-card-header>
 
+  <!-- Header -->
+
+  <app-card-header>Kurse</app-card-header>
   <p>Bitte wähle deine Kurse</p>
 
-  <h3 class="warning" *ngIf="error">Fehler: {{error}}</h3>
 
+  <!-- Here the actual selection happens -->
 
   <app-kurse-select-row
     *ngFor="let kursTitle of (kurseTitle$ | async)"
-    [kurse]="(setupQuery.availKurse$ | async)[kursTitle]">
-    {{kursTitle}}
+    [kurse]="(setupQuery.availKurse$ | async)[kursTitle]"
+    [title]="kursTitle">
   </app-kurse-select-row>
 
+  <br>
+
+  <!-- Error message here -->
+  <h3 class="warning" *ngIf="error">Fehler: {{error}}</h3>
+
+  <!-- Info on what is not selected yet -->
+
+  <p *ngIf="!(setupQuery.hasSelectedAllKurse$ | async)" class="center-text">
+    <b>Noch nicht ausgefüllt: </b>
+    <span *ngFor="let k of (setupQuery.noSelectedKurse$ | async)">{{k}} </span>
+  </p>
+
+  <!-- Submit Button-->
+  <app-button class="center-button"
+              [disabled]="!(setupQuery.hasSelectedAllKurse$ | async)"
+              (click)="onSetKurse()">
+    Stundenplan erstellen
+  </app-button>
+
+  <!-- Padding -->
+  <br>
+  <br>
 </app-card>

@@ -6,6 +6,7 @@ import {SetupStore} from '../state/setup.store';
 import {SetupService} from '../state/setup.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import { NormalComponent } from './normal/normal.component';
+import {SetupQuery} from '../state/setup.query';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -19,7 +20,7 @@ describe('RegisterComponent', () => {
     ])
     ],
       declarations: [ RegisterComponent, NormalComponent, RegisterComponent ],
-      providers: [SetupStore, SetupService]
+      providers: [SetupStore, SetupService, SetupQuery]
     })
     .compileComponents();
   }));

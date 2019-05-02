@@ -1,4 +1,14 @@
-<h3><ng-content></ng-content></h3>
-<p *ngFor="let k of kurse">
-  {{k | json}}
-</p>
+<h3 [ngClass]="{'ok': (setupQuery.selectedKurseIndexes$ | async)[title] !== -1}">{{title}}</h3>
+
+<div class="wrapper">
+  <div class="sel-btn"
+       *ngFor="let k of kurse; let i = index"
+       [ngClass]="{'active': (setupQuery.selectedKurseIndexes$ | async)[title] === i}"
+       (click)="setupService.changeSelectedStufeIndex(title, i)"
+  >
+    <p></p>
+    <p>{{k.fach}}</p>
+    <p class="lehrer">{{k.lehrer}}</p>
+  </div>
+</div>
+
