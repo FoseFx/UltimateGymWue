@@ -26,6 +26,7 @@ import { InstaLoginComponent } from './login/insta-login/insta-login.component';
 import { CredentialsComponent } from './credentials/credentials.component';
 import {HasCredsGuard} from './guards/has-creds.guard';
 import {HasStufeGuard} from "./guards/has-stufe.guard";
+import {KurseSelectRowComponent} from "./kurse/kurse-select-row/kurse-select-row.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {HasStufeGuard} from "./guards/has-stufe.guard";
     GoogleLoginComponent,
     InstaComponent,
     InstaLoginComponent,
-    CredentialsComponent
+    CredentialsComponent,
+    KurseSelectRowComponent
   ],
   imports: [
     CommonModule,

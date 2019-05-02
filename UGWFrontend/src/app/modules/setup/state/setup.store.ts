@@ -6,7 +6,7 @@ export interface SetupState {
   name: string;
   available_stufen: string[];
   stufe: string;
-  available_kurse: Kurse;
+  available_kurse: AvailableKurseMap;
   selected_kurse: Kurse;
 }
 
@@ -15,7 +15,7 @@ export function createInitialState() {
     name: null,
     available_stufen: [],
     stufe: null,
-    available_kurse: [],
+    available_kurse: {},
     selected_kurse: [],
   };
 }
@@ -29,3 +29,7 @@ export class SetupStore extends Store<SetupState> {
   }
 }
 
+
+export interface AvailableKurseMap {
+  [kurs: string]: Kurse;
+}

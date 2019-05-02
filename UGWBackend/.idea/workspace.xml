@@ -4,14 +4,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/kurse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/kurse.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/utils.rs" afterDir="false" />
-    </list>
+    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="600">
+              <caret line="105" column="10" lean-forward="true" selection-start-line="105" selection-start-column="10" selection-end-line="105" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -292,12 +285,12 @@
       <workItem from="1556519042177" duration="2619000" />
       <workItem from="1556626796000" duration="1025000" />
       <workItem from="1556639491939" duration="6105000" />
-      <workItem from="1556712064249" duration="3446000" />
+      <workItem from="1556712064249" duration="3513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106760000" />
+    <option name="totallyTimeSpent" value="106827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -317,7 +310,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.5751634" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5751634" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -671,8 +664,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="600">
+          <caret line="105" column="10" lean-forward="true" selection-start-line="105" selection-start-column="10" selection-end-line="105" selection-end-column="10" />
         </state>
       </provider>
     </entry>

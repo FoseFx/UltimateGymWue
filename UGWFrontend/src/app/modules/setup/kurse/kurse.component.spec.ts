@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {SetupService} from '../state/setup.service';
+import {KurseSelectRowComponent} from './kurse-select-row/kurse-select-row.component';
 
 describe('KurseComponent', () => {
   let component: KurseComponent;
@@ -16,7 +17,7 @@ describe('KurseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
-      declarations: [ KurseComponent ],
+      declarations: [ KurseComponent, KurseSelectRowComponent ],
       providers: [SetupQuery, SetupStore, AppQuery, AppStore, SetupService]
     })
     .compileComponents();

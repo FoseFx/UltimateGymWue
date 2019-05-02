@@ -4,4 +4,12 @@
   <p>Bitte wähle deine Kurse</p>
 
   <h3 class="warning" *ngIf="error">Fehler: {{error}}</h3>
+
+
+  <app-kurse-select-row
+    *ngFor="let kursTitle of (kurseTitle$ | async)"
+    [kurse]="(setupQuery.availKurse$ | async)[kursTitle]">
+    {{kursTitle}}
+  </app-kurse-select-row>
+
 </app-card>

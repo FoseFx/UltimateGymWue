@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
+import {Kurse} from "../../../../types/Kurs";
+import {map} from "rxjs/operators";
+import {AvailableKurseMap} from "../state/setup.store";
 
 @Component({
   selector: 'app-kurse',
@@ -20,6 +23,8 @@ export class KurseComponent implements OnInit {
   loading = false;
   error: string;
 
+  kurseTitle$ = this.setupQuery.availKurse$.pipe(map((amap: AvailableKurseMap) => Object.keys(amap)));
+
   ngOnInit() {
     if (this.setupQuery.getStufe() === null) { return; } // for the tests, should be captured by router guard
     this.loading = true;
@@ -27,8 +32,12 @@ export class KurseComponent implements OnInit {
       `${environment.urls.getKurse}/${this.setupQuery.getStufe()}`,
       {headers: {Authorization: this.appQuery.loginToken, 'x-gw-auth': this.appQuery.credentialsToken}}
     ).subscribe(
-      (next) => {
+      (next: {error: boolean, msg?: string, data?: Kurse}) => {
         console.log(next);
+        if (!next.error) {
+          this.setupService.setAvailableKurse(next.data);
+        }
+        this.loading = false;
       },
       (error) => {
         console.error(error);
