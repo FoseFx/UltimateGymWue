@@ -21,12 +21,12 @@ async function getKurseAndTT(stufe, stufeid, wochen, creds) { // returns promise
 
     try{
         let r = await res.textConverted();
-
+        r = r.replace(/\?/g, '').replace(/color="#FF0000"/g, '');        
         evaKurse(r, stufe, tempTTs, _kurse);
         //woche 2
         const res2 = await fetchWithCreds(`/Schueler-Stundenplan/${wochen[1]}/c/${stufeid}`, creds);
         r = await res2.textConverted();
-
+        r = r.replace(/\?/g, '').replace(/color="#FF0000"/g, '');        
         evaKurse(r, stufe, tempTTs, _kurse);
         let k = [];
         _kurse[0].kurse.forEach((val) => {
@@ -91,7 +91,6 @@ function evaKurse(html, stufe, tempTTs, kurse) {
             // Tag: 1: Mo, 2: Di, ...
 
             if(/^\npause\n/i.test(td.textContent) || td.textContent === "") {
-                // @ts-ignore
                 stunde.push({isUsed: true});
                 return;
             }
@@ -102,11 +101,13 @@ function evaKurse(html, stufe, tempTTs, kurse) {
 
             let isUsed = false;
             if(!doppelStunde){
-                let indexOfFirstSmallSlotBefore = data[data.length-1].findIndex((e)=> !e.isBig && !e.isUsed);
-                tag = indexOfFirstSmallSlotBefore === -1? tag : indexOfFirstSmallSlotBefore + 1;
-                if(indexOfFirstSmallSlotBefore !== -1){
-                    data[data.length-1][indexOfFirstSmallSlotBefore].isUsed = true;
-                    isUsed = true;
+                if (data.length !== 0) {
+                    let indexOfFirstSmallSlotBefore = data[data.length-1].findIndex((e)=> !e.isBig && !e.isUsed);
+                    tag = indexOfFirstSmallSlotBefore === -1? tag : indexOfFirstSmallSlotBefore + 1;
+                    if(indexOfFirstSmallSlotBefore !== -1){
+                        data[data.length-1][indexOfFirstSmallSlotBefore].isUsed = true;
+                        isUsed = true;
+                    }
                 }
                 // +1 to counter following -1, which is needed because of the exclusion
             }

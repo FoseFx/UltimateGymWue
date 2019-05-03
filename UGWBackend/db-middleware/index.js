@@ -321,10 +321,26 @@ async function api_getKurseAndTT(req, res){
 
   try {
     let kurse = await getKurseAndTT(as_obj.stufe, as_obj.stufe_id, as_obj.wochen, as_obj.creds);
-    console.log("ok");
-    return res.end(JSON.stringify(kurse).replace(/type/g, "typ"));
+    
+    // this is needed because at the time writing, the data provided by the server is corrupted
+    kurse.tt.forEach((o) => {
+      o.days.forEach((t) => {
+        t.forEach((h) => {
+          if (!!h.raeume)
+            h.raeume.forEach((r) => {
+              if (!r.raum){
+                r.raum = "---";
+              }
+            });
+        });
+      });
+    });
+    let str = JSON.stringify(kurse, null, 2).replace(/type/g, "typ");
+    console.log(JSON.stringify(JSON.parse(str)));
+    return res.end(str);
   } catch (e) {
     console.error(e);
+    res.statusCode = 500;
     return res.end("error");
   }
   
