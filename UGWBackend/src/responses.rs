@@ -43,6 +43,7 @@ impl<'r> Responder<'r> for ErrorResponse {
             .sized_body(Cursor::new(format!("{}", json!({"error": true, "msg": self.0}))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
+            .raw_header("Access-Control-Allow-Methods", format!("GET,POST,PUT"))
             .header(rocket::http::ContentType::JSON)
             .status(self.1)
             .ok()
@@ -55,6 +56,7 @@ impl<'r> Responder<'r> for MessageResponse {
             .sized_body(Cursor::new(format!("{}", json!({"error": false, "msg": self.0}))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
+            .raw_header("Access-Control-Allow-Methods", format!("GET,POST,PUT"))
             .header(rocket::http::ContentType::JSON)
             .ok()
     }
@@ -66,6 +68,7 @@ impl<'r> Responder<'r> for DataResponse {
             .sized_body(Cursor::new(format!("{}", json!(json!({"error": false, "data": self.0})))))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
+            .raw_header("Access-Control-Allow-Methods", format!("GET,POST,PUT"))
             .header(rocket::http::ContentType::JSON)
             .ok()
     }

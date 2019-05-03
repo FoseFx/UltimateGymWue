@@ -56,8 +56,31 @@ pub fn get_all_kurse(_user: AuthGuard,
 
 #[put("/basics/kurse", data="<data>")]
 pub fn set_kurse(user: AuthGuard, secret: State<SecretMgt>, data: Json<Vec<Kurs>>) -> CustomResponse {
+    let kurse: Vec<Kurs> = data.0;
 
-    return CustomResponse::data(json!(data.0));
+    let uid = user.claim.uid;
+
+    let client = reqwest::Client::new();
+    let jsonv = json!({
+        "uid": uid,
+        "kurse": kurse
+    });
+    println!("{:?}", &jsonv);
+    let json_res = serde_json::to_string(&jsonv).unwrap();
+    let base = base64::encode(&json_res);
+    let res = client.get(&format!("http://localhost:8080/set_kurse/{}", base)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.0.deref().to_string())
+        .send();
+    if res.is_err() {
+        return CustomResponse::error(res.unwrap_err().to_string(), Status::InternalServerError);
+    }
+    let res = res.unwrap();
+    let res = res.error_for_status();
+    if res.is_err() {
+        return CustomResponse::error(res.unwrap_err().to_string(), Status::InternalServerError);
+    }
+
+    return CustomResponse::message("Ok".to_string());
 }
 
 

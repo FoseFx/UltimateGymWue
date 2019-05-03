@@ -54,6 +54,9 @@ http.createServer((req, res) => {
   if (/^\/getKurseAndTT\/.*$/.test(req.url)) {
     return api_getKurseAndTT(req, res);
   }
+  if (/^\/set_kurse\/.*$/.test(req.url)) {
+    return setKurse(req, res);
+  }
 
   res.statusCode = 404;
   res.end();
@@ -312,6 +315,25 @@ function getCreds(req, res) {
   });
 
 }
+
+function setKurse(req, res) {
+  let base = req.url.replace("/set_kurse/", "").replace("/", "");
+  let as_string = Buffer.from(base, 'base64').toString('ascii');
+  let as_obj = JSON.parse(as_string);
+  console.log(as_obj);
+  const user = as_obj.uid;
+  const kurse = as_obj.kurse;
+
+  db.collection('users').doc(user).set({kurse: kurse}, {merge: true}).then(ref => {
+    res.end("Ok");
+  }).catch((err) => {
+    console.error(err);
+    res.statusCode = 400;
+    res.end("err");
+  });
+
+}
+
 
 async function api_getKurseAndTT(req, res){
   

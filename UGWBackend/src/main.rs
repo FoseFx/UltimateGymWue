@@ -42,6 +42,7 @@ impl<'r> Responder<'r> for CORSResponder {
             .sized_body(Cursor::new(self.0))
             .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
+            .raw_header("Access-Control-Allow-Methods", format!("GET,POST,PUT"))
             .ok()
     }
 }

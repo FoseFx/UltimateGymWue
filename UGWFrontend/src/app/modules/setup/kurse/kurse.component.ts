@@ -53,12 +53,33 @@ export class KurseComponent implements OnInit {
   }
 
   onSetKurse() {
-    if (!this.setupQuery.getHasSelectedAllKurse()) {
+    if (!this.setupQuery.getHasSelectedAllKurse() || this.loading) {
       return;
     }
     this.loading = true;
     const selectedKurse = this.setupQuery.getSelectedKurse();
     console.log(selectedKurse);
+    this.http.put(
+      environment.urls.setKurse,
+      selectedKurse,
+      {headers: {Authorization: this.appQuery.loginToken}}
+    ).subscribe(
+      (next: {error: boolean, msg: string}) => {
+        console.log(next);
+
+      },
+      (error) => {
+        console.error(error);
+        try {
+          if (!!error.error.msg) {
+            this.error = error.error.msg;
+          } else {
+            this.error = error.message;
+          }
+        } catch (_) {}
+        this.loading = false;
+      }
+    );
     // todo send to server and route
   }
 

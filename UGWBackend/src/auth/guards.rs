@@ -1,6 +1,7 @@
 use crate::auth::jwt::UserClaim;
 use rocket::State;
 use crate::SecretMgt;
+use std::error::Error;
 
 #[derive(Debug)]
 pub struct AuthGuard {
@@ -22,7 +23,12 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for AuthGuard {
 
         if auth_headers.len() == 1 {
             if is_valid_jwt(auth_headers[0], &secret) {
-                return rocket::Outcome::Success(AuthGuard {claim: get_claim(auth_headers[0], &secret)});
+                let claim = get_claim(auth_headers[0], &secret);
+                if claim .is_err() {
+                    println!("{:?}", claim.unwrap_err() );
+                    return rocket::Outcome::Failure((rocket::http::Status::BadRequest, AuthGuardError::Invalid));
+                }
+                return rocket::Outcome::Success(AuthGuard {claim: claim.unwrap()});
             }
             return rocket::Outcome::Failure((rocket::http::Status::Unauthorized, AuthGuardError::Invalid));
         }
@@ -62,7 +68,7 @@ pub fn is_valid_jwt(header: &str, secret: &String) -> bool {
     return v_res.unwrap();
 }
 
-fn get_claim(header: &str, secret: &String) -> UserClaim {
+fn get_claim(header: &str, secret: &String) -> Result<UserClaim, Box<Error>> {
 
     let token: Vec<&str> = header.split(" ").collect();
     let token = token[1].to_string();
@@ -71,11 +77,9 @@ fn get_claim(header: &str, secret: &String) -> UserClaim {
         &token,
         secret.as_ref(),
         &jsonwebtoken::Validation::default()
-    );
+    )?;
 
-    let d_res = d_res.unwrap().claims;
-
-    return d_res;
+    return Ok(d_res.claims);
 
 }
 
@@ -143,6 +147,8 @@ mod test {
             insta: None,
             google: None
         };
+        assert!(res.is_ok());
+        let res = res.unwrap();
         assert_eq!(res.uid, cmp.uid);
         assert_eq!(res.fullname, cmp.fullname);
         assert!(res.google.is_none());
