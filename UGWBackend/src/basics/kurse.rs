@@ -11,6 +11,7 @@ use redis::RedisResult;
 use crate::redis::Commands;
 use crate::SecretMgt;
 use rocket::State;
+use rocket_contrib::json::Json;
 
 #[get("/basics/kurse/<stufe>")]
 pub fn get_all_kurse(_user: AuthGuard,
@@ -52,6 +53,13 @@ pub fn get_all_kurse(_user: AuthGuard,
 
     return CustomResponse::data(json!(kurse.unwrap()));
 }
+
+#[put("/basics/kurse", data="<data>")]
+pub fn set_kurse(user: AuthGuard, secret: State<SecretMgt>, data: Json<Vec<Kurs>>) -> CustomResponse {
+
+    return CustomResponse::data(json!(data.0));
+}
+
 
 /// tested
 fn is_stufe(string: &String) -> bool {

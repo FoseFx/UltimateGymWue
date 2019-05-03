@@ -75,7 +75,8 @@ fn rocket() -> Rocket {
                 basics::stufen::get_stufen_handler,
                 basics::creds::add_creds_handler,
                 basics::creds::get_creds_handler,
-                basics::kurse::get_all_kurse
+                basics::kurse::get_all_kurse,
+                basics::kurse::set_kurse
 
             ]
         )
