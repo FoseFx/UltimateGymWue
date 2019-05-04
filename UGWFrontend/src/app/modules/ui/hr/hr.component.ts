@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'app-hr',
@@ -6,11 +6,8 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./hr.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HrComponent implements OnInit {
+export class HrComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

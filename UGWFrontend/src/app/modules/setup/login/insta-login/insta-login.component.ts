@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {LoginService} from '../login.service';
 import {Router} from '@angular/router';
@@ -8,14 +8,12 @@ import {Router} from '@angular/router';
   templateUrl: './insta-login.component.html',
   styleUrls: ['./insta-login.component.scss']
 })
-export class InstaLoginComponent implements OnInit {
+export class InstaLoginComponent {
 
   error: string;
   loading = false;
   constructor(private loginService: LoginService, private router: Router) { }
 
-  ngOnInit() {
-  }
 
   onClick() {
     this.error = undefined;

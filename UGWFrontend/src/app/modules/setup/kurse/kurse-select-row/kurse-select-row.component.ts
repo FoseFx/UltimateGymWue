@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Kurse} from '../../../../../types/Kurs';
 import {SetupQuery} from '../../state/setup.query';
 import {SetupService} from '../../state/setup.service';
@@ -8,13 +8,11 @@ import {SetupService} from '../../state/setup.service';
   templateUrl: './kurse-select-row.component.html',
   styleUrls: ['./kurse-select-row.component.scss']
 })
-export class KurseSelectRowComponent implements OnInit {
+export class KurseSelectRowComponent  {
 
   @Input('kurse') kurse: Kurse;
   @Input('title') title: string;
   constructor(public setupQuery: SetupQuery, public setupService: SetupService) { }
 
-  ngOnInit() {
-  }
 
 }

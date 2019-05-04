@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {InputComponent} from '../../ui/input/input.component';
 import {LoginService} from './login.service';
 import {Subscription} from 'rxjs';
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
 
   subs: Subscription[] = [];
   errorMsg: string = null;
@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private loginService: LoginService, private router: Router) { }
 
-  ngOnInit() {
-  }
 
   allow(email: InputComponent, password: InputComponent) {
     return !(email.invalid || email.value === '' || password.invalid || password.value === '');

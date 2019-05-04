@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {SetupQuery} from '../../state/setup.query';
 import {InputComponent} from '../../../ui/input/input.component';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './normal.component.html',
   styleUrls: ['./normal.component.scss']
 })
-export class NormalComponent implements OnInit {
+export class NormalComponent {
 
   constructor(public query: SetupQuery,
               private service: SetupService,
@@ -22,8 +22,6 @@ export class NormalComponent implements OnInit {
 
   loading = false;
   error: string = null;
-  ngOnInit() {
-  }
 
   register() {
   }
