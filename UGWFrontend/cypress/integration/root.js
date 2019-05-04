@@ -10,12 +10,12 @@ describe('root', () => {
       cy.url().should('equal', 'http://localhost:4200/setup/welcome');
       localStorage.clear();
     });
-/* todo
 
     it('should route to /setup/basics/stufen, when logged in, but no basics set', function () {
 
-      localStorage.clear();
-      localStorage['app_state'] = JSON.stringify({
+      cy.visit('http://localhost:4200/');
+
+      cy.window().its('AppService').its('store').invoke('update', {
         meta: {
           version: 'kdss'
         },
@@ -31,17 +31,19 @@ describe('root', () => {
         basics: null,
         menuOpen: false
       });
+      cy.window().its('AppService').invoke('save');
+      cy.wait(500);
       cy.visit('http://localhost:4200/');
       cy.wait(500);
       console.log('localstorage', localStorage);
-      cy.url().should('equal', 'http://localhost:4200/setup/basics/stufen');
+      cy.url().should('equal', 'http://localhost:4200/setup/basics/creds');
       localStorage.clear();
     });
 
     it('should route to /basics/landing, when logged in, and basics set', function () {
 
-      localStorage.clear();
-      localStorage['app_state'] = JSON.stringify({
+      cy.visit('http://localhost:4200/');
+      cy.window().its('AppService').its('store').invoke('update', {
         meta: {
           version: 'kdss'
         },
@@ -60,14 +62,15 @@ describe('root', () => {
         },
         menuOpen: false
       });
+      cy.window().its('AppService').invoke('save');
+      cy.wait(500);
       cy.visit('http://localhost:4200/');
       cy.wait(500);
-      console.log('localstorage', JSON.parse(localStorage.app_state));
       cy.url().should('equal', 'http://localhost:4200/basics/landing');
       localStorage.clear();
     });
 
-*/
+
   });
 
 

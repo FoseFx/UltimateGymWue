@@ -2,10 +2,13 @@ import {Injectable} from '@angular/core';
 import {AppStore} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
+import {serviceInCypress} from '../util';
 
 @Injectable()
 export class AppService {
   constructor(private store: AppStore, private query: AppQuery) {
+    serviceInCypress(this);
+    console.log(this);
   }
   changeMenuState() {
     this.store.update({menuOpen: !this.query.getValue().menuOpen});

@@ -2,10 +2,12 @@ import {Injectable} from '@angular/core';
 import {AvailableKurseMap, SetupStore} from './setup.store';
 import {Kurs, Kurse} from '../../../../types/Kurs';
 import {SetupQuery} from './setup.query';
+import {serviceInCypress} from '../../../util';
 
 @Injectable()
 export class SetupService {
   constructor(private store: SetupStore, protected query: SetupQuery) {
+    serviceInCypress(this);
   }
   lockName(name: string) {
     this.store.update({name});

@@ -3,11 +3,13 @@ import {Injectable} from '@angular/core';
 import {SelectedKurseIndexMap, SetupState, SetupStore} from './setup.store';
 import {map} from 'rxjs/operators';
 import {Kurse} from '../../../../types/Kurs';
+import {queryInCypress} from '../../../util';
 
 @Injectable()
 export class SetupQuery extends Query<SetupState> {
   constructor(protected store: SetupStore) {
     super(store);
+    queryInCypress(this);
   }
   selectName$ = this.select('name');
 
