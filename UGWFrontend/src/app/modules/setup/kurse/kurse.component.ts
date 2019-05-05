@@ -58,14 +58,29 @@ export class KurseComponent implements OnInit {
     }
     this.loading = true;
     const selectedKurse = this.setupQuery.getSelectedKurse();
-    console.log(selectedKurse);
     this.http.put(
-      environment.urls.setKurse,
-      selectedKurse,
+      environment.urls.setBasics,
+      {kurse: selectedKurse, stufe: this.setupQuery.getStufe()},
       {headers: {Authorization: this.appQuery.loginToken}}
     ).subscribe(
       (next: {error: boolean, msg: string}) => {
         console.log(next);
+
+
+        // todo get Stundenplan and set AppStore and route
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       },
       (error) => {
@@ -80,7 +95,7 @@ export class KurseComponent implements OnInit {
         this.loading = false;
       }
     );
-    // todo send to server and route
+
   }
 
 }

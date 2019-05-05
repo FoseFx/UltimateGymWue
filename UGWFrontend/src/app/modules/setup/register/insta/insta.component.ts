@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {SetupQuery} from '../../state/setup.query';
 import {Router} from '@angular/router';
 import {AppService} from '../../../../state/app.service';
-import {LoginResponse} from "../../login/login.service";
+import {LoginResponse} from '../../login/login.service';
 
 @Component({
   selector: 'app-insta',

@@ -8,7 +8,6 @@ import {serviceInCypress} from '../util';
 export class AppService {
   constructor(private store: AppStore, private query: AppQuery) {
     serviceInCypress(this);
-    console.log(this);
   }
   changeMenuState() {
     this.store.update({menuOpen: !this.query.getValue().menuOpen});

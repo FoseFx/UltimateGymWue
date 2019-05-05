@@ -13,6 +13,6 @@ export const environment = {
     fetchCredentials: `${backendHost}/api/basics/get_creds`,
     getStufen: `${backendHost}/api/basics/stufen`,
     getKurse: `${backendHost}/api/basics/kurse`,
-    setKurse: `${backendHost}/api/basics/kurse`
+    setBasics: `${backendHost}/api/basics`
   }
 };

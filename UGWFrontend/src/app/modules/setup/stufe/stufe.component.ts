@@ -25,6 +25,9 @@ export class StufeComponent implements OnInit {
   ngOnInit() {
     if (!this.appQuery.hasCredentials()) {return; }
     this.loading = true;
+
+    // todo fetch basics
+
     const sub = this.http.get(
       environment.urls.getStufen,
       {headers: {Authorization: this.appQuery.loginToken, 'x-gw-auth': this.appQuery.credentialsToken}}
