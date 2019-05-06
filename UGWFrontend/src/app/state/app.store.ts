@@ -5,6 +5,7 @@
 
 import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
+import { Kurse } from 'src/types/Kurs';
 
 export interface AppState {
   meta: {
@@ -31,6 +32,7 @@ export interface AppState {
   basics: {
     stufe: string,
     stufe_id: string,
+    kurse: Kurse,
     stundenplan: any
     // todo
   };

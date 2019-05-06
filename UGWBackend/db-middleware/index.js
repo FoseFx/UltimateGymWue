@@ -54,8 +54,8 @@ http.createServer((req, res) => {
   if (/^\/getKurseAndTT\/.*$/.test(req.url)) {
     return api_getKurseAndTT(req, res);
   }
-  if (/^\/set_kurse\/.*$/.test(req.url)) {
-    return setKurse(req, res);
+  if (/^\/set_basics\/.*$/.test(req.url)) {
+    return setBasics(req, res);
   }
 
   res.statusCode = 404;
@@ -316,15 +316,16 @@ function getCreds(req, res) {
 
 }
 
-function setKurse(req, res) {
-  let base = req.url.replace("/set_kurse/", "").replace("/", "");
+function setBasics(req, res) {
+  let base = req.url.replace("/set_basics/", "").replace("/", "");
   let as_string = Buffer.from(base, 'base64').toString('ascii');
   let as_obj = JSON.parse(as_string);
   console.log(as_obj);
   const user = as_obj.uid;
   const kurse = as_obj.kurse;
+  const stufe = as_obj.stufe;
 
-  db.collection('users').doc(user).set({kurse: kurse}, {merge: true}).then(ref => {
+  db.collection('users').doc(user).set({kurse: kurse, stufe: stufe}, {merge: true}).then(ref => {
     res.end("Ok");
   }).catch((err) => {
     console.error(err);

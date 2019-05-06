@@ -41,7 +41,7 @@ export class SetupQuery extends Query<SetupState> {
     return hasSelAllKurse(this.getValue().selected_kurse_indexes);
   }
 
-  getSelectedKurse() {
+  getSelectedKurse(): Kurse {
     const ind = this.getValue().selected_kurse_indexes;
     const arr: Kurse = [];
     for (const key in ind) {

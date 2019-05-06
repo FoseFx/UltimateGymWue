@@ -3,6 +3,7 @@ import {AppStore} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
+import { Kurse } from 'src/types/Kurs';
 
 @Injectable()
 export class AppService {
@@ -75,6 +76,18 @@ export class AppService {
       credentials: {
         token,
         has_lehrer: !!claim.lehrer
+      }
+    });
+    this.save();
+  }
+
+  setKurseStufeStundenplan(kurse: Kurse, stufe: string, sp: any) { // todo
+    this.store.update({
+      basics: {
+        stufe: stufe,
+        stufe_id: null,
+        kurse: kurse,
+        stundenplan: sp
       }
     });
     this.save();

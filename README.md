@@ -26,7 +26,7 @@ The Ultimate Tool for the Students of my School.
 
 1. Make sure you have a firebase project setup. 
 2. Download it's `service_account.json` and copy it to `./UGWBackend/db-middleware/service_account.json`
-3. Make sure Docker and Docker-compose is installed
+3. Make sure Docker and Docker-compose are installed
 4. Run `docker-compose build` and `docker-compose up` with the following environment variables:
     - SECRET - used to sign JWTs
     - MAIL_JET_USER

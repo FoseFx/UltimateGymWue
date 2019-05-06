@@ -5,6 +5,7 @@ import {SetupQuery} from '../../state/setup.query';
 import {Router} from '@angular/router';
 import {AppService} from '../../../../state/app.service';
 import {LoginResponse} from '../../login/login.service';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-insta',
@@ -81,15 +82,7 @@ export class InstaComponent implements OnInit {
         this.router.navigate(['/setup/basics']);
 
       },
-      (error) => {
-        if (error.error.msg) {
-          this.error = error.error.msg;
-        } else {
-          this.error = error.message;
-        }
-        console.log(error);
-        this.loading = false;
-      }
+      (error) => handleError(this, error)
     );
 
   }

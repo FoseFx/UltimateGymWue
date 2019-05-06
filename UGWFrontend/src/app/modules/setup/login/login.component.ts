@@ -3,6 +3,7 @@ import {InputComponent} from '../../ui/input/input.component';
 import {LoginService} from './login.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnDestroy {
 
   subs: Subscription[] = [];
-  errorMsg: string = null;
+  error: string = null;
   loading = false;
 
   constructor(private loginService: LoginService, private router: Router) { }
@@ -34,16 +35,8 @@ export class LoginComponent implements OnDestroy {
           (_) => {
             this.router.navigate(['/setup/basics']);
           },
-          (error) => {
-            console.log(!!error.error);
-            console.error('error', error);
-            if (!!error.error) { // http error
-              this.errorMsg = error.error.msg;
-            } else {
-              this.errorMsg = error.message;
-            }
-            this.loading = false;
-          })
+          (error) => handleError(this, error) 
+        )
     );
   }
 

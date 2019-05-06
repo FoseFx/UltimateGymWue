@@ -11,7 +11,6 @@ use redis::RedisResult;
 use crate::redis::Commands;
 use crate::SecretMgt;
 use rocket::State;
-use rocket_contrib::json::Json;
 
 #[get("/basics/kurse/<stufe>")]
 pub fn get_all_kurse(_user: AuthGuard,
@@ -54,35 +53,6 @@ pub fn get_all_kurse(_user: AuthGuard,
     return CustomResponse::data(json!(kurse.unwrap()));
 }
 
-#[put("/basics/kurse", data="<data>")]
-pub fn set_kurse(user: AuthGuard, secret: State<SecretMgt>, data: Json<Vec<Kurs>>) -> CustomResponse {
-    let kurse: Vec<Kurs> = data.0;
-
-    let uid = user.claim.uid;
-
-    let client = reqwest::Client::new();
-    let jsonv = json!({
-        "uid": uid,
-        "kurse": kurse
-    });
-    println!("{:?}", &jsonv);
-    let json_res = serde_json::to_string(&jsonv).unwrap();
-    let base = base64::encode(&json_res);
-    let res = client.get(&format!("http://localhost:8080/set_kurse/{}", base)[..])
-        .header(reqwest::header::AUTHORIZATION, secret.0.deref().to_string())
-        .send();
-    if res.is_err() {
-        return CustomResponse::error(res.unwrap_err().to_string(), Status::InternalServerError);
-    }
-    let res = res.unwrap();
-    let res = res.error_for_status();
-    if res.is_err() {
-        return CustomResponse::error(res.unwrap_err().to_string(), Status::InternalServerError);
-    }
-
-    return CustomResponse::message("Ok".to_string());
-}
-
 
 /// tested
 fn is_stufe(string: &String) -> bool {
@@ -111,8 +81,8 @@ fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &Strin
 
     let kurse_str = serde_json::to_string(&kurse)?;
     let tt_str = serde_json::to_string(&tt)?;
-    let _: RedisResult<u8> = redis.set_ex(key, kurse_str, 7 * 24 * 60 * 60);
-    let _: RedisResult<u8> = redis.set_ex(tt_key, tt_str, 7 * 24 * 60 * 60);
+    let _: RedisResult<u8> = redis.set_ex(key, kurse_str, 8 * 60 * 60);
+    let _: RedisResult<u8> = redis.set_ex(tt_key, tt_str, 8 * 60 * 60);
 
     return Ok(kurse);
 }
@@ -199,7 +169,7 @@ fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Ve
     ];
     let cache_str = format!("{},{}", &wochen[0], &wochen[1]);
 
-    let _: RedisResult<String> = redis.set_ex("wochen", cache_str, 7 * 24 * 60 * 60);
+    let _: RedisResult<String> = redis.set_ex("wochen", cache_str, 24 * 60 * 60);
 
     return Ok(wochen);
 }

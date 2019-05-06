@@ -6,6 +6,7 @@ import {environment} from '../../../../../environments/environment';
 import {SetupService} from '../../state/setup.service';
 import {LoginService} from '../../login/login.service';
 import {Router} from '@angular/router';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-normal',
@@ -47,22 +48,10 @@ export class NormalComponent {
             this.router.navigate(['/setup/basics']);
 
           },
-          (error) => {
-            console.log(error);
-            this.error = 'Erfolgreich registriert, Login fehlgeschlagen';
-            this.loading = false;
-          }
+          (error) => handleError(this, error)
         );
       },
-      (err: HttpErrorResponse) => {
-        sub.unsubscribe();
-        console.log(err);
-        this.error = err.error.msg;
-        if (typeof this.error === 'undefined') {
-          this.error = err.statusText;
-        }
-        this.loading = false;
-      }
+      (error) => handleError(this, error)
     );
   }
 }

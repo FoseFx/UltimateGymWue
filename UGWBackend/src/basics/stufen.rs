@@ -48,7 +48,7 @@ pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> R
 
     let (stufen, to_cache_str) = evaluate_stufen(navbar_res);
 
-    let set_ex: redis::RedisResult<String> = redis_conn.set_ex("stufen", to_cache_str, 7 * 24 * 60 * 60); // 7 days cache
+    let set_ex: redis::RedisResult<String> = redis_conn.set_ex("stufen", to_cache_str, 24 * 60 * 60);
 
     println!("stufe set_ex: {:?}", set_ex);
 
@@ -69,8 +69,7 @@ pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> 
 
     let fetch_res = fetch_navbar(creds)?;
 
-
-    let redis_set_res: redis::RedisResult<String> = redis_conn.set_ex("navbar", fetch_res.clone(), 7 * 24 * 60 * 60);
+    let redis_set_res: redis::RedisResult<String> = redis_conn.set_ex("navbar", fetch_res.clone(), 24 * 60 * 60);
     println!("redis set {:?}", &redis_set_res);
 
     return Ok(fetch_res);

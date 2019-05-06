@@ -3,6 +3,7 @@ import {addGoogleScript} from '../../utils';
 import {GoogleUser} from '../../register/google/google.component';
 import {Router} from '@angular/router';
 import {LoginService} from '../login.service';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-google-login',
@@ -31,14 +32,7 @@ export class GoogleLoginComponent implements OnInit {
         this.router.navigate(['/setup/basics/stufe']);
       },
       (error) => {
-        console.log(error);
-        if (!!error.error.msg) {
-          this.error = error.error.msg;
-        } else {
-          this.error = error.message;
-        }
-        console.log(error);
-        this.loading = false;
+        handleError(this, error);
         this.cdref.detectChanges();
       }
     );

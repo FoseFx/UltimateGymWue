@@ -5,6 +5,7 @@ import {AppQuery} from '../../../state/app.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppService} from '../../../state/app.service';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-credentials',
@@ -31,12 +32,7 @@ export class CredentialsComponent implements OnInit {
         this.router.navigate(['/setup/basics/stufe']);
         sub.unsubscribe();
       },
-      (error) => {
-        console.error(error);
-        // ignore errors caused by automatic network requests
-        this.loading = false;
-        sub.unsubscribe();
-      }
+      (error) => handleError(this, error)
     );
   }
 
@@ -56,16 +52,7 @@ export class CredentialsComponent implements OnInit {
         this.router.navigate(['/setup/basics/stufe']);
         sub.unsubscribe();
       },
-      (error) => {
-        console.error(error);
-        if (!!error.error.msg) {
-          this.error = error.error.msg;
-        } else {
-          this.error = error.message;
-        }
-        this.loading = false;
-        sub.unsubscribe();
-      }
+      (error) => handleError(this, error)
     );
 
   }

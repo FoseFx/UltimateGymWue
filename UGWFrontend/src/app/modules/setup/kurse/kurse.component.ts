@@ -8,6 +8,7 @@ import {Kurse} from '../../../../types/Kurs';
 import {map} from 'rxjs/operators';
 import {AvailableKurseMap} from '../state/setup.store';
 import { StundenplanService } from '../services/stundenplan.service';
+import { handleError } from 'src/app/util';
 
 @Component({
   selector: 'app-kurse',
@@ -41,16 +42,7 @@ export class KurseComponent implements OnInit {
         }
         this.loading = false;
       },
-      (error) => {
-        console.error(error);
-        this.error = error.message;
-        try {
-          if (!!error.error.msg) {
-            this.error = error.error.msg;
-          }
-        } catch (e) {}
-        this.loading = false;
-      }
+      (error) => handleError(this, error)
     );
   }
 
@@ -67,19 +59,11 @@ export class KurseComponent implements OnInit {
     ).subscribe(
       (next: {error: boolean, msg: string}) => {
         console.log(next);
-        this.stundenplanService.getSp();
+        this.stundenplanService.getSp().subscribe(_ => {
+          // todo route to landing
+        }, error => handleError(this, error));
       },
-      (error) => {
-        console.error(error);
-        try {
-          if (!!error.error.msg) {
-            this.error = error.error.msg;
-          } else {
-            this.error = error.message;
-          }
-        } catch (_) {}
-        this.loading = false;
-      }
+      (error) => handleError(this, error)
     );
 
   }
