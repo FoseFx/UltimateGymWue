@@ -7,6 +7,7 @@ import {SetupService} from '../state/setup.service';
 import {Kurse} from '../../../../types/Kurs';
 import {map} from 'rxjs/operators';
 import {AvailableKurseMap} from '../state/setup.store';
+import { StundenplanService } from '../services/stundenplan.service';
 
 @Component({
   selector: 'app-kurse',
@@ -18,7 +19,8 @@ export class KurseComponent implements OnInit {
   constructor(private setupQuery: SetupQuery,
               private http: HttpClient,
               private appQuery: AppQuery,
-              public setupService: SetupService) { }
+              public setupService: SetupService, 
+              private stundenplanService: StundenplanService) { }
 
   loading = false;
   error: string;
@@ -65,23 +67,7 @@ export class KurseComponent implements OnInit {
     ).subscribe(
       (next: {error: boolean, msg: string}) => {
         console.log(next);
-
-
-        // todo get Stundenplan and set AppStore and route
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        this.stundenplanService.getSp();
       },
       (error) => {
         console.error(error);

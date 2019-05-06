@@ -30,7 +30,8 @@ export interface AppState {
   fullname: string;
   basics: {
     stufe: string,
-    stufe_id: string
+    stufe_id: string,
+    stundenplan: any
     // todo
   };
   menuOpen: boolean;

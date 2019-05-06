@@ -27,6 +27,7 @@ import { CredentialsComponent } from './credentials/credentials.component';
 import {HasCredsGuard} from './guards/has-creds.guard';
 import {HasStufeGuard} from './guards/has-stufe.guard';
 import {KurseSelectRowComponent} from './kurse/kurse-select-row/kurse-select-row.component';
+import { StundenplanService } from './services/stundenplan.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {KurseSelectRowComponent} from './kurse/kurse-select-row/kurse-select-row
     LoginGuard,
     LoginnedGuard,
     HasCredsGuard,
-    HasStufeGuard
+    HasStufeGuard,
+    StundenplanService
   ]
 })
 export class SetupModule { }

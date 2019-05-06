@@ -9,6 +9,8 @@ import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {SetupService} from '../state/setup.service';
 import {KurseSelectRowComponent} from './kurse-select-row/kurse-select-row.component';
+import { StundenplanService } from '../services/stundenplan.service';
+import { AppService } from 'src/app/state/app.service';
 
 describe('KurseComponent', () => {
   let component: KurseComponent;
@@ -18,7 +20,7 @@ describe('KurseComponent', () => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
       declarations: [ KurseComponent, KurseSelectRowComponent ],
-      providers: [SetupQuery, SetupStore, AppQuery, AppStore, SetupService]
+      providers: [SetupQuery, SetupStore, AppQuery, AppStore, SetupService, StundenplanService, AppService]
     })
     .compileComponents();
   }));
