@@ -57,6 +57,9 @@ http.createServer((req, res) => {
   if (/^\/set_basics\/.*$/.test(req.url)) {
     return setBasics(req, res);
   }
+  if (/^\/users_kurse\/.*$/.test(req.url)) {
+    return getUsersKurse(req, res);
+  }
 
   res.statusCode = 404;
   res.end();
@@ -335,7 +338,6 @@ function setBasics(req, res) {
 
 }
 
-
 async function api_getKurseAndTT(req, res){
   
   let base = req.url.replace("/getKurseAndTT/", "").replace("/", "");
@@ -367,4 +369,30 @@ async function api_getKurseAndTT(req, res){
     return res.end("error");
   }
   
+}
+
+async function getUsersKurse(req, res) {
+    const uid = req.url.replace('/users_kurse/', '').replace('/', '');
+    console.log(uid);
+    try {
+        const snap = await db.collection('users').doc(uid).get();
+        const data = snap.data();
+        if (!!data) {
+            const kurse = data.kurse;
+            if (!!kurse)
+                return res.end(JSON.stringify(kurse));
+            else {
+                res.statusCode = 402;
+                return res.end("Kurse nicht gesetzt");
+            }
+        }
+        else {
+            res.statusCode = 401;
+            return res.end("Nutzer nicht gefunden");
+        }
+    } catch (e) {
+        console.error(e);
+        res.statusCode = 400;
+        return res.end(e.message);
+    }
 }
