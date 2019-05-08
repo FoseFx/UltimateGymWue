@@ -90,8 +90,8 @@ fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &Strin
 #[derive(Deserialize,Serialize)]
 #[derive(Debug)]
 pub struct FetchKurseAndTTResult {
-    tt: Vec<TTWoche>,
-    kurse: Vec<Kurs>
+    pub tt: Vec<TTWoche>,
+    pub kurse: Vec<Kurs>
 }
 
 
@@ -100,7 +100,7 @@ pub struct FetchKurseAndTTResult {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<FetchKurseAndTTResult, Box<Error>>{
+pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<FetchKurseAndTTResult, Box<Error>>{
     let client = reqwest::Client::new();
 
     let json = serde_json::to_string(&json!({
@@ -124,7 +124,7 @@ fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String,
 }
 
 /// untested
-fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &String) -> Option<String>{
+pub fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &String) -> Option<String>{
     let stufen_arr = super::stufen::get_stufe(redis, creds);
     if stufen_arr.is_err() {
         return None;
@@ -144,7 +144,7 @@ fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &Str
 }
 
 /// unstested
-fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
+pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
     let cache: RedisResult<String> = redis.get("wochen"); // will fail, when nil
     if cache.is_ok() {
         let cache = cache.unwrap();

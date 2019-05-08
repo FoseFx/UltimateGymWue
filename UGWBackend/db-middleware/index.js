@@ -378,9 +378,10 @@ async function getUsersKurse(req, res) {
         const snap = await db.collection('users').doc(uid).get();
         const data = snap.data();
         if (!!data) {
+            const stufe = data.stufe;
             const kurse = data.kurse;
             if (!!kurse)
-                return res.end(JSON.stringify(kurse));
+                return res.end(JSON.stringify({stufe, kurse}));
             else {
                 res.statusCode = 402;
                 return res.end("Kurse nicht gesetzt");

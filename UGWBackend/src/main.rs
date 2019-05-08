@@ -6,18 +6,14 @@ extern crate redis;
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate serde_json;
 
-mod auth;
-mod db;
-mod responses;
-mod redismw;
-mod basics;
-mod catcher;
+
 
 use rocket::Rocket;
 use std::path::PathBuf;
 use std::io::Cursor;
 use rocket::response::{self, Response, Responder};
 use std::time::{SystemTime, UNIX_EPOCH};
+use std::error::Error;
 
 pub struct SecretMgt(String);
 pub struct MailJetMgt {user: String, key: String}
@@ -26,6 +22,27 @@ pub struct InstaSecretMgt {client_id: String, client_secret: String}
 pub const EMAIL_DOMAIN: &'static str = "ugw.fosefx.com";
 pub const SERVER_HOST: &'static str = "https://ugw.fosefx.com/api";
 pub const GOOGLE_AUD: &'static str = "945920838122-ms73bj0tvdfcjijt1dqis687f98m167v.apps.googleusercontent.com";
+
+
+#[macro_export]
+macro_rules! error {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut string: String;
+            $(
+                string = format!("{}", $x);
+            )*
+            return Err(Box::new(CustomError(string)));
+        }
+    };
+}
+
+mod auth;
+mod db;
+mod responses;
+mod redismw;
+mod basics;
+mod catcher;
 
 #[get("/health")]
 fn status() -> &'static str{
@@ -174,6 +191,16 @@ pub fn calc_exp() -> u64 {
     return in_s + (60 * 60 * 24 * 30 * 6);
 }
 
+#[derive(Debug)]
+pub struct CustomError (String);
+
+impl std::fmt::Display for CustomError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+impl Error for CustomError {}
 
 
 
