@@ -31,17 +31,14 @@ export function queryInCypress(query: Query<any>) {
 
 export function handleError(component: MakesRequests, error: HttpErrorResponse) {
   console.error(error);
-  
-  if (error.statusText === "Unknown Error") {
-    component.error = "Netzwerkfehler";
-  } 
-  else if (!error.error) {
+
+  if (error.statusText === 'Unknown Error') {
+    component.error = 'Netzwerkfehler';
+  } else if (!error.error) {
     component.error = error.message;
-  }
-  else if (!!error.error.msg) {
+  } else if (!!error.error.msg) {
     component.error = error.error.msg;
-  } 
-  else {
+  } else {
     component.error = error.message;
   }
 

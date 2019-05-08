@@ -1,7 +1,7 @@
 declare const gapi: any;
 
 export function addGoogleScript() {
-  if (typeof gapi === 'undefined'){
+  if (typeof gapi === 'undefined') {
     const resource = document.createElement('script');
     resource.async = true;
     resource.defer = true;

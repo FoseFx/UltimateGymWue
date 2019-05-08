@@ -11,8 +11,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {SetupQuery} from '../../state/setup.query';
 import {addGoogleScript} from '../../utils';
-import {LoginService} from "../../login/login.service";
-import {Router} from "@angular/router";
+import {LoginService} from '../../login/login.service';
+import {Router} from '@angular/router';
 
 declare const gapi: any;
 
@@ -89,6 +89,7 @@ export class GoogleComponent implements OnInit {
 
 @Component({
   selector: 'app-google-signin',
+  // tslint:disable-next-line:max-line-length
   template: '<div id="googleBtn">Bitte Warten...</div><div *ngIf="times > 10">Das dauert ungewöhnlich lange... Hast du einen Skriptblocker installiert?</div>'
 })
 export class GoogleSigninComponent implements AfterViewInit {
@@ -121,7 +122,7 @@ export class GoogleSigninComponent implements AfterViewInit {
     const that = this;
     this.auth2.attachClickHandler(element, {},
       // tslint:disable-next-line:only-arrow-functions
-      function(googleUser: GoogleUser){
+      function(googleUser: GoogleUser) {
         that.onSuccess(googleUser, that);
       },
       (error) => {

@@ -10,8 +10,8 @@ import {SetupService} from '../../state/setup.service';
 })
 export class KurseSelectRowComponent  {
 
-  @Input('kurse') kurse: Kurse;
-  @Input('title') title: string;
+  @Input() kurse: Kurse;
+  @Input() title: string;
   constructor(public setupQuery: SetupQuery, public setupService: SetupService) { }
 
 

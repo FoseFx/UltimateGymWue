@@ -20,7 +20,7 @@ export class CredentialsComponent implements OnInit {
   constructor(private router: Router, private query: AppQuery, private http: HttpClient, private service: AppService) { }
 
   ngOnInit() {
-    if (this.query.getValue().loginData === null) {return;} // this line is only for the tests
+    if (this.query.getValue().loginData === null) {return; } // this line is only for the tests
     this.loading = true;
     const sub = this.http.get(
       environment.urls.fetchCredentials,

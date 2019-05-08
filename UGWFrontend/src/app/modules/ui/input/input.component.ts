@@ -93,6 +93,7 @@ export class InputComponent implements OnInit, OnDestroy {
           } else if (this.type === 'password' && !this.allowBadPsw) {
             return input.length > 7;
           } else if (this.type === 'email') {
+            // tslint:disable-next-line:max-line-length
             return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
           } else { // number
             return true;
@@ -107,7 +108,7 @@ export class InputComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     try {
       this.validSub.unsubscribe();
-    } catch(err) {
+    } catch (err) {
 
     }
   }

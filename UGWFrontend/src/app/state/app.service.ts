@@ -84,9 +84,9 @@ export class AppService {
   setKurseStufeStundenplan(kurse: Kurse, stufe: string, sp: any) { // todo
     this.store.update({
       basics: {
-        stufe: stufe,
+        stufe,
         stufe_id: null,
-        kurse: kurse,
+        kurse,
         stundenplan: sp
       }
     });

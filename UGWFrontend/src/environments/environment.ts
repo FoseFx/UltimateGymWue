@@ -10,6 +10,7 @@ export const environment = {
     registerNormal: `${backendHost}/api/auth/normal/register`,
     registerGoogle: `${backendHost}/api/auth/google/register`,
     loginGoogle: `${backendHost}/api/auth/google/login`,
+    // tslint:disable-next-line:max-line-length
     registerInstaRediect: `https://api.instagram.com/oauth/authorize/?client_id=6adf4502be134725b4208a5273fac0a1&redirect_uri=${backendHost}/api/auth/insta/register-redirect&response_type=code`,
     registerInsta: `${backendHost}/api/auth/insta/register-code`,
     loginInsta: `${backendHost}/api/auth/insta/login`,

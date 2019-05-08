@@ -6,13 +6,12 @@ import { environment } from 'src/environments/environment';
 import { Kurse } from 'src/types/Kurs';
 import { AppQuery } from 'src/app/state/app.query';
 import { DataResponse } from 'src/types/Responses';
-import { handleError } from 'src/app/util';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class StundenplanService {
-    constructor(private appService: AppService, private setupQuery: SetupQuery, private appQuery: AppQuery, private http: HttpClient){}
+    constructor(private appService: AppService, private setupQuery: SetupQuery, private appQuery: AppQuery, private http: HttpClient) {}
 
     getSp(): Observable<DataResponse<any>> {
         const selectedKurse: Kurse = this.setupQuery.getSelectedKurse();
@@ -20,7 +19,7 @@ export class StundenplanService {
 
         return this.http.get(environment.urls.getStundenplan, {
             headers: {
-                Authorization: this.appQuery.loginToken, 
+                Authorization: this.appQuery.loginToken,
                 'x-gw-auth': this.appQuery.credentialsToken
             }
         }).pipe(
@@ -28,6 +27,6 @@ export class StundenplanService {
                 console.log(next);
                 this.appService.setKurseStufeStundenplan(selectedKurse, stufe, next.data);
             })
-        );        
+        );
     }
 }

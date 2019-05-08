@@ -35,7 +35,7 @@ export class LoginComponent implements OnDestroy {
           (_) => {
             this.router.navigate(['/setup/basics']);
           },
-          (error) => handleError(this, error) 
+          (error) => handleError(this, error)
         )
     );
   }

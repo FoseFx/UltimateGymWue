@@ -20,7 +20,7 @@ export class KurseComponent implements OnInit {
   constructor(private setupQuery: SetupQuery,
               private http: HttpClient,
               private appQuery: AppQuery,
-              public setupService: SetupService, 
+              public setupService: SetupService,
               private stundenplanService: StundenplanService) { }
 
   loading = false;
