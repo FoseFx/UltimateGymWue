@@ -4,7 +4,7 @@ use crate::basics::guards::HasCredsGuard;
 use crate::auth::guards::AuthGuard;
 use crate::redismw::RedisConnection;
 use std::error::Error;
-use crate::basics::utils::{Kurs, BasicCredsWrapper, TTWoche};
+use crate::basics::utils::{Kurs, BasicCredsWrapper, TTWoche, TTField, TT};
 use crate::{SecretMgt, CustomError};
 use rocket::State;
 use std::ops::Deref;
@@ -36,7 +36,12 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
         return CustomResponse::error(sp.unwrap_err().to_string(), Status::BadRequest);
     }
     let sp = sp.unwrap();
-    // todo generate personal sp
+
+    let sp = generate_personal_tt(&kurse,  &sp);
+    if sp.is_err() {
+        return CustomResponse::error(sp.unwrap_err().to_string(), Status::BadRequest);
+    }
+    let sp = sp.unwrap();
 
     return CustomResponse::data(json!({"kurse":kurse, "sp": sp}));
     // return CustomResponse::error("Not Implemented yet".to_string(), Status::NotImplemented);
@@ -104,4 +109,71 @@ fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWra
     let _: RedisResult<u8> = redis_conn.set_ex(tt_key, tt_str, 8 * 60 * 60);
 
     return Ok(tt);
+}
+
+fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<Error>> {
+    if tt.len() != 2 {
+        error!("Stundenplan nicht vollständig");
+    }
+    let mut new_tt: TT = vec![];
+    for woche in tt {
+        let mut new_days = vec![];
+        for day in &woche.days {
+            let mut new_fields: Vec<TTField> = vec![];
+            for kurs_field in day {
+                if kurs_field.fach.is_none() {
+                    new_fields.push(TTField::empty());
+                } else {
+                    let typ = match &kurs_field.typ {
+                        Some(b) => b,
+                        None => error!("Malformed"),
+                    };
+                    if typ == "klasse" {
+                        // todo
+                    } else { // kurs
+
+                        let mut sel_kurs: Option<&Kurs> = None;
+                        let fach = match &kurs_field.fach {
+                            None => panic!(),
+                            Some(v) => v
+                        }.to_owned();
+                        for kurs in kurse {
+                            if fach == kurs.title {
+                                sel_kurs = Some(kurs);
+                            }
+                            // todo
+                        }
+                        if sel_kurs.is_none() {
+                            new_fields.push(TTField::empty());
+                            continue;
+                        }
+                        let sel_kurs = sel_kurs.unwrap();
+                        let raum = match &kurs_field.raeume {
+                            None => format!(""),
+                            Some(v) => {
+                                for raum in v {
+                                    if raum.kurs == sel_kurs.fach {
+                                        format!("{}", raum.raum);
+                                    }
+                                }
+                                format!("")
+                            }
+                        };
+                        new_fields.push(
+                            TTField {
+                                raum: Some(raum),
+                                fach: Some(fach),
+                                lehrer: Some(format!("{}", sel_kurs.lehrer)),
+                                typ: Some(typ.to_owned())
+                            }
+                        );
+                    } // if kurs
+                } // fach not none
+            } // field in day
+            new_days.push(new_fields);
+        } // day in days
+        new_tt.push(new_days);
+    } // week in weeks
+
+    return Ok(new_tt);
 }

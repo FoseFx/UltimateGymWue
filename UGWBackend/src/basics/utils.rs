@@ -85,6 +85,26 @@ pub struct TTKursField {
     pub isUsed: Option<bool>
 }
 
+#[allow(non_snake_case)]
+#[derive(Deserialize,Serialize)]
+#[derive(Debug)]
+pub struct TTField {
+    pub typ: Option<String>,
+    pub fach: Option<String>,
+    pub raum: Option<String>,
+    pub lehrer: Option<String>
+}
+
+impl TTField {
+    pub fn empty() -> Self {
+        return TTField {typ: None, fach: None, raum: None, lehrer: None};
+    }
+}
+
+pub type TT = Vec<TTWeek>;
+pub type TTWeek = Vec<TTDay>;
+pub type TTDay = Vec<TTField>;
+
 #[derive(Deserialize,Serialize)]
 #[derive(Debug)]
 pub struct TTWoche {
