@@ -19,13 +19,12 @@ export class NeedsSetupGuard implements CanActivate {
     const isLoginned = !!value.loginData;
     const hasBasics = !!value.basics;
 
-    if (!isLoginned) {
-      this.router.navigate(['/setup/welcome']);
-    } else if (!hasBasics) {
-      this.router.navigate(['/setup/basics']);
-    }
 
-    console.log({isLoginned, hasBasics});
+    if (!isLoginned) {
+      return this.router.createUrlTree(['/setup/welcome']);
+    } else if (!hasBasics) {
+      return this.router.createUrlTree(['/setup/basics']);
+    }
     return isLoginned && hasBasics;
   }
 
