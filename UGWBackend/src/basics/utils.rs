@@ -82,7 +82,9 @@ pub struct TTKursField {
     pub fach: Option<String>,
     pub raeume: Option<Vec<KursRaum>>,
     pub tag: Option<u8>,
-    pub isUsed: Option<bool>
+    pub isUsed: Option<bool>,
+    pub raum: Option<String>,
+    pub lehrer: Option<String>
 }
 
 #[allow(non_snake_case)]

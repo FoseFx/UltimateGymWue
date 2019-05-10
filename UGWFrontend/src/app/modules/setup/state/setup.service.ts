@@ -65,6 +65,9 @@ export class SetupService {
     this.store.update({selected_kurse_indexes: obj});
   }
 
+  justRegistered() {
+    this.store.update({justRegistered: true});
+  }
 
 }
 

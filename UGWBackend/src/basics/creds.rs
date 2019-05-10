@@ -57,7 +57,7 @@ pub fn add_creds_handler(user: AuthGuard,
     };
     println!("{:?}", crate::db::add_creds_to_user(&uid, &cred_obj, secret));
 
-    let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &cred_obj, secret.as_ref()).unwrap();
+    let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &json!({"lehrer": cred_obj.lehrer, "schueler": cred_obj.schueler, "exp": calc_exp()}), secret.as_ref()).unwrap();
 
     return CustomResponse::message(token);
 

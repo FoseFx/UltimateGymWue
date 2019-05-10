@@ -29,7 +29,11 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for HasCredsGuard {
         if auth_headers.len() == 1 {
             if is_valid_jwt(auth_headers[0], &secret) {
                 let claim = get_claim(auth_headers[0], &secret);
-                return rocket::Outcome::Success( HasCredsGuard {token: auth_headers[0].to_string(), pl: claim} );
+                if claim.is_err() {
+                    println!("err: {:?}", claim);
+                    return rocket::Outcome::Failure((rocket::http::Status::Unauthorized, HasCredsGuardError::Invalid));               
+                }
+                return rocket::Outcome::Success( HasCredsGuard {token: auth_headers[0].to_string(), pl: claim.unwrap()} );
             }
             return rocket::Outcome::Failure((rocket::http::Status::Unauthorized, HasCredsGuardError::Invalid));
         }
@@ -40,7 +44,7 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for HasCredsGuard {
     }
 }
 
-pub fn get_claim(header: &str, secret: &String) -> BasicCreds {
+pub fn get_claim(header: &str, secret: &String) -> Result<BasicCreds, String> {
 
     let token: Vec<&str> = header.split(" ").collect();
     let token = token[1].to_string();
@@ -50,6 +54,9 @@ pub fn get_claim(header: &str, secret: &String) -> BasicCreds {
         secret.as_ref(),
         &jsonwebtoken::Validation::default()
     );
+    if d_res.is_err() {
+        return Err(d_res.unwrap_err().to_string());
+    }
 
     let d_res = d_res.unwrap().claims;
     let schueler = d_res.get("schueler").unwrap().as_object().unwrap();
@@ -74,5 +81,5 @@ pub fn get_claim(header: &str, secret: &String) -> BasicCreds {
         lehrer: final_lehrer
     };
 
-    return ret;
+    return Ok(ret);
 }

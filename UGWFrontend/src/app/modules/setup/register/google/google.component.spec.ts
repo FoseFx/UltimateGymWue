@@ -10,6 +10,7 @@ import {LoginService} from '../../login/login.service';
 import {AppStore} from '../../../../state/app.store';
 import {AppService} from '../../../../state/app.service';
 import {AppQuery} from '../../../../state/app.query';
+import {SetupService} from '../../state/setup.service';
 
 describe('GoogleComponent', () => {
   let component: GoogleComponent;
@@ -19,7 +20,7 @@ describe('GoogleComponent', () => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ GoogleComponent, GoogleSigninComponent ],
-      providers: [SetupQuery, SetupStore, LoginService, AppStore, AppService, AppQuery]
+      providers: [SetupQuery, SetupStore, LoginService, AppStore, AppService, AppQuery, SetupService]
     })
     .compileComponents();
   }));

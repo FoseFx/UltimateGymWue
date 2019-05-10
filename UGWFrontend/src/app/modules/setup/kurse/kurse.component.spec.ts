@@ -11,6 +11,7 @@ import {SetupService} from '../state/setup.service';
 import {KurseSelectRowComponent} from './kurse-select-row/kurse-select-row.component';
 import { StundenplanService } from '../services/stundenplan.service';
 import { AppService } from 'src/app/state/app.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('KurseComponent', () => {
   let component: KurseComponent;
@@ -18,7 +19,7 @@ describe('KurseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule, HttpClientModule],
+      imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ KurseComponent, KurseSelectRowComponent ],
       providers: [SetupQuery, SetupStore, AppQuery, AppStore, SetupService, StundenplanService, AppService]
     })

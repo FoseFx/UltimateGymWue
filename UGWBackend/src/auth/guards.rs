@@ -24,7 +24,7 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for AuthGuard {
         if auth_headers.len() == 1 {
             if is_valid_jwt(auth_headers[0], &secret) {
                 let claim = get_claim(auth_headers[0], &secret);
-                if claim .is_err() {
+                if claim.is_err() {
                     println!("{:?}", claim.unwrap_err() );
                     return rocket::Outcome::Failure((rocket::http::Status::BadRequest, AuthGuardError::Invalid));
                 }

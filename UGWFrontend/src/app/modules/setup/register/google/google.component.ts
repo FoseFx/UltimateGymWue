@@ -13,6 +13,7 @@ import {SetupQuery} from '../../state/setup.query';
 import {addGoogleScript} from '../../utils';
 import {LoginService} from '../../login/login.service';
 import {Router} from '@angular/router';
+import {SetupService} from '../../state/setup.service';
 
 declare const gapi: any;
 
@@ -30,6 +31,7 @@ export class GoogleComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private query: SetupQuery,
+              private service: SetupService,
               private changedetectionRef: ChangeDetectorRef,
               private loginService: LoginService,
               private router: Router) { }

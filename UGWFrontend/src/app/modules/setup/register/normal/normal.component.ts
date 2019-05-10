@@ -24,9 +24,6 @@ export class NormalComponent {
   loading = false;
   error: string = null;
 
-  register() {
-  }
-
   onClick(email: InputComponent, passw: InputComponent, passwwdh: InputComponent) {
     if (email.value === '' || passw.value === '' || email.invalid || passw.invalid || passw.value !== passwwdh.value) {
       return;
@@ -37,14 +34,12 @@ export class NormalComponent {
       fullname: this.query.getValue().name,
       email: email.value,
       password: passw.value
-    }).pipe(
-
-    ).subscribe((data: string) => {
+    }).subscribe((data: string) => {
         sub.unsubscribe();
         console.log(data);
         this.loginService.normalLogin(email.value, passw.value).subscribe(
-          (res) => {
-
+          (_) => {
+            this.service.justRegistered();
             this.router.navigate(['/setup/basics']);
 
           },

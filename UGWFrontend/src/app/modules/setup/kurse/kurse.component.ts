@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 import {AvailableKurseMap} from '../state/setup.store';
 import { StundenplanService } from '../services/stundenplan.service';
 import { handleError } from 'src/app/util';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-kurse',
@@ -21,7 +22,8 @@ export class KurseComponent implements OnInit {
               private http: HttpClient,
               private appQuery: AppQuery,
               public setupService: SetupService,
-              private stundenplanService: StundenplanService) { }
+              private stundenplanService: StundenplanService,
+              private router: Router) { }
 
   loading = false;
   error: string;
@@ -60,7 +62,7 @@ export class KurseComponent implements OnInit {
       (next: {error: boolean, msg: string}) => {
         console.log(next);
         this.stundenplanService.getSp().subscribe(_ => {
-          // todo route to landing
+          this.router.navigate(['/basics/landing']);
         }, error => handleError(this, error));
       },
       (error) => handleError(this, error)

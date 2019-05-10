@@ -31,7 +31,7 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
     }
     let (stufe, kurse) = kurse.unwrap();
 
-    let sp = get_stundenplan(redis, creds, &secret, stufe);
+    let sp = get_stundenplan(redis, creds, &secret, &stufe);
     if sp.is_err() {
         return CustomResponse::error(sp.unwrap_err().to_string(), Status::BadRequest);
     }
@@ -43,7 +43,7 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
     }
     let sp = sp.unwrap();
 
-    return CustomResponse::data(json!({"kurse":kurse, "sp": sp}));
+    return CustomResponse::data(json!({"kurse":kurse, "sp": sp, "stufe": stufe}));
     // return CustomResponse::error("Not Implemented yet".to_string(), Status::NotImplemented);
 }
 
@@ -74,10 +74,10 @@ fn get_users_kurse(secret: &String, uid: String) -> Result<(String, Vec<Kurs>), 
 }
 
 
-fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: String) -> Result<Vec<TTWoche>, Box<Error>> {
+fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String) -> Result<Vec<TTWoche>, Box<Error>> {
 
     //
-    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, &stufe);
+    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, stufe);
     if stufe_id.is_none() {
         error!("stufe not found");
     }
@@ -99,7 +99,7 @@ fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWra
     let wochen = wochen.unwrap();
 
 
-    let kurse_and_tt = fetch_kurse_and_tt(schueler_creds, secret, &stufe, &stufe_id, &wochen)?;
+    let kurse_and_tt = fetch_kurse_and_tt(schueler_creds, secret, stufe, &stufe_id, &wochen)?;
     let kurse = kurse_and_tt.kurse;
     let tt = kurse_and_tt.tt;
 
@@ -128,20 +128,37 @@ fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<
                         Some(b) => b,
                         None => error!("Malformed"),
                     };
+                    let fach = match &kurs_field.fach {
+                            None => panic!(),
+                            Some(v) => v
+                        }.to_owned();
                     if typ == "klasse" {
+                        println!("{:?}", &kurs_field);
+                        let lehrer = match &kurs_field.lehrer {
+                            None => panic!(),
+                            Some(v) => v
+                        }.to_owned();
+                        let raum = match &kurs_field.raum {
+                            None => panic!(),
+                            Some(v) => v
+                        }.to_owned();
+
+                        new_fields.push(
+                            TTField {
+                                fach: Some(format!("{}", &fach)),
+                                lehrer: Some(format!("{}", lehrer)),
+                                raum: Some(format!("{}", raum)),
+                                typ: Some(format!("klasse"))
+                            }
+                        );
                         // todo
                     } else { // kurs
 
                         let mut sel_kurs: Option<&Kurs> = None;
-                        let fach = match &kurs_field.fach {
-                            None => panic!(),
-                            Some(v) => v
-                        }.to_owned();
                         for kurs in kurse {
                             if fach == kurs.title {
                                 sel_kurs = Some(kurs);
                             }
-                            // todo
                         }
                         if sel_kurs.is_none() {
                             new_fields.push(TTField::empty());

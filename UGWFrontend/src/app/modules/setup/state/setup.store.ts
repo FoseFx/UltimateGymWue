@@ -6,6 +6,7 @@ export interface SetupState {
   name: string;
   available_stufen: string[];
   stufe: string;
+  justRegistered: boolean;
   available_kurse: AvailableKurseMap;
   selected_kurse: Kurse;
   selected_kurse_indexes: SelectedKurseIndexMap;
@@ -16,6 +17,7 @@ export function createInitialState() {
     name: null,
     available_stufen: [],
     stufe: null,
+    justRegistered: false,
     available_kurse: {},
     selected_kurse: [],
     selected_kurse_indexes: {}

@@ -9,6 +9,7 @@ import {AppService} from '../../../../state/app.service';
 import {AppStore} from '../../../../state/app.store';
 import {AppQuery} from '../../../../state/app.query';
 import {RouterTestingModule} from '@angular/router/testing';
+import {SetupService} from '../../state/setup.service';
 
 describe('InstaComponent', () => {
   let component: InstaComponent;
@@ -18,7 +19,7 @@ describe('InstaComponent', () => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ InstaComponent ],
-      providers: [SetupQuery, SetupStore, AppService, AppStore, AppQuery]
+      providers: [SetupQuery, SetupStore, AppService, AppStore, AppQuery, SetupService]
     })
     .compileComponents();
   }));

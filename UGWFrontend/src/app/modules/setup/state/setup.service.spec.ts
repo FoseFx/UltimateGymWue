@@ -24,6 +24,16 @@ describe('SetupService', () => {
     expect(query.getValue().name).toEqual('test');
   });
 
+  it('should just register', () => {
+    const service: SetupService = TestBed.get(SetupService);
+    const query: SetupQuery = TestBed.get(SetupQuery);
+
+    expect(query.getValue().justRegistered).toEqual(false); // initial state
+
+    service.justRegistered();
+    expect(query.getValue().justRegistered).toEqual(true);
+
+  });
 
 
 });

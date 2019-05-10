@@ -8,14 +8,13 @@ import { AppQuery } from 'src/app/state/app.query';
 import { DataResponse } from 'src/types/Responses';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import {TimeTable} from '../../../../types/TT';
 
 @Injectable()
 export class StundenplanService {
     constructor(private appService: AppService, private setupQuery: SetupQuery, private appQuery: AppQuery, private http: HttpClient) {}
 
     getSp(): Observable<DataResponse<any>> {
-        const selectedKurse: Kurse = this.setupQuery.getSelectedKurse();
-        const stufe = this.setupQuery.getStufe();
 
         return this.http.get(environment.urls.getStundenplan, {
             headers: {
@@ -23,9 +22,10 @@ export class StundenplanService {
                 'x-gw-auth': this.appQuery.credentialsToken
             }
         }).pipe(
-            tap((next: DataResponse<any>) => {
+            tap((next: DataResponse<{kurse: Kurse, sp: TimeTable, stufe: string}>) => {
+                const {kurse, sp, stufe} = next.data;
                 console.log(next);
-                this.appService.setKurseStufeStundenplan(selectedKurse, stufe, next.data);
+                this.appService.setKurseStufeStundenplan(kurse, stufe, sp);
             })
         );
     }

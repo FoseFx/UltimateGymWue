@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {InputComponent} from '../../ui/input/input.component';
 import {Router} from '@angular/router';
 import {AppQuery} from '../../../state/app.query';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppService} from '../../../state/app.service';
 import { handleError } from 'src/app/util';
+import {SetupService} from '../state/setup.service';
+import {SetupQuery} from '../state/setup.query';
 
 @Component({
   selector: 'app-credentials',
@@ -17,10 +19,18 @@ export class CredentialsComponent implements OnInit {
   loading = false;
   error: string;
 
-  constructor(private router: Router, private query: AppQuery, private http: HttpClient, private service: AppService) { }
+  constructor(
+    private router: Router,
+    private query: AppQuery,
+    private http: HttpClient,
+    private service: AppService,
+    private setupQuery: SetupQuery) { }
 
   ngOnInit() {
     if (this.query.getValue().loginData === null) {return; } // this line is only for the tests
+    if (this.setupQuery.getValue().justRegistered) {
+      return; // no possibility user has credentials saved already
+    }
     this.loading = true;
     const sub = this.http.get(
       environment.urls.fetchCredentials,
@@ -32,7 +42,13 @@ export class CredentialsComponent implements OnInit {
         this.router.navigate(['/setup/basics/stufe']);
         sub.unsubscribe();
       },
-      (error) => handleError(this, error)
+      (error: HttpErrorResponse) => {
+        if (error.status !== 400) {
+          handleError(this, error); // only handle error, when not a user-not-found error
+        } else {
+          this.loading = false;
+        }
+      }
     );
   }
 

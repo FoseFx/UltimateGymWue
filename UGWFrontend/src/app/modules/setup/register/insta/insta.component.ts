@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AppService} from '../../../../state/app.service';
 import {LoginResponse} from '../../login/login.service';
 import { handleError } from 'src/app/util';
+import {SetupService} from '../../state/setup.service';
 
 @Component({
   selector: 'app-insta',
@@ -20,7 +21,8 @@ export class InstaComponent implements OnInit {
   constructor(private http: HttpClient,
               private query: SetupQuery,
               private service: AppService,
-              private router: Router) { }
+              private router: Router,
+              private setupService: SetupService) { }
 
   ngOnInit() {
   }
@@ -78,6 +80,7 @@ export class InstaComponent implements OnInit {
 
       (data: LoginResponse) => {
         console.log(data);
+        this.setupService.justRegistered();
         this.service.onLogin(data);
         this.router.navigate(['/setup/basics']);
 

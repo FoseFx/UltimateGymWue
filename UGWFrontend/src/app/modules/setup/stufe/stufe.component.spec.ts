@@ -8,6 +8,8 @@ import {SetupStore} from '../state/setup.store';
 import {AppQuery} from '../../../state/app.query';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StundenplanService} from '../services/stundenplan.service';
+import {AppService} from '../../../state/app.service';
 
 describe('StufeComponent', () => {
   let component: StufeComponent;
@@ -17,7 +19,7 @@ describe('StufeComponent', () => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule, RouterTestingModule],
       declarations: [ StufeComponent ],
-      providers: [AppQuery, AppStore, SetupService, SetupQuery, SetupStore]
+      providers: [AppQuery, AppStore, SetupService, SetupQuery, SetupStore, StundenplanService, AppService]
     })
     .compileComponents();
   }));

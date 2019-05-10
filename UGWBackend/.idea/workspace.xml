@@ -4,11 +4,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/stundenplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/stundenplan.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/utils.rs" afterDir="false" />
-    </list>
+    <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,19 +298,19 @@
       <workItem from="1557162585236" duration="938000" />
       <workItem from="1557238057825" duration="2987000" />
       <workItem from="1557329453916" duration="5257000" />
-      <workItem from="1557412396706" duration="5025000" />
+      <workItem from="1557412396706" duration="5198000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130488000" />
+    <option name="totallyTimeSpent" value="130661000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.54488516" visible="true" weight="0.15635005" />
-      <window_info id="Structure" order="1" sideWeight="0.4551148" side_tool="true" visible="true" weight="0.15635005" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.54684097" visible="true" weight="0.15635005" />
+      <window_info id="Structure" order="1" sideWeight="0.45315903" side_tool="true" visible="true" weight="0.15635005" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -327,7 +323,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.47821352" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47821352" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />

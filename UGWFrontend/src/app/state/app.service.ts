@@ -4,6 +4,7 @@ import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
 import { Kurse } from 'src/types/Kurs';
+import {TimeTable} from '../../types/TT';
 
 @Injectable()
 export class AppService {
@@ -81,7 +82,7 @@ export class AppService {
     this.save();
   }
 
-  setKurseStufeStundenplan(kurse: Kurse, stufe: string, sp: any) { // todo
+  setKurseStufeStundenplan(kurse: Kurse, stufe: string, sp: TimeTable) {
     this.store.update({
       basics: {
         stufe,
