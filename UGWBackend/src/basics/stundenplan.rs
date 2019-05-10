@@ -51,7 +51,7 @@ fn get_users_kurse(secret: &String, uid: String) -> Result<(String, Vec<Kurs>), 
     let client = reqwest::Client::new();
 
     let res = client
-        .get(&format!("http://localhost:8080/users_kurse/{}", uid)[..])
+        .get(&format!("http://db/users_kurse/{}", uid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
     let mut res = res.error_for_status()?;
@@ -133,7 +133,6 @@ fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<
                             Some(v) => v
                         }.to_owned();
                     if typ == "klasse" {
-                        println!("{:?}", &kurs_field);
                         let lehrer = match &kurs_field.lehrer {
                             None => panic!(),
                             Some(v) => v

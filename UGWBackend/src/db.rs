@@ -51,7 +51,7 @@ pub fn add_user(user: User, secret: String) -> Result<String, String> {
     let base = base64::encode(&json);
 
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/register/{}", base)[..])
+    let res = client.get(&format!("http://db/register/{}", base)[..])
         .header(reqwest::header::AUTHORIZATION, secret)
         .send();
     if res.is_err(){
@@ -73,7 +73,7 @@ pub fn add_user(user: User, secret: String) -> Result<String, String> {
 
 pub fn exists_email(email: &String, secret: &String) -> Result<bool, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/existsemail/{}", email)[..])
+    let res = client.get(&format!("http://db/existsemail/{}", email)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -93,7 +93,7 @@ pub fn exists_email(email: &String, secret: &String) -> Result<bool, String> {
 
 pub fn verify_email(email: &String, secret: &String) {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/verify_email/{}", email)[..])
+    let res = client.get(&format!("http://db/verify_email/{}", email)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     println!("{:?}", res);
@@ -111,7 +111,7 @@ pub struct LoginData {
 
 pub fn get_login_data(email: &String, secret: &String) -> Result<LoginData, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/login_normal/{}", email)[..])
+    let res = client.get(&format!("http://db/login_normal/{}", email)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -145,7 +145,7 @@ pub fn get_login_data(email: &String, secret: &String) -> Result<LoginData, Stri
 
 pub fn exists_google_account(gid: &String, secret: &String) -> Result<bool, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/exists_google/{}", gid)[..])
+    let res = client.get(&format!("http://db/exists_google/{}", gid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -165,7 +165,7 @@ pub fn exists_google_account(gid: &String, secret: &String) -> Result<bool, Stri
 
 pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::auth::jwt::UserClaim, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/login_google/{}", gid)[..])
+    let res = client.get(&format!("http://db/login_google/{}", gid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -203,7 +203,7 @@ pub fn get_google_login_data(gid: &String, secret: &String) -> Result<crate::aut
 
 pub fn exists_insta_account(iid: &String, secret: &String) -> Result<bool, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/exists_insta/{}", iid)[..])
+    let res = client.get(&format!("http://db/exists_insta/{}", iid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -223,7 +223,7 @@ pub fn exists_insta_account(iid: &String, secret: &String) -> Result<bool, Strin
 
 pub fn login_insta(iid: &String, secret: &String) -> Result<UserClaim, String> {
     let client = reqwest::Client::new();
-    let res = client.get(&format!("http://localhost:8080/login_insta/{}", iid)[..])
+    let res = client.get(&format!("http://db/login_insta/{}", iid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send();
     if res.is_err(){
@@ -272,7 +272,7 @@ pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String) -> 
 
     let base = base64::encode(&json_res);
 
-    let res = client.get(&format!("http://localhost:8080/add_creds/{}", base)[..])
+    let res = client.get(&format!("http://db/add_creds/{}", base)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
 
@@ -284,7 +284,7 @@ pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String) -> 
 pub fn get_creds_from_user(uid: &String, secret: &String) -> Result<BasicCreds, Box<Error>> {
     let client = reqwest::Client::new();
 
-    let res = client.get(&format!("http://localhost:8080/get_creds/{}", uid))
+    let res = client.get(&format!("http://db/get_creds/{}", uid))
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
     let mut res = res.error_for_status()?;

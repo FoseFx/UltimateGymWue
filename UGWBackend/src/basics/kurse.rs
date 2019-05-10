@@ -114,7 +114,7 @@ pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &Str
     println!("base: {:?}", &base);
 
     let mut res = client
-        .get(&format!("http://localhost:8080/getKurseAndTT/{}", base)[..])
+        .get(&format!("http://db/getKurseAndTT/{}", base)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
 

@@ -24,7 +24,7 @@ describe("register component", () => {
       cy.server();
       cy.route({
         method: "OPTIONS",
-        url: "https://backend.development/api/auth/normal/register",
+        url: "http://localhost:8000/api/auth/normal/register",
         ignoreCase: true,
         response: {
           error: true,
@@ -42,7 +42,7 @@ describe("register component", () => {
       });
       cy.route({
         method: "POST",
-        url: "https://backend.development/api/auth/normal/register",
+        url: "http://localhost:8000/api/auth/normal/register",
         ignoreCase: true,
         response: {
           error: true,
