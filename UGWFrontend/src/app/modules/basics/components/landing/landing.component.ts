@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AppQuery} from '../../../../state/app.query';
 
 @Component({
   selector: 'app-landing',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
 
-  constructor() { }
+  constructor(public readonly appQuery: AppQuery) { }
 
 }

@@ -147,7 +147,8 @@ fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<
                                 fach: Some(format!("{}", &fach)),
                                 lehrer: Some(format!("{}", lehrer)),
                                 raum: Some(format!("{}", raum)),
-                                typ: Some(format!("klasse"))
+                                typ: Some(format!("klasse")),
+                                name: Some(format!("{}", &fach)) // if klasse then name == fach
                             }
                         );
                         // todo
@@ -164,15 +165,16 @@ fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<
                             continue;
                         }
                         let sel_kurs = sel_kurs.unwrap();
-                        let raum = match &kurs_field.raeume {
-                            None => format!(""),
+                        let name = &sel_kurs.fach;
+                        let mut raum = format!("");
+                        match &kurs_field.raeume {
+                            None => {},
                             Some(v) => {
-                                for raum in v {
-                                    if raum.kurs == sel_kurs.fach {
-                                        format!("{}", raum.raum);
+                                for r in v {
+                                    if r.kurs == sel_kurs.fach {
+                                        raum = format!("{}", r.raum);
                                     }
                                 }
-                                format!("")
                             }
                         };
                         new_fields.push(
@@ -180,7 +182,8 @@ fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<
                                 raum: Some(raum),
                                 fach: Some(fach),
                                 lehrer: Some(format!("{}", sel_kurs.lehrer)),
-                                typ: Some(typ.to_owned())
+                                typ: Some(typ.to_owned()),
+                                name: Some(format!("{}", name))
                             }
                         );
                     } // if kurs

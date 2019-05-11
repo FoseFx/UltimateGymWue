@@ -1,0 +1,13 @@
+<table>
+  <tbody>
+  <ng-container *ngFor="let field of today; let i = index;">
+    <tr *ngIf="!!field.name">
+      <td>{{i + 1}}</td>
+      <td>{{field.name}}</td>
+      <td>{{field.raum}}</td>
+      <td>{{field.lehrer}}</td>
+    </tr>
+  </ng-container>
+
+  </tbody>
+</table>

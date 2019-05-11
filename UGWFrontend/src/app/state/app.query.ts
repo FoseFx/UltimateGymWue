@@ -16,6 +16,8 @@ export class AppQuery extends Query<AppState> {
     queryInCypress(this);
   }
   menuOpen$ = this.select('menuOpen');
+  tt$ = this.select('basics').pipe(map((b) => b.stundenplan));
+
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
   hasCredentials = () => this.getValue().credentials !== null;
   get loginToken() {

@@ -94,12 +94,13 @@ pub struct TTField {
     pub typ: Option<String>,
     pub fach: Option<String>,
     pub raum: Option<String>,
-    pub lehrer: Option<String>
+    pub lehrer: Option<String>,
+    pub name: Option<String>
 }
 
 impl TTField {
     pub fn empty() -> Self {
-        return TTField {typ: None, fach: None, raum: None, lehrer: None};
+        return TTField {typ: None, fach: None, raum: None, lehrer: None, name: None};
     }
 }
 

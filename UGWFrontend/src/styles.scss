@@ -89,3 +89,37 @@ a {
     opacity: 1;
   }
 }
+
+table {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table tbody+tbody {
+  border-top: 2px solid rgba(0, 0, 0, .06)
+}
+
+table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid rgba(0, 0, 0, .06)
+}
+table td,
+table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid rgba(0, 0, 0, .06)
+}
+
+tr {
+  background-color: transparent;
+  transition: background-color 0.1s linear;
+  &:hover {
+    background-color: $light;
+  }
+}
+
+td {
+  padding: 0.75rem;
+  font-size: .8125rem;
+  margin: 0;
+}

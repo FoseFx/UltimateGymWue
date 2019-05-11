@@ -6,4 +6,5 @@ export class TimeTableField {
   fach?: string;
   raum?: string;
   lehrer?: string;
+  name?: string;
 }
