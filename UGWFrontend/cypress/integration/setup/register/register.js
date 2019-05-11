@@ -63,6 +63,14 @@ describe("register component", () => {
           cy.get("@name").type("{enter}");
           cy.url().should("contain", "/setup/register/normal");
         });
+        it("should redirect on google button click", () => {
+          cy.get("@googlebtn").click();
+          cy.url().should("contain", "/setup/register/google");
+        });
+        it("should redirect on insta button click", () => {
+          cy.get("@instabtn").click();
+          cy.url().should("contain", "/setup/register/insta");
+        });
       });
 
     });

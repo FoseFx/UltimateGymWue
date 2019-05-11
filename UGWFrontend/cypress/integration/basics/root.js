@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('root', () => {
+describe('Basics - /', () => {
 
   describe('routing', () => {
 

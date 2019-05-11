@@ -16,6 +16,7 @@ export class LoginGuard implements CanActivate {
 
     const allow = this.query.getValue().loginData === null;
 
+    console.log('localstorage:', localStorage);
     if (!allow) {
       return this.router.parseUrl('/');
     }

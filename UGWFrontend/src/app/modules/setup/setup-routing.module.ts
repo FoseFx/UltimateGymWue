@@ -69,7 +69,7 @@ const routes: Routes = [
   },
   {
     path: 'basics',
-    redirectTo: 'basics/stufe'
+    redirectTo: 'basics/creds'
   },
   {
     path: 'basics/creds',

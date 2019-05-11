@@ -35,8 +35,6 @@ export class StufeComponent implements OnInit {
       }
     }
 
-    // todo fetch basics
-
     const sub = this.http.get(
       environment.urls.getStufen,
       {headers: {Authorization: this.appQuery.loginToken, 'x-gw-auth': this.appQuery.credentialsToken}}
