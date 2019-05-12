@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
+import { HomeTableComponent } from '../home-table/home-table.component';
+import { AppQuery } from 'src/app/state/app.query';
+import { AppStore } from 'src/app/state/app.store';
+import { of } from 'rxjs';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -8,7 +12,8 @@ describe('LandingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingComponent ]
+      declarations: [ LandingComponent, HomeTableComponent ],
+      providers: [AppQuery, AppStore]
     })
     .compileComponents();
   }));
@@ -16,6 +21,17 @@ describe('LandingComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LandingComponent);
     component = fixture.componentInstance;
+    component.appQuery.__store__.update({
+      basics: {
+        stundenplan: [
+          [[], [], [], [], []], 
+          [[], [], [], [], []]
+        ],
+        kurse: [],
+        stufe: "",
+        stufe_id: ""
+      }
+    });
     fixture.detectChanges();
   });
 
