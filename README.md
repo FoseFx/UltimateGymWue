@@ -46,6 +46,9 @@ The Ultimate Tool for the Students of my School.
 - Run the db middleware using `env SECRET=AAAA` and replace `AAAA`
 - Serve the frontend using `ng serve`
 
+
+In case you wonder, what this ["docs/ugw-router.xml"](docs/ugw-router.xml) file is. Open it on [draw.io](http://draw.io/)
+
 ---
 
 A FoseFx project.

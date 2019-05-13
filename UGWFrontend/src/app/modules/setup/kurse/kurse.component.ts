@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
 })
 export class KurseComponent implements OnInit {
 
-  constructor(private setupQuery: SetupQuery,
+  constructor(public setupQuery: SetupQuery,
               private http: HttpClient,
               private appQuery: AppQuery,
               public setupService: SetupService,
