@@ -39,7 +39,7 @@ matrix:
     - cargo build --verbose --all
     - cargo test --verbose --all
     - echo "$DOCKER_PSW" | docker login -u "$DOCKER_NAME" --password-stdin https://$(echo $DOCKER_REG)
-    - docker build -t $DOCKER_REG/ugwbackend_backend UGWBackend
-    - docker build -t $DOCKER_REG/ugwbackend_db UGWBackend/db-middleware
+    - docker build -t $DOCKER_REG/ugwbackend_backend ./UGWBackend
+    - docker build -t $DOCKER_REG/ugwbackend_db ./UGWBackend/db-middleware
     - docker push $DOCKER_REG/ugwbackend_db
     - docker push $DOCKER_REG/ugwbackend_backend
