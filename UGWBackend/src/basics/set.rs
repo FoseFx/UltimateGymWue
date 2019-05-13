@@ -6,6 +6,7 @@ use rocket_contrib::json::Json;
 use crate::responses::CustomResponse;
 use rocket::http::Status;
 use std::ops::Deref;
+use crate::DBURL;
 
 #[derive(Deserialize,Serialize)]
 #[derive(Debug)]
@@ -15,7 +16,8 @@ pub struct SetBasicsRequest {
 }
 
 #[put("/basics", data="<data>")]
-pub fn set_basics(user: AuthGuard, secret: State<SecretMgt>, data: Json<SetBasicsRequest>) -> CustomResponse {
+pub fn set_basics(user: AuthGuard, secret: State<SecretMgt>, data: Json<SetBasicsRequest>, db_url: State<DBURL>) -> CustomResponse {
+    let db_url = &db_url.url;
     let kurse: &Vec<Kurs> = &data.kurse;
     let stufe: &String = &data.stufe;
 
@@ -30,7 +32,7 @@ pub fn set_basics(user: AuthGuard, secret: State<SecretMgt>, data: Json<SetBasic
     println!("{:?}", &jsonv);
     let json_res = serde_json::to_string(&jsonv).unwrap();
     let base = base64::encode(&json_res);
-    let res = client.get(&format!("http://db/set_basics/{}", base)[..])
+    let res = client.get(&format!("{}set_basics/{}", db_url, base)[..])
         .header(reqwest::header::AUTHORIZATION, secret.0.deref().to_string())
         .send();
     if res.is_err() {

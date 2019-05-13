@@ -6,6 +6,7 @@ use std::error::Error;
 use crate::{GOOGLE_AUD, SecretMgt};
 use rocket::State;
 use std::ops::Deref;
+use crate::DBURL;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -15,8 +16,9 @@ pub struct GoogleRegisterRequest {
 }
 
 #[post("/auth/google/register", data = "<data>")]
-pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<SecretMgt>) -> CustomResponse {
+pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<SecretMgt>, db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret: String = secret.0.deref().to_string();
     let token = &data.token;
     let fullname = &data.fullname;
@@ -79,7 +81,7 @@ pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<
 
     // google account exists?
 
-    let g_exists_res = crate::db::exists_google_account(&google_resp.sub, &secret);
+    let g_exists_res = crate::db::exists_google_account(&google_resp.sub, &secret, db_url);
     if g_exists_res.is_err() {
         println!("FATAL ERROR CHECKING G ACCOUNT: {:?}", g_exists_res.unwrap_err());
         return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
@@ -94,7 +96,7 @@ pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<
 
 
     // email exists?
-    let exists_res = crate::db::exists_email(&google_resp.email, &secret);
+    let exists_res = crate::db::exists_email(&google_resp.email, &secret, db_url);
     if exists_res.is_err() {
         println!("{:?}", exists_res.unwrap_err());
         return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
@@ -118,7 +120,8 @@ pub fn google_register_handler(data: Json<GoogleRegisterRequest>, secret: State<
             }),
             instagram: None
         },
-        secret
+        secret,
+        db_url
     );
 
     if add_user_resp.is_err() {

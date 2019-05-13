@@ -39,10 +39,8 @@ The Ultimate Tool for the Students of my School.
 5. Make sure the frontend is hosted somewhere with 404 redirects to `index.html` and points to the backend in `environment.prod.ts`.
 
 ### When running in development:
-- Configure a reverse-proxy like nginx to proxy to `http://localhost:8080` when hit on `http://db/`
-- Configure your `/etc/hosts` file to contian the following line: `127.0.0.1    db`
 - Make sure you set the correct values in the `main.rs` file
-- Make sure you run the backend using `env SECRET=AAAA MAIL_JET_USER=AAAA MAIL_JET_KEY=AAAA REDIS_PATH=AAAA INSTA_CID=AAAA INSTA_SECRET=AAAA cargo run` and replace `AAAA`
+- Make sure you run the backend using `env DEVELOPMENT=true SECRET=AAAA MAIL_JET_USER=AAAA MAIL_JET_KEY=AAAA REDIS_PATH=AAAA INSTA_CID=AAAA INSTA_SECRET=AAAA cargo run` and replace `AAAA`
 - Run the db middleware using `env SECRET=AAAA` and replace `AAAA`
 - Serve the frontend using `ng serve`
 

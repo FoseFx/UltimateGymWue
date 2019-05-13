@@ -7,6 +7,7 @@ use reqwest::Response;
 use std::ops::Deref;
 use std::error::Error;
 use rocket::http::Status;
+use crate::DBURL;
 
 #[derive(Deserialize, Serialize)]
 #[derive(Debug)]
@@ -14,8 +15,9 @@ pub struct GoogleLoginRequest {
     token: String
 }
 #[post("/auth/google/login", data = "<data>")]
-pub fn google_login_handler(data: Json<GoogleLoginRequest>, secret: State<SecretMgt>) -> CustomResponse {
+pub fn google_login_handler(data: Json<GoogleLoginRequest>, secret: State<SecretMgt>, db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret: String = secret.0.deref().to_string();
     let token = &data.token;
 
@@ -73,7 +75,7 @@ pub fn google_login_handler(data: Json<GoogleLoginRequest>, secret: State<Secret
     }
 
 
-    let claim = crate::db::get_google_login_data(&google_resp.sub, &secret);
+    let claim = crate::db::get_google_login_data(&google_resp.sub, &secret, db_url);
 
     println!("claim: {:#?}", &claim);
 

@@ -8,6 +8,7 @@ use crate::basics::utils::{BasicCredsWrapper, BasicCreds};
 use crate::SecretMgt;
 use rocket::State;
 use crate::calc_exp;
+use crate::DBURL;
 
 #[derive(Deserialize,Serialize)]
 #[derive(Debug)]
@@ -21,8 +22,9 @@ pub struct AddCredsRequest {
 pub fn add_creds_handler(user: AuthGuard,
                          redis_conn: RedisConnection,
                          secret: State<SecretMgt>,
-                         data: Json<AddCredsRequest>) -> CustomResponse {
+                         data: Json<AddCredsRequest>, db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret: &String = &secret.0.deref().to_string();
     let conn: &redis::Connection = redis_conn.0.deref();
     let uid = user.claim.uid;
@@ -55,7 +57,7 @@ pub fn add_creds_handler(user: AuthGuard,
         false => BasicCreds {lehrer: None, schueler: BasicCredsWrapper {username: username.clone(), password: password.clone()}},
         true => BasicCreds {lehrer: Some(BasicCredsWrapper {username, password}), schueler: BasicCredsWrapper {username: "todo".to_string(), password: "todo".to_string() }}
     };
-    println!("{:?}", crate::db::add_creds_to_user(&uid, &cred_obj, secret));
+    println!("{:?}", crate::db::add_creds_to_user(&uid, &cred_obj, secret, db_url));
 
     let token = jsonwebtoken::encode(&jsonwebtoken::Header::default(), &json!({"lehrer": cred_obj.lehrer, "schueler": cred_obj.schueler, "exp": calc_exp()}), secret.as_ref()).unwrap();
 
@@ -80,12 +82,13 @@ fn is_cached(creds: &AddCredsRequest, conn: &redis::Connection) -> bool {
 }
 
 #[get("/basics/get_creds")]
-pub fn get_creds_handler(user: AuthGuard, secret: State<SecretMgt>) -> CustomResponse {
+pub fn get_creds_handler(user: AuthGuard, secret: State<SecretMgt>, db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret: &String = &secret.0.deref().to_string();
     let uid = user.claim.uid;
 
-    let res = crate::db::get_creds_from_user(&uid, secret);
+    let res = crate::db::get_creds_from_user(&uid, secret, db_url);
 
     println!("error getting creds: {:?}", &res);
 

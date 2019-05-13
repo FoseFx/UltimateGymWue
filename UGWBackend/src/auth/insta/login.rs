@@ -7,6 +7,7 @@ use crate::auth::insta::register::InstaAuthResponse;
 use reqwest::Error;
 use std::ops::Deref;
 use rocket::http::Status;
+use crate::DBURL;
 
 #[derive(Deserialize, Serialize)]
 #[derive(Debug)]
@@ -19,8 +20,9 @@ pub struct InstaLoginCodeRequest{
 #[post("/auth/insta/login", data="<data>")]
 pub fn login_instagram_handler(data: Json<InstaLoginCodeRequest>,
                                insta_secrets: State<InstaSecretMgt>,
-                               secret: State<SecretMgt>) -> CustomResponse {
-
+                               secret: State<SecretMgt>, db_url: State<DBURL>) -> CustomResponse {
+    
+    let db_url = &db_url.url;
     let secret = &secret.deref().0.to_string();
     let cid = &insta_secrets.client_id;
     let c_secret = &insta_secrets.client_secret;
@@ -75,7 +77,7 @@ pub fn login_instagram_handler(data: Json<InstaLoginCodeRequest>,
     let iid = &user.id.to_string();
 
 
-    let claim_res = crate::db::login_insta(iid, secret);
+    let claim_res = crate::db::login_insta(iid, secret, db_url);
 
     if claim_res.is_err() {
         println!("error fetching claim {:?}", &claim_res);

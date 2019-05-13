@@ -8,6 +8,7 @@ use crate::{InstaSecretMgt, SecretMgt, calc_exp};
 use rocket::State;
 use reqwest::Error;
 use std::ops::Deref;
+use crate::DBURL;
 
 #[get("/auth/insta/register-redirect")]
 pub fn insta_register_handler() -> Option<NamedFile> {
@@ -46,8 +47,11 @@ pub struct InstaAuthUserResponse {
 
 #[post("/auth/insta/register-code", data="<data>")]
 pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
-                                   insta_secrets: State<InstaSecretMgt>, secret: State<SecretMgt>) -> CustomResponse {
+                                   insta_secrets: State<InstaSecretMgt>, 
+                                   secret: State<SecretMgt>, 
+                                   db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret = &secret.deref().0.to_string();
     let cid = &insta_secrets.client_id;
     let c_secret = &insta_secrets.client_secret;
@@ -101,7 +105,7 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
     let user = res.user.unwrap();
     let iid = &user.id.to_string();
 
-    let exists_res = crate::db::exists_insta_account(&iid, secret);
+    let exists_res = crate::db::exists_insta_account(&iid, secret, db_url);
     if exists_res.is_err() {
         println!("FATAL ERROR CHECKING I ACCOUNT: {:?}", exists_res.unwrap_err());
         return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
@@ -128,7 +132,7 @@ pub fn insta_register_code_handler(data: Json<InstaRegisterCodeRequest>,
         })
     };
 
-    let add_res = crate::db::add_user(user, secret.to_string());
+    let add_res = crate::db::add_user(user, secret.to_string(), db_url);
 
     if add_res.is_err() {
         println!("error adding user: {:?}", add_res);

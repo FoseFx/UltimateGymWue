@@ -12,6 +12,7 @@ use rocket::State;
 use std::ops::Deref;
 use crate::responses::CustomResponse;
 use crate::redismw::RedisConnection;
+use crate::DBURL;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -26,8 +27,10 @@ pub fn normal_handler(
     secret: State<SecretMgt>,
     email_creds: State<MailJetMgt>,
     redis_conn: RedisConnection,
-    data: Json<NormalRegisterData>) -> CustomResponse {
+    data: Json<NormalRegisterData>, 
+    db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let secret: String = secret.0.deref().to_string();
     let email_creds: &MailJetMgt = email_creds.deref();
     let redis_conn: &redis::Connection = redis_conn.0.deref();
@@ -39,7 +42,7 @@ pub fn normal_handler(
         return CustomResponse::error(format!("Email not valid"), Status::BadRequest);
     }
 
-    let exists_res = crate::db::exists_email(&data.email, &secret);
+    let exists_res = crate::db::exists_email(&data.email, &secret, db_url);
     if exists_res.is_err() {
         println!("{:?}", exists_res.unwrap_err());
         return CustomResponse::error(format!("Server Error"), Status::InternalServerError);
@@ -63,7 +66,8 @@ pub fn normal_handler(
             google: None,
             instagram: None
         },
-        secret
+        secret,
+        db_url
     );
 
     if uid_res.is_err() {
@@ -86,8 +90,10 @@ pub fn normal_handler(
 #[get("/auth/normal/verify_email/<key>")]
 pub fn normal_verify_email_handler(secret: State<SecretMgt>,
                                    redis_conn: RedisConnection,
-                                   key: String) -> String {
+                                   key: String, 
+                                   db_url: State<DBURL>) -> String {
 
+    let db_url = &db_url.url;
     let secret: String = secret.0.deref().to_string();
     let redis_conn: &redis::Connection = redis_conn.0.deref();
 
@@ -98,7 +104,7 @@ pub fn normal_verify_email_handler(secret: State<SecretMgt>,
     }
 
     let email = opt.unwrap();
-    crate::db::verify_email(&email, &secret.to_owned());
+    crate::db::verify_email(&email, &secret.to_owned(), db_url);
 
     return format!("{} wurde verifiziert.", email);
 
@@ -112,10 +118,11 @@ pub struct LoginRequest {
 }
 
 #[post("/auth/normal/login", data = "<data>")]
-pub fn normal_login_handler(secret: State<SecretMgt>, data: Json<LoginRequest>) -> CustomResponse {
+pub fn normal_login_handler(secret: State<SecretMgt>, data: Json<LoginRequest>, db_url: State<DBURL>) -> CustomResponse {
     
+    let db_url = &db_url.url;
     let secret: String = secret.0.deref().to_string();
-    let login_data = crate::db::get_login_data(&data.email, &secret);
+    let login_data = crate::db::get_login_data(&data.email, &secret, db_url);
 
     if login_data.is_err() {
         return CustomResponse::error(login_data.unwrap_err(), Status::Unauthorized);

@@ -13,9 +13,12 @@ use std::path::PathBuf;
 use std::io::Cursor;
 use rocket::response::{self, Response, Responder};
 use std::time::{SystemTime, UNIX_EPOCH};
+use std::process::Command;
+use std::env::vars;
 use std::error::Error;
 
 pub struct SecretMgt(String);
+pub struct DBURL {url: String}
 pub struct MailJetMgt {user: String, key: String}
 pub struct InstaSecretMgt {client_id: String, client_secret: String}
 
@@ -75,6 +78,7 @@ fn rocket() -> Rocket {
     return rocket::ignite()
         .manage(get_secret())
         .manage(get_insta_secret())
+        .manage(get_db_url())
         .manage(get_mailjet_creds())
         .manage(redismw::pool())
         .mount(
@@ -108,6 +112,31 @@ fn rocket() -> Rocket {
         );
 }
 
+fn get_db_url() -> DBURL {
+    let mut isdev = false;
+    for (env_key, _val) in vars(){
+        if env_key == "DEVELOPMENT" {
+            isdev = true;
+        }
+    }
+    if isdev {
+        return DBURL {url: format!("http://localhost:8080/")};
+    }
+    let outp = Command::new("nslookup")
+             .arg("db")
+             .output()
+             .expect("failed to execute process");
+    let mut st = String::new();
+    for s in outp.stdout {
+        st = format!("{}{}", st, s as char);
+    }
+    let split: Vec<&str> = st.split("\n").collect();
+    let ip = split[2];
+    let ip: Vec<&str> = ip.split(" ").collect();
+    let ip = ip[2];
+    println!("{}", &ip);
+    return DBURL { url: format!("http://{}:8080/", ip)};
+}
 
 fn get_secret() -> SecretMgt {
 

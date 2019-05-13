@@ -11,15 +11,17 @@ use std::ops::Deref;
 use crate::basics::kurse::{stufe_to_id, get_wochen, fetch_kurse_and_tt};
 use redis::RedisResult;
 use crate::redis::Commands;
+use crate::DBURL;
 
 #[get("/basics/stundenplan")]
-pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, secret: State<SecretMgt>) -> CustomResponse {
+pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, secret: State<SecretMgt>, db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let redis = redis.0.deref();
     let creds = creds.pl.schueler;
     let secret: String = secret.0.deref().to_string();
 
-    let kurse = get_users_kurse(&secret, user.claim.uid);
+    let kurse = get_users_kurse(&secret, user.claim.uid, db_url);
     if kurse.is_err() {
         let err = kurse.unwrap_err().to_string();
         if err.contains("402 Payment Required") {
@@ -31,7 +33,7 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
     }
     let (stufe, kurse) = kurse.unwrap();
 
-    let sp = get_stundenplan(redis, creds, &secret, &stufe);
+    let sp = get_stundenplan(redis, creds, &secret, &stufe, db_url);
     if sp.is_err() {
         return CustomResponse::error(sp.unwrap_err().to_string(), Status::BadRequest);
     }
@@ -47,11 +49,11 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
     // return CustomResponse::error("Not Implemented yet".to_string(), Status::NotImplemented);
 }
 
-fn get_users_kurse(secret: &String, uid: String) -> Result<(String, Vec<Kurs>), Box<Error>> {
+fn get_users_kurse(secret: &String, uid: String, db_url: &String) -> Result<(String, Vec<Kurs>), Box<Error>> {
     let client = reqwest::Client::new();
 
     let res = client
-        .get(&format!("http://db/users_kurse/{}", uid)[..])
+        .get(&format!("{}users_kurse/{}", db_url, uid)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
     let mut res = res.error_for_status()?;
@@ -74,7 +76,7 @@ fn get_users_kurse(secret: &String, uid: String) -> Result<(String, Vec<Kurs>), 
 }
 
 
-fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String) -> Result<Vec<TTWoche>, Box<Error>> {
+fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String, db_url: &String) -> Result<Vec<TTWoche>, Box<Error>> {
 
     //
     let stufe_id = stufe_to_id(redis_conn, &schueler_creds, stufe);
@@ -99,7 +101,7 @@ fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWra
     let wochen = wochen.unwrap();
 
 
-    let kurse_and_tt = fetch_kurse_and_tt(schueler_creds, secret, stufe, &stufe_id, &wochen)?;
+    let kurse_and_tt = fetch_kurse_and_tt(schueler_creds, secret, stufe, &stufe_id, &wochen, db_url)?;
     let kurse = kurse_and_tt.kurse;
     let tt = kurse_and_tt.tt;
 

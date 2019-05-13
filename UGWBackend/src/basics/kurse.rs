@@ -11,14 +11,17 @@ use redis::RedisResult;
 use crate::redis::Commands;
 use crate::SecretMgt;
 use rocket::State;
+use crate::DBURL;
 
 #[get("/basics/kurse/<stufe>")]
 pub fn get_all_kurse(_user: AuthGuard,
                      creds: HasCredsGuard,
                      redis_conn: RedisConnection,
                      secret: State<SecretMgt>,
-                     stufe: String) -> CustomResponse {
+                     stufe: String, 
+                     db_url: State<DBURL>) -> CustomResponse {
 
+    let db_url = &db_url.url;
     let redis_conn = redis_conn.0.deref();
     let schueler_creds = creds.pl.schueler;
     let secret: String = secret.0.deref().to_string();
@@ -43,7 +46,7 @@ pub fn get_all_kurse(_user: AuthGuard,
     let wochen = wochen.unwrap();
     println!("wochen: {:?}", wochen);
 
-    let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id, &wochen);
+    let kurse = get_kurse(redis_conn, schueler_creds, &secret, stufe, &stufe_id, &wochen, db_url);
     println!("kurse: {:?}", &kurse);
 
     if kurse.is_err() {
@@ -66,7 +69,7 @@ fn is_stufe(string: &String) -> bool {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>) -> Result<Vec<Kurs>, Box<Error>>{
+fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<Vec<Kurs>, Box<Error>>{
 
     let key = format!("kurse_{}", &stufe_id);
     let tt_key = format!("tt_{}", &stufe_id);
@@ -75,7 +78,7 @@ fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &Strin
     if cached.is_ok() {
         return Ok(serde_json::from_str(cached.unwrap().as_ref())?);
     }
-    let kurse_and_tt = fetch_kurse_and_tt(creds, secret, &stufe, stufe_id, wochen)?;
+    let kurse_and_tt = fetch_kurse_and_tt(creds, secret, &stufe, stufe_id, wochen, db_url)?;
     let kurse = kurse_and_tt.kurse;
     let tt = kurse_and_tt.tt;
 
@@ -100,7 +103,7 @@ pub struct FetchKurseAndTTResult {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>) -> Result<FetchKurseAndTTResult, Box<Error>>{
+pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<FetchKurseAndTTResult, Box<Error>>{
     let client = reqwest::Client::new();
 
     let json = serde_json::to_string(&json!({
@@ -114,7 +117,7 @@ pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &Str
     println!("base: {:?}", &base);
 
     let mut res = client
-        .get(&format!("http://db/getKurseAndTT/{}", base)[..])
+        .get(&format!("{}getKurseAndTT/{}", db_url, base)[..])
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
 
