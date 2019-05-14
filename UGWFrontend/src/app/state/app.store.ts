@@ -6,7 +6,7 @@
 import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
 import { Kurse } from 'src/types/Kurs';
-import {TimeTable} from "../../types/TT";
+import {TimeTable} from '../../types/TT';
 
 export interface AppState {
   meta: {
