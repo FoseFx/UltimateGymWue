@@ -34,6 +34,7 @@ matrix:
     - INSTA_CID="test"
     - INSTA_SECRET="test"
     - RUST_BACKTRACE=1
+    - DEVELOPMENT="true"
     script:
     - cd UGWBackend
     - cargo build --verbose --all
