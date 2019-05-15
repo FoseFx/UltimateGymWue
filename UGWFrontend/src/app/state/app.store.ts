@@ -42,11 +42,17 @@ export interface AppState {
     token: string,
     has_lehrer: boolean
   };
+  thisDay: Date;
+  nextDay: Date;
 }
 
 export function createInitialState(): AppState {
   if (!!localStorage.app_state) {
-    return JSON.parse(localStorage.app_state);
+    const storage: AppState = JSON.parse(localStorage.app_state);
+    storage.nextDay = null;
+    storage.thisDay = null;
+    storage.menuOpen = false;
+    return storage;
   }
   return {
     meta: {
@@ -56,7 +62,9 @@ export function createInitialState(): AppState {
     loginData: null,
     menuOpen: false,
     basics: null,
-    credentials: null
+    credentials: null,
+    thisDay: null,
+    nextDay: null
   };
 }
 

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import {LOCALE_ID, NgModule} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AppStore} from './state/app.store';
@@ -13,6 +15,8 @@ import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
+
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import {NeedsSetupGuard} from './guards/needs-setup.guard';
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [
+    {provide: LOCALE_ID,  useValue: 'de-DE'},
     AppStore,
     AppQuery,
     AppService,

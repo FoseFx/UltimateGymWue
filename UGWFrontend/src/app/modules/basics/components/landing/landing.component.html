@@ -1,3 +1,6 @@
+<h1 >{{appQuery.today$ | async | date: 'EE dd/MM/yyyy' }}</h1>
+<h1 >{{appQuery.nextDay$ | async | date: 'EE dd/MM/yyyy' }}</h1>
+
 <app-tab style="width: 80%; margin: 0 auto;">
   <app-tab-item label="Heute">
     <app-home-table class="tab-item" [today]="(appQuery.tt$ | async)[0][0]"></app-home-table>

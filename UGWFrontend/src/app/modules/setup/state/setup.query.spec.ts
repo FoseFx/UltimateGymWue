@@ -3,7 +3,7 @@ import {hasSelAllKurse, SetupQuery} from './setup.query';
 import {SelectedKurseIndexMap, SetupStore} from './setup.store';
 
 
-describe('SetupService', () => {
+describe('SetupQuery', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [SetupStore, SetupQuery]
   }));
