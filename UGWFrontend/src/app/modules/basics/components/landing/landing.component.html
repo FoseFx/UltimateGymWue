@@ -1,14 +1,18 @@
-<h1 >{{appQuery.today$ | async | date: 'EE dd/MM/yyyy' }}</h1>
-<h1 >{{appQuery.nextDay$ | async | date: 'EE dd/MM/yyyy' }}</h1>
-
 <app-tab style="width: 80%; margin: 0 auto;">
-  <app-tab-item label="Heute">
-    <app-home-table class="tab-item" [today]="(appQuery.tt$ | async)[0][0]"></app-home-table>
+  <app-tab-item label="{{appQuery.today$ | async | date: 'EE' }}">
+    <app-home-table
+      class="tab-item"
+      [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.today$ | async).getDay()]"
+      [abWoche]="appQuery.abwoche$ | async"
+      [date]="appQuery.today$ | async"
+    ></app-home-table>
   </app-tab-item>
-  <app-tab-item label="Morgen">
-    <app-home-table class="tab-item" [today]="(appQuery.tt$ | async)[0][1]"></app-home-table>
-  </app-tab-item>
-  <app-tab-item label="Übermorgen">
-    <app-home-table class="tab-item" [today]="(appQuery.tt$ | async)[0][2]"></app-home-table>
+  <app-tab-item label="{{appQuery.nextDay$ | async | date: 'EE' }}">
+    <app-home-table
+      class="tab-item"
+      [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.nextDay$ | async).getDay()]"
+      [abWoche]="appQuery.abwoche$ | async"
+      [date]="appQuery.nextDay$ | async"
+    ></app-home-table>
   </app-tab-item>
 </app-tab>

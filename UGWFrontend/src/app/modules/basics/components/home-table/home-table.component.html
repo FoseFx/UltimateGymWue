@@ -1,3 +1,7 @@
+<div class="day-header">
+  <h1>{{date | date: 'EE dd.MM.yy'}}</h1>
+  <h3>{{abWoche === 1 ? 'A' : 'B'}} Woche</h3>
+</div>
 <table>
   <tbody>
   <ng-container *ngFor="let field of today; let i = index;">

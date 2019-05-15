@@ -10,6 +10,8 @@ import {TimeTableDay} from '../../../../../types/TT';
 export class HomeTableComponent implements OnInit {
 
   @Input() today: TimeTableDay;
+  @Input() date: Date;
+  @Input() abWoche: 0|1;
   constructor() { }
 
   ngOnInit() {

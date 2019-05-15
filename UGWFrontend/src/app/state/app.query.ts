@@ -56,6 +56,20 @@ export class AppQuery extends Query<AppState> {
     })
   );
 
+  abwoche$: Observable<0|1> = this.today$.pipe(
+    map((date) => {
+      return (this.getWeekNumber(date)[1] % 2 === 0) ? 1 : 0;
+    })
+  );
+
+  /** credit: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php/6117889#6117889 */
+  private getWeekNumber(d) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil(( ( (d - (yearStart as any)) / 86400000) + 1) / 7);
+    return [d.getUTCFullYear(), weekNo];
+  }
 
   _toNextDay(day, allowFriday = true): Date {
     // 0 1 2 3 4 5 6
