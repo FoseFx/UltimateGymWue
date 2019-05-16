@@ -60,7 +60,7 @@ impl<'r> Responder<'r> for CORSResponder {
     fn respond_to(self, _: &rocket::request::Request) -> response::Result<'r> {
         Response::build()
             .sized_body(Cursor::new(self.0))
-            .raw_header("Access-Control-Allow-Origin", format!("http://localhost:4200"))
+            .raw_header("Access-Control-Allow-Origin", format!("https://ugw.fosefx.com"))
             .raw_header("Access-Control-Allow-Headers", format!("Content-Type,authorization,x-gw-auth"))
             .raw_header("Access-Control-Allow-Methods", format!("GET,POST,PUT"))
             .ok()
@@ -256,7 +256,7 @@ mod integration {
         let headers = response.headers();
         let origin = headers.get("Access-Control-Allow-Origin").next();
         let allow_headers = headers.get("Access-Control-Allow-Headers").next();
-        assert_eq!(origin, Some("http://localhost:4200".into()));
+        assert_eq!(origin, Some("https://ugw.fosefx.com".into()));
         assert_eq!(allow_headers, Some("Content-Type,authorization,x-gw-auth".into()));
     }
 }
