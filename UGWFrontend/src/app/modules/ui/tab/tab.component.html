@@ -10,7 +10,11 @@
 
 <div class="tab-content-wrapper">
 
-  <div class="tab-content" [ngStyle]="{'width': tabs.length * 100 + '%', 'transform': 'translateX(-' + (activeIndex * (1 / tabs.length) * 100) + '%)'}">
+  <div
+    class="tab-content"
+    [appSwipable]="activeIndex"
+    (snapto)="setActive = $event"
+    [ngStyle]="{'width': tabs.length * 100 + '%', 'transform': 'translateX(-' + (activeIndex * (1 / tabs.length) * 100) + '%)'}">
     <ng-container *ngFor="let tab of tabs; let i = index;">
       <ng-container *ngTemplateOutlet="tab.content"></ng-container>
     </ng-container>

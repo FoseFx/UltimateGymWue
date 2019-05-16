@@ -8,6 +8,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { CardHeaderComponent } from './card/card-header/card-header.component';
 import { TabComponent } from './tab/tab.component';
 import { TabItemComponent } from './tab/tab-item/tab-item.component';
+import { SwipableDirective } from './tab/swipable.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TabItemComponent } from './tab/tab-item/tab-item.component';
     SpinnerComponent,
     CardHeaderComponent,
     TabComponent,
-    TabItemComponent
+    TabItemComponent,
+    SwipableDirective
   ],
   imports: [
     CommonModule,

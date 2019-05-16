@@ -7,9 +7,11 @@
   height: 55px;
   background: white;
   display: flex;
+  user-select: none;
   border-bottom: $light 1px solid;
 }
 .tab-header-item {
+  cursor: pointer;
   width: 20%;
   background: white;
   transition: background 0.3s linear, opacity 0.1s linear, border-bottom 0.1s linear;

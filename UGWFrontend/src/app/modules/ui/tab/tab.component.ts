@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {TabItemComponent} from './tab-item/tab-item.component';
 
 @Component({
@@ -14,6 +14,7 @@ export class TabComponent {
   set activeIndex(i: number) {
     this._activeIndex = i;
     this.currentActive.emit(i);
+    this.cdref.detectChanges();
   }
   get activeIndex() {
     return this._activeIndex;
@@ -23,7 +24,7 @@ export class TabComponent {
     this.activeIndex = index;
   }
   @Output() currentActive = new EventEmitter();
-  constructor() { }
+  constructor(private cdref: ChangeDetectorRef) { }
 
   labelClicked(i: number): void {
     this.activeIndex = i;
