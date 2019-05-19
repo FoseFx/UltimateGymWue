@@ -10,16 +10,17 @@
   padding: 10px 15px 10px 10px;
   max-width: 550px;
   @media (max-width: 590px){
-    width: 100%;
+    width: 93%;
     padding-left: 0;
   }
   width: 90%;
 
   #scroll {
     overflow-y: auto;
-    width: 100%;
+    width: 90%;
     height: 99%;
     padding-right: 30px;
+    padding-left: 5%;
     position: relative;
 
     #backdrop {

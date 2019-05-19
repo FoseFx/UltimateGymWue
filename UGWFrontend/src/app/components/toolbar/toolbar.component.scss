@@ -1,5 +1,5 @@
 @import "../../../colors";
-.toolbar {
+:host {
   $height: 56px;
   width: 100%;
   margin: 0;
@@ -10,6 +10,9 @@
   grid-template-columns: 60px 100%;
   grid-auto-rows: 100%;
   user-select: none;
+  h3 {
+    max-width: 200px;
+  }
   i {
     font-size: 24px;
     margin-left: 40px - 24px;

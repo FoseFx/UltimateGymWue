@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     this.showTitle$ = fromEvent(window, 'resize')
       .pipe(
-        map(_ => window.innerWidth < 400)
+        map(_ => window.innerWidth < 300)
       );
   }
 
