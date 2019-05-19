@@ -3,6 +3,8 @@ services:
 
   db:
     build: ./db-middleware
+    environment:
+    - "SECRET=${SECRET}"
     ports:
     - "8080"
   backend:
