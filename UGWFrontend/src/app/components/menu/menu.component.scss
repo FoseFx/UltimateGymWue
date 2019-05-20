@@ -18,3 +18,19 @@ div {
   z-index: 9;
   opacity: 0.35;
 }
+
+ul {
+  list-style: none;
+}
+li {
+  display: block;
+  padding: 20px;
+  margin: 10px 10px 10px -40px;
+  background: white;
+  width: 100%;
+  white-space: nowrap;
+  transition: background-color 0.2s linear;
+  &:hover {
+    background: $light;
+  }
+}

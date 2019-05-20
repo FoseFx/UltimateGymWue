@@ -1,7 +1,9 @@
 <div id="menu"
      *ngIf="query.menuOpen$ | async"
      [@menuOpen]="(query.menuOpen$ | async) ? 'open' : 'closed'">
-
+  <ul>
+    <li><i class="material-icons">home</i>Home</li>
+  </ul>
 </div>
 
 <!-- Backdrop -->
