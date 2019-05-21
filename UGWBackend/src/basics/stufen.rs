@@ -15,6 +15,7 @@ pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: Re
     let stufen_res = get_stufe(redis_conn, &BasicCredsWrapper{username: creds.username, password: creds.password});
 
     if stufen_res.is_err() {
+        println!("Error communicating with schulserver: {:?}", &stufen_res);
         return CustomResponse::error("Fehler bei Verbindung zum Schulserver, haben sich die Anmeldedaten geändert?".to_string(), rocket::http::Status::BadRequest);
     }
 

@@ -10,10 +10,7 @@ use reqwest::Error;
 use std::ops::Deref;
 use crate::DBURL;
 
-#[get("/auth/insta/register-redirect")]
-pub fn insta_register_handler() -> Option<NamedFile> {
-    return NamedFile::open(Path::new("./insta-redirect.html")).ok();
-}
+
 
 #[derive(Deserialize, Serialize)]
 #[derive(Debug)]
