@@ -41,8 +41,8 @@ pub fn add_creds_handler(user: AuthGuard,
     let is_cached = is_cached(&data, conn);
     if !is_cached {
         let res = match lehrer {
-            true => super::stufen::fetch_navbar(&basic_creds), // todo fetch sth else
-            false => super::stufen::fetch_navbar(&basic_creds)
+            true => super::stufen::fetch_navbar(&basic_creds, secret, db_url), // todo fetch sth else
+            false => super::stufen::fetch_navbar(&basic_creds, secret, db_url)
         };
         if res.is_err() {
             println!("error testing creds {:?}", res);

@@ -79,7 +79,7 @@ fn get_users_kurse(secret: &String, uid: String, db_url: &String) -> Result<(Str
 fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String, db_url: &String) -> Result<Vec<TTWoche>, Box<Error>> {
 
     //
-    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, stufe);
+    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, stufe, secret, db_url);
     if stufe_id.is_none() {
         error!("stufe not found");
     }
@@ -92,7 +92,7 @@ fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWra
         return Ok(serde_json::from_str(cached.unwrap().as_ref())?);
     }
 
-    let wochen = get_wochen(redis_conn, &schueler_creds);
+    let wochen = get_wochen(redis_conn, &schueler_creds, secret, db_url);
     if wochen.is_err() {
         let err = wochen.unwrap_err();
         println!("error while getting wochen: {:#?}", &err);

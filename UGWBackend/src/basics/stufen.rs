@@ -6,13 +6,26 @@ use std::error::Error;
 use crate::redis::Commands;
 use crate::basics::guards::HasCredsGuard;
 use crate::responses::CustomResponse;
+use crate::{SecretMgt, DBURL};
+use rocket::State;
 
 #[get("/basics/stufen")]
-pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: RedisConnection) -> CustomResponse {
+pub fn get_stufen_handler(_user: AuthGuard,
+                          creds: HasCredsGuard,
+                          redis_conn: RedisConnection,
+                          secret: State<SecretMgt>,
+                          db_url: State<DBURL>) -> CustomResponse {
     let redis_conn: &redis::Connection = redis_conn.0.deref();
     let creds = creds.pl.schueler;
+    let db_url = &db_url.url;
+    let secret: String = secret.0.deref().to_string();
 
-    let stufen_res = get_stufe(redis_conn, &BasicCredsWrapper{username: creds.username, password: creds.password});
+    let stufen_res = get_stufe(
+        redis_conn,
+        &BasicCredsWrapper{username: creds.username, password: creds.password},
+        &secret,
+        db_url
+    );
 
     if stufen_res.is_err() {
         println!("Error communicating with schulserver: {:?}", &stufen_res);
@@ -26,7 +39,7 @@ pub fn get_stufen_handler(_user: AuthGuard, creds: HasCredsGuard, redis_conn: Re
 /// untested
 /// this will try to gather the value using the redis cache, if not found it will fetch for it
 /// creds must be schueler creds
-pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
+pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<Vec<String>, Box<Error>> {
 
     let get_res: redis::RedisResult<String> = redis_conn.get("stufen");
 
@@ -45,7 +58,7 @@ pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> R
 
     // fetch file
 
-    let navbar_res = get_navbar(redis_conn, creds)?;
+    let navbar_res = get_navbar(redis_conn, creds, secret, db_url)?;
 
     let (stufen, to_cache_str) = evaluate_stufen(navbar_res);
 
@@ -60,7 +73,7 @@ pub fn get_stufe(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> R
 /// untested
 /// this will try to gather the value using the redis cache, if not found it will fetch for it
 /// creds must be schueler creds
-pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> Result<String, Box<Error>> {
+pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<String, Box<Error>> {
 
     let redis_res: redis::RedisResult<String> = redis_conn.get("navbar");
 
@@ -68,7 +81,7 @@ pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> 
         return Ok(redis_res.unwrap());
     }
 
-    let fetch_res = fetch_navbar(creds)?;
+    let fetch_res = fetch_navbar(creds, secret, db_url)?;
 
     let redis_set_res: redis::RedisResult<String> = redis_conn.set_ex("navbar", fetch_res.clone(), 24 * 60 * 60);
     println!("redis set {:?}", &redis_set_res);
@@ -80,10 +93,12 @@ pub fn get_navbar(redis_conn: &redis::Connection, creds: &BasicCredsWrapper) -> 
 /// untested
 /// this will fetch and return the navbar-frame from /Schueler-Stundenplan/frames/navbar.htm
 /// creds must be schueler creds
-pub fn fetch_navbar(creds: &BasicCredsWrapper) -> Result<String, reqwest::Error> {
+pub fn fetch_navbar(creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<String, Box<std::error::Error>> {
     return super::utils::fetch_schul_server(
         format!("/Schueler-Stundenplan/frames/navbar.htm"),
-        creds
+        creds,
+        secret,
+        db_url
     );
 }
 

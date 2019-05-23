@@ -30,14 +30,14 @@ pub fn get_all_kurse(_user: AuthGuard,
         return CustomResponse::error("Nicht als Stufe erkannt".to_string(), Status::BadRequest);
     }
 
-    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, &stufe);
+    let stufe_id = stufe_to_id(redis_conn, &schueler_creds, &stufe, &secret, db_url);
     if stufe_id.is_none() {
         return CustomResponse::error("Stufe nicht gefunden".to_string(), Status::BadRequest);
     }
     let stufe_id = stufe_id.unwrap();
     println!("stufe_id: {}", &stufe_id);
 
-    let wochen = get_wochen(redis_conn, &schueler_creds);
+    let wochen = get_wochen(redis_conn, &schueler_creds, &secret, db_url);
     if wochen.is_err() {
         let err = wochen.unwrap_err();
         println!("error while getiign wochen: {:#?}", &err);
@@ -127,8 +127,8 @@ pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &Str
 }
 
 /// untested
-pub fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &String) -> Option<String>{
-    let stufen_arr = super::stufen::get_stufe(redis, creds);
+pub fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: &String, secret: &String, db_url: &String) -> Option<String>{
+    let stufen_arr = super::stufen::get_stufe(redis, creds, secret, db_url);
     if stufen_arr.is_err() {
         return None;
     }
@@ -147,7 +147,7 @@ pub fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: 
 }
 
 /// unstested
-pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Result<Vec<String>, Box<Error>> {
+pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<Vec<String>, Box<Error>> {
     let cache: RedisResult<String> = redis.get("wochen"); // will fail, when nil
     if cache.is_ok() {
         let cache = cache.unwrap();
@@ -159,7 +159,7 @@ pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper) -> Resul
         return Ok(ret);
     }
 
-    let nav = super::stufen::get_navbar(redis, creds)?;
+    let nav = super::stufen::get_navbar(redis, creds, secret, db_url)?;
 
     let vec: Vec<&str> = nav.split("<option value=\"").collect();
 

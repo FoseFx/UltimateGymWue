@@ -2,6 +2,7 @@ const admin = require('firebase-admin');
 const serviceAccount = require('./service-account.json');
 const http = require("http");
 const getKurseAndTT = require('./kurse').getKurseAndTT;
+const fetch = require("node-fetch");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -59,6 +60,9 @@ http.createServer((req, res) => {
   }
   if (/^\/users_kurse\/.*$/.test(req.url)) {
     return getUsersKurse(req, res);
+  }
+  if (/^\/proxy\/.*$/.test(req.url)) {
+    return proxy(req, res);
   }
 
   res.statusCode = 404;
@@ -396,4 +400,21 @@ async function getUsersKurse(req, res) {
         res.statusCode = 400;
         return res.end(e.message);
     }
+}
+
+async function proxy(req, res) {
+  let base = req.url.replace("/proxy/", "").replace("/", "");
+  let as_string = Buffer.from(base, 'base64').toString('ascii');
+  let as_obj = JSON.parse(as_string); // {url: string, method: string, header: {}, payload?: string}
+
+  console.log(JSON.stringify(as_obj));
+  const resp = await fetch(as_obj.url, {
+    headers: as_obj.header,
+    method: as_obj.method
+  });
+
+  const resp_txt = await resp.textConverted();
+  res.statusCode = resp.status;
+  return res.end(resp_txt);
+
 }

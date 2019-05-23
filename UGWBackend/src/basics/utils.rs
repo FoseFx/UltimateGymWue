@@ -1,3 +1,4 @@
+use std::error::Error;
 
 const BASE_URL: &'static str = "https://gymnasium-wuerselen.de/untis";
 
@@ -28,18 +29,29 @@ impl BasicCredsWrapper {
 /// this sends a request to the school's server relative to the BASE_URL
 /// and returns the body on a 200, any other code will fail and return a
 /// reqwest::Error
-pub fn fetch_schul_server(path: String, creds: &BasicCredsWrapper) -> Result<String, reqwest::Error> {
+pub fn fetch_schul_server(path: String, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<String, Box<Error>> {
 
     let url = format!("{}{}", BASE_URL, path);
 
     let auth_header_content = creds_wrapper_to_basic(creds);
 
+    let reqest_object = json!({
+        "url": url,
+        "method": "GET",
+        "header": {
+            "AUTHORIZATION": auth_header_content,
+            "USER_AGENT": "UGW Scrapper. https://ugw.fosefx.com/info"
+        }
+    });
+    let request_object_string = serde_json::to_string(&reqest_object)?;
+
+    let base = base64::encode(&request_object_string[..]);
+
     let client = reqwest::Client::new();
 
     let res = client
-        .get(&url)
-        .header(reqwest::header::AUTHORIZATION, auth_header_content)
-        .header(reqwest::header::USER_AGENT, "UGW Scrapper. https://ugw.fosefx.com/info")
+        .get(&format!("{}proxy/{}", db_url, base)[..])
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
     let mut res = res.error_for_status()?;
 
