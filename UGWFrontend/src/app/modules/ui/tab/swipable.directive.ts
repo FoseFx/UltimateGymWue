@@ -69,17 +69,20 @@ export class SwipableDirective {
     if (!this.moved) {
       return;
     }
+    if (typeof this.newPercent === 'undefined') {
+      this.newPercent = this.percentAtStart;
+    }
     const diff = this.newPercent - this.percentAtStart;
     const el = this.elRef.nativeElement as HTMLElement;
 
     if (Math.abs(diff) > Math.abs(0.4 * this.percentPerPage)) { // snap to
       const add = diff < 0;
       const newIndex = this.index + (add ? 1 : -1);
-      el.style.transform = `translateX(${100 * (newIndex / this.N)}%)`;
+      el.style.transform = `translateX(-${100 * (newIndex / this.N)}%)`;
       this.index = newIndex;
       this.snapto.emit(newIndex);
     } else { // snap back
-      el.style.transform = `translateX(${100 * (this.index / this.N)}%)`;
+      el.style.transform = `translateX(-${100 * (this.index / this.N)}%)`;
       this.snapto.emit(this.index);
     }
 
