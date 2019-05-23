@@ -33,6 +33,9 @@ export class InstaComponent implements OnInit {
     const top = (screen.height / 2) - (600 / 2);
     const child = window.open(environment.urls.registerInstaRediect, 'popup', `top=${top},left=${left},width=${600},height=${600}`);
 
+    if (child === null) {
+      return;
+    }
     const interv = setInterval(() => {
       console.log('closed', child.closed);
       if (child.closed) {
@@ -42,7 +45,7 @@ export class InstaComponent implements OnInit {
       const href = child.location.href;
       console.log('href', href);
 
-      if (/^.*\/auth\/insta\/register-redirect.*$/.test(href)) {
+      if (/^.*\/assets\/insta-redirect.html.*$/.test(href)) {
         this.loading = true;
         child.close();
         clearInterval(interv);
@@ -53,7 +56,7 @@ export class InstaComponent implements OnInit {
 
   onData(href: string) {
     const firstPart = href.split('?')[0];
-    const queryStrings = href.split('/auth/insta/register-redirect?')[1].split('&');
+    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
     const querys: {code?: string, error?: string, error_description?: string, error_reason?: string} = {};
 
     queryStrings.forEach((pair: string) => {

@@ -30,7 +30,7 @@ export class InstaLoginComponent {
       const href = child.location.href;
       console.log('href', href);
 
-      if (/^.*\/auth\/insta\/register-redirect.*$/.test(href)) {
+      if (/^.*\/assets\/insta-redirect.html.*$/.test(href)) {
         this.loading = true;
         child.close();
         clearInterval(interv);
@@ -42,7 +42,7 @@ export class InstaLoginComponent {
 
   onData(href) {
     const firstPart = href.split('?')[0];
-    const queryStrings = href.split('/auth/insta/register-redirect?')[1].split('&');
+    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
     const querys: {code?: string, error?: string, error_description?: string, error_reason?: string} = {};
 
     queryStrings.forEach((pair: string) => {
