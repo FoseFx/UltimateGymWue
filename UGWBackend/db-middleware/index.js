@@ -407,7 +407,6 @@ async function proxy(req, res) {
   let as_string = Buffer.from(base, 'base64').toString('ascii');
   let as_obj = JSON.parse(as_string); // {url: string, method: string, header: {}, payload?: string}
 
-  console.log(JSON.stringify(as_obj));
   const resp = await fetch(as_obj.url, {
     headers: as_obj.header,
     method: as_obj.method

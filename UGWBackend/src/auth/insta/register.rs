@@ -1,5 +1,3 @@
-use rocket::response::NamedFile;
-use std::path::Path;
 use rocket::http::Status;
 use rocket_contrib::json::Json;
 use crate::responses::CustomResponse;
