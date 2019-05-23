@@ -2,6 +2,7 @@ const admin = require('firebase-admin');
 const serviceAccount = require('./service-account.json');
 const http = require("http");
 const getKurseAndTT = require('./kurse').getKurseAndTT;
+const getVertretungsdaten = require('./vp').getVertretungsdaten;
 const fetch = require("node-fetch");
 
 admin.initializeApp({
@@ -63,6 +64,9 @@ http.createServer((req, res) => {
   }
   if (/^\/proxy\/.*$/.test(req.url)) {
     return proxy(req, res);
+  }
+  if (/^\/vp\/.*$/.test(req.url)) {
+    return vp(req, res);
   }
 
   res.statusCode = 404;
@@ -416,4 +420,11 @@ async function proxy(req, res) {
   res.statusCode = resp.status;
   return res.end(resp_txt);
 
+}
+
+async function vp(req, res) {
+  let base = req.url.replace("/vp/", "").replace("/", "");
+  const o = await getVertretungsdaten(base, false, new Date());
+  console.log(JSON.stringify(o, null, 2).replace(/type/g, 'typ'));
+  return res.end(JSON.stringify(o).replace(/type/g, 'typ'));
 }

@@ -98,7 +98,8 @@ fn rocket() -> Rocket {
                 basics::creds::get_creds_handler,
                 basics::kurse::get_all_kurse,
                 basics::set::set_basics,
-                basics::stundenplan::get_sp
+                basics::stundenplan::get_sp,
+                basics::vertretungsplan::get_vertretungsplan
 
             ]
         )

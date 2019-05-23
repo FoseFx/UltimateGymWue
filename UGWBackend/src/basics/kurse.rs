@@ -58,7 +58,7 @@ pub fn get_all_kurse(_user: AuthGuard,
 
 
 /// tested
-fn is_stufe(string: &String) -> bool {
+pub fn is_stufe(string: &String) -> bool {
     let string = string.to_uppercase();
     let regex = Regex::new(r"^[A-Z0-9-]{2,5}$").unwrap();
     return regex.is_match(string.as_ref());

@@ -5,3 +5,4 @@ pub mod guards;
 pub mod kurse;
 pub mod set;
 pub mod stundenplan;
+pub mod vertretungsplan;
