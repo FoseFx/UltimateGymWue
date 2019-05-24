@@ -1,5 +1,6 @@
 <app-tab style="width: 80%; max-width: 900px; margin: 0 auto;">
   <app-tab-item label="{{appQuery.today$ | async | date: 'EE' }}">
+    <!-- Today -->
     <app-home-table
       class="tab-item"
       [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.today$ | async).getDay() - 1]"
@@ -7,6 +8,7 @@
       [date]="appQuery.today$ | async"
     ></app-home-table>
   </app-tab-item>
+  <!-- Next Day -->
   <app-tab-item label="{{appQuery.nextDay$ | async | date: 'EE' }}">
     <app-home-table
       class="tab-item"

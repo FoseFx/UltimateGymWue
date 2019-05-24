@@ -35,7 +35,10 @@ export interface AppState {
     stufe_id: string,
     kurse: Kurse,
     stundenplan: TimeTable
-    // todo
+    vertretungsplan: {
+      infos: string[],
+      vp: VertretungsDatum[]
+    }
   };
   menuOpen: boolean;
   credentials: {
@@ -76,4 +79,15 @@ export class AppStore extends Store<AppState> {
     super(createInitialState());
   }
 
+}
+
+
+export class VertretungsDatum {
+  date: string;
+  fach: string;
+  info: string;
+  newRaum: string;
+  oldRaum: string;
+  stunde: string;
+  typ: string;
 }

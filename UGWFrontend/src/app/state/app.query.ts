@@ -86,4 +86,8 @@ export class AppQuery extends Query<AppState> {
 
   hasCredentials = () => this.getValue().credentials !== null;
 
+  public hasVertretungsplanCached(): boolean {
+    return !!this.getValue().basics.vertretungsplan;
+  }
+
 }

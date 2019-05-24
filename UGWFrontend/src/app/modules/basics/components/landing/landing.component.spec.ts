@@ -5,6 +5,8 @@ import { HomeTableComponent } from '../home-table/home-table.component';
 import { AppQuery } from 'src/app/state/app.query';
 import { AppStore } from 'src/app/state/app.store';
 import {UiModule} from '../../../ui/ui.module';
+import {AppService} from '../../../../state/app.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -12,9 +14,9 @@ describe('LandingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule],
+      imports: [UiModule, HttpClientModule],
       declarations: [ LandingComponent, HomeTableComponent ],
-      providers: [AppQuery, AppStore]
+      providers: [AppQuery, AppStore, AppService]
     })
     .compileComponents();
   }));
@@ -30,7 +32,8 @@ describe('LandingComponent', () => {
         ],
         kurse: [],
         stufe: '',
-        stufe_id: ''
+        stufe_id: '',
+        vertretungsplan: null
       }
     });
     fixture.detectChanges();

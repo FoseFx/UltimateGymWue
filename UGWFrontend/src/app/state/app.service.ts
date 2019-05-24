@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppStore} from './app.store';
+import {AppState, AppStore} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
@@ -88,14 +88,29 @@ export class AppService {
         stufe,
         stufe_id: null,
         kurse,
-        stundenplan: sp
+        stundenplan: sp,
+        vertretungsplan: null
       }
     });
     this.save();
   }
 
+  setVertretungsplan(vp) {
+    const basics = Object.assign({}, this.query.getValue().basics);
+    basics.vertretungsplan = vp;
+    this.store.update({
+      basics
+    });
+  }
 
   private save() {
-    localStorage.app_state = JSON.stringify(this.query.getValue());
+    const obj: AppState = JSON.parse(JSON.stringify(this.query.getValue()));
+    if (obj.basics) {
+      delete obj.basics.vertretungsplan;
+    }
+    delete obj.nextDay;
+    delete obj.thisDay;
+    delete obj.menuOpen;
+    localStorage.app_state = JSON.stringify(obj);
   }
 }
