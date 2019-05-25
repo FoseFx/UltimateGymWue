@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeTableComponent } from './home-table.component';
+import {UiModule} from '../../../ui/ui.module';
 
 describe('HomeTableComponent', () => {
   let component: HomeTableComponent;
@@ -8,6 +9,7 @@ describe('HomeTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [UiModule],
       declarations: [ HomeTableComponent ]
     })
     .compileComponents();

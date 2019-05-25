@@ -12,6 +12,8 @@ export class HomeTableComponent implements OnInit {
   @Input() today: TimeTableDay;
   @Input() date: Date;
   @Input() abWoche: 0|1;
+  @Input() showSpinner = false;
+
   constructor() { }
 
   ngOnInit() {

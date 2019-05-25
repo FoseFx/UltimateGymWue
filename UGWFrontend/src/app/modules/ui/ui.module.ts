@@ -32,6 +32,7 @@ import { SwipableDirective } from './tab/swipable.directive';
     HrComponent,
     CardHeaderComponent,
     TabComponent,
+    SpinnerComponent,
     TabItemComponent
   ]
 })

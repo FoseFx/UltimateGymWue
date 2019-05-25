@@ -6,6 +6,7 @@
       [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.today$ | async).getDay() - 1]"
       [abWoche]="appQuery.abwoche$ | async"
       [date]="appQuery.today$ | async"
+      [showSpinner]="loading"
     ></app-home-table>
   </app-tab-item>
   <!-- Next Day -->
@@ -15,6 +16,7 @@
       [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.nextDay$ | async).getDay() - 1]"
       [abWoche]="appQuery.abwoche$ | async"
       [date]="appQuery.nextDay$ | async"
+      [showSpinner]="loading"
     ></app-home-table>
   </app-tab-item>
 </app-tab>

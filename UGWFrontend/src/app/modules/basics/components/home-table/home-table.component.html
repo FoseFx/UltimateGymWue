@@ -1,5 +1,7 @@
 <div class="day-header">
   <h1>{{date | date: 'EE dd.MM.yy'}}</h1>
+  <app-spinner style="transform: scale(0.7); display: block; margin: auto;" *ngIf="showSpinner"></app-spinner>
+  <div *ngIf="!showSpinner"></div>
   <h3>{{abWoche === 1 ? 'A' : 'B'}} Woche</h3>
 </div>
 <table>
