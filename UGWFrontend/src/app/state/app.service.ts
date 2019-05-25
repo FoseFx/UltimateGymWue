@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppState, AppStore} from './app.store';
+import {AppState, AppStore, VertretungsDatum, VertretungsPlanSeite} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
@@ -95,7 +95,7 @@ export class AppService {
     this.save();
   }
 
-  setVertretungsplan(vp) {
+  setVertretungsplan(vp: VertretungsPlanSeite[]) {
     const basics = Object.assign({}, this.query.getValue().basics);
     basics.vertretungsplan = vp;
     this.store.update({

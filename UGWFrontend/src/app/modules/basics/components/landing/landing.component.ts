@@ -3,6 +3,7 @@ import {AppQuery} from '../../../../state/app.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {AppService} from '../../../../state/app.service';
+import {VertretungsPlanSeite} from "../../../../state/app.store";
 
 @Component({
   selector: 'app-landing',
@@ -26,7 +27,7 @@ export class LandingComponent implements AfterViewInit {
         Authorization: this.appQuery.loginToken,
         'X-GW-Auth': this.appQuery.credentialsToken
       }
-    }).subscribe((o: {error: boolean, msg?: string, data: any}) => {
+    }).subscribe((o: {error: boolean, msg?: string, data: VertretungsPlanSeite[]}) => {
       this.loading = false;
       this.appService.setVertretungsplan(o.data);
     }, (err) => {

@@ -35,10 +35,7 @@ export interface AppState {
     stufe_id: string,
     kurse: Kurse,
     stundenplan: TimeTable
-    vertretungsplan: {
-      infos: string[],
-      vp: VertretungsDatum[]
-    }
+    vertretungsplan: VertretungsPlanSeite[]
   };
   menuOpen: boolean;
   credentials: {
@@ -90,4 +87,9 @@ export class VertretungsDatum {
   oldRaum: string;
   stunde: string;
   typ: string;
+}
+
+export class VertretungsPlanSeite {
+  infos: string[];
+  vp: VertretungsDatum[];
 }
