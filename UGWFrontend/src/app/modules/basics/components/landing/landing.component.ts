@@ -28,8 +28,8 @@ export class LandingComponent implements AfterViewInit {
         'X-GW-Auth': this.appQuery.credentialsToken
       }
     }).subscribe((o: {error: boolean, msg?: string, data: VertretungsPlanSeite[]}) => {
-      this.loading = false;
       this.appService.setVertretungsplan(o.data);
+      this.loading = false;
     }, (err) => {
       this.loading = false;
       console.log(err);

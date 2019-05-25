@@ -5,7 +5,7 @@
 
 import {Query} from '@datorama/akita';
 import {Injectable} from '@angular/core';
-import {AppState, AppStore} from './app.store';
+import {AppState, AppStore, VertretungsPlanSeite} from './app.store';
 import {map} from 'rxjs/operators';
 import {queryInCypress} from '../util';
 import {Observable} from 'rxjs';
@@ -23,7 +23,7 @@ export class AppQuery extends Query<AppState> {
     return `Bearer ${this.getValue().credentials.token}`;
   }
   menuOpen$ = this.select('menuOpen');
-  tt$ = this.select('basics').pipe(map((b) => b.stundenplan));
+  tt$ = this.select('basics').pipe(map((b) => !!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan));
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
 
@@ -58,12 +58,16 @@ export class AppQuery extends Query<AppState> {
 
   abwoche$: Observable<0|1> = this.today$.pipe(
     map((date) => {
-      return (this.getWeekNumber(date)[1] % 2 === 0) ? 1 : 0;
+      return (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1;
     })
   );
 
+  vertretungsDaten$: Observable<VertretungsPlanSeite[]> = this.select('basics').pipe(
+    map((b) => !!b.vertretungsplan ? b.vertretungsplan : [null, null])
+  );
+
   /** credit: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php/6117889#6117889 */
-  private getWeekNumber(d) {
+  public static getWeekNumber(d) {
     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
     const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));

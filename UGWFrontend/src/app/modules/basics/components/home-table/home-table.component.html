@@ -2,7 +2,7 @@
   <h1>{{date | date: 'EE dd.MM.yy'}}</h1>
   <app-spinner style="transform: scale(0.7); display: block; margin: auto;" *ngIf="showSpinner"></app-spinner>
   <div *ngIf="!showSpinner"></div>
-  <h3>{{abWoche === 1 ? 'A' : 'B'}} Woche</h3>
+  <h3>{{abWoche === 0 ? 'A' : 'B'}} Woche</h3>
 </div>
 <table>
   <tbody>
@@ -21,3 +21,13 @@
 
   </tbody>
 </table>
+
+<ng-container *ngIf="vd !== null">
+  <ul>
+    <li *ngFor="let v of vd.infos">{{v | json}}</li>
+  </ul>
+  <ul>
+    <li *ngFor="let v of vd.vp">{{v | json}}</li>
+  </ul>
+
+</ng-container>

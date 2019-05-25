@@ -34,7 +34,8 @@ export interface AppState {
     stufe: string,
     stufe_id: string,
     kurse: Kurse,
-    stundenplan: TimeTable
+    stundenplan: TimeTable,
+    stundenplanWithInfos: TimeTable
     vertretungsplan: VertretungsPlanSeite[]
   };
   menuOpen: boolean;
