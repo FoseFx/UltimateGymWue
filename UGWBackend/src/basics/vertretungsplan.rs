@@ -7,7 +7,6 @@ use crate::responses::CustomResponse;
 use rocket::http::Status;
 use crate::basics::kurse::{is_stufe, stufe_to_id};
 use std::ops::Deref;
-use std::collections::HashMap;
 use rocket_contrib::json::JsonValue;
 use crate::CustomError;
 use serde_json::Map;
@@ -45,20 +44,23 @@ pub fn get_vertretungsplan(_user: AuthGuard,
     }
     let result = result.unwrap();
 
-    let infos: &serde_json::Value = result.get(0).unwrap();
+    let mut returnVec: Vec<ReturnVecItem> = vec![];
 
-    let map: &Map<String, serde_json::Value> = result.get(1).unwrap().as_object().unwrap();
-
-    let stufe_vp_datum = map.get(&stufe);
-
-    if stufe_vp_datum.is_none() {
-        return CustomResponse::data(json!({"infos": infos}));
+    for day in result {
+        let infos: &serde_json::Value = day.get(0).unwrap();
+        let map: &Map<String, serde_json::Value> = day.get(1).unwrap().as_object().unwrap();
+        let stufe_vp_datum = map.get(&stufe);
+        if stufe_vp_datum.is_none() {
+            returnVec.push(ReturnVecItem { infos: infos.to_owned(), vp: None } );
+        } else {
+            returnVec.push(ReturnVecItem { infos: infos.to_owned(), vp: Some(stufe_vp_datum.unwrap().to_owned()) } );
+        }
     }
 
-    return CustomResponse::data(json!({"infos": infos, "vp": stufe_vp_datum.unwrap()}));
+    return CustomResponse::data(json!(returnVec));
 }
 
-fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<JsonValue>, Box<std::error::Error>> {
+fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<Vec<JsonValue>>, Box<std::error::Error>> {
 
     let redis_get_res: RedisResult<String> = redis.get("vertretungsplan");
 
@@ -80,7 +82,7 @@ fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, 
         error!(format!("{:?}", resp))
     }
 
-    let result: Result<Vec<JsonValue>, reqwest::Error>  = resp.unwrap().json();
+    let result: Result<Vec<Vec<JsonValue>>, reqwest::Error>  = resp.unwrap().json();
 
 
     if result.is_err() {
@@ -104,4 +106,10 @@ struct VertretungsDatum {
     newRaum: String,
     oldRaum: String,
     stunde: String
+}
+
+#[derive(Deserialize,Serialize,Debug)]
+struct ReturnVecItem {
+    infos: serde_json::Value,
+    vp: Option<serde_json::Value>
 }

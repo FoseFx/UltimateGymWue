@@ -32,7 +32,11 @@ async function fetchVD(creds, expectedDate, lehrer = false) {
         fetchVDFrame(creds, "f1/", expectedDate, lehrer, START_FILE, []),
         fetchVDFrame(creds, "f2/", expectedDate, lehrer, START_FILE, [])
     ]);
-    return analyzeVD(frames);
+    let frame1 = [frames[0], null];
+    let frame2 = [null, frames[1]];
+    let anal1 = analyzeVD(frame1);
+    let anal2 = analyzeVD(frame2);
+    return [anal1, anal2];
 }
 
 /**
@@ -53,9 +57,9 @@ async function fetchVDFrame(creds,
     const dom = new JSDOM(text);
     const doc = dom.window.document;
     // test whether this frame is old
-    const tagOnDoc = doc.querySelector(".mon_title").textContent.trim();
-    if (tagOnDoc.match(expectedDate) === null)
-        return null;
+    //const tagOnDoc = doc.querySelector(".mon_title").textContent.trim();
+    //if (tagOnDoc.match(expectedDate) === null)
+    //    return null;
     const eva = evaVDPort(text, false);
     file = eva[0];
     slides.push(eva[1]);
