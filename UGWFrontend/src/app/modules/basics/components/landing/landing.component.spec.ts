@@ -7,6 +7,7 @@ import { AppStore } from 'src/app/state/app.store';
 import {UiModule} from '../../../ui/ui.module';
 import {AppService} from '../../../../state/app.service';
 import {HttpClientModule} from '@angular/common/http';
+import {StufeVertretungComponent} from '../stufe-vertretung/stufe-vertretung.component';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -15,7 +16,7 @@ describe('LandingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
-      declarations: [ LandingComponent, HomeTableComponent ],
+      declarations: [ LandingComponent, HomeTableComponent, StufeVertretungComponent ],
       providers: [AppQuery, AppStore, AppService]
     })
     .compileComponents();
@@ -33,7 +34,8 @@ describe('LandingComponent', () => {
         kurse: [],
         stufe: '',
         stufe_id: '',
-        vertretungsplan: null
+        vertretungsplan: null,
+        stundenplanWithInfos: null
       }
     });
     fixture.detectChanges();

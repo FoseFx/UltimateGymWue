@@ -88,6 +88,7 @@ export class VertretungsDatum {
   oldRaum: string;
   stunde: string;
   typ: string;
+  nd?: 1;
 }
 
 export class VertretungsPlanSeite {

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeTableComponent } from './home-table.component';
 import {UiModule} from '../../../ui/ui.module';
+import {StufeVertretungComponent} from '../stufe-vertretung/stufe-vertretung.component';
 
 describe('HomeTableComponent', () => {
   let component: HomeTableComponent;
@@ -10,7 +11,7 @@ describe('HomeTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [UiModule],
-      declarations: [ HomeTableComponent ]
+      declarations: [ HomeTableComponent, StufeVertretungComponent ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {TimeTableDay} from '../../../../../types/TT';
-import {VertretungsDatum, VertretungsPlanSeite} from '../../../../state/app.store';
+import {VertretungsPlanSeite} from '../../../../state/app.store';
 
 @Component({
   selector: 'app-home-table',
@@ -14,7 +14,23 @@ export class HomeTableComponent implements OnInit {
   @Input() date: Date;
   @Input() abWoche: 0|1;
   @Input() showSpinner = false;
-  @Input() vd: VertretungsPlanSeite = null;
+  Svd: VertretungsPlanSeite = null;
+  noVDFound = false;
+
+  @Input() set vd(value: VertretungsPlanSeite[]) {
+    console.log(value);
+    for (const v of value) {
+      if (!!v) {
+        if (v.infos[0] === `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear()}`) {
+          this.Svd = v;
+          return;
+        }
+      }
+    }
+    if (value[0] !== null && value[1] !== null) {
+      this.noVDFound = true;
+    }
+  }
 
   constructor() { }
 

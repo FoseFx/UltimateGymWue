@@ -7,7 +7,7 @@
       [abWoche]="appQuery.abwoche$ | async"
       [date]="appQuery.today$ | async"
       [showSpinner]="loading"
-      [vd]="(appQuery.vertretungsDaten$ | async)[0]"
+      [vd]="appQuery.vertretungsDaten$ | async"
     ></app-home-table>
   </app-tab-item>
   <!-- Next Day -->
@@ -18,7 +18,7 @@
       [abWoche]="appQuery.abwoche$ | async"
       [date]="appQuery.nextDay$ | async"
       [showSpinner]="loading"
-      [vd]="(appQuery.vertretungsDaten$ | async)[1]"
+      [vd]="appQuery.vertretungsDaten$ | async"
     ></app-home-table>
   </app-tab-item>
 </app-tab>

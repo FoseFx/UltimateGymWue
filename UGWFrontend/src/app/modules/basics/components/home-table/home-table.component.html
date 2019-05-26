@@ -22,12 +22,11 @@
   </tbody>
 </table>
 
-<ng-container *ngIf="vd !== null">
-  <ul>
-    <li *ngFor="let v of vd.infos">{{v | json}}</li>
-  </ul>
-  <ul>
-    <li *ngFor="let v of vd.vp">{{v | json}}</li>
-  </ul>
+<p *ngIf="noVDFound">Noch kein Vertretungsplan verfügbar.</p>
 
-</ng-container>
+<p *ngIf="!showSpinner && Svd?.vp === null && !noVDFound">Keine Vertretung.</p>
+
+<app-stufe-vertretung
+  *ngIf="!!Svd?.vp || !Svd?.infos.length > 1"
+  [vertretungsdaten]="Svd">
+</app-stufe-vertretung>

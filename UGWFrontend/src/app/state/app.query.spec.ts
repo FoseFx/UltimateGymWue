@@ -213,27 +213,27 @@ describe('AppQuery', () => {
 
     });
 
-    it('should return 1 for abwoche$ on A woche', (done) => {
+    it('should return 0 for abwoche$ on A woche', (done) => {
       const query: AppQuery = TestBed.get(AppQuery);
       spyOn(query, 'select').and.returnValue(of(null));
       jasmine.clock().install();
       const refDate = new Date(2019, 4, 14);
       jasmine.clock().mockDate(refDate);
       query.abwoche$.subscribe((val: 0|1) => {
-        expect(val).toEqual(1);
+        expect(val).toEqual(0);
         done();
       });
       jasmine.clock().uninstall();
     });
 
-    it('should return 0 for abwoche$ on B Woche', (done) => {
+    it('should return 1 for abwoche$ on B Woche', (done) => {
       const query: AppQuery = TestBed.get(AppQuery);
       spyOn(query, 'select').and.returnValue(of(null));
       jasmine.clock().install();
       const refDate = new Date(2019, 4, 20);
       jasmine.clock().mockDate(refDate);
       query.abwoche$.subscribe((val: 0|1) => {
-        expect(val).toEqual(0);
+        expect(val).toEqual(1);
         done();
       });
       jasmine.clock().uninstall();
