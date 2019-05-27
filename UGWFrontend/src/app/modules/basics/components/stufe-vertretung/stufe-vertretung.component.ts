@@ -17,7 +17,7 @@ export class StufeVertretungComponent {
       vp: []
     };
 
-    this.Svertretungsdaten.infos.shift(); // dont display day
+    this.Svertretungsdaten.infos.shift(); // dont display day (first item)
 
     if (!value.vp) {
       return;
