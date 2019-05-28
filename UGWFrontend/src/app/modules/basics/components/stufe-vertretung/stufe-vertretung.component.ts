@@ -27,6 +27,7 @@ export class StufeVertretungComponent {
         this.Svertretungsdaten.vp.push(vd);
       }
     });
+    console.log(this.Svertretungsdaten);
   }
 
   constructor() { }
