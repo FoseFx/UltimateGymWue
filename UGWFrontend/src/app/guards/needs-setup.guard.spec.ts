@@ -1,9 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppStore } from '../state/app.store';
-import { AppQuery } from '../state/app.query';
-import { NeedsSetupGuard } from './needs-setup.guard';
-import { Router } from '@angular/router';
+import {inject, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppStore} from '../state/app.store';
+import {AppQuery} from '../state/app.query';
+import {NeedsSetupGuard} from './needs-setup.guard';
+import {Router} from '@angular/router';
 
 
 describe('NeedsSetupGuard', () => {

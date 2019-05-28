@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GoogleComponent, GoogleSigninComponent} from './google.component';
 import {UiModule} from '../../../ui/ui.module';

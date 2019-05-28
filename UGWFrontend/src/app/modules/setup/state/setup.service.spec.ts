@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {SetupService} from './setup.service';
 import {SetupStore} from './setup.store';
 import {SetupQuery} from './setup.query';

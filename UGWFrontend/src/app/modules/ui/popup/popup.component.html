@@ -1,7 +1,7 @@
-<div class="popup">
+<div class="popup" [@popupWindowOpenClose]="'open'">
 
   <ng-content></ng-content>
 
 </div>
-<div class="popup-backdrop">
+<div class="popup-backdrop" (click)="close.emit()">
 </div>

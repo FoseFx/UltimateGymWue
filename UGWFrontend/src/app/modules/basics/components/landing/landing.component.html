@@ -1,4 +1,4 @@
-<app-popup>
+<app-popup *ngIf="basicsQuery.showPopup$ | async" (close)="closePopup()">
   <h1>Some Test</h1>
   <p>Some Content here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto deserunt dolore est facilis molestias natus nobis praesentium quo quod repellat, sunt, unde vitae voluptates. Aliquam consequuntur fugit pariatur quos reprehenderit?</p>
 </app-popup>

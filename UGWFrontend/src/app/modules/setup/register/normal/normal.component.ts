@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SetupQuery} from '../../state/setup.query';
 import {InputComponent} from '../../../ui/input/input.component';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {SetupService} from '../../state/setup.service';
 import {LoginService} from '../../login/login.service';
 import {Router} from '@angular/router';
-import { handleError } from 'src/app/util';
+import {handleError} from 'src/app/util';
 
 @Component({
   selector: 'app-normal',

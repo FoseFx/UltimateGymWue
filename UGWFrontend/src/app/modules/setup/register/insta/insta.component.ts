@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {SetupQuery} from '../../state/setup.query';
 import {Router} from '@angular/router';
 import {AppService} from '../../../../state/app.service';
 import {LoginResponse} from '../../login/login.service';
-import { handleError } from 'src/app/util';
+import {handleError} from 'src/app/util';
 import {SetupService} from '../../state/setup.service';
 
 @Component({

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SetupQuery} from '../state/setup.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {StundenplanService} from '../services/stundenplan.service';
 
 @Component({

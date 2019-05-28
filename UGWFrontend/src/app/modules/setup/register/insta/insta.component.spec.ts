@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InstaComponent } from './insta.component';
+import {InstaComponent} from './insta.component';
 import {UiModule} from '../../../ui/ui.module';
 import {HttpClientModule} from '@angular/common/http';
 import {SetupQuery} from '../../state/setup.query';

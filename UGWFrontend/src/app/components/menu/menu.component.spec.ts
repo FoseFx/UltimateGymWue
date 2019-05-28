@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MenuComponent } from './menu.component';
+import {MenuComponent} from './menu.component';
 import {AppStore} from '../../state/app.store';
 import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';

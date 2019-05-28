@@ -13,7 +13,7 @@ export class StufeVertretungComponent {
 
   @Input() set vertretungsdaten(value: VertretungsPlanSeite) {
     this.Svertretungsdaten = {
-      infos: value.infos,
+      infos: Array.from(value.infos),
       vp: []
     };
 

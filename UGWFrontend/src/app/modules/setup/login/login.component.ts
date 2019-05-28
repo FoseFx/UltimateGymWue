@@ -3,7 +3,7 @@ import {InputComponent} from '../../ui/input/input.component';
 import {LoginService} from './login.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import { handleError } from 'src/app/util';
+import {handleError} from 'src/app/util';
 
 @Component({
   selector: 'app-login',

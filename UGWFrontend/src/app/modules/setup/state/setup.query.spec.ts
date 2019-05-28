@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {hasSelAllKurse, SetupQuery} from './setup.query';
 import {SelectedKurseIndexMap, SetupStore} from './setup.store';
 

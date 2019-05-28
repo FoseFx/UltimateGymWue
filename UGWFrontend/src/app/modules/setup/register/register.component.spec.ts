@@ -1,11 +1,11 @@
 import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
-import { RegisterComponent } from './register.component';
+import {RegisterComponent} from './register.component';
 import {UiModule} from '../../ui/ui.module';
 import {SetupStore} from '../state/setup.store';
 import {SetupService} from '../state/setup.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import { NormalComponent } from './normal/normal.component';
+import {NormalComponent} from './normal/normal.component';
 import {SetupQuery} from '../state/setup.query';
 
 describe('RegisterComponent', () => {

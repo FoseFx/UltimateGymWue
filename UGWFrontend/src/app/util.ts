@@ -1,6 +1,6 @@
 import {Query} from '@datorama/akita';
-import { HttpErrorResponse } from '@angular/common/http';
-import { MakesRequests } from 'src/types/MakesRequests';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MakesRequests} from 'src/types/MakesRequests';
 
 export function serviceInCypress(service) {
   const name = service.constructor.name;

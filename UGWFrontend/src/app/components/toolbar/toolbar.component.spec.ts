@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ToolbarComponent } from './toolbar.component';
+import {ToolbarComponent} from './toolbar.component';
 import {AppStore} from '../../state/app.store';
 import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';

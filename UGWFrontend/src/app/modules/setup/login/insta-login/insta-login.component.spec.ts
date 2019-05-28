@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InstaLoginComponent } from './insta-login.component';
+import {InstaLoginComponent} from './insta-login.component';
 import {UiModule} from '../../../ui/ui.module';
 import {AppService} from '../../../../state/app.service';
 import {AppStore} from '../../../../state/app.store';

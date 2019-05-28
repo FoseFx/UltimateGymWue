@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { AppService } from 'src/app/state/app.service';
-import { SetupQuery } from '../state/setup.query';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Kurse } from 'src/types/Kurs';
-import { AppQuery } from 'src/app/state/app.query';
-import { DataResponse } from 'src/types/Responses';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {AppService} from 'src/app/state/app.service';
+import {SetupQuery} from '../state/setup.query';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {Kurse} from 'src/types/Kurs';
+import {AppQuery} from 'src/app/state/app.query';
+import {DataResponse} from 'src/types/Responses';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {TimeTable} from '../../../../types/TT';
 
 @Injectable()

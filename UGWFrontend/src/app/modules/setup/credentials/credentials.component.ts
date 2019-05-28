@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InputComponent} from '../../ui/input/input.component';
 import {Router} from '@angular/router';
 import {AppQuery} from '../../../state/app.query';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppService} from '../../../state/app.service';
-import { handleError } from 'src/app/util';
-import {SetupService} from '../state/setup.service';
+import {handleError} from 'src/app/util';
 import {SetupQuery} from '../state/setup.query';
 
 @Component({

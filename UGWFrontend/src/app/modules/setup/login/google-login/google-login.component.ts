@@ -3,7 +3,7 @@ import {addGoogleScript} from '../../utils';
 import {GoogleUser} from '../../register/google/google.component';
 import {Router} from '@angular/router';
 import {LoginService} from '../login.service';
-import { handleError } from 'src/app/util';
+import {handleError} from 'src/app/util';
 
 @Component({
   selector: 'app-google-login',

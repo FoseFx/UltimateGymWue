@@ -3,7 +3,7 @@ import {AppState, AppStore, VertretungsDatum, VertretungsPlanSeite} from './app.
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
-import { Kurse } from 'src/types/Kurs';
+import {Kurse} from 'src/types/Kurs';
 import {TimeTable} from '../../types/TT';
 
 @Injectable()

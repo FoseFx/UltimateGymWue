@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GoogleLoginComponent } from './google-login.component';
+import {GoogleLoginComponent} from './google-login.component';
 import {UiModule} from '../../../ui/ui.module';
 import {GoogleSigninComponent} from '../../register/google/google.component';
 import {RouterTestingModule} from '@angular/router/testing';

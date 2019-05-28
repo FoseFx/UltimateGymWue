@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { LegalComponent } from './legal/legal.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {WelcomeComponent} from './welcome/welcome.component';
+import {LegalComponent} from './legal/legal.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {NormalComponent} from './register/normal/normal.component';

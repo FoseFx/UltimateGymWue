@@ -3,7 +3,9 @@ import {AppQuery} from '../../../../state/app.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {AppService} from '../../../../state/app.service';
-import {VertretungsPlanSeite} from "../../../../state/app.store";
+import {VertretungsPlanSeite} from '../../../../state/app.store';
+import {BasicsQuery} from '../../state/basics.query';
+import {BasicsService} from '../../state/basics.service';
 
 @Component({
   selector: 'app-landing',
@@ -14,9 +16,14 @@ export class LandingComponent implements AfterViewInit {
 
   loading = false;
 
-  constructor(public readonly appQuery: AppQuery, private appService: AppService, private http: HttpClient) { }
+  constructor(public readonly appQuery: AppQuery,
+              private appService: AppService,
+              private http: HttpClient,
+              public basicsQuery: BasicsQuery,
+              private basicsService: BasicsService) { }
 
   ngAfterViewInit() {
+    console.log(this.basicsService);
     if (!this.appQuery.getValue().loginData) { return; } // only for the tests, guard should not allow this
     if (this.appQuery.hasVertretungsplanCached()) {
       return;
@@ -34,6 +41,10 @@ export class LandingComponent implements AfterViewInit {
       this.loading = false;
       console.log(err);
     });
+  }
+
+  closePopup(): void {
+    this.basicsService.showPopup = false;
   }
 
 }

@@ -1,6 +1,6 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
 import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {MenuComponent} from './components/menu/menu.component';
 import {UiModule} from './modules/ui/ui.module';

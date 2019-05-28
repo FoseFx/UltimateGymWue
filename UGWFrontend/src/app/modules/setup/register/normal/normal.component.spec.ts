@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NormalComponent } from './normal.component';
+import {NormalComponent} from './normal.component';
 import {UiModule} from '../../../ui/ui.module';
 import {SetupQuery} from '../../state/setup.query';
 import {SetupStore} from '../../state/setup.store';

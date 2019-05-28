@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { StufeComponent } from './stufe.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {StufeComponent} from './stufe.component';
 import {UiModule} from '../../ui/ui.module';
 import {AppStore} from '../../../state/app.store';
 import {SetupService} from '../state/setup.service';

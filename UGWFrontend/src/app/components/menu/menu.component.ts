@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';

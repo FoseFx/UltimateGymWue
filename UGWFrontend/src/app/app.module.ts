@@ -1,21 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {AppStore} from './state/app.store';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { environment } from '../environments/environment';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { MenuComponent } from './components/menu/menu.component';
+import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
+import {environment} from '../environments/environment';
+import {ToolbarComponent} from './components/toolbar/toolbar.component';
+import {MenuComponent} from './components/menu/menu.component';
 import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { UiModule} from './modules/ui/ui.module';
+import {UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 

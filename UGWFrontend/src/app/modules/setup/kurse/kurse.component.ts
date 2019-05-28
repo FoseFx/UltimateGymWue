@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SetupQuery} from '../state/setup.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
@@ -7,8 +7,8 @@ import {SetupService} from '../state/setup.service';
 import {Kurse} from '../../../../types/Kurs';
 import {map} from 'rxjs/operators';
 import {AvailableKurseMap} from '../state/setup.store';
-import { StundenplanService } from '../services/stundenplan.service';
-import { handleError } from 'src/app/util';
+import {StundenplanService} from '../services/stundenplan.service';
+import {handleError} from 'src/app/util';
 import {Router} from '@angular/router';
 
 @Component({

@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {LoginnedGuard} from './loginned.guard';
 import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';

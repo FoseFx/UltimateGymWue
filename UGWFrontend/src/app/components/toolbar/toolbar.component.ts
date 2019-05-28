@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {fromEvent} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AppService} from '../../state/app.service';
 
