@@ -33,6 +33,7 @@ export class SwipableDirective {
       return;
     }
     this.startedAtX = touch.clientX;
+    event.preventDefault();
   }
 
   @HostListener('touchmove', ['$event']) touchMove(event: TouchEvent) {
@@ -63,6 +64,7 @@ export class SwipableDirective {
     const percent = this.percentAtStart + changeOnPage * this.percentPerPage;
     this.newPercent = percent;
     (this.elRef.nativeElement as HTMLElement).style.transform = `translateX(${percent * 100}%)`; // set new percent
+    event.preventDefault();
   }
 
   @HostListener('touchend', ['$event']) touchEnd(event: TouchEvent) {

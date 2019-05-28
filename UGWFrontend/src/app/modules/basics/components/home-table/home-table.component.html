@@ -27,6 +27,7 @@
 <p *ngIf="!showSpinner && Svd?.vp === null && !noVDFound">Keine Vertretung.</p>
 
 <app-stufe-vertretung
+  appNotSwipable
   *ngIf="!!Svd?.vp || !Svd?.infos.length > 1"
   [vertretungsdaten]="Svd">
 </app-stufe-vertretung>
