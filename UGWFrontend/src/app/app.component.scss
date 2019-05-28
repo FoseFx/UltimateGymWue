@@ -1,0 +1,11 @@
+:host {
+  display: grid;
+  grid-template: 56px auto / 100%;
+}
+
+app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
