@@ -22,12 +22,14 @@
   </tbody>
 </table>
 
+<p *ngIf="showSpinner">Lade...</p>
+
 <p *ngIf="noVDFound">Noch kein Vertretungsplan verfügbar.</p>
 
 <p *ngIf="!showSpinner && Svd?.vp === null && !noVDFound">Keine Vertretung.</p>
 
 <app-stufe-vertretung
   appNotSwipable
-  *ngIf="!!Svd?.vp || !Svd?.infos.length > 1"
+  *ngIf="showVD"
   [vertretungsdaten]="Svd">
 </app-stufe-vertretung>

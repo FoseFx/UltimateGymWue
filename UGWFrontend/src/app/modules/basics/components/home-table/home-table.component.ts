@@ -42,4 +42,10 @@ export class HomeTableComponent implements OnInit {
     this.basicsService.showPopup = true;
   }
 
+  get showVD() {
+    if (!this.Svd) {
+      return false;
+    }
+    return (!!this.Svd.vp || this.Svd.infos.length > 1);
+  }
 }
