@@ -9,6 +9,7 @@ import {VertretungsDatum, VertretungsPlanSeite} from '../../../../state/app.stor
 })
 export class StufeVertretungComponent {
 
+  @Input() stufe: string;
   Svertretungsdaten: VertretungsPlanSeite = {infos: [], vp: []};
 
   @Input() set vertretungsdaten(value: VertretungsPlanSeite) {

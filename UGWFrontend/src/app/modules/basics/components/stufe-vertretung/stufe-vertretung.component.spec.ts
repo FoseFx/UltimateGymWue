@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {StufeVertretungComponent} from './stufe-vertretung.component';
+import {UnhtmlPipe} from './unhtml.pipe';
+import {ExtractStyleTagsPipe} from './extract-style-tags.pipe';
 
 describe('StufeVertretungComponent', () => {
   let component: StufeVertretungComponent;
@@ -8,7 +10,7 @@ describe('StufeVertretungComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StufeVertretungComponent ]
+      declarations: [ StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe ]
     })
     .compileComponents();
   }));

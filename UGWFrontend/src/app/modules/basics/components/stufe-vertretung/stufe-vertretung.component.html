@@ -1,5 +1,15 @@
 <table>
   <tbody>
+  <tr *ngFor="let info of Svertretungsdaten.infos">
+    <td [class]="info | extractStyleTags">{{info  | unhtml}}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+<h3>{{stufe}}</h3>
+<table>
+  <tbody>
   <tr *ngFor="let vd of Svertretungsdaten.vp">
     <td class="bold">{{vd.stunde}}</td>
     <td>{{vd.fach}}</td>
@@ -9,3 +19,6 @@
   </tr>
   </tbody>
 </table>
+
+<br>
+<br>

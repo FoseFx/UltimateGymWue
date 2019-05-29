@@ -12,6 +12,7 @@
       [date]="appQuery.today$ | async"
       [showSpinner]="loading"
       [vd]="appQuery.vertretungsDaten$ | async"
+      [stufe]="appQuery.stufe$ | async"
     ></app-home-table>
   </app-tab-item>
   <!-- Next Day -->
@@ -23,6 +24,7 @@
       [date]="appQuery.nextDay$ | async"
       [showSpinner]="loading"
       [vd]="appQuery.vertretungsDaten$ | async"
+      [stufe]="appQuery.stufe$ | async"
     ></app-home-table>
   </app-tab-item>
 </app-tab>

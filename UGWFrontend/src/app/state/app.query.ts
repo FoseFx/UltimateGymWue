@@ -22,10 +22,14 @@ export class AppQuery extends Query<AppState> {
   get credentialsToken() {
     return `Bearer ${this.getValue().credentials.token}`;
   }
+
   menuOpen$ = this.select('menuOpen');
   tt$ = this.select('basics').pipe(map((b) => !!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan));
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
+
+  stufe$ = this.select('basics').pipe(map((d) => d.stufe));
+
 
   today$: Observable<Date> = this.select('thisDay').pipe(
     map((day) => {

@@ -11,6 +11,8 @@ import {StufeVertretungComponent} from '../stufe-vertretung/stufe-vertretung.com
 import {BasicsStore} from '../../state/basics.store';
 import {BasicsQuery} from '../../state/basics.query';
 import {BasicsService} from '../../state/basics.service';
+import {UnhtmlPipe} from '../stufe-vertretung/unhtml.pipe';
+import {ExtractStyleTagsPipe} from '../stufe-vertretung/extract-style-tags.pipe';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -19,7 +21,7 @@ describe('LandingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
-      declarations: [ LandingComponent, HomeTableComponent, StufeVertretungComponent ],
+      declarations: [ LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe],
       providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService]
     })
     .compileComponents();
