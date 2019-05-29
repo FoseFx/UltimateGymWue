@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="Svertretungsdaten.infos.length > 0">
   <tbody>
   <tr *ngFor="let info of Svertretungsdaten.infos">
     <td [class]="info | extractStyleTags">{{info  | unhtml}}</td>
