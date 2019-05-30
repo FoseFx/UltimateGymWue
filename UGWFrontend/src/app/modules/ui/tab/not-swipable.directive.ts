@@ -14,12 +14,24 @@ export class NotSwipableDirective {
   *  before the Swipeable Directive can react to it.
   */
   @HostListener('touchstart', ['$event']) func(event) {
-    event.stopPropagation();
+    if (this.shouldBlock(event)) {
+      event.stopPropagation();
+    }
   }
   @HostListener('touchmove', ['$event']) func2(event) {
-    event.stopPropagation();
+    if (this.shouldBlock(event)) {
+      event.stopPropagation();
+    }
   }
   @HostListener('touchend', ['$event']) func3(event) {
-    event.stopPropagation();
+    if (this.shouldBlock(event)) {
+      event.stopPropagation();
+    }
+  }
+
+  shouldBlock(event: Event): boolean {
+    const t = event.target as HTMLElement;
+    console.table({scrollWidth: t.scrollWidth, offWidth: t.offsetWidth, block: t.scrollWidth > t.offsetWidth});
+    return t.scrollWidth > t.offsetWidth;
   }
 }

@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [NeedsSetupGuard]
   },
   {
+    path: 'user',
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
+    canActivate: [NeedsSetupGuard]
+  },
+  {
     path: '',
     redirectTo: 'basics/landing',
     pathMatch: 'full'

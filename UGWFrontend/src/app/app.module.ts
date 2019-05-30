@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {RouterTestingModule} from "@angular/router/testing";
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -31,7 +32,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     AppRoutingModule,
     UiModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     {provide: LOCALE_ID,  useValue: 'de-DE'},

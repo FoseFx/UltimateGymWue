@@ -1,8 +1,10 @@
+<!--suppress AngularUndefinedBinding -->
 <div id="menu"
      *ngIf="query.menuOpen$ | async"
      [@menuOpen]="(query.menuOpen$ | async) ? 'open' : 'closed'">
-  <ul>
-    <li><i class="material-icons">home</i>Home</li>
+  <ul (click)="service.changeMenuState()">
+    <li routerLink="/"><i class="material-icons block">home</i><span class="block">Home</span></li>
+    <li routerLink="/user" ><i class="material-icons block">account_circle</i><span class="block">User</span></li>
   </ul>
 </div>
 
