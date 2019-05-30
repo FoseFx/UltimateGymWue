@@ -5,7 +5,7 @@ import {NeedsSetupGuard} from './guards/needs-setup.guard';
 const routes: Routes = [
   {
     path: 'setup',
-    loadChildren: './modules/setup/setup.module#SetupModule',
+    loadChildren: () => import('./modules/setup/setup.module').then(m => m.SetupModule),
   },
   {
     path: 'legal',
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'basics',
-    loadChildren: './modules/basics/basics.module#BasicsModule',
+    loadChildren: () => import('./modules/basics/basics.module').then(m => m.BasicsModule),
     canActivate: [NeedsSetupGuard]
   },
   {

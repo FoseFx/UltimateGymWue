@@ -11,7 +11,7 @@ export class TabItemComponent implements OnInit, OnDestroy {
   private parentComponent: TabComponent;
   public id: string;
   @Input() public label = '';
-  @ViewChild(TemplateRef) content;
+  @ViewChild(TemplateRef, { static: true }) content;
 
   constructor(private inj: Injector) {
   }
