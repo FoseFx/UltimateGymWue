@@ -18,10 +18,10 @@ export const PopupFadeAnimation = trigger('popupOpenClose', [
 
 export const PopupWindowAnimation = trigger('popupWindowOpenClose', [
   state('open', style({
-    transform: 'scale(1)'
+    transform: 'scale(1) translateY(-56px)'
   })),
   state('void', style({
-    transform: 'scale(0)'
+    transform: 'scale(0) translateY(-56px)'
   })),
   transition('open <=> void', [
     animate('200ms')
