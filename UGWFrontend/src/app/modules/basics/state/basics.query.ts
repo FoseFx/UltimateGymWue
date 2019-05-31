@@ -11,4 +11,6 @@ export class BasicsQuery extends Query<BasicsState> {
   }
 
   showPopup$: Observable<boolean> = this.select('showPopup');
+
+  popupData$ = this.select('popupData');
 }

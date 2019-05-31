@@ -1,13 +1,18 @@
 import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
+import {TimeTableField} from "../../../../types/TT";
 
 export class BasicsState {
   showPopup: boolean;
+  popupData: {
+    stunde: TimeTableField
+  };
 }
 
 function createDefaultState(): BasicsState {
   return {
-    showPopup: false
+    showPopup: false,
+    popupData: null
   };
 }
 

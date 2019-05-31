@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {TimeTableDay} from '../../../../../types/TT';
+import {TimeTableDay, TimeTableField} from '../../../../../types/TT';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
 import {BasicsService} from '../../state/basics.service';
 
@@ -39,8 +39,8 @@ export class HomeTableComponent implements OnInit {
   ngOnInit() {
   }
 
-  onTrClick() {
-    this.basicsService.showPopup = true;
+  onTrClick(stunde: TimeTableField) {
+    this.basicsService.newPopup({stunde});
   }
 
   get showVD() {

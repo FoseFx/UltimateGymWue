@@ -44,7 +44,7 @@ export class LandingComponent implements AfterViewInit {
   }
 
   closePopup(): void {
-    this.basicsService.showPopup = false;
+    this.basicsService.closePopup();
   }
 
 }

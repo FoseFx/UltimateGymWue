@@ -7,7 +7,7 @@
 <table>
   <tbody>
   <ng-container *ngFor="let field of today; let i = index;">
-    <tr *ngIf="!!field.name && field.name !== 'Frei'" (click)="onTrClick()" >
+    <tr *ngIf="!!field.name && field.name !== 'Frei'" (click)="onTrClick(field)" >
       <td>{{i + 1}}</td>
       <td>{{field.name}}</td>
       <td *ngIf="field.raum !== ''">{{field.raum}}</td>
