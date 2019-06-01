@@ -8,27 +8,29 @@ import {Injectable} from '@angular/core';
 import {Kurse} from 'src/types/Kurs';
 import {TimeTable} from '../../types/TT';
 
+export class LoginData {
+  token: string;
+  uid: string;
+  provider: ('normal'|'google'|'insta')[];
+  normal: {
+    email: string,
+    email_verified: boolean
+  };
+  google: {
+    email: string,
+    gid: string
+  };
+  insta: {
+    iid: string,
+    token: string
+  };
+}
+
 export interface AppState {
   meta: {
     version: string;
   };
-  loginData: {
-    token: string,
-    uid: string,
-    provider: ('normal'|'google'|'insta')[],
-    normal: {
-      email: string,
-      email_verified: boolean
-    },
-    google: {
-      email: string,
-      gid: string
-    }
-    insta: {
-      iid: string,
-      token: string
-    }
-  };
+  loginData: LoginData;
   fullname: string;
   basics: {
     stufe: string,

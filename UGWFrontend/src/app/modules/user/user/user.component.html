@@ -1,3 +1,55 @@
-<p>
-  user works!
-</p>
+<app-card>
+  <app-card-header>User</app-card-header>
+  <p>{{user$ | async | json}}</p>
+  <p>Alle über dich gesammelten Daten, gemäß DSGVO:</p>
+
+  <table class="dark">
+    <tr>
+      <th>Name</th>
+    </tr>
+  </table>
+
+  <ng-template [ngIf]="(user$ | async)?.normal !== null"> <!-- Normal -->
+    <table class="dark">
+      <tr>
+        <th>Email</th>
+        <td>{{(user$ | async).normal.email}}</td>
+      </tr>
+      <tr>
+        <th>Email Verifiziert?</th>
+        <td>{{(user$ | async).normal.email_verified ? 'Ja' : 'Nein'}}</td>
+      </tr>
+    </table>
+  </ng-template>
+
+
+  <ng-template [ngIf]="(user$ | async)?.google !== null"> <!-- Google -->
+    <table class="dark">
+      <tr>
+        <th>Email</th>
+        <td>{{(user$ | async).google.email}}</td>
+      </tr>
+      <tr>
+        <th>Google ID</th>
+        <td>{{(user$ | async).google.gid}}</td>
+      </tr>
+    </table>
+  </ng-template>
+
+
+  <ng-template [ngIf]="(user$ | async)?.insta !== null"> <!-- Insta -->
+    <table class="dark">
+      <tr>
+        <th>Instagram ID</th>
+        <td>{{(user$ | async)?.insta.iid}}</td>
+      </tr>
+      <tr>
+        <th>Token (aus Sicherheitsgründen gekürzt)</th>
+        <td>{{(user$ | async)?.insta.token.substr(0, 7) + "***********"}}</td>
+      </tr>
+    </table>
+  </ng-template>
+
+
+
+</app-card>

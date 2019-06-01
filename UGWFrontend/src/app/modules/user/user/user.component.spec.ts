@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserComponent } from './user.component';
+import {UiModule} from "../../ui/ui.module";
+import {AppQuery} from "../../../state/app.query";
+import {AppStore} from "../../../state/app.store";
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -8,7 +11,9 @@ describe('UserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserComponent ]
+      imports: [UiModule],
+      declarations: [ UserComponent ],
+      providers: [AppStore, AppQuery]
     })
     .compileComponents();
   }));

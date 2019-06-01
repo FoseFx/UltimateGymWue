@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {AppQuery} from '../../../state/app.query';
+import {Observable} from 'rxjs';
+import {LoginData} from '../../../state/app.store';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
 
-  constructor() { }
+  constructor(private appQuery: AppQuery) { }
 
-  ngOnInit() {
-  }
-
+  user$: Observable<LoginData> = this.appQuery.select('loginData');
 }
