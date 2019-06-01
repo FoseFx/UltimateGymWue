@@ -9,7 +9,7 @@ export const PopupFadeAnimation = trigger('popupOpenClose', [
   })),
   transition('open <=> void', [
     group([
-      query('@popupWindowOpenClose', animateChild()),
+      query('@popupWindowOpenClose', animateChild(), {optional: true}),
       animate('100ms')
     ])
   ])

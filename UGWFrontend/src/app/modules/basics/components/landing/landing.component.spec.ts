@@ -13,6 +13,7 @@ import {BasicsQuery} from '../../state/basics.query';
 import {BasicsService} from '../../state/basics.service';
 import {UnhtmlPipe} from '../stufe-vertretung/unhtml.pipe';
 import {ExtractStyleTagsPipe} from '../stufe-vertretung/extract-style-tags.pipe';
+import {BasicsPopupComponent} from '../basics-popup/basics-popup.component';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -21,7 +22,13 @@ describe('LandingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
-      declarations: [ LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe],
+      declarations: [
+        LandingComponent,
+        HomeTableComponent,
+        StufeVertretungComponent,
+        UnhtmlPipe,
+        ExtractStyleTagsPipe,
+        BasicsPopupComponent],
       providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService]
     })
     .compileComponents();

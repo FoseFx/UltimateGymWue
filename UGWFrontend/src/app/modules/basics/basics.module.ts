@@ -11,9 +11,10 @@ import {BasicsStore} from './state/basics.store';
 import {BasicsService} from './state/basics.service';
 import { UnhtmlPipe } from './components/stufe-vertretung/unhtml.pipe';
 import { ExtractStyleTagsPipe } from './components/stufe-vertretung/extract-style-tags.pipe';
+import { BasicsPopupComponent } from './components/basics-popup/basics-popup.component';
 
 @NgModule({
-  declarations: [LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe],
+  declarations: [LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe, BasicsPopupComponent],
   providers: [
     BasicsStore,
     BasicsQuery,

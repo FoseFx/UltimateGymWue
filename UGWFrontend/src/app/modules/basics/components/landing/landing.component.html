@@ -1,20 +1,6 @@
-<app-popup *ngIf="basicsQuery.showPopup$ | async" (close)="closePopup()">
-  <h3>{{(basicsQuery.popupData$ | async)?.stunde.name}}</h3>
-  <table style="width: 100%">
-    <tr>
-      <td class="bold">Name</td>
-      <td class="bold">Fach</td>
-      <td class="bold">Lehrer</td>
-      <td class="bold">Raum</td>
-    </tr>
-    <tr>
-      <td>{{(basicsQuery.popupData$ | async)?.stunde.name}}</td>
-      <td>{{(basicsQuery.popupData$ | async)?.stunde.fach}}</td>
-      <td>{{(basicsQuery.popupData$ | async)?.stunde.lehrer}}</td>
-      <td>{{(basicsQuery.popupData$ | async)?.stunde.raum}}</td>
-    </tr>
-  </table>
-</app-popup>
+<app-basics-popup *ngIf="basicsQuery.showPopup$ | async" >
+
+</app-basics-popup>
 <app-tab>
   <app-tab-item label="{{appQuery.today$ | async | date: 'EE' }}">
     <!-- Today -->

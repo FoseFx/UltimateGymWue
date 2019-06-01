@@ -1,0 +1,18 @@
+<app-popup  (close)="closePopup()">
+  <h3>{{(stunde$ | async)?.name}}</h3>
+  <table style="width: 100%">
+    <tr>
+      <td class="bold">Name</td>
+      <td class="bold">Fach</td>
+      <td class="bold">Lehrer</td>
+      <td class="bold">Raum</td>
+    </tr>
+    <tr>
+      <td>{{(stunde$ | async)?.name}}</td>
+      <td>{{(stunde$ | async)?.fach}}</td>
+      <td>{{(stunde$ | async)?.lehrer}}</td>
+      <td>{{(stunde$ | async)?.raum}}</td>
+    </tr>
+  </table>
+  <p>{{popupData$ | async | json}}</p>
+</app-popup>
