@@ -1,4 +1,4 @@
-<app-popup  (close)="closePopup()">
+<app-popup *ngIf="basicsQuery.showPopup$ | async"   (close)="closePopup()">
   <h3>{{(stunde$ | async)?.name}}</h3>
   <table style="width: 100%">
     <tr>
