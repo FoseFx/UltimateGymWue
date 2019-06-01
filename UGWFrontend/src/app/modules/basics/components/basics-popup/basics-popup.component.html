@@ -14,5 +14,9 @@
       <td>{{(stunde$ | async)?.raum}}</td>
     </tr>
   </table>
+  <p class="center-text small" *ngIf="(stunde$ | async)?.typ === 'klasse'">
+    Wird aufgrund deiner Stufe/Klasse angezeigt. Nicht dein Kurs?<br>
+    <a>{{(stunde$ | async)?.name}} nicht mehr anzeigen</a>
+  </p>
   <p>{{popupData$ | async | json}}</p>
 </app-popup>
