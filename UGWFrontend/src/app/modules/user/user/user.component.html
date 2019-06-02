@@ -1,19 +1,34 @@
 <app-popup *ngIf="showLogoutPopup" (close)="showLogoutPopup = false">
-  <h2 class="center-text">Abmelden</h2>
-  <p class="center-text">
-    Bist du sicher, dass du dich abmelden möchtest?
-    Dies wird deinen Account nicht löschen, manche nur lokal-gespeicherte Informationen werden dabei gelöscht.
-    Deine Stufe und Kurse / dein Stundenplan sind davon nicht betroffen.
-    Auf anderen Geräten bleibst du noch angemeldet.
-  </p>
-  <app-popup-button (click)="logout()">Ja</app-popup-button>
-  <app-popup-button (click)="showLogoutPopup = false">Abbrechen</app-popup-button>
+  <ng-template [ngIf]="logoutOrAccountRemoval === 0">
+    <h2 class="center-text">Abmelden</h2>
+    <p class="center-text">
+      Bist du sicher, dass du dich abmelden möchtest?
+      Dies wird deinen Account nicht löschen, manche nur lokal-gespeicherte Informationen werden dabei gelöscht.
+      Deine Stufe und Kurse / dein Stundenplan sind davon nicht betroffen.
+      Auf anderen Geräten bleibst du noch angemeldet.
+    </p>
+    <app-popup-button (click)="logout()">Ja</app-popup-button>
+    <app-popup-button (click)="showLogoutPopup = false">Abbrechen</app-popup-button>
+  </ng-template>
+
+  <ng-template [ngIf]="logoutOrAccountRemoval === 1">
+    <h2 class="center-text">Account löschen</h2>
+    <p class="center-text">
+      Bist du sicher, dass du deinen Account löschen möchtest?
+      <b>Dies ist nicht wiederherstellbar!</b><br>
+      <b>Alle deine Daten werden gelöscht!</b>
+
+    </p>
+    <app-popup-button (click)="removeAcc()">Ja</app-popup-button>
+    <app-popup-button (click)="showLogoutPopup = false"><b>Nein</b></app-popup-button>
+  </ng-template>
+
 </app-popup>
 
 <app-card>
   <app-card-header>User</app-card-header>
 
-  <app-button class="center-button" [accent]="true" (click)="showLogoutPopup = true">Abmelden</app-button>
+  <app-button class="center-button" [accent]="true" (click)="doShowLogout()">Abmelden</app-button>
   <br>
 
   <p>{{user$ | async | json}}</p>
@@ -69,7 +84,7 @@
   </ng-template>
 
   <br>
-  <a class="center-button">Account löschen</a>
+  <a class="center-button" (click)="showAccountLoeschen()">Account löschen</a>
 
 
 

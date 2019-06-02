@@ -14,6 +14,7 @@ export class UserComponent {
   constructor(private appQuery: AppQuery, private router: Router) { }
 
   showLogoutPopup = false;
+  logoutOrAccountRemoval = 0; // 0 = logout, 1 = account removal
 
   user$: Observable<LoginData> = this.appQuery.select('loginData');
   name$: Observable<string> = this.appQuery.select('fullname');
@@ -22,5 +23,19 @@ export class UserComponent {
     localStorage.clear();
     this.router.navigate(['/setup/welcome']);
     location.reload();
+  }
+
+  showAccountLoeschen() {
+    this.showLogoutPopup = true;
+    this.logoutOrAccountRemoval = 1;
+  }
+
+  doShowLogout() {
+    this.showLogoutPopup = true;
+    this.logoutOrAccountRemoval = 0;
+  }
+
+  removeAcc() {
+    // todo
   }
 }
