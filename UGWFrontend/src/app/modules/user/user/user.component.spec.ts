@@ -4,6 +4,7 @@ import { UserComponent } from './user.component';
 import {UiModule} from "../../ui/ui.module";
 import {AppQuery} from "../../../state/app.query";
 import {AppStore} from "../../../state/app.store";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -11,7 +12,7 @@ describe('UserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule],
+      imports: [UiModule, RouterTestingModule],
       declarations: [ UserComponent ],
       providers: [AppStore, AppQuery]
     })
