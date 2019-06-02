@@ -11,6 +11,7 @@ import {TabItemComponent} from './tab/tab-item/tab-item.component';
 import {SwipableDirective} from './tab/swipable.directive';
 import {PopupComponent} from './popup/popup.component';
 import { NotSwipableDirective } from './tab/not-swipable.directive';
+import {PopupButtonComponent} from "./popup/popup-button/popup-button.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotSwipableDirective } from './tab/not-swipable.directive';
     TabItemComponent,
     SwipableDirective,
     PopupComponent,
-    NotSwipableDirective
+    NotSwipableDirective,
+    PopupButtonComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { NotSwipableDirective } from './tab/not-swipable.directive';
     SpinnerComponent,
     TabItemComponent,
     PopupComponent,
-    NotSwipableDirective
+    NotSwipableDirective,
+    PopupButtonComponent
   ]
 })
 export class UiModule { }
