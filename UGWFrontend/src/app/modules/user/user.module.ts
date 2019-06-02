@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user/user.component';
-import {UiModule} from "../ui/ui.module";
+import {UiModule} from '../ui/ui.module';
 
 @NgModule({
   declarations: [UserComponent],
