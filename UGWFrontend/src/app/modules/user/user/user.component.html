@@ -1,13 +1,31 @@
+<app-popup *ngIf="showLogoutPopup" (close)="showLogoutPopup = false">
+  <h2 class="center-text">Abmelden</h2>
+  <p class="center-text">
+    Bist du sicher, dass du dich abmelden möchtest?
+    Dies wird deinen Account nicht löschen, manche nur lokal-gespeicherte Informationen werden dabei gelöscht.
+    Deine Stufe und Kurse / dein Stundenplan sind davon nicht betroffen.
+    Auf anderen Geräten bleibst du noch angemeldet.
+  </p>
+  <button (click)="logout()">Ja</button>
+  <button (click)="showLogoutPopup = false">Abbrechen</button>
+</app-popup>
+
 <app-card>
   <app-card-header>User</app-card-header>
+
+  <app-button class="center-button" [accent]="true" (click)="showLogoutPopup = true">Abmelden</app-button>
+  <br>
+
   <p>{{user$ | async | json}}</p>
   <p>Alle über dich gesammelten Daten, gemäß DSGVO:</p>
 
   <table class="dark">
     <tr>
       <th>Name</th>
+      <td>{{name$ | async}}</td>
     </tr>
   </table>
+  <br>
 
   <ng-template [ngIf]="(user$ | async)?.normal !== null"> <!-- Normal -->
     <table class="dark">
@@ -49,6 +67,9 @@
       </tr>
     </table>
   </ng-template>
+
+  <br>
+  <a class="center-button">Account löschen</a>
 
 
 
