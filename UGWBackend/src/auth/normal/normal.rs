@@ -52,7 +52,12 @@ pub fn normal_handler(
         return CustomResponse::error(format!("Email benutzt"), Status::Unauthorized);
     }
 
-    let (hash, salt) = passw::hash_passw(&data.password);
+    let hash_result = passw::hash_passw(&data.password);
+    if hash_result.is_err() {
+        return CustomResponse::error(format!("{:?}", hash_result), Status::BadRequest);
+    }
+
+    let (hash, salt) = hash_result.unwrap();
 
     let uid_res = crate::db::add_user(
         crate::db::User {
