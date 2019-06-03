@@ -40,8 +40,8 @@ matrix:
     - DEVELOPMENT="true"
     script:
     - cd UGWBackend
-    - cargo build --verbose --all
-    - cargo test --verbose --all
+    #- cargo build --verbose --all
+    #- cargo test --verbose --all
     - echo "$DOCKER_PSW" | docker login -u "$DOCKER_NAME" --password-stdin https://$(echo $DOCKER_REG)
-    - docker build -t $DOCKER_REG/ugwbackend:0.3.$(echo $TRAVIS_BUILD_NUMBER) .
-    - docker push $DOCKER_REG/ugwbackend:0.3.$(echo $TRAVIS_BUILD_NUMBER)
+    - docker build -t $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER) .
+    - docker push $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER)
