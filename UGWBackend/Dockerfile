@@ -10,6 +10,7 @@ COPY . ./
 # RUN cargo install --path .
 
 RUN cargo build --release
+RUN cargo test --release
 
 RUN ldd target/release/ugw-backend
 
