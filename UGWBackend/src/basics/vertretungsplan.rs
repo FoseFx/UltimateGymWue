@@ -44,7 +44,7 @@ pub fn get_vertretungsplan(_user: AuthGuard,
     }
     let result = result.unwrap();
 
-    let mut returnVec: Vec<ReturnVecItem> = vec![];
+    #[allow(non_snake_case)] let mut returnVec: Vec<ReturnVecItem> = vec![];
 
     for day in result {
         let infos: &serde_json::Value = day.get(0).unwrap();
@@ -97,6 +97,7 @@ fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, 
 
 
 }
+#[allow(non_snake_case)]
 #[derive(Deserialize,Serialize,Debug)]
 struct VertretungsDatum {
     typ: String,

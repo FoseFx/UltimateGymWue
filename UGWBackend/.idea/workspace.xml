@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/normal/normal.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/normal/normal.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/normal/passw.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/normal/passw.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,14 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-              <folding>
-                <element signature="n#!!block;n#VertretungsDatum#0" />
-              </folding>
+            <state relative-caret-position="205">
+              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -50,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/auth/normal/passw.rs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="447">
@@ -175,11 +166,11 @@
         <option value="$PROJECT_DIR$/db-middleware/kurse.js" />
         <option value="$PROJECT_DIR$/db-middleware/index.js" />
         <option value="$PROJECT_DIR$/db-middleware/vp.js" />
-        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
         <option value="$PROJECT_DIR$/src/auth/normal/normal.rs" />
         <option value="$PROJECT_DIR$/src/main.rs" />
         <option value="$PROJECT_DIR$/Cargo.toml" />
         <option value="$PROJECT_DIR$/src/auth/normal/passw.rs" />
+        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
       </list>
     </option>
   </component>
@@ -324,12 +315,12 @@
       <workItem from="1558781489501" duration="1000000" />
       <workItem from="1558966179684" duration="1715000" />
       <workItem from="1559478258594" duration="211000" />
-      <workItem from="1559548400931" duration="1765000" />
+      <workItem from="1559548400931" duration="1916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149342000" />
+    <option name="totallyTimeSpent" value="149493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -734,16 +725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!block;n#VertretungsDatum#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -766,6 +747,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
           <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
         </state>
       </provider>
     </entry>
