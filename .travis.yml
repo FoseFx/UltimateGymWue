@@ -5,7 +5,7 @@ matrix:
       - 10
 
     addons:
-    apt:
+      apt:
           packages:
             # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
             - libgconf-2-4
