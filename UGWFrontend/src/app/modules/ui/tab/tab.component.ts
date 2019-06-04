@@ -8,6 +8,7 @@ import {TabItemComponent} from './tab-item/tab-item.component';
 })
 export class TabComponent {
 
+  allowTransitions = true;
   tabs: TabItemComponent[] = [];
   // tslint:disable-next-line:variable-name
   _activeIndex = 0;
@@ -21,6 +22,7 @@ export class TabComponent {
   }
 
   @Input() set setActive(index: number) {
+    this.allowTransitions = true;
     this.activeIndex = index;
   }
   @Output() currentActive = new EventEmitter();

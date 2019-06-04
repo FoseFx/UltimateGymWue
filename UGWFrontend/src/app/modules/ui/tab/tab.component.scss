@@ -29,9 +29,11 @@
 }
 .tab-content {
   display: flex;
-  transition: transform 0.3s ease-out;
 }
 
 .tab-content-wrapper {
   overflow-x: hidden;
+}
+.with-transition {
+  transition: transform 0.3s ease-out!important;
 }

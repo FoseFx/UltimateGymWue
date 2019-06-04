@@ -17,6 +17,8 @@ export class SwipableDirective {
 
   @Output() snapto = new EventEmitter<number>();
 
+  @Output() active = new EventEmitter();
+
   @HostListener('touchstart', ['$event']) touchStart(event: TouchEvent) {
 
     const element = this.elRef.nativeElement as HTMLElement;
@@ -33,6 +35,7 @@ export class SwipableDirective {
       return;
     }
     this.startedAtX = touch.clientX;
+    this.active.emit();
   }
 
   @HostListener('touchmove', ['$event']) touchMove(event: TouchEvent) {
