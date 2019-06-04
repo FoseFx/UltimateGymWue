@@ -13,7 +13,7 @@ import {TimeTableField} from '../../../../../types/TT';
 })
 export class BasicsPopupComponent {
 
-  constructor(private basicsService: BasicsService, private basicsQuery: BasicsQuery) { }
+  constructor(private basicsService: BasicsService, public basicsQuery: BasicsQuery) { }
 
   popupData$: Observable<PopupData> = this.basicsQuery.popupData$;
 
