@@ -21,7 +21,8 @@ export const environment = {
     getKurse: `${backendHost}/api/basics/kurse`,
     setBasics: `${backendHost}/api/basics`,
     getStundenplan: `${backendHost}/api/basics/stundenplan`,
-    getVertretung: `${backendHost}/api/basics/vp/`
+    getVertretung: `${backendHost}/api/basics/vp/`,
+    removeAccount: `${backendHost}/api/auth/closeAccount`
   }
 };
 

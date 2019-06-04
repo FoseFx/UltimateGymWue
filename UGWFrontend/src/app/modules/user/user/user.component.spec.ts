@@ -5,6 +5,7 @@ import {UiModule} from '../../ui/ui.module';
 import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {RouterTestingModule} from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -12,7 +13,7 @@ describe('UserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule, RouterTestingModule],
+      imports: [UiModule, RouterTestingModule, HttpClientModule],
       declarations: [ UserComponent ],
       providers: [AppStore, AppQuery]
     })
