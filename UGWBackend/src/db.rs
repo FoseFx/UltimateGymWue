@@ -294,3 +294,15 @@ pub fn get_creds_from_user(uid: &String, secret: &String, db_url: &String) -> Re
     return Ok(creds);
 
 }
+
+
+pub fn remove_user_account(uid: &String, secret: &String, db_url: &String) -> Result<bool, Box<Error>> {
+    let client = reqwest::Client::new();
+
+    let res = client.get(&format!("{}removeAccount/{}", db_url, uid))
+        .header(reqwest::header::AUTHORIZATION, secret.to_owned())
+        .send()?;
+    let res = res.error_for_status()?;
+
+    return Ok(true);
+}

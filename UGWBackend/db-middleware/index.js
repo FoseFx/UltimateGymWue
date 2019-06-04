@@ -68,6 +68,9 @@ http.createServer((req, res) => {
   if (/^\/vp\/.*$/.test(req.url)) {
     return vp(req, res);
   }
+  if (/^\/removeAccount\/.*$/.test(req.url)) {
+    return removeAccount(req, res);
+  }
 
   res.statusCode = 404;
   res.end();
@@ -427,4 +430,14 @@ async function vp(req, res) {
   const o = await getVertretungsdaten(base, false, new Date());
   console.log(JSON.stringify(o, null, 2).replace(/type/g, 'typ'));
   return res.end(JSON.stringify(o).replace(/type/g, 'typ'));
+}
+
+async function removeAccount(req, res) {
+  let uid = req.url.replace("/removeAccount/", "").replace("/", "");
+  try {
+    await db.collection('users').doc(uid).delete();
+  } catch (e) {
+    console.error(e);
+  }
+  res.end("Ok");
 }
