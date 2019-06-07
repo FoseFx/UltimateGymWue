@@ -31,7 +31,6 @@ export class NotSwipableDirective {
 
   shouldBlock(event: Event): boolean {
     const t = event.target as HTMLElement;
-    console.table({scrollWidth: t.scrollWidth, offWidth: t.offsetWidth, block: t.scrollWidth > t.offsetWidth});
     return t.scrollWidth > t.offsetWidth;
   }
 }

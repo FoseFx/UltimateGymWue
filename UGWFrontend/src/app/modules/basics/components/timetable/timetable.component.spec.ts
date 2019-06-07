@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimetableComponent } from './timetable.component';
+import { UiModule } from 'src/app/modules/ui/ui.module';
+import { AppQuery } from 'src/app/state/app.query';
+import { AppStore } from 'src/app/state/app.store';
 
 describe('TimetableComponent', () => {
   let component: TimetableComponent;
@@ -8,7 +11,9 @@ describe('TimetableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimetableComponent ]
+      imports: [UiModule],
+      declarations: [ TimetableComponent ],
+      providers: [AppQuery, AppStore]
     })
     .compileComponents();
   }));

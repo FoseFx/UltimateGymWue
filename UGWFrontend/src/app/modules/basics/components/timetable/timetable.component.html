@@ -1,3 +1,23 @@
-<p>
-  timetable works!
-</p>
+<app-tab>
+  <app-tab-item *ngFor="let woche of (s$ | async); let i = index" [label]="i === 0 ? 'A':'B'">
+    <table>
+      <tr>
+        <th></th>
+        <th>Mo</th>
+        <th>Di</th>
+        <th>Mi</th>
+        <th>Do</th>
+        <th>Fr</th>
+      </tr>
+      <tr *ngFor="let stunde of woche, let stundeIndex = index">
+        <th>{{stundeIndex + 1}}</th>
+        <td *ngFor="let tag of stunde">
+          <ng-template [ngIf]="!(tag === null)">
+            <ng-template [ngIf]="tag.name === null && tag.fach === null"><b>Pause</b></ng-template>
+            <ng-template [ngIf]="tag.name !== null && tag.fach !== null">{{tag.name}}</ng-template>
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+  </app-tab-item>
+</app-tab>
