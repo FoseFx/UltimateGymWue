@@ -69,7 +69,7 @@ pub fn is_stufe(string: &String) -> bool {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<Vec<Kurs>, Box<Error>>{
+fn get_kurse(redis: &redis::Connection, creds: BasicCredsWrapper, secret: &String, stufe: String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<Vec<Kurs>, Box<dyn Error>>{
 
     let key = format!("kurse_{}", &stufe_id);
     let tt_key = format!("tt_{}", &stufe_id);
@@ -103,7 +103,7 @@ pub struct FetchKurseAndTTResult {
 /// stufe: must be trusted
 /// stufe_id: must be trusted
 /// error: reqwest
-pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<FetchKurseAndTTResult, Box<Error>>{
+pub fn fetch_kurse_and_tt(creds: BasicCredsWrapper, secret: &String, stufe: &String, stufe_id: &String, wochen: &Vec<String>, db_url: &String) -> Result<FetchKurseAndTTResult, Box<dyn Error>>{
     let client = reqwest::Client::new();
 
     let json = serde_json::to_string(&json!({
@@ -147,7 +147,7 @@ pub fn stufe_to_id(redis: &redis::Connection, creds: &BasicCredsWrapper, stufe: 
 }
 
 /// unstested
-pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<Vec<String>, Box<Error>> {
+pub fn get_wochen(redis: &redis::Connection, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<Vec<String>, Box<dyn Error>> {
     let cache: RedisResult<String> = redis.get("wochen"); // will fail, when nil
     if cache.is_ok() {
         let cache = cache.unwrap();

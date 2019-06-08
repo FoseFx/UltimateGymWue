@@ -29,7 +29,7 @@ impl BasicCredsWrapper {
 /// this sends a request to the school's server relative to the BASE_URL
 /// and returns the body on a 200, any other code will fail and return a
 /// reqwest::Error
-pub fn fetch_schul_server(path: String, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<String, Box<Error>> {
+pub fn fetch_schul_server(path: String, creds: &BasicCredsWrapper, secret: &String, db_url: &String) -> Result<String, Box<dyn Error>> {
 
     let url = format!("{}{}", BASE_URL, path);
 

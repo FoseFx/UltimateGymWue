@@ -49,7 +49,7 @@ pub fn get_sp(user: AuthGuard, creds: HasCredsGuard, redis: RedisConnection, sec
     // return CustomResponse::error("Not Implemented yet".to_string(), Status::NotImplemented);
 }
 
-fn get_users_kurse(secret: &String, uid: String, db_url: &String) -> Result<(String, Vec<Kurs>), Box<Error>> {
+fn get_users_kurse(secret: &String, uid: String, db_url: &String) -> Result<(String, Vec<Kurs>), Box<dyn Error>> {
     let client = reqwest::Client::new();
 
     let res = client
@@ -76,7 +76,7 @@ fn get_users_kurse(secret: &String, uid: String, db_url: &String) -> Result<(Str
 }
 
 
-fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String, db_url: &String) -> Result<Vec<TTWoche>, Box<Error>> {
+fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWrapper, secret: &String, stufe: &String, db_url: &String) -> Result<Vec<TTWoche>, Box<dyn Error>> {
 
     //
     let stufe_id = stufe_to_id(redis_conn, &schueler_creds, stufe, secret, db_url);
@@ -113,7 +113,7 @@ fn get_stundenplan(redis_conn: &redis::Connection, schueler_creds: BasicCredsWra
     return Ok(tt);
 }
 
-fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<Error>> {
+fn generate_personal_tt(kurse: &Vec<Kurs>, tt: &Vec<TTWoche>) -> Result<TT, Box<dyn Error>> {
     if tt.len() != 2 {
         error!("Stundenplan nicht vollständig");
     }

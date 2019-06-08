@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/close_account.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/close_account.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/guards.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/guards.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/normal/passw.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/normal/passw.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/kurse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/kurse.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/stufen.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/stufen.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/stundenplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/stundenplan.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/utils.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,51 +27,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/auth/close_account.rs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
+        <entry file="file://$PROJECT_DIR$/src/db.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="390">
+              <caret line="304" column="9" selection-start-line="304" selection-start-column="9" selection-end-line="304" selection-end-column="9" />
               <folding>
-                <element signature="n#auth#0" />
-                <element signature="n#!!block;n#cors#0" />
+                <element signature="n#!!block;n#exists_insta_account#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/auth/normal/passw.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/auth/normal/normal.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="56" column="85" selection-start-line="56" selection-start-column="85" selection-end-line="56" selection-end-column="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cargo.toml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -80,8 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>register/</find>
-      <find>BasicCreds</find>
       <find>let token =</find>
       <find>userclaim</find>
       <find>jsonwebtoken::encode</find>
@@ -110,6 +89,8 @@
       <find>reqwest::Cl</find>
       <find>base64::encode</find>
       <find>crypto</find>
+      <find>Box&lt;Error&gt;</find>
+      <find>Box&lt;std::error::Error&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>Content-Type,authorization,proxy-authorization</replace>
@@ -145,23 +126,17 @@
         <option value="$USER_HOME$/.local/share/JetBrains/Toolbox/apps/IDEA-U/ch-0/191.6707.61.vmoptions" />
         <option value="$PROJECT_DIR$/src/auth/jwt.rs" />
         <option value="$PROJECT_DIR$/src/redismw.rs" />
-        <option value="$PROJECT_DIR$/src/db.rs" />
         <option value="$PROJECT_DIR$/src/basics/guards.rs" />
         <option value="$PROJECT_DIR$/src/catcher.rs" />
         <option value="$PROJECT_DIR$/src/responses.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/login/handler.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/register/handler.rs" />
         <option value="$PROJECT_DIR$/src/auth/insta/login.rs" />
-        <option value="$PROJECT_DIR$/src/auth/guards.rs" />
         <option value="$PROJECT_DIR$/src/basics/set.rs" />
         <option value="$PROJECT_DIR$/src/basics/creds.rs" />
-        <option value="$PROJECT_DIR$/src/basics/stundenplan.rs" />
-        <option value="$PROJECT_DIR$/src/basics/stufen.rs" />
-        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/src/auth/insta/register.rs" />
         <option value="$PROJECT_DIR$/src/basics/mod.rs" />
-        <option value="$PROJECT_DIR$/src/basics/kurse.rs" />
         <option value="$PROJECT_DIR$/db-middleware/kurse.js" />
         <option value="$PROJECT_DIR$/db-middleware/index.js" />
         <option value="$PROJECT_DIR$/db-middleware/vp.js" />
@@ -169,7 +144,15 @@
         <option value="$PROJECT_DIR$/src/main.rs" />
         <option value="$PROJECT_DIR$/Cargo.toml" />
         <option value="$PROJECT_DIR$/src/auth/normal/passw.rs" />
+        <option value="$PROJECT_DIR$/src/basics/kurse.rs" />
+        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
+        <option value="$PROJECT_DIR$/src/auth/guards.rs" />
+        <option value="$PROJECT_DIR$/src/basics/stundenplan.rs" />
+        <option value="$PROJECT_DIR$/warnings.txt" />
+        <option value="$PROJECT_DIR$/src/basics/stufen.rs" />
         <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
+        <option value="$PROJECT_DIR$/src/auth/close_account.rs" />
+        <option value="$PROJECT_DIR$/src/db.rs" />
       </list>
     </option>
   </component>
@@ -188,8 +171,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -207,13 +190,6 @@
               <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="normal" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
@@ -315,17 +291,20 @@
       <workItem from="1558966179684" duration="1715000" />
       <workItem from="1559478258594" duration="211000" />
       <workItem from="1559548400931" duration="1961000" />
+      <workItem from="1559989971372" duration="16000" />
+      <workItem from="1559990009560" duration="209000" />
+      <workItem from="1560013997962" duration="1159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149538000" />
+    <option name="totallyTimeSpent" value="150922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.19637139" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.2054429" />
       <window_info id="Structure" order="1" sideWeight="0.3253833" side_tool="true" weight="0.16083151" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -339,7 +318,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -388,7 +367,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tests.rs" />
     <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/rand-0.6.5/src/lib.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
@@ -475,13 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/mod.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -524,16 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/guards.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="25" column="67" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#58#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/catcher.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -562,22 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/guards.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-          <folding>
-            <element signature="e#0#32#0" />
-            <element signature="n#!!block;n#AuthGuard#0" />
-            <element signature="n#!!block;n#AuthGuardError#0" />
-            <element signature="e#300#1340#0" />
-            <element signature="n#!!block;n#is_valid_jwt#0" />
-            <element signature="n#!!block;n#get_claim#0" />
-            <element signature="n#test#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/responses.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -589,34 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2564">
           <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/set.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="45" column="10" lean-forward="true" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
-          <folding>
-            <element signature="n#!!block;n#AddCredsRequest#0" />
-            <element signature="n#!!block;n#is_cached#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="261" column="92" selection-start-line="261" selection-start-column="60" selection-end-line="261" selection-end-column="92" />
-          <folding>
-            <element signature="n#!!block;n#exists_insta_account#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -641,13 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="49" column="14" lean-forward="true" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -655,41 +565,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/stundenplan.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="16" column="142" selection-start-line="16" selection-start-column="128" selection-end-line="16" selection-end-column="142" />
-          <folding>
-            <element signature="e#0#25#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/stufen.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!block;n#evaluate_stufen#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db-middleware/vp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/kurse.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2280">
-          <caret line="120" column="19" selection-start-line="120" selection-end-line="121" />
-          <folding>
-            <element signature="n#!!block;n#to_five#0" />
-            <element signature="n#test#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -717,13 +596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/normal/normal.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="56" column="85" selection-start-line="56" selection-start-column="85" selection-end-line="56" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -735,6 +607,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/normal/normal.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="56" column="85" selection-start-line="56" selection-start-column="85" selection-end-line="56" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Cargo.toml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -742,17 +621,124 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth/normal/passw.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/warnings.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
+        <state relative-caret-position="81">
+          <caret line="74" column="13" lean-forward="true" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/normal/passw.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/kurse.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="149" column="137" selection-start-line="149" selection-start-column="137" selection-end-line="149" selection-end-column="137" />
+          <folding>
+            <element signature="n#!!block;n#to_five#0" />
+            <element signature="n#test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="31" column="127" selection-start-line="31" selection-start-column="127" selection-end-line="31" selection-end-column="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/stufen.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="95" column="107" selection-start-line="95" selection-start-column="107" selection-end-line="95" selection-end-column="107" />
+          <folding>
+            <element signature="n#!!block;n#evaluate_stufen#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/guards.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="70" column="73" selection-start-line="70" selection-start-column="73" selection-end-line="70" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#32#0" />
+            <element signature="n#!!block;n#AuthGuard#0" />
+            <element signature="n#!!block;n#AuthGuardError#0" />
+            <element signature="n#!!block;n#is_valid_jwt#0" />
+            <element signature="n#test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/stundenplan.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="115" column="84" selection-start-line="115" selection-start-column="84" selection-end-line="115" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#25#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/mod.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/creds.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="779">
+          <caret line="45" column="10" lean-forward="true" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+          <folding>
+            <element signature="n#!!block;n#AddCredsRequest#0" />
+            <element signature="n#!!block;n#is_cached#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/guards.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="25" column="67" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#58#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/set.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/close_account.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="304" column="9" selection-start-line="304" selection-start-column="9" selection-end-line="304" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!block;n#exists_insta_account#0" />
+          </folding>
         </state>
       </provider>
     </entry>

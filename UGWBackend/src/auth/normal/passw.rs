@@ -6,7 +6,7 @@ use rand::distributions::Alphanumeric;
 
 
 /// returns: (hash, salt)
-pub fn hash_passw(password: &String) -> Result<(String, String), Box<Error>> {
+pub fn hash_passw(password: &String) -> Result<(String, String), Box<dyn Error>> {
 
     let salt = salt();
 

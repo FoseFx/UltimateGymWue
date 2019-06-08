@@ -60,7 +60,7 @@ pub fn get_vertretungsplan(_user: AuthGuard,
     return CustomResponse::data(json!(returnVec));
 }
 
-fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<Vec<JsonValue>>, Box<std::error::Error>> {
+fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<Vec<JsonValue>>, Box<dyn std::error::Error>> {
 
     let redis_get_res: RedisResult<String> = redis.get("vertretungsplan");
 

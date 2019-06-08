@@ -12,7 +12,7 @@ pub fn remove_account(user: AuthGuard, secret: State<SecretMgt>, db_url: State<D
     let secret: &String = &secret.0.deref().to_string();
     let uid = user.claim.uid;
 
-    let remove_response = db::remove_user_account(&uid, secret, db_url);
+    let _remove_response = db::remove_user_account(&uid, secret, db_url);
 
     return CustomResponse::message("Ok, Account wurde gelöscht".to_string());
 }

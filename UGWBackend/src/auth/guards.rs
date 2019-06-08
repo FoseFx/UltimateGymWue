@@ -68,7 +68,7 @@ pub fn is_valid_jwt(header: &str, secret: &String) -> bool {
     return v_res.unwrap();
 }
 
-fn get_claim(header: &str, secret: &String) -> Result<UserClaim, Box<Error>> {
+fn get_claim(header: &str, secret: &String) -> Result<UserClaim, Box<dyn Error>> {
 
     let token: Vec<&str> = header.split(" ").collect();
     let token = token[1].to_string();

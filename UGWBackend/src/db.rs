@@ -259,7 +259,7 @@ pub fn login_insta(iid: &String, secret: &String, db_url: &String) -> Result<Use
     return Ok(claim);
 }
 
-pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String, db_url: &String) -> Result<String, Box<Error>> {
+pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String, db_url: &String) -> Result<String, Box<dyn Error>> {
     let client = reqwest::Client::new();
 
     let jsonv = json!({
@@ -281,7 +281,7 @@ pub fn add_creds_to_user(uid: &String,  creds: &BasicCreds, secret: &String, db_
     return Ok(res.text()?);
 }
 
-pub fn get_creds_from_user(uid: &String, secret: &String, db_url: &String) -> Result<BasicCreds, Box<Error>> {
+pub fn get_creds_from_user(uid: &String, secret: &String, db_url: &String) -> Result<BasicCreds, Box<dyn Error>> {
     let client = reqwest::Client::new();
 
     let res = client.get(&format!("{}get_creds/{}", db_url, uid))
@@ -296,13 +296,13 @@ pub fn get_creds_from_user(uid: &String, secret: &String, db_url: &String) -> Re
 }
 
 
-pub fn remove_user_account(uid: &String, secret: &String, db_url: &String) -> Result<bool, Box<Error>> {
+pub fn remove_user_account(uid: &String, secret: &String, db_url: &String) -> Result<bool, Box<dyn Error>> {
     let client = reqwest::Client::new();
 
     let res = client.get(&format!("{}removeAccount/{}", db_url, uid))
         .header(reqwest::header::AUTHORIZATION, secret.to_owned())
         .send()?;
-    let res = res.error_for_status()?;
+    let _res = res.error_for_status()?;
 
     return Ok(true);
 }
