@@ -33,6 +33,7 @@ li {
   width: 100%;
   white-space: nowrap;
   transition: background-color 0.2s linear;
+  cursor: pointer;
   &:hover {
     background: $light;
   }

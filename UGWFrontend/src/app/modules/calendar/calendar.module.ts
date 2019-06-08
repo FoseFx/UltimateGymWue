@@ -1,10 +1,14 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { CalendarRoutingModule } from './calendar-routing.module';
+import { MonthComponent } from './month/month.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [MonthComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CalendarRoutingModule
   ]
 })
 export class CalendarModule { }

@@ -37,4 +37,11 @@ export class MenuComponent {
 
   constructor(public query: AppQuery, public service: AppService) { }
 
+  menuItems = [
+    {name: 'Home', icon: 'home', route: '/'},
+    {name: 'User', icon: 'account_circle', route: '/user'},
+    {name: 'Stundenplan', icon: 'date_range', route: '/basics/stundenplan'},
+    {name: 'Kalender', icon: 'event', route: '/calendar'}
+  ];
+
 }

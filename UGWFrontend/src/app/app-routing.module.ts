@@ -22,6 +22,11 @@ const routes: Routes = [
     canActivate: [NeedsSetupGuard]
   },
   {
+    path: 'calendar',
+    loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule),
+    canActivate: [NeedsSetupGuard]
+  },
+  {
     path: '',
     redirectTo: 'basics/landing',
     pathMatch: 'full'
