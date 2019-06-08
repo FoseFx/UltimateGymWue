@@ -157,3 +157,12 @@ p.small {
 a {
   cursor: pointer;
 }
+
+.padded_center {
+  width: 70%;
+  max-width: 900px;
+  margin: 0 auto;
+  @media (max-width: 600px) {
+    width: 90%!important;
+  }
+}
