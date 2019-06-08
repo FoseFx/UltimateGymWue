@@ -11,17 +11,6 @@ COPY . ./
 
 RUN cargo build --release
 
-ENV SECRET="test"
-ENV MAIL_JET_USER="test"
-ENV MAIL_JET_KEY="test"
-ENV REDIS_PATH="redis://127.0.0.1:6379/"
-ENV INSTA_CID="test"
-ENV INSTA_SECRET="test"
-ENV RUST_BACKTRACE="1"
-ENV DEVELOPMENT="true"
-
-RUN cargo test --release
-
 RUN ldd target/release/ugw-backend
 
 RUN LANG=en objdump -s -j .interp target/release/ugw-backend
