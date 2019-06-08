@@ -4,6 +4,7 @@ import { TimetableComponent } from './timetable.component';
 import { UiModule } from 'src/app/modules/ui/ui.module';
 import { AppQuery } from 'src/app/state/app.query';
 import { AppStore } from 'src/app/state/app.store';
+import {KeyService} from '../../../../services/key.service';
 
 describe('TimetableComponent', () => {
   let component: TimetableComponent;
@@ -13,7 +14,7 @@ describe('TimetableComponent', () => {
     TestBed.configureTestingModule({
       imports: [UiModule],
       declarations: [ TimetableComponent ],
-      providers: [AppQuery, AppStore]
+      providers: [KeyService, AppQuery, AppStore]
     })
     .compileComponents();
   }));

@@ -14,6 +14,7 @@ import {BasicsService} from '../../state/basics.service';
 import {UnhtmlPipe} from '../stufe-vertretung/unhtml.pipe';
 import {ExtractStyleTagsPipe} from '../stufe-vertretung/extract-style-tags.pipe';
 import {BasicsPopupComponent} from '../basics-popup/basics-popup.component';
+import {KeyService} from '../../../../services/key.service';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -29,7 +30,7 @@ describe('LandingComponent', () => {
         UnhtmlPipe,
         ExtractStyleTagsPipe,
         BasicsPopupComponent],
-      providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService]
+      providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService, KeyService]
     })
     .compileComponents();
   }));

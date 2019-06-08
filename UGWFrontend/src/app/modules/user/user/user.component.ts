@@ -42,8 +42,8 @@ export class UserComponent {
       authorization: this.appQuery.loginToken
     }}).subscribe((res) => {
       console.log(res);
-      this.logout();      
-    }, 
+      this.logout();
+    },
     (err) => {
       console.error(err);
     });

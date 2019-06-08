@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppQuery} from '../../../../state/app.query';
 import {TimeTable, TimeTableDay, TimeTableField, TimeTableWeek} from '../../../../../types/TT';
 import {map} from 'rxjs/operators';
+import {KeyService} from '../../../../services/key.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.scss']
 })
-export class TimetableComponent {
+export class TimetableComponent implements OnInit, OnDestroy {
 
-  constructor(private appQuery: AppQuery) { }
+  constructor(private appQuery: AppQuery, private keyService: KeyService) { }
+
+  subscriptions: Subscription[] = [];
+  activeTab = 0;
+
+
 
   s$ = this.appQuery.tt$.pipe(map(
     (tt: TimeTable) => {
@@ -27,7 +34,7 @@ export class TimetableComponent {
             if (!newTTforWeek[fieldIndex]) { // add stunde, if not set yet
               newTTforWeek[fieldIndex] = [];
               if (deepness > 1) { // padding
-                for (let i = 0; i <= deepness; i++){
+                for (let i = 0; i <= deepness; i++) {
                   newTTforWeek[fieldIndex].push(null);
                 }
               }
@@ -52,6 +59,23 @@ export class TimetableComponent {
       return newTT;
     }
   ));
+
+  ngOnInit(): void {
+    // listen to key Events
+    this.subscriptions.push(
+      this.keyService.leftRightlistener$.subscribe((e) => {
+        if (e === KeyService.RIGHT_EVENT) {
+          this.activeTab = 1;
+        } else {
+          this.activeTab = 0;
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 
 }
 

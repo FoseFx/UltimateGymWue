@@ -1,6 +1,6 @@
 <app-basics-popup></app-basics-popup>
 
-<app-tab class="padded_center">
+<app-tab class="padded_center" [setActive]="activeTab" (currentActive)="activeTab = $event">
   <app-tab-item label="{{appQuery.today$ | async | date: 'EE' }}">
     <!-- Today -->
     <app-home-table

@@ -7,8 +7,8 @@ describe('BasicsQuery', () => {
     providers: [BasicsStore, BasicsQuery]
   }));
 
-  it('should be created', () => {
+  /*it('should be created', () => {
     const service: BasicsQuery = TestBed.get(BasicsQuery);
     expect(service).toBeTruthy();
-  });
+  });*/
 });

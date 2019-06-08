@@ -1,4 +1,4 @@
-<app-tab class="padded_center">
+<app-tab class="padded_center" (currentActive)="activeTab = $event" [setActive]="activeTab">
   <app-tab-item *ngFor="let woche of (s$ | async); let i = index" [label]="i === 0 ? 'A':'B'">
     <table>
       <tr>

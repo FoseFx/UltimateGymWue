@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AppQuery} from '../../../../state/app.query';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
@@ -6,13 +6,15 @@ import {AppService} from '../../../../state/app.service';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
 import {BasicsQuery} from '../../state/basics.query';
 import {BasicsService} from '../../state/basics.service';
+import {KeyService} from '../../../../services/key.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent implements AfterViewInit {
+export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   loading = false;
 
@@ -20,10 +22,27 @@ export class LandingComponent implements AfterViewInit {
               private appService: AppService,
               private http: HttpClient,
               public basicsQuery: BasicsQuery,
-              private basicsService: BasicsService) { }
+              private basicsService: BasicsService,
+              private keyService: KeyService) { }
+
+  activeTab = 0;
+  subscriptions: Subscription[] = [];
+
+  ngOnInit(): void {
+    // listen to key Events
+    this.subscriptions.push(
+      this.keyService.leftRightlistener$.subscribe((e) => {
+        if (e === KeyService.RIGHT_EVENT) {
+          this.activeTab = 1;
+        } else {
+          this.activeTab = 0;
+        }
+      })
+    );
+  }
+
 
   ngAfterViewInit() {
-    console.log(this.basicsService);
     if (!this.appQuery.getValue().loginData) { return; } // only for the tests, guard should not allow this
     if (this.appQuery.hasVertretungsplanCached()) {
       return;
@@ -42,5 +61,10 @@ export class LandingComponent implements AfterViewInit {
       console.log(err);
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
 
 }
