@@ -71,6 +71,9 @@ http.createServer((req, res) => {
   if (/^\/removeAccount\/.*$/.test(req.url)) {
     return removeAccount(req, res);
   }
+  if (/^\/getEvents\/.*$/.test(req.url)) {
+   return getEvents(req, res);
+ }
 
   res.statusCode = 404;
   res.end();
@@ -440,4 +443,30 @@ async function removeAccount(req, res) {
     console.error(e);
   }
   res.end("Ok");
+}
+
+async function getEvents(req, res) {
+  let date = req.url.replace("/getEvents/", "").replace("/", "");
+  console.log(date);
+  try {
+      const snap = await db.collection('events').doc(date).get();
+      const data = snap.data();
+      if (typeof data !== "undefined") {
+        console.log(data);
+        const arr = [];
+        for (let i in data) {
+            arr.push(data[i]);
+        }
+
+        res.end(JSON.stringify(arr));
+      } else {
+        res.end("[]");
+      }
+      return;
+  } catch(e) {
+  console.log(e);
+    res.end("[]");
+    return;
+  }
+
 }

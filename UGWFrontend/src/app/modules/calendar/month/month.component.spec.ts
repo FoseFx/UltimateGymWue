@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MonthComponent } from './month.component';
+import {HttpClientModule} from '@angular/common/http';
+import {AppQuery} from "../../../state/app.query";
+import {AppStore} from "../../../state/app.store";
 
 describe('MonthComponent', () => {
   let component: MonthComponent;
@@ -8,7 +11,9 @@ describe('MonthComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthComponent ]
+      imports: [HttpClientModule],
+      declarations: [ MonthComponent ],
+      providers: [AppQuery, AppStore]
     })
     .compileComponents();
   }));

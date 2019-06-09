@@ -18,6 +18,7 @@ export const environment = {
     setBasics: `${backendHost}/api/basics`,
     getStundenplan: `${backendHost}/api/basics/stundenplan`,
     getVertretung: `${backendHost}/api/basics/vp/`,
-    removeAccount: `${backendHost}/api/auth/closeAccount`
+    removeAccount: `${backendHost}/api/auth/closeAccount`,
+    getEvents: `${backendHost}/api/events/`
   }
 };

@@ -46,6 +46,7 @@ mod responses;
 mod redismw;
 mod basics;
 mod catcher;
+mod events;
 
 #[get("/health")]
 fn status() -> &'static str{
@@ -100,7 +101,9 @@ fn rocket() -> Rocket {
                 basics::kurse::get_all_kurse,
                 basics::set::set_basics,
                 basics::stundenplan::get_sp,
-                basics::vertretungsplan::get_vertretungsplan
+                basics::vertretungsplan::get_vertretungsplan,
+                events::month::get_months_events,
+                events::add_event::put_add_event
 
             ]
         )
