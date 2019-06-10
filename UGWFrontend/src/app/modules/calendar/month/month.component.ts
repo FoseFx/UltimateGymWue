@@ -13,9 +13,35 @@ export class MonthComponent implements AfterViewInit, OnInit {
   constructor(private http: HttpClient, private appQuery: AppQuery) { }
 
   now = new Date();
-  month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30];
+  month = [];
+
+  public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
+    const year = date.getFullYear();
+    if (year % 4 === 0) {
+      return false;
+    }
+    if (year % 100 !== 0) {
+      return true;
+    } else {
+      return year % 400 === 0;
+    }
+  }
 
   ngOnInit(): void {
+    let ndays: number;
+    const month = this.now.getMonth() + 1;
+    if (month !== 2) { // exclude February bc of leap years
+      if (month <= 7) {
+        ndays = month % 2 === 0 ? 30 : 31;
+      } else {
+        ndays = month % 2 !== 0 ? 30 : 31;
+      }
+    } else {
+      ndays = MonthComponent.isLeapYear(this.now) ? 29 : 28;
+    }
+    for (let i = 0; i < ndays; i++) {
+      this.month.push({});
+    }
   }
 
 
