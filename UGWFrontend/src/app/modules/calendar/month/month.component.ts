@@ -20,7 +20,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
 
   ngAfterViewInit(): void {
-    if (!this.appQuery.hasCredentials()) {return;} // only for the tests
+    if (!this.appQuery.hasCredentials()) { return; } // only for the tests
     const year = this.now.getFullYear();
     const month = this.now.getMonth() + 1;
     const query = `${year}-${month.toString().length === 1 ? '0' : ''}${month}`;
