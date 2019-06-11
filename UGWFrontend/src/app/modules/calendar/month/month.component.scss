@@ -1,3 +1,4 @@
+@import "../../../../colors";
 .calendar {
   display: grid;
   grid: auto / auto auto auto auto auto auto auto;
@@ -7,12 +8,21 @@
 }
 
 .item {
+  position: relative;
   width: auto;
   height: calc(100vh / 6);
-  background: red;
+  background: $light;
   margin: 1px;
   border-radius: 5px;
   @media (min-width: 600px) {
     margin: 5px;
   }
+
+  .frei {
+    background: red;
+  }
+  .klausur {
+    background: blue;
+  }
 }
+

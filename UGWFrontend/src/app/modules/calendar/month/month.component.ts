@@ -13,7 +13,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
   constructor(private http: HttpClient, private appQuery: AppQuery) { }
 
   now = new Date();
-  month = [];
+  month: Event[][] = [];
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
@@ -40,7 +40,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
       ndays = MonthComponent.isLeapYear(this.now) ? 29 : 28;
     }
     for (let i = 0; i < ndays; i++) {
-      this.month.push({});
+      this.month.push([]);
     }
   }
 
@@ -60,9 +60,30 @@ export class MonthComponent implements AfterViewInit, OnInit {
         const data = d.data;
         console.log(data);
         data.forEach((event: Event) => {
-          // todo
+
+          if (event.format === 'fullday') {
+            const date = new Date(event.begin);
+            const day = date.getDate();
+            this.month[day].push(event);
+          } else if (event.format === 'ferien' || event.format === 'time') {
+            const begin = new Date(event.begin).getDate();
+            const end = new Date(event.end).getDate();
+            for (let i = begin; i <= end; i++) {
+              this.month[i].push(event);
+            }
+          } else if (event.format === 'schule') {
+            const l = event.begin.toString().length;
+            const beginH = +event.begin.toString().substr(0, l > 13 ? 1 : 2);
+            const date = new Date(+event.begin.toString().substr(l > 13 ? 1 : 2));
+            const day = date.getDate();
+            event.beginSchulStunde = beginH;
+            event.begin = +date;
+            this.month[day].push(event);
+          }
+
         });
 
+        console.log(this.month);
       },
       (err) => {
         console.error(err);
@@ -77,7 +98,8 @@ class Event {
   format: 'ferien'|'schule'|'fullday'|'time';
   votes: number;
   by: EventBy;
-  begin: number;
+  beginSchulStunde?: number;
+  begin: number; // if type = schule: first one/two digits represent the schulstunde, rest is the date it begins
   end?: number; // Not for typ = Feiertag
   stufe?: string; // only for typ = Klausur or Note
   kurs?: string; // only for typ = Klausur or Note

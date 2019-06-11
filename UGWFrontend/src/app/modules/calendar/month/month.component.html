@@ -3,7 +3,11 @@
 <div class="calendar">
 
   <div class="item" *ngFor="let item of month">
-    test
+
+    <div *ngFor="let event of item" [ngClass]="{'frei': event.typ === 'ferien' || event.typ === 'ferientag', 'klausur': event.typ === 'klausur'}">
+      {{event.name}}
+    </div>
+
   </div>
 
 
