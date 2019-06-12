@@ -19,3 +19,15 @@ app-stufe-vertretung {
   overflow-x: auto;
   margin-top: 30px;
 }
+tr {
+  &.e {
+    color: red;
+    font-weight: bold;
+  }
+  &.r {
+    color: #f8a660;
+  }
+  &.k {
+    color: cornflowerblue;
+  }
+}

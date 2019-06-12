@@ -7,7 +7,14 @@
 <table>
   <tbody>
   <ng-container *ngFor="let field of today; let i = index;">
-    <tr *ngIf="!!field.name && field.name !== 'Frei'" (click)="onTrClick(field)" >
+    <tr
+      *ngIf="!!field.name && field.name !== 'Frei'"
+      (click)="onTrClick(field)"
+      [ngClass]="{
+        'e': field.vd?.typ === 'e' || field.vd?.typ === 'eva',
+        'r': field.vd?.typ === 'raum-vtr.',
+        'k': field.vd?.typ === 'k'
+       }">
       <td>{{i + 1}}</td>
       <td>{{field.name}}</td>
       <td *ngIf="field.raum !== ''">{{field.raum}}</td>

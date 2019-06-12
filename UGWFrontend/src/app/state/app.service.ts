@@ -97,6 +97,13 @@ export class AppService {
   }
 
   setVertretungsplan(vp: VertretungsPlanSeite[]) {
+    const weights = {
+      'raum-vtr.': 0,
+      v: 1,
+      e: 2,
+      eva: 2,
+      k: 3
+    };
     const refDate = new Date(); // we use this to copy the 'year' information. No need to worry about new years eve b/c of holidays
     const basics = Object.assign({}, this.query.getValue().basics);
     let newPlan: TimeTable;
@@ -117,8 +124,15 @@ export class AppService {
           const asDate = new Date(refDate.getFullYear(), +dateSplit[1] - 1, +dateSplit[0], 8 );
           const index = asDate.getDay() - 1;
           const abIndex = AppQuery.getWeekNumber(asDate) [1] % 2 === 0 ? 0 : 1;
-          if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach) {
-            newPlan[abIndex][index][+datum.stunde - 1].vd = datum;
+          if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach || this.isMyKlausur(datum)) {
+            if (!newPlan[abIndex][index][+datum.stunde - 1].vd) { // set if empty
+              newPlan[abIndex][index][+datum.stunde - 1].vd = datum;
+            } else { // check for replacement
+              const currentType  = newPlan[abIndex][index][+datum.stunde - 1].vd.typ;
+              if (weights[currentType] < weights[datum.typ]) { // replace
+                newPlan[abIndex][index][+datum.stunde - 1].vd = datum;
+              }
+            }
           }
         });
       }
@@ -127,6 +141,13 @@ export class AppService {
     this.store.update({
       basics
     });
+  }
+
+  private isMyKlausur(datum: VertretungsDatum): boolean {
+    if (datum.typ !== 'k') {
+      return false;
+    }
+    return true; // todo
   }
 
   private save() {
