@@ -1,0 +1,25 @@
+<app-card>
+  <app-card-header>Klausuren</app-card-header>
+  <p class="center-text">Bitte wähle alle Kurse aus, die du schriftlich hast</p>
+
+  <table class="center-text padded_center dark">
+    <tr>
+      <th>Fach</th>
+      <th>Lehrer</th>
+      <th>Klausur?</th>
+    </tr>
+    <tr *ngFor="let k of kurse; let i = index;">
+      <td>{{k.fach}}</td>
+      <td>{{k.lehrer}}</td>
+      <td>
+        <input type="checkbox" (change)="active[i] = !active[i]">
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <br>
+  <app-button class="center-button" (click)="next()">Weiter</app-button>
+  <br>
+  <br>
+</app-card>

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PopupButtonComponent } from './popup-button.component';
+import {PopupButtonComponent} from './popup-button.component';
 
 describe('PopupButtonComponent', () => {
   let component: PopupButtonComponent;

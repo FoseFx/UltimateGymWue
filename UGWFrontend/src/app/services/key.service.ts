@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {fromEvent, Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 

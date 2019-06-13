@@ -1,4 +1,4 @@
-import { UnhtmlPipe } from './unhtml.pipe';
+import {UnhtmlPipe} from './unhtml.pipe';
 
 describe('UnhtmlPipe', () => {
   it('create an instance', () => {

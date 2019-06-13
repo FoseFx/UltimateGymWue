@@ -62,7 +62,7 @@ export class KurseComponent implements OnInit {
       (next: {error: boolean, msg: string}) => {
         console.log(next);
         this.stundenplanService.getSp().subscribe(_ => {
-          this.router.navigate(['/basics/landing']);
+          this.router.navigate(['/setup/basics/klausuren']);
         }, error => handleError(this, error));
       },
       (error) => handleError(this, error)

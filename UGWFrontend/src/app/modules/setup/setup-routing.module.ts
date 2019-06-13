@@ -17,6 +17,8 @@ import {CredentialsComponent} from './credentials/credentials.component';
 import {HasCredsGuard} from './guards/has-creds.guard';
 import {KurseComponent} from './kurse/kurse.component';
 import {HasStufeGuard} from './guards/has-stufe.guard';
+import {KlausurenComponent} from './klausuren/klausuren.component';
+import {HasKurseGuard} from './guards/has-kurse.guard';
 
 const routes: Routes = [
   {
@@ -85,7 +87,13 @@ const routes: Routes = [
     path: 'basics/kurse',
     component: KurseComponent,
     canActivate: [LoginnedGuard, HasCredsGuard, HasStufeGuard]
+  },
+  {
+    path: 'basics/klausuren',
+    component: KlausurenComponent,
+    canActivate: [LoginnedGuard, HasCredsGuard, HasKurseGuard]
   }
+
 ];
 
 @NgModule({

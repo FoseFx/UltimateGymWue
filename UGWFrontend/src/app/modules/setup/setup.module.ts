@@ -28,6 +28,8 @@ import {HasCredsGuard} from './guards/has-creds.guard';
 import {HasStufeGuard} from './guards/has-stufe.guard';
 import {KurseSelectRowComponent} from './kurse/kurse-select-row/kurse-select-row.component';
 import {StundenplanService} from './services/stundenplan.service';
+import {KlausurenComponent} from './klausuren/klausuren.component';
+import {HasKurseGuard} from './guards/has-kurse.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {StundenplanService} from './services/stundenplan.service';
     InstaComponent,
     InstaLoginComponent,
     CredentialsComponent,
-    KurseSelectRowComponent
+    KurseSelectRowComponent,
+    KlausurenComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +66,8 @@ import {StundenplanService} from './services/stundenplan.service';
     LoginnedGuard,
     HasCredsGuard,
     HasStufeGuard,
-    StundenplanService
+    StundenplanService,
+    HasKurseGuard
   ]
 })
 export class SetupModule { }

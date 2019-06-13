@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BasicsPopupComponent } from './basics-popup.component';
+import {BasicsPopupComponent} from './basics-popup.component';
 import {BasicsStore} from '../../state/basics.store';
 import {BasicsQuery} from '../../state/basics.query';
 import {BasicsService} from '../../state/basics.service';

@@ -1,4 +1,4 @@
-import { ExtractStyleTagsPipe } from './extract-style-tags.pipe';
+import {ExtractStyleTagsPipe} from './extract-style-tags.pipe';
 
 describe('ExtractStyleTagsPipe', () => {
   it('create an instance', () => {

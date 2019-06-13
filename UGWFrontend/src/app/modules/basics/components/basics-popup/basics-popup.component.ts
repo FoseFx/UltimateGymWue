@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {BasicsService} from '../../state/basics.service';
 import {BasicsQuery} from '../../state/basics.query';
 import {map} from 'rxjs/operators';

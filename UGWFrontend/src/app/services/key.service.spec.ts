@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { KeyService } from './key.service';
+import {KeyService} from './key.service';
 
 describe('KeyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

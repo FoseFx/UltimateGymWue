@@ -16,7 +16,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {RouterTestingModule} from '@angular/router/testing';
 import {KeyService} from './services/key.service';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);

@@ -1,4 +1,4 @@
-import { NotSwipableDirective } from './not-swipable.directive';
+import {NotSwipableDirective} from './not-swipable.directive';
 
 describe('NotSwipableDirective', () => {
   it('should create an instance', () => {
