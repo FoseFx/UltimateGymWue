@@ -156,7 +156,13 @@ export class AppService {
     if (datum.typ !== 'k') {
       return false;
     }
-    return true; // todo
+    return !!this.query.getValue().klausuren.find(f => {
+      const possible = datum.info.match(/\w+\d+/g);
+      if (possible === null) {
+        return false;
+      }
+      return !!possible.find(p => f === p);
+    });
   }
 
   private save() {
