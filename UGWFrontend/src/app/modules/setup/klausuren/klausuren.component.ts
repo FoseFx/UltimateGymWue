@@ -14,11 +14,12 @@ export class KlausurenComponent {
 
   active: boolean[] = [];
   kurse: Kurse =
-      !!this.appQuery.getValue().basics
+    (!!this.appQuery.getValue().basics
         ? this.appQuery.getValue().basics.kurse
-        : this.setupQuery.getSelectedKurse();
+        : this.setupQuery.getSelectedKurse()
+    ).filter(k => k.fach !== 'Frei');
 
-  next() {
+  save() {
     // todo
   }
 

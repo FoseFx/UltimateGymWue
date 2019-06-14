@@ -8,7 +8,7 @@
       <th>Lehrer</th>
       <th>Klausur?</th>
     </tr>
-    <tr *ngFor="let k of kurse; let i = index;">
+    <tr *ngFor="let k of kurse; let i = index;" [ngClass]="{'bold': active[i]}" >
       <td>{{k.fach}}</td>
       <td>{{k.lehrer}}</td>
       <td>
@@ -19,7 +19,7 @@
 
   <br>
   <br>
-  <app-button class="center-button" (click)="next()">Weiter</app-button>
+  <app-button class="center-button" (click)="save()">Speichern</app-button>
   <br>
   <br>
 </app-card>
