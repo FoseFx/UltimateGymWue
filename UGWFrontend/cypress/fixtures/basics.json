@@ -1,0 +1,1273 @@
+{
+  "meta": {
+    "version": "0.0.1"
+  },
+  "fullname": "Dummy Data",
+  "loginData": {
+    "uid": "ummyuid",
+    "token": "dummytoken",
+    "provider": [
+      "normal"
+    ],
+    "google": null,
+    "insta": null,
+    "normal": {
+      "email": "dummy@dummy.com",
+      "email_verified": true
+    }
+  },
+  "basics": {
+    "stufe": "S",
+    "stufe_id": null,
+    "kurse": [
+      {
+        "fach": "FA1",
+        "lehrer": "LEA",
+        "title": "TA"
+      },
+      {
+        "fach": "LZ",
+        "lehrer": "LEB",
+        "title": "LZ"
+      },
+      {
+        "fach": "FA1",
+        "lehrer": "LEC",
+        "title": "RELI"
+      },
+      {
+        "fach": "N1",
+        "lehrer": "LED",
+        "title": "WPI"
+      },
+      {
+        "fach": "FA5",
+        "lehrer": "LEE",
+        "title": "WPII"
+      }
+    ],
+    "stundenplan": [
+      [
+        [
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ],
+        [
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "K-Rat",
+            "lehrer": "LEM",
+            "name": "K-Rat",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "K-Rat",
+            "lehrer": "LEM",
+            "name": "K-Rat",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ],
+        [
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "NW",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "NW",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "THGym",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "THGym",
+            "typ": "klasse"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ]
+      ]
+    ],
+    "stundenplanWithInfos": [
+      [
+        [
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ],
+        [
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N7",
+            "lehrer": "LEI",
+            "name": "N7",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N9",
+            "lehrer": "LEK",
+            "name": "N9",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N8",
+            "lehrer": "LEJ",
+            "name": "N8",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "KRH2",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "tauch",
+            "lehrer": "Azv",
+            "name": "tauch",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPII",
+            "lehrer": "LEE",
+            "name": "FA5",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "WPI",
+            "lehrer": "LED",
+            "name": "N1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N2",
+            "lehrer": "LEF",
+            "name": "N2",
+            "raum": "000",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "K-Rat",
+            "lehrer": "LEM",
+            "name": "K-Rat",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "K-Rat",
+            "lehrer": "LEM",
+            "name": "K-Rat",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI1",
+            "lehrer": "LEL",
+            "name": "NI1",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "TA",
+            "lehrer": "LEA",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ],
+        [
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N4",
+            "lehrer": "LEG",
+            "name": "N4",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "LZ",
+            "lehrer": "LEB",
+            "name": "LZ",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI3",
+            "lehrer": "LEM",
+            "name": "NI3",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": null,
+            "lehrer": null,
+            "name": null,
+            "raum": null,
+            "typ": null
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "NW",
+            "typ": "klasse"
+          },
+          {
+            "fach": "N6",
+            "lehrer": "LEH",
+            "name": "N6",
+            "raum": "NW",
+            "typ": "klasse"
+          }
+        ],
+        [
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI2",
+            "lehrer": "LEM",
+            "name": "NI2",
+            "raum": "000",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "THGym",
+            "typ": "klasse"
+          },
+          {
+            "fach": "NI4",
+            "lehrer": "LEN",
+            "name": "NI4",
+            "raum": "THGym",
+            "typ": "klasse"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          },
+          {
+            "fach": "RELI",
+            "lehrer": "LEC",
+            "name": "FA1",
+            "raum": "000",
+            "typ": "kurs"
+          }
+        ]
+      ]
+    ],
+    "vertretungsplan": [
+      {
+        "infos": [
+          "14.6.2019",
+          "<b>Nachrichten zum Tag</b>",
+          "Exkursion EF: Treffpunkt vor der Aula"
+        ],
+        "vp": null
+      },
+      {
+        "infos": [
+          "17.6.2019"
+        ],
+        "vp": null
+      }
+    ]
+  },
+  "credentials": {
+    "token": "stub",
+    "has_lehrer": false
+  },
+  "thisDay": "2019-06-14T15:08:53.389Z",
+  "nextDay": "2019-06-17T15:08:53.400Z",
+  "klausuren": []
+}
