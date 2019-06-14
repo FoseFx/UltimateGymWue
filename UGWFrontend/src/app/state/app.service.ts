@@ -143,6 +143,15 @@ export class AppService {
     });
   }
 
+
+  public setKlausuren(klausuren: string[]) {
+    this.store.update({
+      klausuren
+    });
+    this.save();
+  }
+
+
   private isMyKlausur(datum: VertretungsDatum): boolean {
     if (datum.typ !== 'k') {
       return false;

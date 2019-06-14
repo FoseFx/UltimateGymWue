@@ -40,6 +40,7 @@ export interface AppState {
     stundenplanWithInfos: TimeTable
     vertretungsplan: VertretungsPlanSeite[]
   };
+  klausuren: string[],
   menuOpen: boolean;
   credentials: {
     token: string,
@@ -67,7 +68,8 @@ export function createInitialState(): AppState {
     basics: null,
     credentials: null,
     thisDay: null,
-    nextDay: null
+    nextDay: null,
+    klausuren: []
   };
 }
 

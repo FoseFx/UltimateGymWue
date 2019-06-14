@@ -12,14 +12,17 @@
       <td>{{k.fach}}</td>
       <td>{{k.lehrer}}</td>
       <td>
-        <input type="checkbox" (change)="active[i] = !active[i]">
+        <input type="checkbox"
+               [checked]="active[i]"
+               (change)="active[i] = !active[i]"
+        >
       </td>
     </tr>
   </table>
 
-  <br>
-  <br>
+  <br/>
+  <br/>
   <app-button class="center-button" (click)="save()">Speichern</app-button>
-  <br>
-  <br>
+  <br/>
+  <br/>
 </app-card>

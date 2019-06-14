@@ -6,6 +6,8 @@ import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {SetupQuery} from '../state/setup.query';
 import {SetupStore} from '../state/setup.store';
+import {AppService} from "../../../state/app.service";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('KlausurenComponent', () => {
   let component: KlausurenComponent;
@@ -13,9 +15,9 @@ describe('KlausurenComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule],
+      imports: [UiModule, RouterTestingModule],
       declarations: [ KlausurenComponent ],
-      providers: [AppQuery, AppStore, SetupQuery, SetupStore]
+      providers: [AppQuery, AppStore, SetupQuery, SetupStore, AppService]
     })
     .compileComponents();
   }));
