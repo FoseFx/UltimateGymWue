@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {AppQuery} from './app.query';
+import {abwochemap, AppQuery} from './app.query';
 import {AppStore} from './app.store';
 import {AppService} from './app.service';
 import {SetupQuery} from '../modules/setup/state/setup.query';
@@ -251,6 +251,20 @@ describe('AppQuery', () => {
     });
 
 
+  });
+
+  it('should test abwochemap', (done) => {
+    of(new Date(2019, 5, 19)).pipe(abwochemap()).subscribe((n: 0|1) => {
+      expect(n).toEqual(1);
+      done();
+    });
+  });
+
+  it('should test abwochemap 2', (done) => {
+    of(new Date(2019, 5, 24)).pipe(abwochemap()).subscribe((n: 0|1) => {
+      expect(n).toEqual(0);
+      done();
+    });
   });
 
 });

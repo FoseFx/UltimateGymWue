@@ -99,4 +99,4 @@ export class AppQuery extends Query<AppState> {
 
 }
 // tslint:disable-next-line:no-shadowed-variable
-const abwochemap = () => map((date: Date) => (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1);
+export const abwochemap = () => map((date: Date) => (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1);
