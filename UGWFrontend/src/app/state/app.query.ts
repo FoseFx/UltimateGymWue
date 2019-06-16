@@ -25,7 +25,7 @@ export class AppQuery extends Query<AppState> {
 
 
   menuOpen$ = this.select('menuOpen');
-  tt$ = this.select('basics').pipe(map((b) => !!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan));
+  tt$ = this.select('basics').pipe(map((b) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []));
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
 
