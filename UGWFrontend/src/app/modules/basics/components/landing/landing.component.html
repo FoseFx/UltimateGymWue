@@ -17,8 +17,8 @@
   <app-tab-item label="{{appQuery.nextDay$ | async | date: 'EE' }}">
     <app-home-table
       class="tab-item"
-      [today]="(appQuery.tt$ | async)[appQuery.abwoche$ | async][(appQuery.nextDay$ | async).getDay() - 1]"
-      [abWoche]="appQuery.abwoche$ | async"
+      [today]="(appQuery.tt$ | async)[appQuery.nextDayABwoche$ | async][(appQuery.nextDay$ | async).getDay() - 1]"
+      [abWoche]="appQuery.nextDayABwoche$ | async"
       [date]="appQuery.nextDay$ | async"
       [showSpinner]="loading"
       [vd]="appQuery.vertretungsDaten$ | async"

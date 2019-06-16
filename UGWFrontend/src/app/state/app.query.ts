@@ -23,6 +23,7 @@ export class AppQuery extends Query<AppState> {
     return `Bearer ${this.getValue().credentials.token}`;
   }
 
+
   menuOpen$ = this.select('menuOpen');
   tt$ = this.select('basics').pipe(map((b) => !!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan));
 
@@ -60,11 +61,9 @@ export class AppQuery extends Query<AppState> {
     })
   );
 
-  abwoche$: Observable<0|1> = this.today$.pipe(
-    map((date) => {
-      return (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1;
-    })
-  );
+  abwoche$: Observable<0|1> = this.today$.pipe(abwochemap());
+
+  nextDayABwoche$: Observable<0|1> = this.nextDay$.pipe(abwochemap());
 
   vertretungsDaten$: Observable<VertretungsPlanSeite[]> = this.select('basics').pipe(
     map((b) => !!b.vertretungsplan ? b.vertretungsplan : [null, null])
@@ -99,3 +98,5 @@ export class AppQuery extends Query<AppState> {
   }
 
 }
+// tslint:disable-next-line:no-shadowed-variable
+const abwochemap = () => map((date: Date) => (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1);
