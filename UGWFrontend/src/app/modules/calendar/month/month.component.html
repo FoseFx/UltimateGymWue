@@ -2,13 +2,15 @@
 
 <div class="calendar">
 
-  <div class="item" *ngFor="let item of month">
-
-    <div *ngFor="let event of item" [ngClass]="{'frei': event.typ === 'ferien' || event.typ === 'ferientag', 'klausur': event.typ === 'klausur'}">
-      {{event.name}}
+  <ng-container *ngFor="let item of month; let i = index;">
+    <div class="item" *ngIf="item !== null">
+      <h4>{{i - this.offset + 1}}</h4>
+      <div *ngFor="let event of item" [ngClass]="{'frei': event.typ === 'ferien' || event.typ === 'ferientag', 'klausur': event.typ === 'klausur'}">
+        {{event.name}}
+      </div>
     </div>
-
-  </div>
+    <div class="item filler-item" *ngIf="item === null"></div>
+  </ng-container>
 
 
 </div>

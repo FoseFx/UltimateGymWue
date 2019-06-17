@@ -12,6 +12,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   constructor(private http: HttpClient, private appQuery: AppQuery) { }
 
+  offset: number;
   now = new Date();
   month: Event[][] = [];
 
@@ -38,6 +39,16 @@ export class MonthComponent implements AfterViewInit, OnInit {
       }
     } else {
       ndays = MonthComponent.isLeapYear(this.now) ? 29 : 28;
+    }
+    const firstOfMonth = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
+    const offset = firstOfMonth.getDay() - 1; // (0 = So, 1 = mo, ..., 6 = Sa) - 1
+    if (offset < 0) {
+      this.offset = 6;
+    } else {
+      this.offset = offset;
+    }
+    for (let i = 0; i < this.offset; i++) {
+      this.month.push(null);
     }
     for (let i = 0; i < ndays; i++) {
       this.month.push([]);

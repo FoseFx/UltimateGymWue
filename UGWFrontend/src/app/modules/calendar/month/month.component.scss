@@ -17,6 +17,9 @@
   @media (min-width: 600px) {
     margin: 5px;
   }
+  &.filler-item {
+    opacity: 0;
+  }
 
   .frei {
     background: red;
@@ -25,4 +28,3 @@
     background: blue;
   }
 }
-
