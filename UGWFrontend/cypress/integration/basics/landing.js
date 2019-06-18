@@ -183,4 +183,17 @@ describe('display data correctly', function () {
     });
 
   });
+
+
+  it('should hide hiddenNonKurse ', function () {
+    cy.clock(+new Date(2019, 5, 17));
+    cy.visit('http://localhost:4200/basics/landing');
+    cy.get('table').eq(0).within(() => cy.get('tr').then(d => expect(d.length).to.equal(10)));
+    cy.contains('tauch').eq(0).click();
+    cy.contains('tauch nicht mehr anzeigen').click();
+    cy.wait(1000);
+    cy.get('table').eq(0).within(() => cy.get('tr').then(d => expect(d.length).to.equal(8)));
+  });
+
+
 });

@@ -38,7 +38,8 @@ export interface AppState {
     kurse: Kurse,
     stundenplan: TimeTable,
     stundenplanWithInfos: TimeTable
-    vertretungsplan: VertretungsPlanSeite[]
+    vertretungsplan: VertretungsPlanSeite[],
+    hiddenNonKurse: string[]
   };
   klausuren: string[],
   menuOpen: boolean;

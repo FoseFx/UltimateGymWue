@@ -6,9 +6,10 @@
 import {Query} from '@datorama/akita';
 import {Injectable} from '@angular/core';
 import {AppState, AppStore, VertretungsPlanSeite} from './app.store';
-import {map} from 'rxjs/operators';
+import {flatMap, map, tap} from 'rxjs/operators';
 import {queryInCypress} from '../util';
 import {Observable} from 'rxjs';
+import {TimeTable} from "../../types/TT";
 
 @Injectable()
 export class AppQuery extends Query<AppState> {
@@ -25,7 +26,12 @@ export class AppQuery extends Query<AppState> {
 
 
   menuOpen$ = this.select('menuOpen');
-  tt$ = this.select('basics').pipe(map((b) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []));
+  public tt$ = this.select('basics').pipe(
+    tap(b => console.log('b: ' + JSON.stringify(b))),
+    map((b) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []),
+    mixInHiddenNonKurse(this.select('basics')),
+    removeHiddenNonKurse()
+  );
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
 
@@ -100,3 +106,27 @@ export class AppQuery extends Query<AppState> {
 }
 // tslint:disable-next-line:no-shadowed-variable
 export const abwochemap = () => map((date: Date) => (AppQuery.getWeekNumber(date)[1] % 2 === 0) ? 0 : 1);
+
+export const removeHiddenNonKurse = () => map((arr: [TimeTable, string[]]) => {
+  const tt = JSON.parse(JSON.stringify(arr[0]));
+  arr[1].forEach((kurs: string) => {
+    tt.forEach((woche) =>
+      woche.forEach((tag) =>
+        tag.forEach((stunde, i) => {
+          if (stunde.typ === 'klasse' && stunde.name === kurs) {
+            tag[i] = {};
+          }
+        })
+      )
+    );
+  });
+  return tt;
+});
+
+export const mixInHiddenNonKurse =
+  (basics$: Observable<{hiddenNonKurse: string[]}>) =>
+    flatMap(
+      tt => basics$.pipe(
+          map(b => !!b ? [tt, (!!b.hiddenNonKurse ? b.hiddenNonKurse : [])] : [tt, []])
+        )
+    );

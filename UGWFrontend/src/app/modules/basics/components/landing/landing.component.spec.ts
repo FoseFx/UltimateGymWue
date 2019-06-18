@@ -48,7 +48,8 @@ describe('LandingComponent', () => {
         stufe: '',
         stufe_id: '',
         vertretungsplan: null,
-        stundenplanWithInfos: null
+        stundenplanWithInfos: null,
+        hiddenNonKurse: []
       }
     });
     fixture.detectChanges();

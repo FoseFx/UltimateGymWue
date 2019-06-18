@@ -90,7 +90,8 @@ export class AppService {
         kurse,
         stundenplan: sp,
         stundenplanWithInfos: sp,
-        vertretungsplan: null
+        vertretungsplan: null,
+        hiddenNonKurse: []
       }
     });
     this.save();
@@ -147,6 +148,16 @@ export class AppService {
   public setKlausuren(klausuren: string[]) {
     this.store.update({
       klausuren
+    });
+    this.save();
+  }
+
+  public hideNonKurs(kurs: string) {
+    const basics = JSON.parse(JSON.stringify(this.query.getValue().basics));
+    const hiddenNonKurse = basics.hiddenNonKurse;
+    basics.hiddenNonKurse = [kurs, ...(!!hiddenNonKurse ? hiddenNonKurse : [])];
+    this.store.update({
+      basics
     });
     this.save();
   }

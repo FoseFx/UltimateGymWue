@@ -1,10 +1,11 @@
 import {TestBed} from '@angular/core/testing';
-import {abwochemap, AppQuery} from './app.query';
+import {abwochemap, AppQuery, mixInHiddenNonKurse, removeHiddenNonKurse} from './app.query';
 import {AppStore} from './app.store';
 import {AppService} from './app.service';
 import {SetupQuery} from '../modules/setup/state/setup.query';
 import {SetupStore} from '../modules/setup/state/setup.store';
 import {of} from 'rxjs';
+import {TimeTable} from '../../types/TT';
 
 describe('AppQuery', () => {
   beforeEach(() => {
@@ -13,7 +14,7 @@ describe('AppQuery', () => {
     });
   });
   it('should be created', () => {
-    const query: SetupQuery = TestBed.get(SetupQuery);
+    const query: AppQuery = TestBed.get(AppQuery);
     expect(query).toBeTruthy();
   });
 
@@ -253,18 +254,90 @@ describe('AppQuery', () => {
 
   });
 
-  it('should test abwochemap', (done) => {
-    of(new Date(2019, 5, 19)).pipe(abwochemap()).subscribe((n: 0|1) => {
-      expect(n).toEqual(1);
-      done();
+  describe('abwochen', () => {
+
+    it('should test abwochemap', (done) => {
+      of(new Date(2019, 5, 19)).pipe(abwochemap()).subscribe((n: 0|1) => {
+        expect(n).toEqual(1);
+        done();
+      });
     });
+
+    it('should test abwochemap 2', (done) => {
+      of(new Date(2019, 5, 24)).pipe(abwochemap()).subscribe((n: 0|1) => {
+        expect(n).toEqual(0);
+        done();
+      });
+    });
+
   });
 
-  it('should test abwochemap 2', (done) => {
-    of(new Date(2019, 5, 24)).pipe(abwochemap()).subscribe((n: 0|1) => {
-      expect(n).toEqual(0);
-      done();
-    });
-  });
+  describe('tt', () => {
 
+    describe('mixInHiddenNonKurse', () => {
+      it('should work with no tt, but hiddenNoKurse set', (done) => {
+        of([]).pipe(mixInHiddenNonKurse(of({hiddenNonKurse: ['test']}))).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify([[], ['test']]));
+          done();
+        });
+      });
+
+      it('should work with tt, but no hiddenNoKurse set', (done) => {
+        of(['sample']).pipe(mixInHiddenNonKurse(of({hiddenNonKurse: null}))).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify([['sample'], []]));
+          done();
+        });
+      });
+      it('should work with tt and hiddenNoKurse set', (done) => {
+        of(['sample']).pipe(mixInHiddenNonKurse(of({hiddenNonKurse: ['test']}))).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify([['sample'], ['test']]));
+          done();
+        });
+      });
+
+    });
+
+    describe('removeHiddenNonKurse', () => {
+
+      it('should stay like it is, with no hiddenNonKurse', (done) => {
+        // @ts-ignore
+        of([['this', 'should', 'not', 'change or fail'], []]).pipe(removeHiddenNonKurse()).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify(['this', 'should', 'not', 'change or fail']));
+          done();
+        });
+      });
+
+      it('should not error, with no tt, but with hiddenNonKurse', (done) => {
+        // @ts-ignore
+        of([[], ['test', 'mkey?']]).pipe(removeHiddenNonKurse()).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify([]));
+          done();
+        });
+      });
+
+      it('should remove hiddennonkurse', (done) => {
+        const tt: TimeTable = [
+          [[{name: 'test1', typ: 'kurs', fach: 'test', raum: '000', lehrer: 'idk'},
+            {name: 'test2', typ: 'klasse', fach: 'test', raum: '000', lehrer: 'idk'},
+            {name: 'test4', typ: 'klasse', fach: 'test', raum: '000', lehrer: 'idk'},
+            {name: 'test3', typ: 'kurs', fach: 'test', raum: '000', lehrer: 'idk'}], [], [], [], []],
+          [[], [], [], [], []]
+        ];
+        of([tt, ['test2']]).pipe(removeHiddenNonKurse()).subscribe((val) => {
+          expect(JSON.stringify(val)).toEqual(JSON.stringify([
+            [[
+              {name: 'test1', typ: 'kurs', fach: 'test', raum: '000', lehrer: 'idk'},
+              {},
+              {name: 'test4', typ: 'klasse', fach: 'test', raum: '000', lehrer: 'idk'},
+              {name: 'test3', typ: 'kurs', fach: 'test', raum: '000', lehrer: 'idk'}], [], [], [], []],
+            [[], [], [], [], []]
+          ]));
+          done();
+        });
+      });
+
+
+    });
+
+  });
 });
