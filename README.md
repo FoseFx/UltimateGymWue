@@ -1,4 +1,4 @@
-# UltimateGymWue [![Build Status](https://travis-ci.com/FoseFx/UltimateGymWue.svg?token=iq4xczjhn3DVKzpp6yfB&branch=master)](https://travis-ci.com/FoseFx/UltimateGymWue)
+# UltimateGymWue [![Build Status](https://travis-ci.com/FoseFx/UltimateGymWue.svg?token=iq4xczjhn3DVKzpp6yfB&branch=master)](https://travis-ci.com/FoseFx/UltimateGymWue) [![codecov](https://codecov.io/gh/FoseFx/UltimateGymWue/branch/master/graph/badge.svg?token=4elcNKyOMX)](https://codecov.io/gh/FoseFx/UltimateGymWue) 
 The Ultimate Tool for the Students of my School.
 
 ## Features
