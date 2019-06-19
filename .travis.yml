@@ -23,6 +23,8 @@ matrix:
       - ng build --prod # production build
       - npm run test # unit tests
       - npm run e2e  # integration tests
+    after_success:
+      - bash <(curl -s https://codecov.io/bash) -t $(echo "$UPLOAD_TOKEN")
   - language: rust
     rust: nightly
     cache: cargo
