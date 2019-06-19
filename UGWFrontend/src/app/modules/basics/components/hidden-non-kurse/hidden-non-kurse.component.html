@@ -1,0 +1,24 @@
+<app-card>
+  <app-card-header>Versteckte Stunden</app-card-header>
+
+  <ng-template [ngIf]="(appQuery.hiddenNonKurse$ | async).length > 0" [ngIfElse]="emptyArray">
+
+
+    <table class="dark center-text fullwidth" >
+      <tr><th>Stunden</th><td>Erlaubt</td></tr>
+      <tr *ngFor="let f of (appQuery.hiddenNonKurse$ | async)">
+        <td>{{f}}</td>
+        <td>
+          <input type="checkbox" [checked]="!allowed[f]" (change)="allowed[f] = !allowed[f]">
+        </td>
+      </tr>
+    </table>
+
+    <app-button class="center-button" (click)="save()">Speichern</app-button>
+
+  </ng-template>
+  <ng-template #emptyArray>
+    <p class="center-text">Nichts Versteckt</p>
+  </ng-template>
+
+</app-card>

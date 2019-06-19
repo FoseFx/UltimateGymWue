@@ -161,6 +161,16 @@ export class AppService {
     });
     this.save();
   }
+  public unHideNonKurse(kurs: string) {
+    const basics = JSON.parse(JSON.stringify(this.query.getValue().basics));
+    const hiddenNonKurse = basics.hiddenNonKurse;
+    basics.hiddenNonKurse = [...(!!hiddenNonKurse ? hiddenNonKurse : [])];
+    basics.hiddenNonKurse = basics.hiddenNonKurse.filter(s => s !== kurs);
+    this.store.update({
+      basics
+    });
+    this.save();
+  }
 
 
   private isMyKlausur(datum: VertretungsDatum): boolean {

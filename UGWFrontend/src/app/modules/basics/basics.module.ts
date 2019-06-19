@@ -13,9 +13,10 @@ import {UnhtmlPipe} from './components/stufe-vertretung/unhtml.pipe';
 import {ExtractStyleTagsPipe} from './components/stufe-vertretung/extract-style-tags.pipe';
 import {BasicsPopupComponent} from './components/basics-popup/basics-popup.component';
 import {TimetableComponent} from './components/timetable/timetable.component';
+import {HiddenNonKurseComponent} from './components/hidden-non-kurse/hidden-non-kurse.component';
 
 @NgModule({
-  declarations: [LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe, BasicsPopupComponent, TimetableComponent],
+  declarations: [LandingComponent, HomeTableComponent, StufeVertretungComponent, UnhtmlPipe, ExtractStyleTagsPipe, BasicsPopupComponent, TimetableComponent, HiddenNonKurseComponent],
   providers: [
     BasicsStore,
     BasicsQuery,

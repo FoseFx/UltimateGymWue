@@ -42,7 +42,8 @@ export class MenuComponent {
     {name: 'User', icon: 'account_circle', route: '/user'},
     {name: 'Stundenplan', icon: 'date_range', route: '/basics/stundenplan'},
     {name: 'Kalender', icon: 'event', route: '/calendar'},
-    {name: 'Klausuren', icon: 'assignment', route: '/setup/basics/klausuren'}
+    {name: 'Klausuren', icon: 'assignment', route: '/setup/basics/klausuren'},
+    {name: 'Versteckte Stunden', icon: 'not_interested', route: '/basics/hide'}
   ];
 
 }

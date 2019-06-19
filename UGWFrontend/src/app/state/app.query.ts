@@ -6,7 +6,7 @@
 import {Query} from '@datorama/akita';
 import {Injectable} from '@angular/core';
 import {AppState, AppStore, VertretungsPlanSeite} from './app.store';
-import {flatMap, map, tap} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 import {queryInCypress} from '../util';
 import {Observable} from 'rxjs';
 import {TimeTable} from '../../types/TT';
@@ -27,11 +27,12 @@ export class AppQuery extends Query<AppState> {
 
   menuOpen$ = this.select('menuOpen');
   public tt$ = this.select('basics').pipe(
-    tap(b => console.log('b: ' + JSON.stringify(b))),
     map((b) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []),
     mixInHiddenNonKurse(this.select('basics')),
     removeHiddenNonKurse()
   );
+
+  hiddenNonKurse$: Observable<string[]> = this.select('basics').pipe(map(b => !!b ? b.hiddenNonKurse : []));
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
 
