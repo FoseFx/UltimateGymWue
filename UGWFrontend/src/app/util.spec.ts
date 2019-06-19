@@ -1,7 +1,9 @@
-import {queryInCypress, serviceInCypress} from './util';
+import {queryInCypress, serviceInCypress, handleError} from './util';
 import {AppQuery} from './state/app.query';
 import {AppStore} from './state/app.store';
 import {AppService} from './state/app.service';
+import { MakesRequests } from 'src/types/MakesRequests';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 describe('util', () => {
 
@@ -54,6 +56,64 @@ describe('util', () => {
       expect(window.AppService).toBeTruthy();
     });
 
+  });
+
+  describe('handleError', () => {
+    
+    it('Unknown Error', () => {
+      const obj: MakesRequests = {error: "", loading: true};
+      const err: HttpErrorResponse = new HttpErrorResponse({
+        url: 'whocares://i.dont', 
+        statusText: 'Unknown Error',
+        status: 401,
+        headers: new HttpHeaders(),
+        error: {}
+      });
+      handleError(obj, err);
+      expect(obj.error).toEqual('Netzwerkfehler');
+    });
+    
+    it('No error object', () => {
+      const obj: MakesRequests = {error: "", loading: true};
+      const err: HttpErrorResponse = new HttpErrorResponse({
+        url: 'whocares://i.dont', 
+        statusText: 'Error',
+        status: 401,
+        headers: new HttpHeaders(),
+        error: null
+      });
+      handleError(obj, err);
+      expect(obj.error).toEqual(err.message);
+    });
+    
+    it('msg key in err exists', () => {
+      const obj: MakesRequests = {error: "", loading: true};
+      const err: HttpErrorResponse = new HttpErrorResponse({
+        url: 'whocares://i.dont', 
+        statusText: 'Error',
+        status: 401,
+        headers: new HttpHeaders(),
+        error: {
+          msg: "Some Error message haha"
+        }
+      });
+      handleError(obj, err);
+      expect(obj.error).toEqual("Some Error message haha");
+    });
+        
+    it('Should not happen I think', () => {
+      const obj: MakesRequests = {error: "", loading: true};
+      const err: HttpErrorResponse = new HttpErrorResponse({
+        url: 'whocares://i.dont', 
+        statusText: 'Error',
+        status: 401,
+        headers: new HttpHeaders(),
+        error: {}
+      });
+      handleError(obj, err);
+      expect(obj.error).toEqual(err.message);
+    });
+    
   });
 
 });
