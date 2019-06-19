@@ -74,7 +74,7 @@ export class StufeComponent implements OnInit {
 
       this.stundenplanService.getSp().subscribe(
         (_) => {
-          this.router.navigate(['/basics/landing']);
+          this.router.navigate(['/setup/basics/klausuren']);
           resolve(true);
         },
         (error) => {
