@@ -13,19 +13,21 @@ export class KeyService {
   public listener$: Observable<KeyboardEvent> = fromEvent(document, 'keydown') as Observable<KeyboardEvent>;
 
   public leftRightlistener$: Observable<number> = this.listener$.pipe(
-    map((event: KeyboardEvent) => {
-
-      switch (event.key) {
-        case 'ArrowLeft': return KeyService.LEFT_EVENT;
-        case 'a': return KeyService.LEFT_EVENT;
-        case 'ArrowRight': return KeyService.RIGHT_EVENT;
-        case 'd': return KeyService.RIGHT_EVENT;
-        default: return  -1;
-      }
-
-    }),
+    eventKeyMap(),
     filter((event: number) => event === KeyService.LEFT_EVENT || event === KeyService.RIGHT_EVENT) // remove rest
   );
 
   constructor() { }
 }
+
+export const eventKeyMap = () =>  map((event: KeyboardEvent) => {
+
+  switch (event.key) {
+    case 'ArrowLeft': return KeyService.LEFT_EVENT;
+    case 'a': return KeyService.LEFT_EVENT;
+    case 'ArrowRight': return KeyService.RIGHT_EVENT;
+    case 'd': return KeyService.RIGHT_EVENT;
+    default: return  -1;
+  }
+
+});
