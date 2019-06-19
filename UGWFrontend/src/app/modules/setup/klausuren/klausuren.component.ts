@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SetupQuery} from '../state/setup.query';
 import {AppQuery} from '../../../state/app.query';
 import {Kurse} from '../../../../types/Kurs';
-import {AppService} from "../../../state/app.service";
-import {Router} from "@angular/router";
+import {AppService} from '../../../state/app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-klausuren',

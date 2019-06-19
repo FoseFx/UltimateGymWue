@@ -6,8 +6,8 @@ import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {SetupQuery} from '../state/setup.query';
 import {SetupStore} from '../state/setup.store';
-import {AppService} from "../../../state/app.service";
-import {RouterTestingModule} from "@angular/router/testing";
+import {AppService} from '../../../state/app.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('KlausurenComponent', () => {
   let component: KlausurenComponent;

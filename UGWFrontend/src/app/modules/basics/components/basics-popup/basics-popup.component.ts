@@ -5,7 +5,7 @@ import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {PopupData} from '../../state/basics.store';
 import {TimeTableField} from '../../../../../types/TT';
-import {AppService} from "../../../../state/app.service";
+import {AppService} from '../../../../state/app.service';
 
 @Component({
   selector: 'app-basics-popup',

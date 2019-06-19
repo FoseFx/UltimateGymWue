@@ -41,7 +41,7 @@ export interface AppState {
     vertretungsplan: VertretungsPlanSeite[],
     hiddenNonKurse: string[]
   };
-  klausuren: string[],
+  klausuren: string[];
   menuOpen: boolean;
   credentials: {
     token: string,

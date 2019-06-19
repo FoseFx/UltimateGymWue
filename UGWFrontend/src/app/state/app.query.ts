@@ -9,7 +9,7 @@ import {AppState, AppStore, VertretungsPlanSeite} from './app.store';
 import {flatMap, map, tap} from 'rxjs/operators';
 import {queryInCypress} from '../util';
 import {Observable} from 'rxjs';
-import {TimeTable} from "../../types/TT";
+import {TimeTable} from '../../types/TT';
 
 @Injectable()
 export class AppQuery extends Query<AppState> {

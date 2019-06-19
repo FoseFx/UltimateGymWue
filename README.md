@@ -12,11 +12,12 @@ The Ultimate Tool for the Students of my School.
   - Credentials
   - Stufen
   - Kurse
-
+- Basics
+  - Landing Page
+  - Stundenplan
+  - Popup
+    - Verstecken von Nicht-Kursen
 ## TODO
-
-- Setup
-  - Non Kurse
 - Landing / Main
   - Stundenplan
   - Vertretungsplan
