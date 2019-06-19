@@ -31,7 +31,6 @@
   <app-button class="center-button" [accent]="true" (click)="doShowLogout()">Abmelden</app-button>
   <br>
 
-  <p>{{user$ | async | json}}</p>
   <p>Alle über dich gesammelten Daten, gemäß DSGVO:</p>
 
   <table class="dark">
@@ -82,6 +81,17 @@
       </tr>
     </table>
   </ng-template>
+
+  <br>
+  <div>
+    Informationen über deine Kurse, die gespeichert werden:
+    <ul>
+      <li>Name</li>
+      <li>Schiene</li>
+      <li>Lehrer</li>
+      <li>Stufe</li>
+    </ul>
+  </div>
 
   <br>
   <a class="center-button" (click)="showAccountLoeschen()">Account löschen</a>
