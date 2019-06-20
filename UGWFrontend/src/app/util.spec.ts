@@ -1,9 +1,9 @@
-import {queryInCypress, serviceInCypress, handleError} from './util';
+import {handleError, queryInCypress, serviceInCypress} from './util';
 import {AppQuery} from './state/app.query';
 import {AppStore} from './state/app.store';
 import {AppService} from './state/app.service';
-import { MakesRequests } from 'src/types/MakesRequests';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {MakesRequests} from 'src/types/MakesRequests';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 describe('util', () => {
 

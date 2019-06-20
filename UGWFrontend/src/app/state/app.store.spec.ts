@@ -1,5 +1,5 @@
-import {TestBed} from "@angular/core/testing";
-import {AppStore, createInitialState} from "./app.store";
+import {TestBed} from '@angular/core/testing';
+import {AppStore, createInitialState} from './app.store';
 
 
 describe('AppStore', () => {

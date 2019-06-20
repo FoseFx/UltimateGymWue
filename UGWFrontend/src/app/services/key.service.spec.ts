@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
-import {KeyService, eventKeyMap} from './key.service';
-import { of } from 'rxjs';
+import {eventKeyMap, KeyService} from './key.service';
+import {of} from 'rxjs';
 
 describe('KeyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

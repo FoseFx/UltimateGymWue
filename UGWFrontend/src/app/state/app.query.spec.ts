@@ -3,11 +3,12 @@ import {
   abwochemap,
   AppQuery,
   basicHiddenNonKurseMap,
-  basicStunenplanMap, basicVertretungsDatenMap,
+  basicStunenplanMap,
+  basicVertretungsDatenMap,
   mixInHiddenNonKurse,
   removeHiddenNonKurse
 } from './app.query';
-import {AppStore, AppStoreBasics} from './app.store';
+import {AppStore} from './app.store';
 import {AppService} from './app.service';
 import {SetupQuery} from '../modules/setup/state/setup.query';
 import {SetupStore} from '../modules/setup/state/setup.store';
