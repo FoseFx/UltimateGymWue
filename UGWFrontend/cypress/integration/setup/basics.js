@@ -27,7 +27,7 @@ describe('basics', () => {
           menuOpen: false
         }
       );
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(300);
       cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
@@ -55,7 +55,7 @@ describe('basics', () => {
           menuOpen: false
         }
       );
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(300);
       cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
@@ -78,7 +78,7 @@ describe('basics', () => {
           menuOpen: false
         }
       );
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(300);
       cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);
@@ -101,7 +101,7 @@ describe('basics', () => {
           menuOpen: false
         }
       );
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(300);
       cy.visit('http://localhost:4200/basics/landing');
       cy.wait(300);

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppState, AppStore, VertretungsDatum, VertretungsPlanSeite} from './app.store';
+import {AppState, AppStore, AppStoreBasics, VertretungsDatum, VertretungsPlanSeite} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';
@@ -8,7 +8,7 @@ import {TimeTable} from '../../types/TT';
 
 @Injectable()
 export class AppService {
-  constructor(public store: AppStore, private query: AppQuery) {
+  constructor(public store: AppStore, public query: AppQuery) {
     serviceInCypress(this);
   }
   changeMenuState() {
@@ -67,7 +67,7 @@ export class AppService {
       fullname: loginData.data.claim.fullname
     });
 
-    this.save();
+    this._save();
   }
 
   addCreds(token: string) {
@@ -77,7 +77,7 @@ export class AppService {
         has_lehrer: tokenHasLehrer(token)
       }
     });
-    this.save();
+    this._save();
   }
 
   setKurseStufeStundenplan(kurse: Kurse, stufe: string, sp: TimeTable) {
@@ -92,7 +92,7 @@ export class AppService {
         hiddenNonKurse: []
       }
     });
-    this.save();
+    this._save();
   }
 
   setVertretungsplan(vp: VertretungsPlanSeite[]) {
@@ -123,7 +123,7 @@ export class AppService {
           const asDate = new Date(refDate.getFullYear(), +dateSplit[1] - 1, +dateSplit[0], 8 );
           const index = asDate.getDay() - 1;
           const abIndex = AppQuery.getWeekNumber(asDate) [1] % 2 === 0 ? 0 : 1;
-          if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach || this.isMyKlausur(datum)) {
+          if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach || this._isMyKlausur(datum)) {
             if (!newPlan[abIndex][index][+datum.stunde - 1].vd) { // set if empty
               newPlan[abIndex][index][+datum.stunde - 1].vd = datum;
             } else { // check for replacement
@@ -147,31 +147,34 @@ export class AppService {
     this.store.update({
       klausuren
     });
-    this.save();
+    this._save();
   }
 
   public hideNonKurs(kurs: string) {
-    const basics = JSON.parse(JSON.stringify(this.query.getValue().basics));
+    const basics = this._getMutableBasicObject();
     const hiddenNonKurse = basics.hiddenNonKurse;
     basics.hiddenNonKurse = [kurs, ...(!!hiddenNonKurse ? hiddenNonKurse : [])];
     this.store.update({
       basics
     });
-    this.save();
+    this._save();
   }
   public unHideNonKurse(kurs: string) {
-    const basics = JSON.parse(JSON.stringify(this.query.getValue().basics));
+    const basics = this._getMutableBasicObject();
     const hiddenNonKurse = basics.hiddenNonKurse;
     basics.hiddenNonKurse = [...(!!hiddenNonKurse ? hiddenNonKurse : [])];
     basics.hiddenNonKurse = basics.hiddenNonKurse.filter(s => s !== kurs);
     this.store.update({
       basics
     });
-    this.save();
+    this._save();
   }
 
+  _getMutableBasicObject(): AppStoreBasics {
+    return JSON.parse(JSON.stringify(this.query.getValue().basics));
+  }
 
-  private isMyKlausur(datum: VertretungsDatum): boolean {
+  _isMyKlausur(datum: VertretungsDatum): boolean {
     if (datum.typ !== 'k') {
       return false;
     }
@@ -184,7 +187,7 @@ export class AppService {
     });
   }
 
-  save() {
+  _save() {
     const obj: AppState = JSON.parse(JSON.stringify(this.query.getValue()));
     if (obj.basics) {
       delete obj.basics.vertretungsplan;

@@ -6,7 +6,7 @@ beforeEach(function () {
     cy.visit('http://localhost:4200/basics/landing');
     cy.wait(300);
     cy.window().its('AppService').its('store').invoke('update', data);
-    cy.window().its('AppService').invoke('save');
+    cy.window().its('AppService').invoke('_save');
     cy.wait(300);
   });
 

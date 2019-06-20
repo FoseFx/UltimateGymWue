@@ -31,7 +31,7 @@ describe('Basics - /', () => {
         basics: null,
         menuOpen: false
       });
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(500);
       cy.visit('http://localhost:4200/');
       cy.wait(500);
@@ -62,7 +62,7 @@ describe('Basics - /', () => {
         },
         menuOpen: false
       });
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.wait(500);
       cy.visit('http://localhost:4200/');
       cy.wait(500);

@@ -28,7 +28,7 @@ describe("welcome component", () => {
         },
         basics: null
       });
-      cy.window().its('AppService').invoke('save');
+      cy.window().its('AppService').invoke('_save');
       cy.visit("http://localhost:4200/setup/welcome");
       // only loggedin, no basics set, so NeedsSetupGuard will route to /setup/basics, which redirects to /setup/bascis/creds
       cy.url().should('equal', 'http://localhost:4200/setup/basics/creds');

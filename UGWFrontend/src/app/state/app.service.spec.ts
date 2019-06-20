@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {AppStore} from './app.store';
+import {AppState, AppStore, AppStoreBasics} from './app.store';
 import {AppService, getProvider, isGoogle, isInsta, isNormal, tokenHasLehrer} from './app.service';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
@@ -224,7 +224,7 @@ describe('AppService', () => {
       const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
         expect(v).toEqual({credentials: {token, has_lehrer: true}});
       });
-      const saveSpy = spyOn(service, 'save');
+      const saveSpy = spyOn(service, '_save');
       service.addCreds(token);
       expect(saveSpy.calls.count()).toEqual(1);
     });
@@ -235,7 +235,7 @@ describe('AppService', () => {
       const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
         expect(v).toEqual({credentials: {token, has_lehrer: false}});
       });
-      const saveSpy = spyOn(service, 'save');
+      const saveSpy = spyOn(service, '_save');
       service.addCreds(token);
       expect(saveSpy.calls.count()).toEqual(1);
     });
@@ -257,7 +257,7 @@ describe('AppService', () => {
         }
       });
     });
-    const saveSpy = spyOn(service, 'save');
+    const saveSpy = spyOn(service, '_save');
     // @ts-ignore
     service.setKurseStufeStundenplan('kurse', 'stufe', 'sp');
     expect(saveSpy.calls.count()).toEqual(1);
@@ -270,10 +270,95 @@ describe('AppService', () => {
         klausuren: 'klausuren'
       });
     });
-    const saveSpy = spyOn(service, 'save');
+    const saveSpy = spyOn(service, '_save');
     // @ts-ignore
     service.setKlausuren('klausuren');
     expect(saveSpy.calls.count()).toEqual(1);
+  });
+
+  it('should return mutalbebasicsoject', () => {
+    // @ts-ignore
+    const sample: AppState = {basics: {}};
+    const service: AppService = TestBed.get(AppService);
+    spyOn(service.query, 'getValue').and.returnValue(sample);
+    // test value
+    const val = service._getMutableBasicObject();
+    expect(val).toEqual(sample.basics);
+    // try to modify
+    val.stufe = 'test';
+  });
+
+  describe('hiddenNonKurse', () => {
+    it('should test hideNonKurs with existing values',  () => {
+      const service: AppService = TestBed.get(AppService);
+      const saveSpy = spyOn(service, '_save');
+      spyOn(service, '_getMutableBasicObject').and.returnValue({hiddenNonKurse: ['existing', 'values']});
+      spyOn(service.store, 'update').and.callFake((val) => {
+        console.log(val);
+        expect(val.basics.hiddenNonKurse).toEqual(['test', 'existing', 'values']);
+      });
+      service.hideNonKurs('test');
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+    it('should test hideNonKurs without existing values',  () => {
+      const service: AppService = TestBed.get(AppService);
+      const saveSpy = spyOn(service, '_save');
+      spyOn(service, '_getMutableBasicObject').and.returnValue({});
+      spyOn(service.store, 'update').and.callFake((val) => {
+        expect(val.basics.hiddenNonKurse).toEqual(['test']);
+      });
+      service.hideNonKurs('test');
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+  });
+
+  describe('unHideNonKurse', () => {
+    it('should test unHideNonKurse with existing values',  () => {
+      const service: AppService = TestBed.get(AppService);
+      const saveSpy = spyOn(service, '_save');
+      spyOn(service, '_getMutableBasicObject').and.returnValue({hiddenNonKurse: ['existing', 'values']});
+      spyOn(service.store, 'update').and.callFake((val) => {
+        console.log(val);
+        expect(val.basics.hiddenNonKurse).toEqual(['values']);
+      });
+      service.unHideNonKurse('existing');
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+    it('should test unHideNonKurse without existing values',  () => {
+      const service: AppService = TestBed.get(AppService);
+      const saveSpy = spyOn(service, '_save');
+      spyOn(service, '_getMutableBasicObject').and.returnValue({});
+      spyOn(service.store, 'update').and.callFake((val) => {
+        expect(val.basics.hiddenNonKurse).toEqual([]);
+      });
+      service.unHideNonKurse('test');
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+  });
+
+  describe('_isMyKlausur', () => {
+
+    it('should return false on non-klausur data', () => {
+      const service: AppService = TestBed.get(AppService);
+      // @ts-ignore
+      expect(service._isMyKlausur({typ: 'eva'})).toEqual(false);
+    });
+
+    it('should return false if not in klausuren', () => {
+      const service: AppService = TestBed.get(AppService);
+      spyOn(service.query, 'getValue').and.returnValue({klausuren: ['test', 'test2']});
+      // @ts-ignore
+      expect(service._isMyKlausur({typ: 'k', info: 'test3 sth else3'})).toEqual(false);
+    });
+
+    it('should return true if in klausuren', () => {
+      const service: AppService = TestBed.get(AppService);
+      spyOn(service.query, 'getValue').and.returnValue({klausuren: ['test', 'test2']});
+      // @ts-ignore
+      expect(service._isMyKlausur({typ: 'k', info: 'test2 sth else3'})).toEqual(true);
+    });
+
+
   });
 
 
