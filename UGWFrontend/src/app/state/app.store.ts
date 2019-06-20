@@ -55,8 +55,10 @@ export class AppStoreBasics {
 }
 
 export function createInitialState(): AppState {
-  if (!!localStorage.app_state) {
-    const storage: AppState = JSON.parse(localStorage.app_state);
+  console.log(localStorage.getItem('app_state'), !!localStorage.getItem('app_state'));
+  if (!!localStorage.getItem('app_state')) {
+    console.log(true);
+    const storage: AppState = JSON.parse(localStorage.getItem('app_state'));
     storage.nextDay = null;
     storage.thisDay = null;
     storage.menuOpen = false;
