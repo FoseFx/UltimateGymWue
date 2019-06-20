@@ -1,6 +1,13 @@
 import {TestBed} from '@angular/core/testing';
-import {abwochemap, AppQuery, mixInHiddenNonKurse, removeHiddenNonKurse} from './app.query';
-import {AppStore} from './app.store';
+import {
+  abwochemap,
+  AppQuery,
+  basicHiddenNonKurseMap,
+  basicStunenplanMap, basicVertretungsDatenMap,
+  mixInHiddenNonKurse,
+  removeHiddenNonKurse
+} from './app.query';
+import {AppStore, AppStoreBasics} from './app.store';
 import {AppService} from './app.service';
 import {SetupQuery} from '../modules/setup/state/setup.query';
 import {SetupStore} from '../modules/setup/state/setup.store';
@@ -274,6 +281,32 @@ describe('AppQuery', () => {
 
   describe('tt', () => {
 
+    describe('basicStunenplanMap', () => {
+
+      it('should map to empty array if basics is null', (done) => {
+        // @ts-ignore
+        of(null).pipe(basicStunenplanMap()).subscribe((val) => {
+          expect(val).toEqual([]);
+          done();
+        });
+      });
+      it('should map to Stundenplan (w/o info) if StundenplanWithInfos is not available', (done) => {
+        // @ts-ignore
+        of({stundenplan: 'no-infos'}).pipe(basicStunenplanMap()).subscribe((val) => {
+          expect(val).toEqual('no-infos');
+          done();
+        });
+      });
+
+      it('should map to StundenplanWithInfos if available', (done) => {
+        // @ts-ignore
+        of({stundenplan: 'no-infos', stundenplanWithInfos: 'with-infos', }).pipe(basicStunenplanMap()).subscribe((val) => {
+          expect(val).toEqual('with-infos');
+          done();
+        });
+      });
+    });
+
     describe('mixInHiddenNonKurse', () => {
       it('should work with no tt, but hiddenNoKurse set', (done) => {
         of([]).pipe(mixInHiddenNonKurse(of({hiddenNonKurse: ['test']}))).subscribe((val) => {
@@ -362,6 +395,40 @@ describe('AppQuery', () => {
     expect(query.hasVertretungsplanCached()).toEqual(false);
   });
 
+  describe('basicHiddenNonKurseMap', () => {
+    it('should return basicHiddenNonKurse', (done) => {
+      // @ts-ignore
+      of({hiddenNonKurse: 'something'}).pipe(basicHiddenNonKurseMap()).subscribe(v => {
+        expect(v).toEqual(v);
+        done();
+      });
+    });
+    it('should return fallback if b not available', (done) => {
+      // @ts-ignore
+      of(null).pipe(basicHiddenNonKurseMap()).subscribe(v => {
+        expect(v).toEqual([]);
+        done();
+      });
+    });
+  });
+
+  describe('basicVertretungsDatenMap', () => {
+    //   (b: AppStoreBasics) => !!b.vertretungsplan ? b.vertretungsplan : [null, null]
+    it('should return vertretungsplan', (done) => {
+      // @ts-ignore
+      of({vertretungsplan: 'exist'}).pipe(basicVertretungsDatenMap()).subscribe((v) => {
+        expect(v).toEqual('exist');
+        done();
+      });
+    });
+    it('should return fallback if vertretungsplan not available', (done) => {
+      // @ts-ignore
+      of({}).pipe(basicVertretungsDatenMap()).subscribe((v) => {
+        expect(v).toEqual([null, null]);
+        done();
+      });
+    });
+  });
 
 
 });

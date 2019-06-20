@@ -5,7 +5,7 @@
 
 import {Query} from '@datorama/akita';
 import {Injectable} from '@angular/core';
-import {AppState, AppStore, VertretungsPlanSeite} from './app.store';
+import {AppState, AppStore, AppStoreBasics, VertretungsPlanSeite} from './app.store';
 import {flatMap, map} from 'rxjs/operators';
 import {queryInCypress} from '../util';
 import {Observable} from 'rxjs';
@@ -27,12 +27,12 @@ export class AppQuery extends Query<AppState> {
 
   menuOpen$ = this.select('menuOpen');
   public tt$ = this.select('basics').pipe(
-    map((b) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []),
+    basicStunenplanMap(),
     mixInHiddenNonKurse(this.select('basics')),
     removeHiddenNonKurse()
   );
 
-  hiddenNonKurse$: Observable<string[]> = this.select('basics').pipe(map(b => !!b ? b.hiddenNonKurse : []));
+  hiddenNonKurse$: Observable<string[]> = this.select('basics').pipe(basicHiddenNonKurseMap());
 
   isLoginned$ = this.select('loginData').pipe(map(d => !!d));
 
@@ -72,9 +72,7 @@ export class AppQuery extends Query<AppState> {
 
   nextDayABwoche$: Observable<0|1> = this.nextDay$.pipe(abwochemap());
 
-  vertretungsDaten$: Observable<VertretungsPlanSeite[]> = this.select('basics').pipe(
-    map((b) => !!b.vertretungsplan ? b.vertretungsplan : [null, null])
-  );
+  vertretungsDaten$: Observable<VertretungsPlanSeite[]> = this.select('basics').pipe(basicVertretungsDatenMap());
 
   /** credit: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php/6117889#6117889 */
   public static getWeekNumber(d) {
@@ -131,3 +129,15 @@ export const mixInHiddenNonKurse =
           map(b => !!b ? [tt, (!!b.hiddenNonKurse ? b.hiddenNonKurse : [])] : [tt, []])
         )
     );
+export const basicStunenplanMap = () => map(
+  (b: AppStoreBasics) => !!b ? (!!b.stundenplanWithInfos ? b.stundenplanWithInfos : b.stundenplan) : []
+);
+
+export const basicHiddenNonKurseMap = () => map(
+  (b: AppStoreBasics) => !!b ? b.hiddenNonKurse : []
+);
+
+export const basicVertretungsDatenMap = () => map(
+  (b: AppStoreBasics) => !!b.vertretungsplan ? b.vertretungsplan : [null, null]
+);
+

@@ -32,15 +32,7 @@ export interface AppState {
   };
   loginData: LoginData;
   fullname: string;
-  basics: {
-    stufe: string,
-    stufe_id: string,
-    kurse: Kurse,
-    stundenplan: TimeTable,
-    stundenplanWithInfos: TimeTable
-    vertretungsplan: VertretungsPlanSeite[],
-    hiddenNonKurse: string[]
-  };
+  basics: AppStoreBasics;
   klausuren: string[];
   menuOpen: boolean;
   credentials: {
@@ -49,6 +41,17 @@ export interface AppState {
   };
   thisDay: Date;
   nextDay: Date;
+}
+
+export class AppStoreBasics {
+  stufe: string;
+  // tslint:disable-next-line:variable-name
+  stufe_id: string;
+  kurse: Kurse;
+  stundenplan: TimeTable;
+  stundenplanWithInfos: TimeTable;
+  vertretungsplan: VertretungsPlanSeite[];
+  hiddenNonKurse: string[];
 }
 
 export function createInitialState(): AppState {
