@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {AppStore} from './app.store';
-import {AppService, getProvider, isGoogle, isInsta, isNormal} from './app.service';
+import {AppService, getProvider, isGoogle, isInsta, isNormal, tokenHasLehrer} from './app.service';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 
@@ -205,6 +205,76 @@ describe('AppService', () => {
 
   });
 
+  describe('addCreds', () => {
+
+    describe('tokenHasLehrer', () => {
+      it('should return true', () => {
+        const token = 'idk.' + btoa(JSON.stringify({lehrer: 'exists'}));
+        expect(tokenHasLehrer(token)).toEqual(true);
+      });
+      it('should return false', () => {
+        const token = 'idk.' + btoa(JSON.stringify({}));
+        expect(tokenHasLehrer(token)).toEqual(false);
+      });
+    });
+
+    it('should test addCreds once', () => {
+      const service: AppService = TestBed.get(AppService);
+      const token = 'idk.' + btoa(JSON.stringify({lehrer: 'exists'}));
+      const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
+        expect(v).toEqual({credentials: {token, has_lehrer: true}});
+      });
+      const saveSpy = spyOn(service, 'save');
+      service.addCreds(token);
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+
+    it('should test addCreds twice', () => {
+      const service: AppService = TestBed.get(AppService);
+      const token = 'idk.' + btoa(JSON.stringify({}));
+      const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
+        expect(v).toEqual({credentials: {token, has_lehrer: false}});
+      });
+      const saveSpy = spyOn(service, 'save');
+      service.addCreds(token);
+      expect(saveSpy.calls.count()).toEqual(1);
+    });
+
+  });
+
+  it('should set KurseStufeStundenplan', () => {
+    const service: AppService = TestBed.get(AppService);
+    const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
+      expect(v).toEqual({
+        basics: {
+          stufe: 'stufe',
+          stufe_id: null,
+          kurse: 'kurse',
+          stundenplan: 'sp',
+          stundenplanWithInfos: 'sp',
+          vertretungsplan: null,
+          hiddenNonKurse: []
+        }
+      });
+    });
+    const saveSpy = spyOn(service, 'save');
+    // @ts-ignore
+    service.setKurseStufeStundenplan('kurse', 'stufe', 'sp');
+    expect(saveSpy.calls.count()).toEqual(1);
+  });
+
+  it('should set Klausuren', () => {
+    const service: AppService = TestBed.get(AppService);
+    const updateSpy = spyOn(service.store, 'update').and.callFake((v) => {
+      expect(v).toEqual({
+        klausuren: 'klausuren'
+      });
+    });
+    const saveSpy = spyOn(service, 'save');
+    // @ts-ignore
+    service.setKlausuren('klausuren');
+    expect(saveSpy.calls.count()).toEqual(1);
+  });
 
 
 });

@@ -71,11 +71,10 @@ export class AppService {
   }
 
   addCreds(token: string) {
-    const claim = JSON.parse(atob(token.split('.')[1]));
     this.store.update({
       credentials: {
         token,
-        has_lehrer: !!claim.lehrer
+        has_lehrer: tokenHasLehrer(token)
       }
     });
     this.save();
@@ -185,7 +184,7 @@ export class AppService {
     });
   }
 
-  private save() {
+  save() {
     const obj: AppState = JSON.parse(JSON.stringify(this.query.getValue()));
     if (obj.basics) {
       delete obj.basics.vertretungsplan;
@@ -213,5 +212,9 @@ export function isGoogle(resp: LoginResponse): boolean {
 export function isInsta(resp: LoginResponse): boolean {
   const provider = getProvider(resp);
   return !!provider.find((val) => val === 'insta');
+}
 
+export function tokenHasLehrer(token: string): boolean {
+  const claim = JSON.parse(atob(token.split('.')[1]));
+  return !!claim.lehrer;
 }
