@@ -8,7 +8,7 @@ import {TimeTable} from '../../types/TT';
 
 @Injectable()
 export class AppService {
-  constructor(private store: AppStore, private query: AppQuery) {
+  constructor(public store: AppStore, private query: AppQuery) {
     serviceInCypress(this);
   }
   changeMenuState() {
@@ -16,10 +16,9 @@ export class AppService {
   }
   onLogin(loginData: LoginResponse) {
 
-    const provider = loginData.data.claim.provider;
-    console.log(loginData);
+    const provider = getProvider(loginData);
 
-    if (!!provider.find((val) => val === 'normal')) {
+    if (isNormal(loginData)) {
       this.store.update({
         loginData: {
           uid: loginData.data.claim.uid,
@@ -35,7 +34,7 @@ export class AppService {
       });
     }
 
-    if (!!provider.find((val) => val === 'google')) {
+    if (isGoogle(loginData)) {
       this.store.update({
         loginData: {
           uid: loginData.data.claim.uid,
@@ -50,7 +49,7 @@ export class AppService {
 
 
 
-    if (!!provider.find((val) => val === 'insta')) {
+    if (isInsta(loginData)) {
       this.store.update({
         loginData: {
           uid: loginData.data.claim.uid,
@@ -196,4 +195,23 @@ export class AppService {
     delete obj.menuOpen;
     localStorage.app_state = JSON.stringify(obj);
   }
+}
+
+export function getProvider(resp: LoginResponse): ('google'|'insta'|'normal')[] {
+  return resp.data.claim.provider;
+}
+
+export function isNormal(resp: LoginResponse): boolean {
+  const provider = getProvider(resp);
+  return !!provider.find((val) => val === 'normal');
+  }
+export function isGoogle(resp: LoginResponse): boolean {
+  const provider = getProvider(resp);
+  return !!provider.find((val) => val === 'google');
+
+}
+export function isInsta(resp: LoginResponse): boolean {
+  const provider = getProvider(resp);
+  return !!provider.find((val) => val === 'insta');
+
 }
