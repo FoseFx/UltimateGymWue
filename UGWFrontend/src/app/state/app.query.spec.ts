@@ -340,4 +340,28 @@ describe('AppQuery', () => {
     });
 
   });
+
+  it('should test loginToken', () => {
+    const query: AppQuery = TestBed.get(AppQuery);
+    spyOn(query, 'getValue').and.returnValue({loginData: {token: 'this is a test'}});
+    expect(query.loginToken).toEqual('Bearer this is a test');
+  });
+
+  it('should test credentialsToken', () => {
+    const query: AppQuery = TestBed.get(AppQuery);
+    spyOn(query, 'getValue').and.returnValue({credentials: {token: 'this is a test'}});
+    expect(query.credentialsToken).toEqual('Bearer this is a test');
+  });
+
+
+  it('should test hasVertretungsplanCached', () => {
+    const query: AppQuery = TestBed.get(AppQuery);
+    const spy = spyOn(query, 'getValue').and.returnValue({basics: {vertretungsplan: 'this is a test'}});
+    expect(query.hasVertretungsplanCached()).toEqual(true);
+    spy.and.returnValue({basics: {}});
+    expect(query.hasVertretungsplanCached()).toEqual(false);
+  });
+
+
+
 });
