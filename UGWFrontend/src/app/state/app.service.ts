@@ -103,13 +103,12 @@ export class AppService {
       eva: 2,
       k: 3
     };
-    const refDate = new Date(); // we use this to copy the 'year' information. No need to worry about new years eve b/c of holidays
-    const basics = Object.assign({}, this.query.getValue().basics);
+    const basics = this._getMutableBasicObject();
     let newPlan: TimeTable;
-    if (!!this.query.getValue().basics.stundenplanWithInfos) {
-      newPlan = JSON.parse(JSON.stringify(this.query.getValue().basics.stundenplanWithInfos));
+    if (!!basics.stundenplanWithInfos) {
+      newPlan = JSON.parse(JSON.stringify(basics.stundenplanWithInfos));
     } else {
-      newPlan = JSON.parse(JSON.stringify(this.query.getValue().basics.stundenplan));
+      newPlan = JSON.parse(JSON.stringify(basics.stundenplan));
     }
     basics.vertretungsplan = vp;
     // Write VD into SPwithInfos
@@ -119,10 +118,7 @@ export class AppService {
           if (datum.stunde.match('-')) {
             return;
           }
-          const dateSplit = datum.date.split('.');
-          const asDate = new Date(refDate.getFullYear(), +dateSplit[1] - 1, +dateSplit[0], 8 );
-          const index = asDate.getDay() - 1;
-          const abIndex = AppQuery.getWeekNumber(asDate) [1] % 2 === 0 ? 0 : 1;
+          const {index, abIndex} = dateSplitToDayOfWeekAndABWoche(datum.date);
           if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach || this._isMyKlausur(datum)) {
             if (!newPlan[abIndex][index][+datum.stunde - 1].vd) { // set if empty
               newPlan[abIndex][index][+datum.stunde - 1].vd = datum;
@@ -179,7 +175,7 @@ export class AppService {
       return false;
     }
     return !!this.query.getValue().klausuren.find(f => {
-      const possible = datum.info.match(/\w+\d+/g);
+      const possible = datum.info.match(/\w+\d*/g);
       if (possible === null) {
         return false;
       }
@@ -220,4 +216,15 @@ export function isInsta(resp: LoginResponse): boolean {
 export function tokenHasLehrer(token: string): boolean {
   const claim = JSON.parse(atob(token.split('.')[1]));
   return !!claim.lehrer;
+}
+export function getCurrentYear(): number {
+  const refDate = new Date();
+  return refDate.getFullYear();
+}
+export function dateSplitToDayOfWeekAndABWoche(dateStr: string): {index: number, abIndex: number} {
+  const split = dateStr.split('.');
+  const date = new Date(getCurrentYear(), +split[1] - 1, +split[0], 8); // this year at dd.mm. at 8 am
+  const abWocheIndex = AppQuery.getWeekNumber(date)[1] % 2 === 0 ? 0 : 1;
+  console.log(dateStr, abWocheIndex);
+  return {index: date.getDay() - 1, abIndex: abWocheIndex};
 }

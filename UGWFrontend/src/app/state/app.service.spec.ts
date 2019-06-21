@@ -1,6 +1,15 @@
 import {TestBed} from '@angular/core/testing';
 import {AppState, AppStore, AppStoreBasics} from './app.store';
-import {AppService, getProvider, isGoogle, isInsta, isNormal, tokenHasLehrer} from './app.service';
+import {
+  AppService,
+  dateSplitToDayOfWeekAndABWoche,
+  getCurrentYear,
+  getProvider,
+  isGoogle,
+  isInsta,
+  isNormal,
+  tokenHasLehrer
+} from './app.service';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 
@@ -358,7 +367,40 @@ describe('AppService', () => {
       expect(service._isMyKlausur({typ: 'k', info: 'test2 sth else3'})).toEqual(true);
     });
 
+  });
 
+  describe('setVertretungsplan', () => {
+    it('should getCurrentYear', () => {
+      const d = new Date(2000, 5, 17);
+      jasmine.clock().mockDate(d);
+      expect(getCurrentYear()).toEqual(2000);
+    });
+    it('should test dateSplitToDayOfWeekAndABWoche', () => {
+      const d = new Date(2019, 5, 17);
+      jasmine.clock().mockDate(d);
+      expect(dateSplitToDayOfWeekAndABWoche('17.05.')).toEqual({index: 4, abIndex: 0});
+      expect(dateSplitToDayOfWeekAndABWoche('17.5.')).toEqual({index: 4, abIndex: 0});
+      expect(dateSplitToDayOfWeekAndABWoche('16.5.')).toEqual({index: 3, abIndex: 0});
+      expect(dateSplitToDayOfWeekAndABWoche('20.5.')).toEqual({index: 0, abIndex: 1});
+    });
+    it('should ', () => {
+      const data = {stundenplanWithInfos: null, stundenplan: [
+          [[{name: 'test'}, {name: 'test'}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}]],
+          [[{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}], [{}, {}, {}, {}, {}]]
+        ], klausuren: ['test']};
+      const service: AppService = TestBed.get(AppService);
+      spyOn(service, '_getMutableBasicObject').and.returnValue(data);
+      spyOn(service.query, 'getValue').and.returnValue(data);
+      const upSpy = spyOn(service.store, 'update').and.callFake((val) => {
+        const spwI = val.basics.stundenplanWithInfos[0][0]; // erster tag
+        expect(spwI[0].vd).toEqual({stunde: '1', date: '24.6.', info: 'test', fach: 'test', typ: 'eva'});
+        expect(spwI[1].vd).toEqual({stunde: '2', date: '24.6.', typ: 'k', info: 'idk test', fach: ''});
+      });
+      // @ts-ignore
+      // tslint:disable-next-line:max-line-length
+      service.setVertretungsplan([{infos: [], vp: [{stunde: '1 - 2', info: 'pls ingore me'}, {stunde: '1', date: '24.6.', info: 'test', fach: 'test', typ: 'raum-vtr.'}, {stunde: '1', date: '24.6.', info: 'test', fach: 'test', typ: 'eva'}, {stunde: '2', date: '24.6.', typ: 'k', info: 'idk test', fach: ''}, {stunde: '2', date: '24.6.', typ: 'eva', fach: 'test'}]}, {infos: [], vp: null} ]);
+      expect(upSpy.calls.count()).toEqual(1);
+    });
   });
 
 
