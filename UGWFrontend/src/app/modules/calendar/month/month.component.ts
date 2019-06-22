@@ -18,7 +18,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
-    if (year % 4 === 0) {
+    if (year % 4 !== 0) {
       return false;
     }
     if (year % 100 !== 0) {
@@ -29,17 +29,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    let ndays: number;
-    const month = this.now.getMonth() + 1;
-    if (month !== 2) { // exclude February bc of leap years
-      if (month <= 7) {
-        ndays = month % 2 === 0 ? 30 : 31;
-      } else {
-        ndays = month % 2 !== 0 ? 30 : 31;
-      }
-    } else {
-      ndays = MonthComponent.isLeapYear(this.now) ? 29 : 28;
-    }
+    const ndays = this.getAmountOfDaysInMonth();
     const firstOfMonth = new Date(this.now.getFullYear(), this.now.getMonth(), 1);
     const offset = firstOfMonth.getDay() - 1; // (0 = So, 1 = mo, ..., 6 = Sa) - 1
     if (offset < 0) {
@@ -52,6 +42,19 @@ export class MonthComponent implements AfterViewInit, OnInit {
     }
     for (let i = 0; i < ndays; i++) {
       this.month.push([]);
+    }
+  }
+
+  getAmountOfDaysInMonth(): number {
+    const month = this.now.getMonth() + 1;
+    if (month !== 2) { // exclude February bc of leap years
+      if (month <= 7) {
+        return month % 2 === 0 ? 30 : 31;
+      } else {
+        return month % 2 !== 0 ? 30 : 31;
+      }
+    } else {
+      return MonthComponent.isLeapYear(this.now) ? 29 : 28;
     }
   }
 
