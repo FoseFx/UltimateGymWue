@@ -20,12 +20,7 @@ matrix:
       - cd UGWFrontend
       - npm ci
     script:
-      - echo $TRAVIS_COMMIT_RANGE
-      - ng build --prod # production build
-      - npm run test # unit tests
-      - npm run e2e  # integration tests
-    after_success:
-      - bash <(curl -s https://codecov.io/bash) -t $(echo "$UPLOAD_TOKEN")
+      - bash ./ci-build.sh
   - language: rust
     rust: nightly
     cache: cargo
@@ -43,8 +38,4 @@ matrix:
     - DEVELOPMENT="true"
     script:
     - cd UGWBackend
-    #- cargo build --verbose --all
-    - cargo test --verbose --all
-    - echo "$DOCKER_PSW" | docker login -u "$DOCKER_NAME" --password-stdin https://$(echo $DOCKER_REG)
-    - docker build -t $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER) .
-    - docker push $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER)
+    - bash ./ci-build.sh
