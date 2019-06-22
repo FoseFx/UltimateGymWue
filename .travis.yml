@@ -18,7 +18,6 @@ matrix:
         - ~/.cache
     install:
       - cd UGWFrontend
-      - npm ci
     script:
       - bash ./ci-build.sh
   - language: rust

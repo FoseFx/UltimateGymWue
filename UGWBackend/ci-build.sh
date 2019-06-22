@@ -1,6 +1,6 @@
 #!/bin/bash
 lineschanged=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "UGWBackend/src/" | wc -l)
-
+echo $lineschanged
 if [ lineschanged == "0" ]
     then
         echo "No changes, skipping tests"
@@ -10,3 +10,5 @@ if [ lineschanged == "0" ]
         docker build -t $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER) .
         docker push $DOCKER_REG/ugw-backend:0.3.$(echo $TRAVIS_BUILD_NUMBER)
 fi
+
+echo "done"
