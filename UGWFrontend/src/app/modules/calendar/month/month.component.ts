@@ -61,9 +61,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (!this.appQuery.hasCredentials()) { return; } // only for the tests
-    const year = this.now.getFullYear();
-    const month = this.now.getMonth() + 1;
-    const query = `${year}-${month.toString().length === 1 ? '0' : ''}${month}`;
+    const query = this.query();    
 
     this.http.get(environment.urls.getEvents + query, {
       headers: {
@@ -103,6 +101,12 @@ export class MonthComponent implements AfterViewInit, OnInit {
         console.error(err);
       }
     );
+  }
+
+  query(): string {
+    const year = this.now.getFullYear();
+    const month = this.now.getMonth() + 1;
+    return `${year}-${month.toString().length === 1 ? '0' : ''}${month}`;
   }
 }
 

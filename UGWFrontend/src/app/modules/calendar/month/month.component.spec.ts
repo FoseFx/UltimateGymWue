@@ -168,4 +168,24 @@ describe('MonthComponent', () => {
     });
   });
 
+  it('should convert now to Query', () => {
+    jasmine.clock().install();
+      jasmine.clock().mockDate(new Date(2019, 1, 1));
+      fixture = TestBed.createComponent(MonthComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      expect(component.query()).toEqual('2019-02');
+      jasmine.clock().uninstall();
+  });
+
+  it('should convert now to Query x2', () => {
+    jasmine.clock().install();
+      jasmine.clock().mockDate(new Date(2019, 11, 1));
+      fixture = TestBed.createComponent(MonthComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      expect(component.query()).toEqual('2019-12');
+      jasmine.clock().uninstall();
+  });
+
 });
