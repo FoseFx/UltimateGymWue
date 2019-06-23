@@ -10,7 +10,7 @@ import {AppQuery} from '../../../state/app.query';
 })
 export class MonthComponent implements AfterViewInit, OnInit {
 
-  constructor(private http: HttpClient, private appQuery: AppQuery) { }
+  constructor(public http: HttpClient, public appQuery: AppQuery) { }
 
   offset: number;
   now = new Date();
@@ -61,7 +61,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (!this.appQuery.hasCredentials()) { return; } // only for the tests
-    const query = this.query();    
+    const query = this.query();
 
     this.http.get(environment.urls.getEvents + query, {
       headers: {
@@ -76,26 +76,26 @@ export class MonthComponent implements AfterViewInit, OnInit {
           if (event.format === 'fullday') {
             const date = new Date(event.begin);
             const day = date.getDate();
-            this.month[day].push(event);
+            this.month[day - 1 + this.offset].push(event);
           } else if (event.format === 'ferien' || event.format === 'time') {
             const begin = new Date(event.begin).getDate();
             const end = new Date(event.end).getDate();
             for (let i = begin; i <= end; i++) {
-              this.month[i].push(event);
+              this.month[i - 1 + this.offset].push(event);
             }
           } else if (event.format === 'schule') {
             const l = event.begin.toString().length;
-            const beginH = +event.begin.toString().substr(0, l > 13 ? 1 : 2);
-            const date = new Date(+event.begin.toString().substr(l > 13 ? 1 : 2));
+            const beginH = +event.begin.toString().substr(0, l === 12 ? 1 : 2);
+            const date = new Date(+(event.begin.toString().substr(l === 12 ? 1 : 2) + '0' + (l === 12 ? '0' : '')));
             const day = date.getDate();
             event.beginSchulStunde = beginH;
             event.begin = +date;
-            this.month[day].push(event);
+            this.month[day - 1 + this.offset].push(event);
           }
 
         });
 
-        console.log(this.month);
+        console.log('month.month', this.month);
       },
       (err) => {
         console.error(err);
@@ -112,7 +112,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
 class Event {
   name: string;
-  typ: 'ferien'|'klausur'|'ferientag';
+  typ: 'ferien'|'klausur'|'ferientag'|'sonder';
   format: 'ferien'|'schule'|'fullday'|'time';
   votes: number;
   by: EventBy;
