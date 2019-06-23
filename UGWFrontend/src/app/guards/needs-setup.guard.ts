@@ -14,7 +14,6 @@ export class NeedsSetupGuard implements CanActivate {
 
 
     const value = this.query.getValue();
-    console.log(value);
 
     const isLoginned = !!value.loginData;
     const hasBasics = !!value.basics;

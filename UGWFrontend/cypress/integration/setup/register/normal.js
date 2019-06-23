@@ -35,7 +35,6 @@ describe("register component", () => {
         },
         status: 401,
         onRequest() {
-          console.log("req");
           called = true;
         }
 
@@ -50,7 +49,6 @@ describe("register component", () => {
         },
         status: 401,
         onRequest() {
-          console.log("req");
           called = true;
         }
       }).as("backendStub");
@@ -62,7 +60,6 @@ describe("register component", () => {
     });
 
     it("should be able to click, when everything is filled out", () => {
-      console.log("hi");
       cy.get("app-input > input").eq(0).type("test@test.com");
       cy.get("app-input > input").eq(1).type("testtesttest");
       cy.get("app-input > input").eq(2).type("testtesttest");

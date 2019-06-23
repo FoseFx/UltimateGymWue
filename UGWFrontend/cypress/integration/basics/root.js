@@ -35,7 +35,6 @@ describe('Basics - /', () => {
       cy.wait(500);
       cy.visit('http://localhost:4200/');
       cy.wait(500);
-      console.log('localstorage', localStorage);
       cy.url().should('equal', 'http://localhost:4200/setup/basics/creds');
       localStorage.clear();
     });

@@ -21,7 +21,6 @@ export class LoginService {
         return res;
       }),
       tap((res) => {
-        console.log('tap', res);
         this.appService.onLogin(res);
       })
     );
@@ -38,7 +37,6 @@ export class LoginService {
         return res;
       }),
       tap((res) => {
-        console.log('tap', res);
         this.appService.onLogin(res);
       })
     );
@@ -56,7 +54,6 @@ export class LoginService {
         return res;
       }),
       tap((res) => {
-        console.log('tap', res);
         this.appService.onLogin(res);
       })
     );

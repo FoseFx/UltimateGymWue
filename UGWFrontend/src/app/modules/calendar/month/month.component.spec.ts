@@ -199,7 +199,6 @@ describe('MonthComponent', () => {
       spyOn(component.appQuery, 'hasCredentials').and.returnValue(true);
       spyOn(component.appQuery, 'getValue').and.returnValue({loginData: {token: 'some-token'}});
       spyOn(component.http, 'get').and.callFake((url, config) => {
-        console.log('thefackingurl', url);
         expect(url).toEqual(environment.urls.getEvents + '2019-12');
         expect(config).toEqual({
           headers: {

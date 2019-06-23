@@ -37,7 +37,6 @@ describe('AppQuery', () => {
         const refDate = new Date(2019, 4, 13);
         jasmine.clock().mockDate(refDate);
         query.today$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+refDate);
           done();
         });
@@ -129,7 +128,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 14);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -143,7 +141,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 15);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -157,7 +154,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 16);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -171,7 +167,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 17);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -185,7 +180,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 20);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -199,7 +193,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 21);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });
@@ -213,7 +206,6 @@ describe('AppQuery', () => {
         const resRefDate = new Date(2019, 4, 21);
         jasmine.clock().mockDate(refDate);
         query.nextDay$.subscribe((val: Date) => {
-          console.log('mo', val);
           expect(+val).toEqual(+resRefDate);
           done();
         });

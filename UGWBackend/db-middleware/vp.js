@@ -53,7 +53,6 @@ async function fetchVDFrame(creds,
                                    slides
 ) {
     const resp = await fetchWithCreds(lehrer? VERT_URL_L:VERT_URL_S + frame + file, creds, true);
-    console.log(resp);
     if (!resp.ok) throw new Error("Netzwerkfehler: " + resp.statusCode);
     const text = await resp.textConverted();
     const dom = new JSDOM(text);

@@ -303,7 +303,6 @@ describe('AppService', () => {
       const saveSpy = spyOn(service, '_save');
       spyOn(service, '_getMutableBasicObject').and.returnValue({hiddenNonKurse: ['existing', 'values']});
       spyOn(service.store, 'update').and.callFake((val) => {
-        console.log(val);
         expect(val.basics.hiddenNonKurse).toEqual(['test', 'existing', 'values']);
       });
       service.hideNonKurs('test');
@@ -327,7 +326,6 @@ describe('AppService', () => {
       const saveSpy = spyOn(service, '_save');
       spyOn(service, '_getMutableBasicObject').and.returnValue({hiddenNonKurse: ['existing', 'values']});
       spyOn(service.store, 'update').and.callFake((val) => {
-        console.log(val);
         expect(val.basics.hiddenNonKurse).toEqual(['values']);
       });
       service.unHideNonKurse('existing');
