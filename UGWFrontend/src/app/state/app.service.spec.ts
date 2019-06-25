@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {AppState, AppStore, AppStoreBasics} from './app.store';
+import {AppState, AppStore} from './app.store';
 import {
   AppService,
   dateSplitToDayOfWeekAndABWoche,

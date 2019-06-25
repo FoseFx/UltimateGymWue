@@ -1,7 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
 import {HasNetworkService} from './has-network.service';
-import {BehaviorSubject} from "rxjs";
 
 describe('HasNetworkService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -13,7 +13,7 @@ import {environment} from 'src/environments/environment';
 })
 export class UserComponent {
 
-  constructor(public appQuery: AppQuery, private router: Router, private http: HttpClient) { }
+  constructor(public appQuery: AppQuery, public router: Router, public http: HttpClient) { }
 
   showLogoutPopup = false;
   logoutOrAccountRemoval = 0; // 0 = logout, 1 = account removal

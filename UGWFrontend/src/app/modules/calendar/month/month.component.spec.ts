@@ -209,6 +209,7 @@ describe('MonthComponent', () => {
             {name: '1', typ: 'ferientag', format: 'fullday', begin: +new Date(2019, 11, 1)},
             {name: '2', typ: 'ferien', format: 'ferien', begin: +new Date(2019, 11, 2), end: +new Date(2019, 11, 4)},
             {name: '3', typ: 'sonder', format: 'time', begin: +new Date(2019, 11, 4, 19), end: +new Date(2019, 11, 5, 1)},
+            // tslint:disable-next-line:max-line-length
             {name: '4', typ: 'klausur', format: 'schule', begin: +('3' + Math.floor(+new Date(2019, 11, 6) / 100)), end: +('4' + Math.floor(+new Date(2019, 11, 6) / 100))},
         ], error: false});
       });
@@ -216,8 +217,10 @@ describe('MonthComponent', () => {
       // @ts-ignore
       expect(component.month[5]).toEqual([{name: '1', typ: 'ferientag', format: 'fullday', begin: +new Date(2019, 11, 1)}]);
       // @ts-ignore
+      // tslint:disable-next-line:max-line-length
       expect(component.month[6]).toEqual([{name: '2', typ: 'ferien', format: 'ferien', begin: +new Date(2019, 11, 2), end: +new Date(2019, 11, 4)}]);
       // @ts-ignore
+      // tslint:disable-next-line:max-line-length
       expect(component.month[7]).toEqual([{name: '2', typ: 'ferien', format: 'ferien', begin: +new Date(2019, 11, 2), end: +new Date(2019, 11, 4)}]);
       // @ts-ignore
       expect(component.month[8]).toEqual([
