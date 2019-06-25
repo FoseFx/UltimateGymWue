@@ -1,7 +1,7 @@
 #!/bin/bash
 lineschanged=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "UGWBackend/src/" | wc -l)
 echo $lineschanged
-if [ lineschanged == "0" ]
+if [ $lineschanged == "0" ]
     then
         echo "No changes, skipping tests"
     else
