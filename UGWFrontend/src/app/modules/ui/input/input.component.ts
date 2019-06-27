@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, OperatorFunction, Subscription} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
 import {tap} from 'rxjs/internal/operators/tap';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -26,7 +26,7 @@ export class InputComponent implements OnInit, OnDestroy {
     this.value = '';
     this.ddFilterValue$.next('');
   }
-  private ddOptions: string[] = [];
+  ddOptions: string[] = [];
   @Output() input = new EventEmitter();
   @Output() enter = new EventEmitter();
   focused = false;
@@ -82,23 +82,9 @@ export class InputComponent implements OnInit, OnDestroy {
     if (this.type !== 'dropdown') {
       this.validSub = this.input.pipe(
         debounceTime(100),
-        map((event: Event) => {
-          const target = event.target as HTMLInputElement;
-          return target.value;
-        }),
-        tap((val) => this.value = val),
-        map((input) => {
-          if (this.type === 'text') {
-            return input.length !== 0;
-          } else if (this.type === 'password' && !this.allowBadPsw) {
-            return input.length > 7;
-          } else if (this.type === 'email') {
-            // tslint:disable-next-line:max-line-length
-            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
-          } else { // number
-            return true;
-          }
-        })
+        eventValueMap(),
+        tap((val: string) => this.value = val),
+        this._inputValidMap()
       ).subscribe((valid: boolean) => {
         this.invalid = !valid;
       });
@@ -126,5 +112,26 @@ export class InputComponent implements OnInit, OnDestroy {
     this.ddFilterValue$.next(target.value);
   }
 
+  _inputValidMap() {
+    return map((input: string) => {
+      if (this.type === 'text') {
+        return input.length !== 0;
+      } else if (this.type === 'password' && !this.allowBadPsw) {
+        return input.length > 7;
+      } else if (this.type === 'email') {
+        // tslint:disable-next-line:max-line-length
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
+      } else { // number
+        return true;
+      }
+    });
+  }
+
+
 
 }
+
+export const eventValueMap = () => map((event: Event) => {
+  const target = event.target as HTMLInputElement;
+  return target.value as string;
+});
