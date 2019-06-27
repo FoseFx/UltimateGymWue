@@ -1,22 +1,6 @@
 # UltimateGymWue [![Build Status](https://travis-ci.com/FoseFx/UltimateGymWue.svg?token=iq4xczjhn3DVKzpp6yfB&branch=master)](https://travis-ci.com/FoseFx/UltimateGymWue) [![codecov](https://codecov.io/gh/FoseFx/UltimateGymWue/branch/master/graph/badge.svg?token=4elcNKyOMX)](https://codecov.io/gh/FoseFx/UltimateGymWue)  [![cypress](https://img.shields.io/static/v1.svg?label=end%202%20end%20tests&message=Cypress&color=blue)](https://travis-ci.com/FoseFx/UltimateGymWue)
 The Ultimate Tool for the Students of my School.
 
-## Features
-
-- User Management
-  - Email/Password
-  - Google OAuth
-  - Instagram OAuth
-  - Anmeldedaten für Schulserver
-- Setup
-  - Credentials
-  - Stufen
-  - Kurse
-- Basics
-  - Landing Page
-  - Stundenplan
-  - Popup
-    - Verstecken von Nicht-Kursen
 ## TODO
 - Landing / Main
   - Stundenplan
