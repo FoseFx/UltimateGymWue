@@ -16,7 +16,7 @@ export class LoginComponent implements OnDestroy {
   error: string = null;
   loading = false;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(public loginService: LoginService, public router: Router) { }
 
 
   allow(email: InputComponent, password: InputComponent) {
