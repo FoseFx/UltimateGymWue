@@ -9,5 +9,11 @@ if [ $lineschanged == "0" ]
         ng build --prod
         npm run test
         npm run e2e
-        bash <(curl -s https://codecov.io/bash) -t $(echo "$UPLOAD_TOKEN")
+        if [ $TRAVIS_EVENT_TYPE == "pull_request" ]
+          then
+            echo "PR, no codecov commit"
+          else
+            bash <(curl -s https://codecov.io/bash) -t $(echo "$UPLOAD_TOKEN")
+        fi
 fi
+
