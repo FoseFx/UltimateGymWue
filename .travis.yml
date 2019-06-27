@@ -1,6 +1,6 @@
 branches:
-  except:
-  - experimental
+  only:
+  - master
 
 matrix:
   include:
