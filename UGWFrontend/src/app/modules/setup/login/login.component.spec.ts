@@ -9,6 +9,7 @@ import {AppService} from '../../../state/app.service';
 import {AppStore} from '../../../state/app.store';
 import {AppQuery} from '../../../state/app.query';
 import {RouterTestingModule} from '@angular/router/testing';
+import {fromEvent, of} from "rxjs";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -134,6 +135,45 @@ describe('LoginComponent', () => {
       expect(component.allow(email, password)).toEqual(true);
     });
 
+  });
+
+  it('should route', () => {
+    const url = '';
+    const spy = spyOn(component.router, 'navigate').and.callFake((val) => {
+      expect(val).toEqual([url]);
+    });
+    component.route([url]);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should unsubscribe', () => {
+    component.subs = [fromEvent(window, 'onkeydown').subscribe()];
+    expect(component.subs[0].closed).toEqual(false);
+    component.ngOnDestroy();
+    expect(component.subs[0].closed).toEqual(true);
+  });
+
+  describe('onsubmit', () => {
+    it('should return without changes when not allowed', () => {
+      component.subs = [];
+      component.loading = false;
+      // @ts-ignore
+      component.onSubmit({invalid: true, value: ''}, {invalid: true, value: ''});
+      expect(component.loading).toEqual(false);
+      expect(component.subs).toEqual([]);
+    });
+    it('should set laod to true and add normalLogin subscriptio', () => {
+      component.subs = [];
+      component.loading = false;
+      spyOn(component, 'route').and.callFake(() => {});
+      const spy = spyOn(component.loginService, 'normalLogin').and.returnValue(of({error: false, msg: 'ok'}));
+      // @ts-ignore
+      component.onSubmit({invalid: false, value: 'odkasokda'}, {invalid: false, value: 'sdak'});
+
+      expect(component.loading).toEqual(true);
+      expect(component.subs.length).toEqual(1);
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
 });
