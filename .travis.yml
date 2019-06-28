@@ -1,6 +1,6 @@
 branches:
-  - master
-
+  only: 
+    - master
 matrix:
   include:
   - language: node_js
