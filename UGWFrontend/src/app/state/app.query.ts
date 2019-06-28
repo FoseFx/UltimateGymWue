@@ -17,6 +17,9 @@ export class AppQuery extends Query<AppState> {
     super(store);
     queryInCypress(this);
   }
+  get version() {
+    return this.getValue().meta.version;
+  }
   get loginToken() {
     return `Bearer ${this.getValue().loginData.token}`;
   }
