@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
-import {AppStore, createInitialState} from './app.store';
-
+import {AppStore, createInitialState, getVersion} from './app.store';
+import {version} from '../../../package.json';
 
 describe('AppStore', () => {
 
@@ -21,7 +21,7 @@ describe('AppStore', () => {
       const val = createInitialState();
       expect(JSON.stringify(val)).toEqual(JSON.stringify({
         meta: {
-          version: '0.0.1'
+          version: getVersion()
         },
         fullname: null,
         loginData: null,
@@ -62,5 +62,9 @@ describe('AppStore', () => {
         klausuren: []
       }));
     });
+  });
+
+  it('should getVersion', () => {
+    expect(getVersion()).toEqual(version);
   });
 });

@@ -7,6 +7,7 @@ import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
 import {Kurse} from 'src/types/Kurs';
 import {TimeTable} from '../../types/TT';
+import * as packageJson from '../../../package.json';
 
 export class LoginData {
   token: string;
@@ -54,6 +55,10 @@ export class AppStoreBasics {
   hiddenNonKurse: string[];
 }
 
+export function getVersion(): string {
+  return packageJson.version;
+}
+
 export function createInitialState(): AppState {
   if (!!localStorage.getItem('app_state')) {
     console.log(true);
@@ -65,7 +70,7 @@ export function createInitialState(): AppState {
   }
   return {
     meta: {
-      version: '0.0.1'
+      version: getVersion()
     },
     fullname: null,
     loginData: null,

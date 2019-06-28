@@ -8,7 +8,7 @@ import {
   mixInHiddenNonKurse,
   removeHiddenNonKurse
 } from './app.query';
-import {AppStore} from './app.store';
+import {AppStore, getVersion} from './app.store';
 import {AppService} from './app.service';
 import {SetupQuery} from '../modules/setup/state/setup.query';
 import {SetupStore} from '../modules/setup/state/setup.store';
@@ -421,6 +421,11 @@ describe('AppQuery', () => {
         done();
       });
     });
+  });
+
+  it('should test version', () => {
+    const query: AppQuery = TestBed.get(AppQuery);
+    expect(query.version).toEqual(getVersion());
   });
 
 
