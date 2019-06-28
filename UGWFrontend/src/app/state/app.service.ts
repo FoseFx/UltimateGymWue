@@ -104,12 +104,8 @@ export class AppService {
       k: 3
     };
     const basics = this._getMutableBasicObject();
-    let newPlan: TimeTable;
-    if (!!basics.stundenplanWithInfos) {
-      newPlan = JSON.parse(JSON.stringify(basics.stundenplanWithInfos));
-    } else {
-      newPlan = JSON.parse(JSON.stringify(basics.stundenplan));
-    }
+    // old information gets discarded
+    const newPlan: TimeTable = JSON.parse(JSON.stringify(basics.stundenplan));
     basics.vertretungsplan = vp;
     // Write VD into SPwithInfos
     basics.vertretungsplan.forEach((day: VertretungsPlanSeite) => {
