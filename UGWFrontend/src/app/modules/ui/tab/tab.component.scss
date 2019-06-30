@@ -37,3 +37,6 @@
 .with-transition {
   transition: transform 0.3s ease-out!important;
 }
+.no-scroll {
+  overflow: hidden;
+}

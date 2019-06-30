@@ -14,8 +14,9 @@
     class="tab-content"
     [appSwipable]="activeIndex"
     (active)="allowTransitions = false"
+    (allowScroll)="allowScroll = $event"
     (snapto)="setActive = $event"
-    [ngClass]="{'with-transition': allowTransitions}"
+    [ngClass]="{'with-transition': allowTransitions, 'no-scroll': !allowScroll}"
     [ngStyle]="{'width': tabs.length * 100 + '%', 'transform': 'translateX(-' + (activeIndex * (1 / tabs.length) * 100) + '%)'}">
     <ng-container *ngFor="let tab of tabs; let i = index;">
       <ng-container *ngTemplateOutlet="tab.content"></ng-container>

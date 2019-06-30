@@ -8,6 +8,7 @@ import {TabItemComponent} from './tab-item/tab-item.component';
 })
 export class TabComponent {
 
+  allowScroll = true;
   allowTransitions = true;
   tabs: TabItemComponent[] = [];
   // tslint:disable-next-line:variable-name
