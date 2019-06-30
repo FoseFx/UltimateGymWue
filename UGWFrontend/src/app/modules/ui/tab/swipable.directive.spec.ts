@@ -44,7 +44,40 @@ describe('SwipableDirective', () => {
       expect(dir.startedAtX).toEqual(10);
       expect(dir.startedAtY).toEqual(20);
     });
+  });
 
+  describe('touchEnd', () => {
+    it('should set values', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchEnd', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.firstMove = true;
+      dir.percentPerPage = 1;
+      dir.N = 1;
+      dir.startedAtX = 1;
+      dir.startedAtY = 1;
+      dir.widthPerPage = 1;
+      dir.newPercent = 1;
+      dir.moved = true;
+
+      dir.touchEnd(event);
+      expect(dir.N).toEqual(undefined);
+      expect(dir.percentPerPage).toEqual(undefined);
+      expect(dir.startedAtX).toEqual(undefined);
+      expect(dir.startedAtY).toEqual(undefined);
+      expect(dir.firstMove).toEqual(true);
+      expect(dir.widthPerPage).toEqual(undefined);
+      expect(dir.percentAtStart).toEqual(undefined);
+      expect(dir.newPercent).toEqual(undefined);
+      expect(dir.moved).toEqual(false);
+    });
   });
 
 });
