@@ -6,6 +6,8 @@ import {Directive, ElementRef, EventEmitter, HostListener, Input, Output} from '
 export class SwipableDirective {
 
   startedAtX: number;
+  startedAtY: number;
+  firstMove = true;
   percentAtStart: number;
   widthPerPage: number;
   N: number;
@@ -18,6 +20,8 @@ export class SwipableDirective {
   @Output() snapto = new EventEmitter<number>();
 
   @Output() active = new EventEmitter();
+
+  @Output() allowScroll = new EventEmitter();
 
   @HostListener('touchstart', ['$event']) touchStart(event: TouchEvent) {
 
@@ -35,6 +39,7 @@ export class SwipableDirective {
       return;
     }
     this.startedAtX = touch.clientX;
+    this.startedAtY = touch.clientY;
     this.active.emit();
   }
 
@@ -48,6 +53,17 @@ export class SwipableDirective {
     }
     this.moved = true;
     const diff = touch.clientX - this.startedAtX; // diff in Richtung rechts gegangen
+
+    if (this.firstMove) {
+      const ydelta = touch.clientY - this.startedAtY;
+      if (Math.abs(ydelta) >= Math.abs(diff)) {
+        this.startedAtX = undefined; // block any further movement
+        return;
+      } else {
+        this.allowScroll.emit(false);
+      }
+      this.firstMove = false;
+    }
 
     if (diff > 0) { // swiped to left
       const isFirstPage = this.index === 0;
@@ -89,9 +105,11 @@ export class SwipableDirective {
       this.snapto.emit(this.index);
     }
 
-
+    this.allowScroll.emit(true);
     // reset values
     this.startedAtX = undefined;
+    this.startedAtY = undefined;
+    this.firstMove = true;
     this.N = undefined;
     this.widthPerPage = undefined;
     this.percentAtStart = undefined;

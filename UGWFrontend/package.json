@@ -1,6 +1,6 @@
 {
   "name": "ugwfrontend",
-  "version": "0.1.171",
+  "version": "0.1.173",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
