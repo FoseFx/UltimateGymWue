@@ -22,7 +22,7 @@ The Ultimate Tool for the Students of my School.
 - Serve the frontend using `ng serve`
 
 
-In case you wonder, what this ["docs/ugw-router.xml"](docs/ugw-router.xml) file is. Open it on [draw.io](http://draw.io/)
+Open ["docs/ugw-router.xml"](docs/ugw-router.xml) on [draw.io](http://draw.io/)
 
 ---
 
