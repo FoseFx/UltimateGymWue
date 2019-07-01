@@ -66,6 +66,9 @@ export function createInitialState(): AppState {
     storage.nextDay = null;
     storage.thisDay = null;
     storage.menuOpen = false;
+    storage.meta = {
+      version: getVersion()
+    };
     return storage;
   }
   return {

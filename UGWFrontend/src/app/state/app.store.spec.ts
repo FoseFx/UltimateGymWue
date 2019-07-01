@@ -50,7 +50,7 @@ describe('AppStore', () => {
       const val = createInitialState();
       expect(JSON.stringify(val)).toEqual(JSON.stringify({
         meta: {
-          version: 'other version.'
+          version: getVersion()
         },
         fullname: 'Some Name',
         loginData: null,
