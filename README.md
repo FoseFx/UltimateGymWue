@@ -15,7 +15,7 @@ The Ultimate Tool for the Students of my School.
     - INSTA_SECRET
 5. Make sure the frontend is hosted somewhere with 404 redirects to `index.html` and points to the backend in `environment.prod.ts`.
 
-### When running in development:
+## When running in development:
 - Make sure you set the correct values in the `main.rs` file
 - Make sure you run the backend using `env DEVELOPMENT=true SECRET=AAAA MAIL_JET_USER=AAAA MAIL_JET_KEY=AAAA REDIS_PATH=AAAA INSTA_CID=AAAA INSTA_SECRET=AAAA cargo run` and replace `AAAA`
 - Run the db middleware using `env SECRET=AAAA` and replace `AAAA`
