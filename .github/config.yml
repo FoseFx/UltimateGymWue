@@ -1,5 +1,5 @@
 version-bump-bot:
-  path: "UGWFrontend/config.yml"
+  path: "UGWFrontend/package.json"
   branch:
   - master:
     bump: "patch"
