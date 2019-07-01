@@ -23,7 +23,3 @@ The Ultimate Tool for the Students of my School.
 
 
 Open ["docs/ugw-router.xml"](docs/ugw-router.xml) on [draw.io](http://draw.io/)
-
----
-
-A FoseFx project.
