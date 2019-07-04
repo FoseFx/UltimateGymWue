@@ -23,5 +23,15 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": ["https://ugw-api.fosefx.com/api/**"],
+      "cacheConfig": {
+        "maxAge": "0",
+        "maxSize": "1"
+      }
+    }
   ]
 }
