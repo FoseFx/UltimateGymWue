@@ -1,4 +1,27 @@
 @import "colors";
+
+/*
+====z-indexes====
+
+0:
+1:
+2:
+3: input > label
+4: card's backdrop
+5: toolbar
+6: popup (wrapper)
+7: popup's backdrop
+8: popup-visible
+9: ham-menu's backdrop
+10: ham-menu
+11:
+12:
+13:
+14:
+15: snackbar (todo)
+*/
+
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
