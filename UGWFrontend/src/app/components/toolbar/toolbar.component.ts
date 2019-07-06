@@ -1,24 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {fromEvent} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AppService} from '../../state/app.service';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent implements OnInit {
-
-  showTitle$;
-
+export class ToolbarComponent {
   constructor(public service: AppService) { }
-
-  ngOnInit() {
-    this.showTitle$ = fromEvent(window, 'resize')
-      .pipe(
-        map(_ => window.innerWidth < 300)
-      );
-  }
-
 }
