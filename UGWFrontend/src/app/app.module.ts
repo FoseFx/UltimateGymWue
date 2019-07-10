@@ -17,6 +17,8 @@ import {UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {KeyService} from './services/key.service';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import {SnackbarService} from './services/snackbar.service';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -24,7 +26,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   declarations: [
     AppComponent,
     ToolbarComponent,
-    MenuComponent
+    MenuComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     AppQuery,
     AppService,
     NeedsSetupGuard,
-    KeyService
+    KeyService,
+    SnackbarService
   ],
   bootstrap: [AppComponent]
 })

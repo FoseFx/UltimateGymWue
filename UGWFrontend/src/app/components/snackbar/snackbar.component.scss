@@ -1,0 +1,31 @@
+@import "../../../colors";
+:host {
+  z-index: 15;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+}
+
+div {
+  margin: 0 auto;
+  background: $dark;
+  color: white;
+  padding: 11px 20px;
+  width: 85%;
+  max-width: 700px;
+  border-radius: 5px;
+}
+
+.fakeBtn {
+  cursor: pointer;
+  padding: 4px 15px;
+  border-radius: 5px;
+  background: transparent;
+  opacity: 0.8;
+  transition: background-color 0.2s linear, opacity 0.2s linear;
+  float: right;
+  &:hover {
+    background-color: $bg;
+    opacity: 1;
+  }
+}

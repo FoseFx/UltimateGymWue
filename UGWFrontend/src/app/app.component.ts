@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {SnackbarService} from './services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'UGWFrontend';
+  obj =  {
+    'test': () => { console.log('test'); }
+  };
+
+  constructor(public snackbarService: SnackbarService) {
+  }
+
+  randomId() {
+    return Math.random() * 10000;
+  }
 }

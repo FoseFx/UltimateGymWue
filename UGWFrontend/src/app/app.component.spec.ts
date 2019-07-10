@@ -7,6 +7,8 @@ import {UiModule} from './modules/ui/ui.module';
 import {AppStore} from './state/app.store';
 import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
+import {SnackbarComponent} from './components/snackbar/snackbar.component';
+import {SnackbarService} from './services/snackbar.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,12 +20,14 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         ToolbarComponent,
-        MenuComponent
+        MenuComponent,
+        SnackbarComponent
       ],
       providers: [
         AppStore,
         AppQuery,
-        AppService
+        AppService,
+        SnackbarService
       ]
     }).compileComponents();
   }));
