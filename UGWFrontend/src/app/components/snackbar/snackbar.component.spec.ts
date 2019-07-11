@@ -18,6 +18,7 @@ describe('SnackbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SnackbarComponent);
     component = fixture.componentInstance;
+    component.snackbarService.addSnackbar('Message');
     fixture.detectChanges();
   });
 
