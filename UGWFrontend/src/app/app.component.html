@@ -1,6 +1,5 @@
 <app-toolbar></app-toolbar>
 <app-menu></app-menu>
 
-<button (click)="snackbarService.addSnackbar(randomId() + '', 10000, 'note', obj)">Test</button>
 <app-snackbar *ngIf="snackbarService.snackQueue.length !== 0"></app-snackbar>
 <router-outlet></router-outlet>
