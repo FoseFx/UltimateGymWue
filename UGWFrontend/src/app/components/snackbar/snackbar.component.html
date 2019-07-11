@@ -1,0 +1,12 @@
+
+<div>
+  <span>
+  {{snackbarService.getNewSnackbar().type === 'note' ? '📝' : snackbarService.getNewSnackbar().type === 'warning' ? '⚠️' : '❗'}}
+    {{snackbarService.getNewSnackbar().msg}}
+  </span>
+
+    <span>
+    <span *ngFor="let s of keysOfCurrentSnackbar()" (click)="executeFunction(s)" class="fakeBtn">{{s}}</span>
+  </span>
+
+</div>

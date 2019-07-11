@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {SnackbarService} from './services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'UGWFrontend';
+  constructor(public snackbarService: SnackbarService) {
+  }
 }
