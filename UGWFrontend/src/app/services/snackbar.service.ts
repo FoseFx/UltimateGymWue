@@ -37,7 +37,7 @@ export interface SnackbarActions {
 
 export type SnackbarType = 'note'|'alert'|'warning';
 
-const defaultActions: SnackbarActions = {
+export const defaultActions: SnackbarActions = {
   'Schließen': ref => { clearTimeout(ref.setTimeout); ref.close(); }
 };
 @Injectable()
