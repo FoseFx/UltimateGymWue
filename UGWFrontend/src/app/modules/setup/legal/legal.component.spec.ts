@@ -1,6 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LegalComponent} from './legal.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {SnackbarService} from '../../../services/snackbar.service';
+import {TrackingService} from '../../../services/tracking.service';
 
 describe('LegalComponent', () => {
   let component: LegalComponent;
@@ -8,7 +11,9 @@ describe('LegalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LegalComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ LegalComponent ],
+      providers: [TrackingService, SnackbarService]
     })
     .compileComponents();
   }));
