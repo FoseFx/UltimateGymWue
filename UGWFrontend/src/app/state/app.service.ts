@@ -6,6 +6,8 @@ import {serviceInCypress} from '../util';
 import {Kurse} from 'src/types/Kurs';
 import {TimeTable} from '../../types/TT';
 
+const keysToSave = ['loginData', 'fullname', 'basics', 'klausuren', 'credentials'];
+
 @Injectable()
 export class AppService {
   constructor(public store: AppStore, public query: AppQuery) {
@@ -180,14 +182,18 @@ export class AppService {
   }
 
   _save() {
-    const obj: AppState = JSON.parse(JSON.stringify(this.query.getValue()));
+    const value = this.query.getValue();
+    const obj: any = {};
+    keysToSave.forEach((key: string) => {
+      if (value.hasOwnProperty(key)) {
+        obj[key] = JSON.parse(JSON.stringify(value[key]));
+      }
+    });
     if (obj.basics) {
+      delete obj.basics.stundenplanWithInfos;
       delete obj.basics.vertretungsplan;
     }
-    delete obj.nextDay;
-    delete obj.thisDay;
-    delete obj.menuOpen;
-    localStorage.app_state = JSON.stringify(obj);
+    localStorage.setItem('app_state', JSON.stringify(obj));
   }
 }
 
