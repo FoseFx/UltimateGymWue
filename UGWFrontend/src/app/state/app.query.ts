@@ -37,8 +37,6 @@ export class AppQuery extends Query<AppState> {
 
   hiddenNonKurse$: Observable<string[]> = this.select('basics').pipe(basicHiddenNonKurseMap());
 
-  isLoginned$ = this.select('loginData').pipe(map(d => !!d));
-
   stufe$ = this.select('basics').pipe(map((d) => d.stufe));
 
 
@@ -85,6 +83,8 @@ export class AppQuery extends Query<AppState> {
     const weekNo = Math.ceil(( ( (d - (yearStart as any)) / 86400000) + 1) / 7);
     return [d.getUTCFullYear(), weekNo];
   }
+
+  isLoginned = () => !!this.getValue().loginData;
 
   _toNextDay(day, allowFriday = true): Date {
     // 0 1 2 3 4 5 6

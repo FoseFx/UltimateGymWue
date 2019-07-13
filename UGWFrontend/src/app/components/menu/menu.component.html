@@ -3,10 +3,13 @@
      *ngIf="query.menuOpen$ | async"
      [@menuOpen]="(query.menuOpen$ | async) ? 'open' : 'closed'">
   <ul (click)="service.changeMenuState()">
-    <li *ngFor="let item of menuItems" [routerLink]="item.route">
-      <i class="material-icons block">{{item.icon}}</i>
-      <span class="block">{{item.name}}</span>
-    </li>
+    <ng-container *ngFor="let item of menuItems">
+      <li [routerLink]="item.route" *ngIf="item.cond(comp)">
+        <i class="material-icons block">{{item.icon}}</i>
+        <span class="block">{{item.name}}</span>
+      </li>
+    </ng-container>
+
     <li><span class="block italic light">UGW v.{{query.version}}</span></li>
   </ul>
 </div>
