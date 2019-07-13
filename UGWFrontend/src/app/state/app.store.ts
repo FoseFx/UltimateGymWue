@@ -60,18 +60,7 @@ export function getVersion(): string {
 }
 
 export function createInitialState(): AppState {
-  if (!!localStorage.getItem('app_state')) {
-    console.log(true);
-    const storage: AppState = JSON.parse(localStorage.getItem('app_state'));
-    storage.nextDay = null;
-    storage.thisDay = null;
-    storage.menuOpen = false;
-    storage.meta = {
-      version: getVersion()
-    };
-    return storage;
-  }
-  return {
+  const defaultValue = {
     meta: {
       version: getVersion()
     },
@@ -84,6 +73,16 @@ export function createInitialState(): AppState {
     nextDay: null,
     klausuren: []
   };
+  const appState = localStorage.getItem('app_state');
+  if (!!appState) {
+    const storage: AppState = JSON.parse(appState);
+    Object.keys(storage).forEach((key: string) => {
+      if (defaultValue.hasOwnProperty(key)) {
+        defaultValue[key] = storage[key];
+      }
+    });
+  }
+  return defaultValue;
 }
 
 @StoreConfig({name: 'AppStore'})
