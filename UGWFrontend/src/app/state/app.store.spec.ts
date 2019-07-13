@@ -35,17 +35,11 @@ describe('AppStore', () => {
     });
     it('should return modified localstorage if present', () => {
       spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify({
-        meta: {
-          version: 'other version.'
-        },
         fullname: 'Some Name',
-        loginData: null,
-        menuOpen: 'sth',
-        basics: null,
-        credentials: null,
-        thisDay: 'sth',
-        nextDay: 'sth',
-        klausuren: []
+        loginData: 'login data',
+        basics: 'basics Modified',
+        credentials: 'creds Modified',
+        klausuren: ['test']
       }));
       const val = createInitialState();
       expect(JSON.stringify(val)).toEqual(JSON.stringify({
@@ -53,13 +47,13 @@ describe('AppStore', () => {
           version: getVersion()
         },
         fullname: 'Some Name',
-        loginData: null,
+        loginData: 'login data',
         menuOpen: false,
-        basics: null,
-        credentials: null,
+        basics: 'basics Modified',
+        credentials: 'creds Modified',
         thisDay: null,
         nextDay: null,
-        klausuren: []
+        klausuren: ['test']
       }));
     });
   });
