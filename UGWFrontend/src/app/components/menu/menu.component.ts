@@ -35,15 +35,20 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class MenuComponent {
 
-  constructor(public query: AppQuery, public service: AppService) { }
+  comp = this;
 
+  constructor(public query: AppQuery, public service: AppService) { }
+  // tslint:disable-next-line
   menuItems = [
-    {name: 'Home', icon: 'home', route: '/'},
-    {name: 'User', icon: 'account_circle', route: '/user'},
-    {name: 'Stundenplan', icon: 'date_range', route: '/basics/stundenplan'},
-    {name: 'Kalender', icon: 'event', route: '/calendar'},
-    {name: 'Klausuren', icon: 'assignment', route: '/setup/basics/klausuren'},
-    {name: 'Versteckte Stunden', icon: 'not_interested', route: '/basics/hide'}
+    {name: 'Home', icon: 'home', route: '/', cond: tru},
+    {name: 'User', icon: 'account_circle', route: '/user', cond: isLoggedIn},
+    {name: 'Stundenplan', icon: 'date_range', route: '/basics/stundenplan', cond: isLoggedIn},
+    {name: 'Kalender', icon: 'event', route: '/calendar', cond: isLoggedIn},
+    {name: 'Klausuren', icon: 'assignment', route: '/setup/basics/klausuren', cond: isLoggedIn},
+    {name: 'Versteckte Stunden', icon: 'not_interested', route: '/basics/hide', cond: isLoggedIn}
   ];
 
 }
+
+export const isLoggedIn = (ctx: MenuComponent) => ctx.query.isLoginned();
+export const tru = (...args) => true;

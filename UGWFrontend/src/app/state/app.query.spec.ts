@@ -428,5 +428,13 @@ describe('AppQuery', () => {
     expect(query.version).toEqual(getVersion());
   });
 
+  it('should test isLoggedin', () => {
+    const query: AppQuery = TestBed.get(AppQuery);
+    const spy = spyOn(query, 'getValue').and.returnValue({loginData: true});
+    expect(query.isLoginned()).toEqual(true);
+    spy.and.returnValue({});
+    expect(query.isLoginned()).toEqual(false);
+  });
+
 
 });
