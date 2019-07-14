@@ -13,7 +13,9 @@ use serde_json::Map;
 use crate::basics::utils::BasicCredsWrapper;
 use redis::RedisResult;
 use crate::redis::Commands;
+use std::time::{SystemTime, UNIX_EPOCH};
 
+/* This route will return an array of {info, vp} objects. The first two are for the two visible pages. the third contains the date when the information was fetched at */
 #[get("/basics/vp/<stufe>")]
 pub fn get_vertretungsplan(_user: AuthGuard,
                            creds: HasCredsGuard,
@@ -46,7 +48,13 @@ pub fn get_vertretungsplan(_user: AuthGuard,
 
     #[allow(non_snake_case)] let mut returnVec: Vec<ReturnVecItem> = vec![];
 
-    for day in result {
+    for (i, day)in result.iter().enumerate() {
+        if i == 2 {
+            let date: String = day.get(0).unwrap().as_str().unwrap().to_string();
+            let js = json!(date);
+            returnVec.push(ReturnVecItem { infos: js, vp: None});
+            continue;
+        }
         let infos: &serde_json::Value = day.get(0).unwrap();
         let map: &Map<String, serde_json::Value> = day.get(1).unwrap().as_object().unwrap();
         let stufe_vp_datum = map.get(&stufe);
@@ -88,7 +96,12 @@ fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, 
     if result.is_err() {
         error!(format!("{:?}", result));
     }
-    let result = result.unwrap();
+    let mut result = result.unwrap();
+    let start = SystemTime::now();
+    let since_the_epoch = start.duration_since(UNIX_EPOCH)
+        .expect("Time went backwards");
+    let date_str = format!("{}", since_the_epoch.as_secs());
+    result.push(vec![JsonValue(json!(date_str))]);
 
     let txt = serde_json::to_string(&json!(result))?;
     let _res: RedisResult<String> = redis.set_ex("vertretungsplan", txt, 60 * 5);

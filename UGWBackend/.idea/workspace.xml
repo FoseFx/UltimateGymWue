@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGWFrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../UGWFrontend/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,10 +21,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/events/month.rs">
+        <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+            <state relative-caret-position="304">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="e#0#35#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,7 +130,6 @@
         <option value="$PROJECT_DIR$/src/basics/stundenplan.rs" />
         <option value="$PROJECT_DIR$/warnings.txt" />
         <option value="$PROJECT_DIR$/src/basics/stufen.rs" />
-        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
         <option value="$PROJECT_DIR$/src/auth/close_account.rs" />
         <option value="$PROJECT_DIR$/src/db.rs" />
         <option value="$PROJECT_DIR$/db-middleware/index.js" />
@@ -133,6 +137,7 @@
         <option value="$PROJECT_DIR$/src/events/month.rs" />
         <option value="$PROJECT_DIR$/src/main.rs" />
         <option value="$PROJECT_DIR$/src/events/add_event.rs" />
+        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
       </list>
     </option>
   </component>
@@ -151,6 +156,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,14 +179,18 @@
               <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="basics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="events" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -279,16 +290,18 @@
       <workItem from="1560520509921" duration="1534000" />
       <workItem from="1561221257494" duration="66000" />
       <workItem from="1561221344723" duration="75000" />
+      <workItem from="1563094737219" duration="1113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164925000" />
+    <option name="totallyTimeSpent" value="166038000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.22291666" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.22518677" />
       <window_info id="Structure" order="1" sideWeight="0.3253833" side_tool="true" weight="0.16083151" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -302,7 +315,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.2752391" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27429804" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -524,21 +537,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cargo.toml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/warnings.txt" />
-    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="74" column="13" lean-forward="true" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/normal/passw.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -718,8 +717,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/events/month.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+        <state relative-caret-position="1159">
+          <caret line="61" column="16" lean-forward="true" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cargo.toml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#0#35#0" />
+          </folding>
         </state>
       </provider>
     </entry>
