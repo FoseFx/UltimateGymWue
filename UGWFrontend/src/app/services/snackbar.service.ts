@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+import {tap} from "rxjs/operators";
 
 
 export class SnackbarRef {
@@ -43,6 +45,12 @@ export const defaultActions: SnackbarActions = {
 @Injectable()
 export class SnackbarService {
   public snackQueue: SnackbarRef[] = [];
+  snackState = new BehaviorSubject('visible');
+  public snackState$ = this.snackState.pipe(tap(() => {
+    setTimeout(() => {
+      this.snackState.next('visible');
+    }, 500);
+  }));
   constructor() { }
 
   addSnackbar(msg: string, ttl: number = 1000, type: SnackbarType = 'note', actions: SnackbarActions = defaultActions) {
@@ -54,6 +62,7 @@ export class SnackbarService {
     if (this.snackQueue[0].startedAt !== -1) {
       return this.snackQueue[0];
     }
+    this.snackState.next('invisible');
     const id = this.snackQueue[0].id;
     this.snackQueue[0].startedAt = +new Date();
     this.snackQueue[0].setTimeout = setTimeout(() => {

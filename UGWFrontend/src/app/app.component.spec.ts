@@ -9,13 +9,15 @@ import {AppQuery} from './state/app.query';
 import {AppService} from './state/app.service';
 import {SnackbarComponent} from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        UiModule
+        UiModule,
+        BrowserAnimationsModule
       ],
       declarations: [
         AppComponent,

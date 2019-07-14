@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SnackbarComponent } from './snackbar.component';
-import {SnackbarActions, SnackbarService, SnackbarType} from '../../services/snackbar.service';
+import {SnackbarService} from '../../services/snackbar.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('SnackbarComponent', () => {
   let component: SnackbarComponent;
@@ -9,6 +10,7 @@ describe('SnackbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [BrowserAnimationsModule],
       declarations: [ SnackbarComponent ],
       providers: [SnackbarService]
     })
