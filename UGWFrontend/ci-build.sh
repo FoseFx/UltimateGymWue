@@ -6,15 +6,6 @@ if [ $lineschanged == "0" ]
         echo "No changes, skipping tests"
     else
         npm ci
-        if [ $TRAVIS_EVENT_TYPE == "push" && $TRAVIS_BRANCH == "master" ] 
-            then
-                npm version patch
-            else
-                if [ $TRAVIS_EVENT_TYPE == "push" && $TRAVIS_BRANCH == "release" ] 
-                then
-                    npm version minor
-                fi
-        fi
         ng build --prod
         npm run test
         npm run e2e
