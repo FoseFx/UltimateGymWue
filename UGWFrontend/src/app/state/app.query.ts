@@ -36,6 +36,8 @@ export class AppQuery extends Query<AppState> {
   );
 
   hiddenNonKurse$: Observable<string[]> = this.select('basics').pipe(basicHiddenNonKurseMap());
+  
+  fetchedAt$: Observable<Date> = this.select('basics').pipe(map((b) => !!b ? b.vdFetchedAt : null));
 
   stufe$ = this.select('basics').pipe(map((d) => d.stufe));
 
@@ -100,10 +102,6 @@ export class AppQuery extends Query<AppState> {
   }
 
   hasCredentials = () => this.getValue().credentials !== null;
-
-  public hasVertretungsplanCached(): boolean {
-    return !!this.getValue().basics.vertretungsplan;
-  }
 
 }
 // tslint:disable-next-line:no-shadowed-variable

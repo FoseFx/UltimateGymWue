@@ -44,9 +44,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (!this.appQuery.getValue().loginData) { return; } // only for the tests, guard should not allow this
-    if (this.appQuery.hasVertretungsplanCached()) {
-      return;
-    }
     this.loading = true;
     this.http.get(environment.urls.getVertretung + this.appQuery.getValue().basics.stufe, {
       headers: {
