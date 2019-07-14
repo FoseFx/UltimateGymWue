@@ -1,5 +1,5 @@
 
-<div>
+<div [@snackbarState]="snackbarService.snackState$ | async">
   <span>
   {{snackbarService.getNewSnackbar().type === 'note' ? '📝' : snackbarService.getNewSnackbar().type === 'warning' ? '⚠️' : '❗'}}
     {{snackbarService.getNewSnackbar().msg}}

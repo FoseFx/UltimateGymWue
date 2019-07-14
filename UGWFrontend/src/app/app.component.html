@@ -1,5 +1,5 @@
 <app-toolbar></app-toolbar>
 <app-menu></app-menu>
 
-<app-snackbar *ngIf="snackbarService.snackQueue.length !== 0"></app-snackbar>
+<app-snackbar *ngIf="snackbarService.snackQueue.length !== 0" [@snackbarState]="snackbarService.snackQueue.length !== 0 ? 'visible' : 'invisible'"></app-snackbar>
 <router-outlet></router-outlet>
