@@ -23,5 +23,18 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "vdcache",
+      "urls": ["*/api/basics/vp/*"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": "2",
+        "maxAge": "12h",
+        "timeout": "5s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
