@@ -379,15 +379,6 @@ describe('AppQuery', () => {
     expect(query.credentialsToken).toEqual('Bearer this is a test');
   });
 
-
-  it('should test hasVertretungsplanCached', () => {
-    const query: AppQuery = TestBed.get(AppQuery);
-    const spy = spyOn(query, 'getValue').and.returnValue({basics: {vertretungsplan: 'this is a test'}});
-    expect(query.hasVertretungsplanCached()).toEqual(true);
-    spy.and.returnValue({basics: {}});
-    expect(query.hasVertretungsplanCached()).toEqual(false);
-  });
-
   describe('basicHiddenNonKurseMap', () => {
     it('should return basicHiddenNonKurse', (done) => {
       // @ts-ignore

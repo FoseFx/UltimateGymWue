@@ -91,7 +91,8 @@ export class AppService {
         stundenplan: sp,
         stundenplanWithInfos: sp,
         vertretungsplan: null,
-        hiddenNonKurse: []
+        hiddenNonKurse: [],
+        vdFetchedAt: null
       }
     });
     this._save();
@@ -130,6 +131,10 @@ export class AppService {
         });
       }
     });
+    if (basics.vertretungsplan[2]) {
+      basics.vdFetchedAt = new Date(+basics.vertretungsplan[2].infos * 1000);
+    }
+
     basics.stundenplanWithInfos = newPlan;
     this.store.update({
       basics
@@ -192,6 +197,7 @@ export class AppService {
     if (obj.basics) {
       delete obj.basics.stundenplanWithInfos;
       delete obj.basics.vertretungsplan;
+      delete obj.basics.vdFetchedAt;
     }
     localStorage.setItem('app_state', JSON.stringify(obj));
   }

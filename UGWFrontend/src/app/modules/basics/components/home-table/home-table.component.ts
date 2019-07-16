@@ -16,6 +16,7 @@ export class HomeTableComponent implements OnInit {
   @Input() abWoche: 0|1;
   @Input() stufe: string;
   @Input() showSpinner = false;
+  @Input() fetchedAt = null;
   Svd: VertretungsPlanSeite = null;
   noVDFound = false;
 

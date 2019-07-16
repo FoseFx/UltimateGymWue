@@ -52,6 +52,7 @@ export class AppStoreBasics {
   stundenplan: TimeTable;
   stundenplanWithInfos: TimeTable;
   vertretungsplan: VertretungsPlanSeite[];
+  vdFetchedAt: Date;
   hiddenNonKurse: string[];
 }
 

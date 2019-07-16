@@ -42,3 +42,5 @@
   [stufe]="stufe"
   [vertretungsdaten]="Svd">
 </app-stufe-vertretung>
+
+<p *ngIf="!showSpinner && fetchedAt !== null">Abgerufen um {{fetchedAt | date: 'hh:mm'}}</p>

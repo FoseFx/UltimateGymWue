@@ -262,7 +262,8 @@ describe('AppService', () => {
           stundenplan: 'sp',
           stundenplanWithInfos: 'sp',
           vertretungsplan: null,
-          hiddenNonKurse: []
+          hiddenNonKurse: [],
+          vdFetchedAt: null
         }
       });
     });

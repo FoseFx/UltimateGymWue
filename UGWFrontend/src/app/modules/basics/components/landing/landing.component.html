@@ -11,6 +11,7 @@
       [showSpinner]="loading"
       [vd]="appQuery.vertretungsDaten$ | async"
       [stufe]="appQuery.stufe$ | async"
+      [fetchedAt]="appQuery.fetchedAt$ | async"
     ></app-home-table>
   </app-tab-item>
   <!-- Next Day -->
@@ -23,6 +24,7 @@
       [showSpinner]="loading"
       [vd]="appQuery.vertretungsDaten$ | async"
       [stufe]="appQuery.stufe$ | async"
+      [fetchedAt]="appQuery.fetchedAt$ | async"
     ></app-home-table>
   </app-tab-item>
 </app-tab>
