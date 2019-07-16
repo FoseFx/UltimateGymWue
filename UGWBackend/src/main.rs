@@ -6,8 +6,6 @@ extern crate bcrypt;
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate serde_json;
 
-
-
 use rocket::Rocket;
 use std::path::PathBuf;
 use std::io::Cursor;
