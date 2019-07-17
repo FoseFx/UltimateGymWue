@@ -17,6 +17,11 @@
     <p class="hint">Dein Klarname kann von dir erstellten Ereignissen höhere Glaubwürdigkeit geben.</p>
 
     <br>
+    <label class="center-button">
+      <input type="checkbox" [checked]="allowTracking" (change)="allowTracking = !allowTracking">
+      Verhaltensanalyse zulassen, siehe <a routerLink="/setup/legal">Dateschutzerklärung</a>
+    </label>
+    <br>
     <app-button
       [accent]="true"
       class="center-button"

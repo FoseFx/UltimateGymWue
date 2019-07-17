@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, map, tap} from 'rxjs/operators';
 import {SetupService} from '../state/setup.service';
 import {Router} from '@angular/router';
+import {TrackingService} from '../../../services/tracking.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,9 @@ export class RegisterComponent implements OnInit {
   private nameValid: boolean;           // used in this file
   name$ = new BehaviorSubject('');
   private name: string;
-  constructor(private setupService: SetupService, private router: Router) { }
+  allowTracking = true;
+
+  constructor(private setupService: SetupService, private router: Router, public trackingService: TrackingService) { }
 
   ngOnInit() {
     const regex = /^[A-ZÜÄÖ][a-züäöß]+ [A-ZÜÄÖ][a-züäöß]+$/;
@@ -38,6 +41,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.setupService.lockName(this.name);
+    if (this.allowTracking) {
+      this.trackingService.giveConsent();
+    } else {
+      this.trackingService.revokeConsent();
+    }
     if (type === 'normal') {
       this.router.navigate(['/setup/register/normal']);
     } else if (type === 'google') {

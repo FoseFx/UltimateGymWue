@@ -7,6 +7,8 @@ import {SetupService} from '../state/setup.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NormalComponent} from './normal/normal.component';
 import {SetupQuery} from '../state/setup.query';
+import {TrackingService} from '../../../services/tracking.service';
+import {SnackbarService} from '../../../services/snackbar.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -20,7 +22,7 @@ describe('RegisterComponent', () => {
     ])
     ],
       declarations: [ RegisterComponent, NormalComponent, RegisterComponent ],
-      providers: [SetupStore, SetupService, SetupQuery]
+      providers: [SetupStore, SetupService, SetupQuery, TrackingService, SnackbarService]
     })
     .compileComponents();
   }));
@@ -87,7 +89,8 @@ describe('RegisterComponent', () => {
 
     it('should lock full name, when valid', () => {
       inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
-
+        spyOn(component.trackingService, 'giveConsent');
+        spyOn(component.trackingService, 'revokeConsent');
         const spy = spyOn(service, 'lockName');
         spy.and.callFake((val: string) => {
           expect(val).toEqual('Some Name');
@@ -105,7 +108,8 @@ describe('RegisterComponent', () => {
 
     it('should not lock full name, when not valid', () => {
       inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
-
+        spyOn(component.trackingService, 'giveConsent');
+        spyOn(component.trackingService, 'revokeConsent');
         const spy = spyOn(service, 'lockName');
         spy.and.callFake((val: string) => {
           expect(val).toEqual('Somename');
@@ -117,6 +121,38 @@ describe('RegisterComponent', () => {
         component.onClick('normal');
         expect(service.lockName).not.toHaveBeenCalled();
 
+      }))();
+    });
+
+    it('should revoke consent', () => {
+      inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
+        const gSpy = spyOn(component.trackingService, 'giveConsent');
+        const rSpy = spyOn(component.trackingService, 'revokeConsent');
+        const spy = spyOn(service, 'lockName');
+        // @ts-ignore
+        component.name = 'Some Name';
+        component.allowTracking = false;
+        // @ts-ignore
+        component.nameValid = true;
+        component.onClick('normal');
+        expect(rSpy).toHaveBeenCalled();
+        expect(gSpy).not.toHaveBeenCalled();
+      }))();
+    });
+
+    it('should give consent', () => {
+      inject([SetupStore, SetupService], ((store: SetupStore, service: SetupService) => {
+        const gSpy = spyOn(component.trackingService, 'giveConsent');
+        const rSpy = spyOn(component.trackingService, 'revokeConsent');
+        const spy = spyOn(service, 'lockName');
+        // @ts-ignore
+        component.name = 'Some Name';
+        component.allowTracking = true;
+        // @ts-ignore
+        component.nameValid = true;
+        component.onClick('normal');
+        expect(gSpy).toHaveBeenCalled();
+        expect(rSpy).not.toHaveBeenCalled();
       }))();
     });
 

@@ -9,6 +9,11 @@
     <app-input #password  type="password" (enter)="onSubmit(email, password)">Passwort</app-input>
 
     <br>
+    <label class="center-button">
+      <input type="checkbox" [checked]="allowTracking" (change)="allowTracking = !allowTracking">
+      Verhaltensanalyse zulassen, siehe <a routerLink="/setup/legal">Dateschutzerklärung</a>
+    </label>
+    <br>
     <app-button
       [accent]="true"
       (click)="onSubmit(email, password)"
