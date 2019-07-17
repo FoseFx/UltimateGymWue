@@ -12,11 +12,16 @@ export class TrackingService {
   constructor(public snackbarService: SnackbarService) { }
 
   giveConsent() {
-    window._paq.push(['rememberConsentGiven']);
+    if (window._paq) {
+      window._paq.push(['rememberConsentGiven']);
+      this.snackbarService.addSnackbar('Das Sammeln von Verhaltensdaten wurde erlaubt', 500, 'note');
+    }
   }
 
   revokeConsent() {
-    window._paq.push(['forgetConsentGiven']);
-    this.snackbarService.addSnackbar('Das Sammeln von Verhaltensdaten wurde gestoppt.', 2000, 'warning');
+    if (window._paq) {
+      window._paq.push(['forgetConsentGiven']);
+      this.snackbarService.addSnackbar('Das Sammeln von Verhaltensdaten wurde gestoppt.', 2000, 'warning');
+    }
   }
 }

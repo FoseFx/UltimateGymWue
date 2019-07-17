@@ -4,6 +4,7 @@ import {LoginService} from './login.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {handleError} from 'src/app/util';
+import {TrackingService} from '../../../services/tracking.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,9 @@ export class LoginComponent implements OnDestroy {
   subs: Subscription[] = [];
   error: string = null;
   loading = false;
+  allowTracking = true;
 
-  constructor(public loginService: LoginService, public router: Router) { }
+  constructor(public loginService: LoginService, public router: Router, public trackingService: TrackingService) { }
 
 
   allow(email: InputComponent, password: InputComponent) {
@@ -28,6 +30,11 @@ export class LoginComponent implements OnDestroy {
       return;
     }
     this.loading = true;
+    if (this.allowTracking) {
+      this.trackingService.giveConsent();
+    } else {
+      this.trackingService.revokeConsent();
+    }
 
     this.subs.push(
       this.loginService.normalLogin(email.value, password.value)

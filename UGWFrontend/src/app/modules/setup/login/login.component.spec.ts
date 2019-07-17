@@ -9,7 +9,9 @@ import {AppService} from '../../../state/app.service';
 import {AppStore} from '../../../state/app.store';
 import {AppQuery} from '../../../state/app.query';
 import {RouterTestingModule} from '@angular/router/testing';
-import {fromEvent, of} from "rxjs";
+import {fromEvent, of} from 'rxjs';
+import {TrackingService} from '../../../services/tracking.service';
+import {SnackbarService} from '../../../services/snackbar.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +21,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [UiModule, HttpClientModule, RouterTestingModule],
-      providers: [LoginService, AppService, AppQuery, AppStore ]
+      providers: [LoginService, AppService, AppQuery, AppStore, SnackbarService, TrackingService ]
     })
     .compileComponents();
   }));
@@ -155,6 +157,8 @@ describe('LoginComponent', () => {
 
   describe('onsubmit', () => {
     it('should return without changes when not allowed', () => {
+      const giveSpy = spyOn(component.trackingService, 'giveConsent');
+      const revokeSpy = spyOn(component.trackingService, 'revokeConsent');
       component.subs = [];
       component.loading = false;
       // @ts-ignore
@@ -162,7 +166,9 @@ describe('LoginComponent', () => {
       expect(component.loading).toEqual(false);
       expect(component.subs).toEqual([]);
     });
-    it('should set laod to true and add normalLogin subscriptio', () => {
+    it('should set load to true and add normalLogin subscription', () => {
+      const giveSpy = spyOn(component.trackingService, 'giveConsent');
+      const revokeSpy = spyOn(component.trackingService, 'revokeConsent');
       component.subs = [];
       component.loading = false;
       spyOn(component, 'route').and.callFake(() => {});
@@ -173,6 +179,28 @@ describe('LoginComponent', () => {
       expect(component.loading).toEqual(true);
       expect(component.subs.length).toEqual(1);
       expect(spy).toHaveBeenCalled();
+    });
+    it('should give consent', () => {
+      const giveSpy = spyOn(component.trackingService, 'giveConsent');
+      const revokeSpy = spyOn(component.trackingService, 'revokeConsent');
+      component.allowTracking = true;
+      const o1 = {invalid: false, value: 'odkasokda'};
+      const o2 = {invalid: false, value: 'sdak'};
+      // @ts-ignore
+      component.onSubmit(o1, o2);
+      expect(giveSpy).toHaveBeenCalled();
+      expect(revokeSpy).not.toHaveBeenCalled();
+    });
+    it('should revoke consent', () => {
+      const giveSpy = spyOn(component.trackingService, 'giveConsent');
+      const revokeSpy = spyOn(component.trackingService, 'revokeConsent');
+      component.allowTracking = false;
+      const o1 = {invalid: false, value: 'odkasokda'};
+      const o2 = {invalid: false, value: 'sdak'};
+      // @ts-ignore
+      component.onSubmit(o1, o2);
+      expect(giveSpy).not.toHaveBeenCalled();
+      expect(revokeSpy).toHaveBeenCalled();
     });
   });
 
