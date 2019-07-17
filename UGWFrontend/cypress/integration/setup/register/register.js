@@ -4,7 +4,7 @@ describe("register component", () => {
 
     beforeEach(() => {
         cy.visit("http://localhost:4200/setup/register");
-        cy.get("app-input").get("input").as("name");
+        cy.get("app-input").get("input").eq(0).as("name");
         cy.get("app-button").eq(0).as("normalbtn");
         cy.get("app-button").eq(1).as("googlebtn");
         cy.get("app-button").eq(2).as("instabtn");

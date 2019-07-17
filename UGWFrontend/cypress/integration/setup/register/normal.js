@@ -9,7 +9,7 @@ describe("register component", () => {
     });
     it("should allow, when directed here and show input", () => {
       cy.visit("http://localhost:4200/setup/register");
-      cy.get("app-input").get("input").type("Some Test");
+      cy.get("app-input").get("input").eq(0).type("Some Test");
       cy.wait(300);
       cy.get("app-button").eq(0).click();
       cy.url().should("equal", "http://localhost:4200/setup/register/normal");
@@ -54,7 +54,7 @@ describe("register component", () => {
       }).as("backendStub");
 
       cy.visit("http://localhost:4200/setup/register");
-      cy.get("app-input").get("input").type("Some Test");
+      cy.get("app-input").get("input").eq(0).type("Some Test");
       cy.wait(300);
       cy.get("app-button").eq(0).click();
     });
