@@ -30,9 +30,9 @@
       "urls": ["*/api/basics/vp/*"],
       "version": 1,
       "cacheConfig": {
-        "maxSize": "2",
+        "maxSize": 1,
         "maxAge": "12h",
-        "timeout": "5s",
+        "timeout": "10s",
         "strategy": "freshness"
       }
     }
