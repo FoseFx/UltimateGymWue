@@ -4,6 +4,7 @@ import {SnackbarService} from './snackbar.service';
 declare global {
   interface Window {
     _paq: string[][];
+    PushManager: PushManager;
   }
 }
 @Injectable()
