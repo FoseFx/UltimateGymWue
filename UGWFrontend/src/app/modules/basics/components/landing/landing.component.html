@@ -12,6 +12,7 @@
       [vd]="appQuery.vertretungsDaten$ | async"
       [stufe]="appQuery.stufe$ | async"
       [fetchedAt]="appQuery.fetchedAt$ | async"
+      [online]="hasNtwkService.isOnline$ | async"
     ></app-home-table>
   </app-tab-item>
   <!-- Next Day -->
@@ -25,6 +26,7 @@
       [vd]="appQuery.vertretungsDaten$ | async"
       [stufe]="appQuery.stufe$ | async"
       [fetchedAt]="appQuery.fetchedAt$ | async"
+      [online]="hasNtwkService.isOnline$ | async"
     ></app-home-table>
   </app-tab-item>
 </app-tab>

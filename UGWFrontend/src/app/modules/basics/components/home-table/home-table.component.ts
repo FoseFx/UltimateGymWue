@@ -17,6 +17,7 @@ export class HomeTableComponent implements OnInit {
   @Input() stufe: string;
   @Input() showSpinner = false;
   @Input() fetchedAt = null;
+  @Input() online = true;
   Svd: VertretungsPlanSeite = null;
   noVDFound = false;
 

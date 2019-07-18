@@ -8,6 +8,7 @@ import {BasicsQuery} from '../../state/basics.query';
 import {BasicsService} from '../../state/basics.service';
 import {KeyService} from '../../../../services/key.service';
 import {Subscription} from 'rxjs';
+import {HasNetworkService} from '../../../../services/has-network.service';
 
 @Component({
   selector: 'app-landing',
@@ -22,6 +23,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
               private appService: AppService,
               private http: HttpClient,
               public basicsQuery: BasicsQuery,
+              public hasNtwkService: HasNetworkService,
               private basicsService: BasicsService,
               private keyService: KeyService) { }
 

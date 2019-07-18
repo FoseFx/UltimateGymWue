@@ -29,6 +29,8 @@
   </tbody>
 </table>
 
+<p *ngIf="!online"><b>Achtung: Offline</b></p>
+
 <p *ngIf="showSpinner">Lade...</p>
 
 <p *ngIf="noVDFound">Noch kein Vertretungsplan verfügbar.</p>

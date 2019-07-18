@@ -15,6 +15,8 @@ import {UnhtmlPipe} from '../stufe-vertretung/unhtml.pipe';
 import {ExtractStyleTagsPipe} from '../stufe-vertretung/extract-style-tags.pipe';
 import {BasicsPopupComponent} from '../basics-popup/basics-popup.component';
 import {KeyService} from '../../../../services/key.service';
+import {HasNetworkService} from '../../../../services/has-network.service';
+import {SnackbarService} from '../../../../services/snackbar.service';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -30,7 +32,7 @@ describe('LandingComponent', () => {
         UnhtmlPipe,
         ExtractStyleTagsPipe,
         BasicsPopupComponent],
-      providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService, KeyService]
+      providers: [AppQuery, AppStore, AppService, BasicsStore, BasicsQuery, BasicsService, KeyService, SnackbarService, HasNetworkService]
     })
     .compileComponents();
   }));
