@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
+import {SwPush} from '@angular/service-worker';
 
 @Injectable()
 export class NotificationService {
 
   navRef = navigator;
   windowRef = window;
-  constructor() {}
+  constructor(public swPush: SwPush) {}
 
   hasSW() {
     return !!this.navRef.serviceWorker;
@@ -15,27 +17,15 @@ export class NotificationService {
     return !!this.windowRef.PushManager;
   }
 
-  async getSWReg(): Promise<ServiceWorkerRegistration> {
-    if (this.hasSW()) {
-      return this.navRef.serviceWorker.getRegistration();
-    }
-    return null;
-  }
-
-  async getPushManager(): Promise<PushManager> {
-    const swr = await this.getSWReg();
-    if (swr === null) {
-      return null;
-    }
-    return swr.pushManager;
-  }
-
   async subscribeToPush() {
-    const pm = await this.getPushManager();
-    const sub = await pm.subscribe({
-      userVisibleOnly: true
-    });
-    console.log(sub);
+    try {
+      const sub = await this.swPush.requestSubscription({
+        serverPublicKey: environment.pushPublicKey
+      });
+      // todo send to server
+    } catch (e) {
+      console.error('Could not subscribe', e);
+    }
   }
 
 }
