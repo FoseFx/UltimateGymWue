@@ -1,10 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {isLoggedIn, MenuComponent, tru} from './menu.component';
+import {isLoggedIn, isLoggedInAndHasPushSupport, MenuComponent, tru} from './menu.component';
 import {AppStore} from '../../state/app.store';
 import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';
 import {RouterTestingModule} from '@angular/router/testing';
+import {NotificationService} from '../../services/notification.service';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -17,7 +18,8 @@ describe('MenuComponent', () => {
       providers: [
         AppStore,
         AppQuery,
-        AppService
+        AppService,
+        NotificationService
       ]
     })
     .compileComponents();
@@ -44,6 +46,20 @@ describe('MenuComponent', () => {
 
     expect(isLoggedIn(comp1)).toEqual(true);
     expect(isLoggedIn(comp2)).toEqual(false);
+  });
+  it('should return pushSupportAndLoginStatus', () => {
+    // @ts-ignore
+    const comp1: MenuComponent = {query: {isLoginned: () => true}, notificationService: {canPush: () => true}};
+    expect(isLoggedInAndHasPushSupport(comp1)).toEqual(true);
+    // @ts-ignore
+    const comp2: MenuComponent = {query: {isLoginned: () => false}, notificationService: {canPush: () => true}};
+    expect(isLoggedInAndHasPushSupport(comp2)).toEqual(false);
+    // @ts-ignore
+    const comp3: MenuComponent = {query: {isLoginned: () => true}, notificationService: {canPush: () => false}};
+    expect(isLoggedInAndHasPushSupport(comp3)).toEqual(false);
+    // @ts-ignore
+    const comp4: MenuComponent = {query: {isLoginned: () => false}, notificationService: {canPush: () => false}};
+    expect(isLoggedInAndHasPushSupport(comp4)).toEqual(false);
   });
 
 });

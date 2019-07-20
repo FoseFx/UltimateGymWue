@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LandingComponent} from './components/landing/landing.component';
 import {TimetableComponent} from './components/timetable/timetable.component';
 import {HiddenNonKurseComponent} from './components/hidden-non-kurse/hidden-non-kurse.component';
+import {NotificationComponent} from './components/notification/notification.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'hide',
     component: HiddenNonKurseComponent
+  },
+  {
+    path: 'notification',
+    component: NotificationComponent
   }
 ];
 
