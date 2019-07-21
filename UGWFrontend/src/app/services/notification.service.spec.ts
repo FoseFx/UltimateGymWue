@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { NotificationService } from './notification.service';
+import {of} from 'rxjs';
 
 describe('NotificationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -10,6 +11,16 @@ describe('NotificationService', () => {
   it('should be created', () => {
     const service: NotificationService = TestBed.get(NotificationService);
     expect(service).toBeTruthy();
+  });
+
+  it('should subscribe to changes', () => {
+    const mockObj = {
+      subscription: of('someTest')
+    };
+    // @ts-ignore
+    const service = new NotificationService(mockObj);
+    expect(service).toBeTruthy();
+    expect(service.subscription).toEqual('someTest');
   });
 
   it('should tell if service worker is existent', () => {
