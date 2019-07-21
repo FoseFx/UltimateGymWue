@@ -100,6 +100,7 @@ fn rocket() -> Rocket {
                 basics::set::set_basics,
                 basics::stundenplan::get_sp,
                 basics::vertretungsplan::get_vertretungsplan,
+                basics::notifications::collect_subscription::add_subscription_handler,
                 events::month::get_months_events,
                 events::add_event::put_add_event
 
