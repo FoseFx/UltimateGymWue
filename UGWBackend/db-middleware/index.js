@@ -74,6 +74,9 @@ http.createServer((req, res) => {
   if (/^\/getEvents\/.*$/.test(req.url)) {
    return getEvents(req, res);
  }
+ if (/^\/newPushSub\/.*$/.test(req.url)) {
+   return newPushSub(req, res);
+ }
 
   res.statusCode = 404;
   res.end();
@@ -469,4 +472,20 @@ async function getEvents(req, res) {
     return;
   }
 
+}
+
+async function newPushSub(req, res) {
+  let base = req.url.replace("/newPushSub/", "").replace("/", "");
+  let as_string = Buffer.from(base, 'base64').toString('ascii');
+  let as_obj = JSON.parse(as_string);
+  const uid = as_obj.uid;
+  const sub = as_obj.sub;
+  try {
+    const ref = await db.collection('pushSubscriptions').doc(uid).set(sub);
+    res.end("Ok");
+  } catch (e) {
+    console.error(e);
+    res.statusCode = 501;
+    res.end("error");
+  }
 }
