@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-menu',
@@ -37,7 +38,7 @@ export class MenuComponent {
 
   comp = this;
 
-  constructor(public query: AppQuery, public service: AppService) { }
+  constructor(public query: AppQuery, public service: AppService, public notificationService: NotificationService) { }
   // tslint:disable-next-line
   menuItems = [
     {name: 'Home', icon: 'home', route: '/', cond: tru},
@@ -45,10 +46,12 @@ export class MenuComponent {
     {name: 'Stundenplan', icon: 'date_range', route: '/basics/stundenplan', cond: isLoggedIn},
     {name: 'Kalender', icon: 'event', route: '/calendar', cond: isLoggedIn},
     {name: 'Klausuren', icon: 'assignment', route: '/setup/basics/klausuren', cond: isLoggedIn},
-    {name: 'Versteckte Stunden', icon: 'not_interested', route: '/basics/hide', cond: isLoggedIn}
+    {name: 'Versteckte Stunden', icon: 'not_interested', route: '/basics/hide', cond: isLoggedIn},
+    {name: 'Benachrichtigungen', icon: 'textsms', route: '/basics/notification', cond: isLoggedInAndHasPushSupport},
   ];
 
 }
 
 export const isLoggedIn = (ctx: MenuComponent) => ctx.query.isLoginned();
 export const tru = (...args) => true;
+export const isLoggedInAndHasPushSupport = (ctx: MenuComponent) => isLoggedIn(ctx) && ctx.notificationService.canPush();

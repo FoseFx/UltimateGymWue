@@ -10,6 +10,7 @@ import {AppService} from './state/app.service';
 import {SnackbarComponent} from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NotificationService} from './services/notification.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -29,7 +30,8 @@ describe('AppComponent', () => {
         AppStore,
         AppQuery,
         AppService,
-        SnackbarService
+        SnackbarService,
+        NotificationService
       ]
     }).compileComponents();
   }));

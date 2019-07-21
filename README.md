@@ -6,14 +6,16 @@ The Ultimate Tool for the Students of my School.
 1. Make sure you have a firebase project setup. 
 2. Download it's `service_account.json` and copy it to `./UGWBackend/db-middleware/service_account.json`
 3. Make sure Docker and Docker-compose are installed
-4. Run `docker-compose build` and `docker-compose up` with the following environment variables:
+4. Run `cd UGWBackend && docker-compose build` and `docker-compose up` with the following environment variables:
     - SECRET - used to sign JWTs
     - MAIL_JET_USER
     - MAIL_JET_KEY
     - REDIS_PATH = `redis://cache:6379/`
     - INSTA_CID
     - INSTA_SECRET
-5. Make sure the frontend is hosted somewhere with 404 redirects to `index.html` and points to the backend in `environment.prod.ts`.
+5. Edit `UGWFrontend/src/environments/environment.prod.ts` to replace `pushPublicKey` with the VAPID PUBLIC KEY you see as output. Make sure the URLs point to your backend.
+6. run `ng build --prod` 
+7. Make sure the frontend (in `UGW/Frontend/dist`) is hosted somewhere with 404 redirects to `index.html`..
 
 ## When running in development:
 - Make sure you set the correct values in the `main.rs` file

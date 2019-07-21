@@ -19,7 +19,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {KeyService} from './services/key.service';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
-import {TrackingService} from "./services/tracking.service";
+import {TrackingService} from './services/tracking.service';
+import {NotificationService} from './services/notification.service';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -46,7 +47,8 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     NeedsSetupGuard,
     KeyService,
     SnackbarService,
-    TrackingService
+    TrackingService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

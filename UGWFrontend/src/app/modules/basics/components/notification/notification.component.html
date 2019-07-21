@@ -1,0 +1,24 @@
+
+<app-card>
+
+  <app-card-header>Benachrichtigungen</app-card-header>
+
+  <ng-template [ngIf]="notificationService.canPush()" [ngIfElse]="elseBlock">
+    <p class="center-text">Werde informiert, sobald der UGW Server Veränderungen bezüglich deinem Vertretungsplan erfasst.</p>
+    <app-button
+      *ngIf="!notificationService.isSubscribed()"
+      (click)="notificationService.subscribeToPush()"
+      class="center-button">
+      Benachrichtigungen aktivieren
+    </app-button>
+    <p *ngIf="notificationService.isSubscribed()">
+      Status: Du wirst über Veränderungen benachrichtigt!
+    </p>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <h2>Dieser Browser unterstützt Push Benachrichtigungen nicht.</h2>
+  </ng-template>
+
+
+</app-card>

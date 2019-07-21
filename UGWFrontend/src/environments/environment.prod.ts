@@ -20,5 +20,6 @@ export const environment = {
     getVertretung: `${backendHost}/api/basics/vp/`,
     removeAccount: `${backendHost}/api/auth/closeAccount`,
     getEvents: `${backendHost}/api/events/`
-  }
+  },
+  pushPublicKey: ''
 };

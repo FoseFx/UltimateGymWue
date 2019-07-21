@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:pwa": "ng build --prod && http-server-spa dist/UGWFrontend index.html 8080",
+    "start:pwa": "ng build --prod && npm run spa-server",
+    "spa-server": "http-server-spa dist/UGWFrontend index.html 8080",
     "build": "ng build",
     "test": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
     "lint": "ng lint",
