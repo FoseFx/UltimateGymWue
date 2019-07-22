@@ -1,6 +1,5 @@
 version: '3'
 services:
-
   db:
     build: ./db-middleware
     environment:
@@ -25,3 +24,6 @@ services:
     ports: 
     - "6379"
     image: "redis:alpine"
+  push:
+    build: ./push-service
+    depends_on: backend
