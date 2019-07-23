@@ -11,6 +11,7 @@ import {SnackbarComponent} from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NotificationService} from './services/notification.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,8 +19,9 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         UiModule,
-        BrowserAnimationsModule
-      ],
+        BrowserAnimationsModule,
+        HttpClientTestingModule
+  ],
       declarations: [
         AppComponent,
         ToolbarComponent,

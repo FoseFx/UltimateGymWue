@@ -6,3 +6,4 @@ pub mod kurse;
 pub mod set;
 pub mod stundenplan;
 pub mod vertretungsplan;
+pub mod notifications;
