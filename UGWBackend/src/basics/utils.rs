@@ -8,12 +8,23 @@ pub struct BasicCreds {
     pub schueler: BasicCredsWrapper,
     pub lehrer: Option<BasicCredsWrapper>
 }
+impl Clone for BasicCreds {
+    fn clone(&self) -> Self {
+        return BasicCreds {schueler: self.schueler.clone(), lehrer: self.lehrer.clone()};
+    }
+}
 
 #[derive(Serialize,Deserialize)]
 #[derive(Debug)]
 pub struct BasicCredsWrapper {
     pub username: String,
     pub password: String
+}
+
+impl Clone for BasicCredsWrapper {
+    fn clone(&self) -> Self {
+        return BasicCredsWrapper {username: self.username.clone(), password: self.password.clone()};
+    }
 }
 
 impl BasicCredsWrapper {

@@ -14,6 +14,7 @@ use crate::basics::utils::BasicCredsWrapper;
 use redis::RedisResult;
 use crate::redis::Commands;
 use std::time::{SystemTime, UNIX_EPOCH};
+use crate::basics::notifications::get_vd_diff::OLD_VD;
 
 /* This route will return an array of {info, vp} objects. The first two are for the two visible pages. the third contains the date when the information was fetched at */
 #[get("/basics/vp/<stufe>")]
@@ -68,7 +69,7 @@ pub fn get_vertretungsplan(_user: AuthGuard,
     return CustomResponse::data(json!(returnVec));
 }
 
-fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<Vec<JsonValue>>, Box<dyn std::error::Error>> {
+pub fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, secret: &String, redis: &redis::Connection) -> Result<Vec<Vec<JsonValue>>, Box<dyn std::error::Error>> {
 
     let redis_get_res: RedisResult<String> = redis.get("vertretungsplan");
 
@@ -104,7 +105,11 @@ fn get_the_vertretungsplan(db_url: &String, schueler_creds: &BasicCredsWrapper, 
     result.push(vec![JsonValue(json!(date_str))]);
 
     let txt = serde_json::to_string(&json!(result))?;
-    let _res: RedisResult<String> = redis.set_ex("vertretungsplan", txt, 60 * 5);
+    let _res: RedisResult<String> = redis.set_ex("vertretungsplan", &txt, 60 * 5);
+    unsafe {
+        println!("{}", &txt);
+        OLD_VD = Some(txt);
+    }
 
     return Ok(result);
 

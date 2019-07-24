@@ -1,3 +1,4 @@
+use crate::VALID_AUTH_PL;
 use crate::basics::utils::{BasicCredsWrapper, BasicCreds};
 use rocket::{Request, State};
 use rocket::request::Outcome;
@@ -17,6 +18,7 @@ pub enum HasCredsGuardError {
     Invalid
 }
 
+
 impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for HasCredsGuard {
     type Error = HasCredsGuardError;
 
@@ -33,7 +35,9 @@ impl<'a, 'r> rocket::request::FromRequest<'a, 'r> for HasCredsGuard {
                     println!("err: {:?}", claim);
                     return rocket::Outcome::Failure((rocket::http::Status::Unauthorized, HasCredsGuardError::Invalid));               
                 }
-                return rocket::Outcome::Success( HasCredsGuard {token: auth_headers[0].to_string(), pl: claim.unwrap()} );
+                let pl = claim.unwrap();
+                save_valid_creds(&pl);
+                return rocket::Outcome::Success( HasCredsGuard {token: auth_headers[0].to_string(), pl} );
             }
             return rocket::Outcome::Failure((rocket::http::Status::Unauthorized, HasCredsGuardError::Invalid));
         }
@@ -82,4 +86,13 @@ pub fn get_claim(header: &str, secret: &String) -> Result<BasicCreds, String> {
     };
 
     return Ok(ret);
+}
+
+fn save_valid_creds(pl: &BasicCreds) {
+    let copy: BasicCreds = pl.clone();
+    unsafe {
+        if VALID_AUTH_PL.is_none() {
+            VALID_AUTH_PL = Some(copy);
+        }
+    }
 }

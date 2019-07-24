@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b99ac23c-d8b7-4cbf-9d5c-d76b2be8f7a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/basics/notifications/get_vd_diff.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/db-middleware/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basics/notifications/collect_subscription.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/notifications/collect_subscription.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/push-service/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/push-service/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/guards.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/guards.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/notifications/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/notifications/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/utils.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/basics/vertretungsplan.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,34 +26,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/basics/notifications/collect_subscription.rs">
+        <entry file="file://$PROJECT_DIR$/src/basics/notifications/get_vd_diff.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="170">
+              <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db.rs">
+        <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="50" selection-start-line="50" selection-end-line="51" />
-              <folding>
-                <element signature="n#!!block;n#exists_insta_account#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="102" column="85" selection-start-line="102" selection-start-column="85" selection-end-line="102" selection-end-column="85" />
-              <folding>
-                <element signature="n#!!block;n#cors#0" />
-              </folding>
+            <state relative-caret-position="348">
+              <caret line="111" column="5" lean-forward="true" selection-start-line="111" selection-start-column="5" selection-end-line="111" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -113,7 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/auth/normal/mod.rs" />
         <option value="$PROJECT_DIR$/src/auth/normal/email.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/google.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/handler.rs" />
@@ -132,7 +121,6 @@
         <option value="$USER_HOME$/.local/share/JetBrains/Toolbox/apps/IDEA-U/ch-0/191.6707.61.vmoptions" />
         <option value="$PROJECT_DIR$/src/auth/jwt.rs" />
         <option value="$PROJECT_DIR$/src/redismw.rs" />
-        <option value="$PROJECT_DIR$/src/basics/guards.rs" />
         <option value="$PROJECT_DIR$/src/catcher.rs" />
         <option value="$PROJECT_DIR$/src/responses.rs" />
         <option value="$PROJECT_DIR$/src/auth/google/login/handler.rs" />
@@ -148,7 +136,6 @@
         <option value="$PROJECT_DIR$/Cargo.toml" />
         <option value="$PROJECT_DIR$/src/auth/normal/passw.rs" />
         <option value="$PROJECT_DIR$/src/basics/kurse.rs" />
-        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
         <option value="$PROJECT_DIR$/src/auth/guards.rs" />
         <option value="$PROJECT_DIR$/src/basics/stundenplan.rs" />
         <option value="$PROJECT_DIR$/warnings.txt" />
@@ -158,12 +145,15 @@
         <option value="$PROJECT_DIR$/src/events/mod.rs" />
         <option value="$PROJECT_DIR$/src/events/month.rs" />
         <option value="$PROJECT_DIR$/src/events/add_event.rs" />
-        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
         <option value="$PROJECT_DIR$/src/basics/mod.rs" />
-        <option value="$PROJECT_DIR$/src/basics/notifications/mod.rs" />
-        <option value="$PROJECT_DIR$/src/main.rs" />
         <option value="$PROJECT_DIR$/db-middleware/index.js" />
         <option value="$PROJECT_DIR$/src/basics/notifications/collect_subscription.rs" />
+        <option value="$PROJECT_DIR$/src/basics/utils.rs" />
+        <option value="$PROJECT_DIR$/src/main.rs" />
+        <option value="$PROJECT_DIR$/src/basics/guards.rs" />
+        <option value="$PROJECT_DIR$/src/basics/notifications/mod.rs" />
+        <option value="$PROJECT_DIR$/src/basics/vertretungsplan.rs" />
+        <option value="$PROJECT_DIR$/src/basics/notifications/get_vd_diff.rs" />
       </list>
     </option>
   </component>
@@ -182,7 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -190,11 +179,6 @@
             <path>
               <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UGWBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="db-middleware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UGWBackend" type="b2602c69:ProjectViewProjectNode" />
@@ -218,6 +202,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,17 +306,19 @@
       <workItem from="1563698688608" duration="1653000" />
       <workItem from="1563723610719" duration="36000" />
       <workItem from="1563723674007" duration="3491000" />
+      <workItem from="1563954515084" duration="9000" />
+      <workItem from="1563954551979" duration="6999000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171671000" />
+    <option name="totallyTimeSpent" value="178679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.20490928" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6746167" visible="true" weight="0.20917822" />
       <window_info id="Structure" order="1" sideWeight="0.3253833" side_tool="true" weight="0.16083151" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -394,13 +381,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/auth/google/login/mod.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/auth/google/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -571,13 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="31" column="127" selection-start-line="31" selection-start-column="127" selection-end-line="31" selection-end-column="127" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/stufen.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
@@ -616,16 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/guards.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="25" column="67" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#58#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,27 +669,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#35#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/basics/notifications/mod.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="29" selection-start-column="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -737,26 +683,6 @@
           <folding>
             <element signature="n#!!block;n#AddCredsRequest#0" />
             <element signature="n#!!block;n#is_cached#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="102" column="85" selection-start-line="102" selection-start-column="85" selection-end-line="102" selection-end-column="85" />
-          <folding>
-            <element signature="n#!!block;n#cors#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="50" selection-start-line="50" selection-end-line="51" />
-          <folding>
-            <element signature="n#!!block;n#exists_insta_account#0" />
           </folding>
         </state>
       </provider>
@@ -779,8 +705,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basics/notifications/collect_subscription.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="360">
+          <caret line="51" column="1" lean-forward="true" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="50" selection-start-line="50" selection-end-line="51" />
+          <folding>
+            <element signature="n#!!block;n#exists_insta_account#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/utils.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-304">
+          <caret line="12" column="87" selection-start-line="12" selection-start-column="87" selection-end-line="12" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!block;n#cors#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/guards.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="90" column="27" lean-forward="true" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!block;n#get_claim#0" />
+            <element signature="n#!!block;n#save_valid_creds#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/notifications/mod.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/vertretungsplan.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="111" column="5" lean-forward="true" selection-start-line="111" selection-start-column="5" selection-end-line="111" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/basics/notifications/get_vd_diff.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
         </state>
       </provider>
     </entry>

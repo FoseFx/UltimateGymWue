@@ -14,6 +14,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use std::process::Command;
 use std::env::vars;
 use std::error::Error;
+use crate::basics::utils::BasicCreds;
 
 pub struct SecretMgt(String);
 pub struct DBURL {url: String}
@@ -24,6 +25,7 @@ pub const EMAIL_DOMAIN: &'static str = "ugw.fosefx.com";
 pub const SERVER_HOST: &'static str = "https://ugw.fosefx.com/api";
 pub const GOOGLE_AUD: &'static str = "945920838122-ms73bj0tvdfcjijt1dqis687f98m167v.apps.googleusercontent.com";
 
+static mut VALID_AUTH_PL: Option<BasicCreds> = None;
 
 #[macro_export]
 macro_rules! error {
@@ -101,6 +103,7 @@ fn rocket() -> Rocket {
                 basics::stundenplan::get_sp,
                 basics::vertretungsplan::get_vertretungsplan,
                 basics::notifications::collect_subscription::add_subscription_handler,
+                basics::notifications::get_vd_diff::get_vd_diff,
                 events::month::get_months_events,
                 events::add_event::put_add_event
 
