@@ -27,7 +27,7 @@ spec:
         env:
         - name: REDIS_PATH
           value: redis://redis.ugw.svc.cluster.local:6379
-		- name: DB_HOST
+        - name: DB_HOST
           value: db.ugw.svc.cluster.local
         - name: SECRET
           valueFrom:  
