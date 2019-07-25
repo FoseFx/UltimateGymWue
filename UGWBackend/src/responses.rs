@@ -2,6 +2,7 @@ use rocket::{response, Response};
 use rocket::response::Responder;
 use std::io::Cursor;
 
+
 pub struct CustomResponse {
     err: bool,
     msg: Option<String>,

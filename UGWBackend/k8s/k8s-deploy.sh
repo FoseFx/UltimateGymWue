@@ -1,0 +1,1 @@
+kubectl apply --namespace=ugw -f k8s-deploy.yml
