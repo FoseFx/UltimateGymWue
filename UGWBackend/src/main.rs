@@ -116,17 +116,22 @@ fn rocket() -> Rocket {
 }
 
 fn get_db_url() -> DBURL {
+    let mut arg = "db".to_string();
     let mut isdev = false;
-    for (env_key, _val) in vars(){
+    for (env_key, val) in vars(){
         if env_key == "DEVELOPMENT" {
             isdev = true;
+        }
+        if env_key == "DB_HOST" {
+            arg = val;
         }
     }
     if isdev {
         return DBURL {url: format!("http://localhost:8080/")};
     }
+    println!("arg: {}", &arg);
     let outp = Command::new("nslookup")
-             .arg("db")
+             .arg(arg)
              .output()
              .expect("failed to execute process");
     let mut st = String::new();
