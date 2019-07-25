@@ -26,7 +26,9 @@ spec:
         - containerPort: 8000
         env:
         - name: REDIS_PATH
-          value: redis://db.ugw.svc.cluster.local:6379
+          value: redis://redis.ugw.svc.cluster.local:6379
+		- name: DB_HOST
+          value: db.ugw.svc.cluster.local
         - name: SECRET
           valueFrom:  
             secretKeyRef:
@@ -129,5 +131,19 @@ spec:
     app: ugw-db
   ports:
   - protocol: TCP
-    port: 8080
+    port: 8008
     targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: ClusterIP
+  selector:
+    app: ugw-redis
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+
