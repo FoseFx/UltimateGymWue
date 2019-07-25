@@ -6,6 +6,8 @@ import {AppQuery} from '../../state/app.query';
 import {AppService} from '../../state/app.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NotificationService} from '../../services/notification.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {SnackbarService} from 'src/app/services/snackbar.service';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -13,13 +15,14 @@ describe('MenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule],
       declarations: [ MenuComponent ],
       providers: [
         AppStore,
         AppQuery,
         AppService,
-        NotificationService
+        NotificationService,
+        SnackbarService
       ]
     })
     .compileComponents();

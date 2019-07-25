@@ -19,7 +19,8 @@ export const environment = {
     getStundenplan: `${backendHost}/api/basics/stundenplan`,
     getVertretung: `${backendHost}/api/basics/vp/`,
     removeAccount: `${backendHost}/api/auth/closeAccount`,
-    getEvents: `${backendHost}/api/events/`
+    getEvents: `${backendHost}/api/events/`,
+    newPushSub: `${backendHost}/api/basics/notifications/subscribe`
   },
   pushPublicKey: ''
 };
