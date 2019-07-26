@@ -42,9 +42,7 @@ pub fn get_vd_diff(redis: RedisConnection, secret: State<SecretMgt>, db_url: Sta
     }
     let vd_now = vd_now.unwrap();
     let diffed = diff(vd_old, vd_now);
-    println!("{:#?}", &diffed);
-
-    return CustomResponse::error("NIY".to_string(), Status::NotImplemented);
+    return CustomResponse::data(json!(diffed));
 }
 
 fn diff(then: Vec<Vec<JsonValue>>, now: Vec<Vec<JsonValue>>) -> Vec<Vec<JsonValue>> {
@@ -73,18 +71,133 @@ fn diff(then: Vec<Vec<JsonValue>>, now: Vec<Vec<JsonValue>>) -> Vec<Vec<JsonValu
 // d1 newer
 fn diff_day(day1: &Vec<JsonValue>, day2: &Vec<JsonValue>) -> Vec<JsonValue> {
     let mut diff_vec: Vec<JsonValue> = vec![];
-    // todo
+    // diff info box
+    {
+        let mut info_box_1 = day1.get(0).unwrap().as_array().unwrap().to_owned();
+        let mut info_box_2 = day2.get(0).unwrap().as_array().unwrap().to_owned();
+        // remove date
+        info_box_1.remove(0);
+        info_box_2.remove(0);
+        let (info_additions, info_removals) = diff_arrs(&info_box_1, &info_box_2);
+        // merge
+        let mut info_changes = vec![];
+        for addition in info_additions {
+            info_changes.push(format!("+\"{}\"", addition.as_str().unwrap()));
+        }
+        for removal in info_removals {
+            info_changes.push(format!("-\"{}\"", removal.as_str().unwrap()));
+        }
+        diff_vec.push(JsonValue::from(json!(info_changes)));
+    }
 
-    return diff_vec;;
+    // diff vd
+    {
+        let mut new_obj: std::collections::HashMap<String, serde_json::Value> = std::collections::HashMap::new();
+        let vd1 = day1.get(1).unwrap().as_object().unwrap();
+        let vd2 = day2.get(1).unwrap().as_object().unwrap();
+        let mut keys1: Vec<serde_json::Value> = vec![];
+        let mut keys2: Vec<serde_json::Value> = vec![];
+        for key in vd1.keys() {
+            keys1.push(json!(key));
+        }
+        for key in vd2.keys() {
+            keys2.push(json!(key));
+        }
+        let (added_keys, removed_keys) = diff_arrs(&keys1, &keys2);
+
+        let mut dont_diff = vec![];
+
+        for added in added_keys { // if key is new, add whole array to obj and dont diff later
+            let string = added.as_str().unwrap();
+            new_obj.insert(
+                string.to_string(),
+                vd1.get(string).unwrap().to_owned()
+            );
+            dont_diff.push(string.to_string());
+        }
+        for rmed in removed_keys { // if key is not in array anymore, add null to obj and dont diff later
+            let string = rmed.as_str().unwrap();
+            new_obj.insert(
+                string.to_string(),
+                serde_json::Value::Null
+            );
+            dont_diff.push(string.to_string());
+        }
+
+        let mut keys_to_diff: Vec<String> = vec![];
+        for key in keys1.iter().chain(keys2.iter()) {
+            let string = key.as_str().unwrap().to_string();
+            if !dont_diff.contains(&string) && !keys_to_diff.contains(&string) {
+                keys_to_diff.push(string);
+            }
+        }
+
+        // at this point keys_to_diff contains all keys that need diffing
+        // and all other keys are either fully or as null in obj
+
+        for key in keys_to_diff {
+            let (added_vd, rmmed_vd) = diff_arrs(
+                vd1.get(&key[..]).unwrap().as_array().unwrap(),
+                vd2.get(&key[..]).unwrap().as_array().unwrap()
+            );
+            let mut arr: Vec<serde_json::Value> = vec![];
+
+            if !added_vd.is_empty() {
+                for vd in added_vd {
+                    arr.push(vd.to_owned());
+                }
+            }
+            if !rmmed_vd.is_empty() {
+                for vd in rmmed_vd {
+                    let mut map = vd.as_object().unwrap().to_owned();
+                    map.insert("removed".to_string(), json!(true));
+                    arr.push(json!(map));
+                }
+            }
+            if !arr.is_empty() {
+                new_obj.insert(
+                    key,
+                    json!(arr)
+                );
+            }
+        }
+
+        diff_vec.push(JsonValue::from(json!(new_obj)));
+    }
+
+    return diff_vec;
 }
 
 
 fn get_date(day: &Vec<JsonValue>) -> &str {
-    return day.get(0).unwrap()
-        .as_array().unwrap()
-        .get(0).unwrap()
-        .as_object().unwrap()
-        .get("infos").unwrap()
-        .get(0).unwrap()
-        .as_str().unwrap();
+    let info = day.get(0).unwrap();
+    let info = info.as_array().unwrap();
+    let date = info.get(0).unwrap();
+    let date = date.as_str().unwrap();
+    return date;
+}
+
+// arr1 is older
+fn diff_arrs<'a, 'b>(arr2: &'b Vec<serde_json::Value>, arr1: &'a Vec<serde_json::Value>) -> (Vec<&'b serde_json::Value>, Vec<&'a serde_json::Value>) {
+    let mut new_vec = vec![];
+    let mut removed_vec = vec![];
+    for obj in arr2 { // n^2
+        if !array_contains(arr1, obj) {
+            new_vec.push(obj);
+        }
+    }
+    for obj in arr1 { // n^2
+        if !array_contains(arr2, obj) {
+            removed_vec.push(obj);
+        }
+    }
+    return (new_vec, removed_vec);
+}
+fn array_contains(arr: &Vec<serde_json::Value>, val: &serde_json::Value) -> bool {
+    for o in arr {
+        if o.eq(val) {
+            return true;
+        }
+    }
+    return false;
 }
