@@ -113,7 +113,6 @@ kind: Service
 metadata:
   name: ugw-expose-service
 spec:
-  type: NodePort
   selector:
     app: ugw-backend
   ports:
@@ -131,7 +130,7 @@ spec:
     app: ugw-db
   ports:
   - protocol: TCP
-    port: 8008
+    port: 8080
     targetPort: 8080
 ---
 apiVersion: v1
@@ -146,4 +145,19 @@ spec:
   - protocol: TCP
     port: 6379
     targetPort: 6379
-
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ugw-ingress
+  annotations:  
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: ugw-api.fosefx.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ugw-expose-service
+          servicePort: 8000
