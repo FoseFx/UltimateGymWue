@@ -4,13 +4,16 @@ import {CommonModule} from '@angular/common';
 import {CalendarRoutingModule} from './calendar-routing.module';
 import {MonthComponent} from './month/month.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ShowEventComponent } from './show-event/show-event.component';
+import {UiModule} from "../ui/ui.module";
 
 @NgModule({
-  declarations: [MonthComponent],
+  declarations: [MonthComponent, ShowEventComponent],
   imports: [
     CommonModule,
     CalendarRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    UiModule
   ]
 })
 export class CalendarModule { }

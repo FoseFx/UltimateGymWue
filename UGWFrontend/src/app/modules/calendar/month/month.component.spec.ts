@@ -6,6 +6,8 @@ import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {environment} from '../../../../environments/environment';
 import {of} from 'rxjs';
+import {ShowEventComponent} from '../show-event/show-event.component';
+import {UiModule} from '../../ui/ui.module';
 
 describe('MonthComponent', () => {
   let component: MonthComponent;
@@ -13,8 +15,8 @@ describe('MonthComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ MonthComponent ],
+      imports: [HttpClientModule, UiModule],
+      declarations: [ MonthComponent, ShowEventComponent ],
       providers: [AppQuery, AppStore]
     })
     .compileComponents();

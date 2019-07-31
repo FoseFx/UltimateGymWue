@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
+import {SchoolEvent} from '../../../../types/Event';
 
 @Component({
   selector: 'app-month',
@@ -12,9 +13,10 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   constructor(public http: HttpClient, public appQuery: AppQuery) { }
 
+  currentEvent: SchoolEvent = null;
   offset: number;
   now = new Date();
-  month: Event[][] = [];
+  month: SchoolEvent[][] = [];
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
@@ -68,10 +70,10 @@ export class MonthComponent implements AfterViewInit, OnInit {
         Authorization: this.appQuery.loginToken
       }
     }).subscribe(
-      (d: {data: Event[], error: boolean}) => {
+      (d: {data: SchoolEvent[], error: boolean}) => {
         const data = d.data;
         console.log(data);
-        data.forEach((event: Event) => {
+        data.forEach((event: SchoolEvent) => {
 
           if (event.format === 'fullday') {
             const date = new Date(event.begin);
@@ -110,19 +112,3 @@ export class MonthComponent implements AfterViewInit, OnInit {
   }
 }
 
-class Event {
-  name: string;
-  typ: 'ferien'|'klausur'|'ferientag'|'sonder';
-  format: 'ferien'|'schule'|'fullday'|'time';
-  votes: number;
-  by: EventBy;
-  beginSchulStunde?: number;
-  begin: number; // if type = schule: first one/two digits represent the schulstunde, rest is the date it begins
-  end?: number; // Not for typ = Feiertag
-  stufe?: string; // only for typ = Klausur or Note
-  kurs?: string; // only for typ = Klausur or Note
-}
-class EventBy {
-  name: string;
-  uid: string;
-}

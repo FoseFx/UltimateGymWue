@@ -44,3 +44,9 @@ export function handleError(component: MakesRequests, error: HttpErrorResponse) 
 
   component.loading = false;
 }
+
+export function capitalizeFirstLetter(s: string): string {
+  const fc = s[0].toLocaleUpperCase();
+  const rest = s.substr(1);
+  return `${fc}${rest}`;
+}

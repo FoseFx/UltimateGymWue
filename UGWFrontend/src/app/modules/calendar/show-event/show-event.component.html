@@ -1,0 +1,5 @@
+<app-popup (close)="close.emit()" *ngIf="!!event" >
+  <h1>{{event.name}}</h1>
+  <h2>{{capitalizeFL(event.typ)}}</h2>
+  {{event | json}}
+</app-popup>
