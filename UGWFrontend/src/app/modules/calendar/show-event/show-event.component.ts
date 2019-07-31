@@ -13,4 +13,6 @@ export class ShowEventComponent  {
   @Output() close = new EventEmitter();
 
   capitalizeFL = capitalizeFirstLetter;
+
+  dateOf = (n: number) => new Date(n);
 }

@@ -1,5 +1,29 @@
 <app-popup (close)="close.emit()" *ngIf="!!event" >
+  <h4>Von: {{event.by.name}}</h4>
   <h1>{{event.name}}</h1>
   <h2>{{capitalizeFL(event.typ)}}</h2>
+  <!-- Timespan -->
+  <h3>
+    <ng-template [ngIf]="event.format === 'ferien'">
+      {{dateOf(event.begin) | date: "dd.MM."}} - {{dateOf(event.end) | date: "dd.MM."}}
+    </ng-template>
+    <ng-template [ngIf]="event.format === 'fullday'">
+      {{dateOf(event.begin) | date: "dd.MM."}}
+    </ng-template>
+    <ng-template [ngIf]="event.format === 'time'">
+      {{dateOf(event.begin) | date: "hh:mm"}} - {{dateOf(event.end) | date: "hh:mm"}}
+    </ng-template>
+    <ng-template [ngIf]="event.format === 'schule'">
+      {{event.beginSchulStunde}}. - {{event.end}}. Stunde
+    </ng-template>
+  </h3>
+  <!-- /Timespan -->
+  <!-- Votes -->
+  <h3 *ngIf="event.votes === 0; else votes">Noch nie bestätigt</h3>
+  <ng-template #votes>
+    <h3>{{event.votes}} mal bestätigt</h3>
+  </ng-template>
+  <button>Bestätigen</button><br>
+  <!-- /Votes -->
   {{event | json}}
 </app-popup>
