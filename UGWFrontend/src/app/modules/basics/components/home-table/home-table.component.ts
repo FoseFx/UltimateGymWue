@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {TimeTableDay, TimeTableField} from '../../../../../types/TT';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
 import {BasicsService} from '../../state/basics.service';
@@ -9,7 +9,7 @@ import {BasicsService} from '../../state/basics.service';
   styleUrls: ['./home-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeTableComponent implements OnInit {
+export class HomeTableComponent {
 
   @Input() today: TimeTableDay;
   @Input() date: Date;
@@ -24,7 +24,7 @@ export class HomeTableComponent implements OnInit {
   @Input() set vd(value: VertretungsPlanSeite[]) {
     console.log(value);
     for (const v of value) {
-      if (!!v) {
+      if (!!v) { // ignore null
         if (v.infos[0] === `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear()}`) {
           this.Svd = v;
           return;
@@ -36,10 +36,7 @@ export class HomeTableComponent implements OnInit {
     }
   }
 
-  constructor(private basicsService: BasicsService) { }
-
-  ngOnInit() {
-  }
+  constructor(public basicsService: BasicsService) { }
 
   onTrClick(stunde: TimeTableField) {
     this.basicsService.newPopup({stunde});
