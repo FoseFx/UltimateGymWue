@@ -12,6 +12,7 @@ import {SwipableDirective} from './tab/swipable.directive';
 import {PopupComponent} from './popup/popup.component';
 import {NotSwipableDirective} from './tab/not-swipable.directive';
 import {PopupButtonComponent} from './popup/popup-button/popup-button.component';
+import { FabComponent } from './fab/fab.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {PopupButtonComponent} from './popup/popup-button/popup-button.component'
     SwipableDirective,
     PopupComponent,
     NotSwipableDirective,
-    PopupButtonComponent
+    PopupButtonComponent,
+    FabComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import {PopupButtonComponent} from './popup/popup-button/popup-button.component'
     TabItemComponent,
     PopupComponent,
     NotSwipableDirective,
-    PopupButtonComponent
+    PopupButtonComponent,
+    FabComponent
   ]
 })
 export class UiModule { }
