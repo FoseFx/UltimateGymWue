@@ -1,11 +1,23 @@
-<h1 class="center-text">{{now | date: 'MMMM'}}</h1>
+<app-show-event [event]="currentEvent" (close)="currentEvent = null"></app-show-event>
+<app-fab>
+  <i class="material-icons block">add</i>
+</app-fab>
+
+<div class="heading">
+  <i class="material-icons" (click)="showPrevMonth()" [ngStyle]="{'visibility': showPrevArrow ? 'initial' : 'hidden'}" >arrow_back</i>
+  <h1 class="center-text" >{{now | date: 'MMMM yyyy'}}</h1>
+  <i class="material-icons" (click)="showNextMonth()" [ngStyle]="{'visibility': showNextArrow ? 'initial' : 'hidden'}">arrow_forward</i>
+</div>
 
 <div class="calendar">
 
   <ng-container *ngFor="let item of month; let i = index;">
     <div class="item" *ngIf="item !== null">
       <h4>{{i - this.offset + 1}}</h4>
-      <div *ngFor="let event of item" [ngClass]="{'frei': event.typ === 'ferien' || event.typ === 'ferientag', 'klausur': event.typ === 'klausur'}">
+      <div [class]="'event-hint ' + event.typ"
+           *ngFor="let event of item"
+           [ngClass]="{'frei': event.typ === 'ferien' || event.typ === 'ferientag'}"
+           (click)="currentEvent = event">
         {{event.name}}
       </div>
     </div>

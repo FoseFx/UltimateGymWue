@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MonthComponent} from './month/month.component';
+import {RelatedMonthsComponent} from './related-months/related-months.component';
 
 const routes: Routes = [
-  {path: 'month', component: MonthComponent},
+  {path: 'month', component: RelatedMonthsComponent},
   {path: '', pathMatch: 'full', redirectTo: 'month'}
 ];
 

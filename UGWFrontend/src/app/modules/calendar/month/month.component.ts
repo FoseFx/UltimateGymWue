@@ -1,20 +1,32 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
+import {SchoolEvent} from '../../../../types/Event';
+import {KeyService} from '../../../services/key.service';
+import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-month',
   templateUrl: './month.component.html',
   styleUrls: ['./month.component.scss']
 })
-export class MonthComponent implements AfterViewInit, OnInit {
+export class MonthComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  constructor(public http: HttpClient, public appQuery: AppQuery) { }
+  public static EVENT_PREV_MONTH = 0;
+  public static EVENT_NEXT_MONTH = 1;
 
+  constructor(public http: HttpClient, public appQuery: AppQuery, public keyService: KeyService) { }
+
+  currentEvent: SchoolEvent = null;
   offset: number;
-  now = new Date();
-  month: Event[][] = [];
+  @Input() now = new Date();
+  @Input() showPrevArrow = true;
+  @Input() showNextArrow = true;
+  month: SchoolEvent[][] = [];
+  @Output() changeMonth: EventEmitter<number> = new EventEmitter();
+  keySub: Subscription = null;
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
@@ -61,6 +73,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (!this.appQuery.hasCredentials()) { return; } // only for the tests
+    this.keySub = this.keyService.leftRightlistener$.subscribe(this.onKeyEvent);
     const query = this.query();
 
     this.http.get(environment.urls.getEvents + query, {
@@ -68,10 +81,10 @@ export class MonthComponent implements AfterViewInit, OnInit {
         Authorization: this.appQuery.loginToken
       }
     }).subscribe(
-      (d: {data: Event[], error: boolean}) => {
+      (d: {data: SchoolEvent[], error: boolean}) => {
         const data = d.data;
         console.log(data);
-        data.forEach((event: Event) => {
+        data.forEach((event: SchoolEvent) => {
 
           if (event.format === 'fullday') {
             const date = new Date(event.begin);
@@ -103,26 +116,32 @@ export class MonthComponent implements AfterViewInit, OnInit {
     );
   }
 
+  onKeyEvent(event: number) {
+    if (event === KeyService.LEFT_EVENT) {
+      this.showPrevMonth();
+    } else if (event === KeyService.RIGHT_EVENT) {
+      this.showNextMonth();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.keySub) {
+      this.keySub.unsubscribe();
+    }
+  }
+
+
   query(): string {
     const year = this.now.getFullYear();
     const month = this.now.getMonth() + 1;
     return `${year}-${month.toString().length === 1 ? '0' : ''}${month}`;
   }
+
+  showNextMonth() {
+    this.changeMonth.emit(MonthComponent.EVENT_NEXT_MONTH);
+  }
+  showPrevMonth() {
+    this.changeMonth.emit(MonthComponent.EVENT_PREV_MONTH);
+  }
 }
 
-class Event {
-  name: string;
-  typ: 'ferien'|'klausur'|'ferientag'|'sonder';
-  format: 'ferien'|'schule'|'fullday'|'time';
-  votes: number;
-  by: EventBy;
-  beginSchulStunde?: number;
-  begin: number; // if type = schule: first one/two digits represent the schulstunde, rest is the date it begins
-  end?: number; // Not for typ = Feiertag
-  stufe?: string; // only for typ = Klausur or Note
-  kurs?: string; // only for typ = Klausur or Note
-}
-class EventBy {
-  name: string;
-  uid: string;
-}

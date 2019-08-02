@@ -1,4 +1,4 @@
-import {handleError, queryInCypress, serviceInCypress} from './util';
+import {capitalizeFirstLetter, handleError, queryInCypress, serviceInCypress} from './util';
 import {AppQuery} from './state/app.query';
 import {AppStore} from './state/app.store';
 import {AppService} from './state/app.service';
@@ -116,4 +116,9 @@ describe('util', () => {
 
   });
 
+  it('should capitalizeFirstLetter', () => {
+    expect(capitalizeFirstLetter('someString and so öün')).toBe('SomeString and so öün');
+    expect(capitalizeFirstLetter('S')).toBe('S');
+    expect(capitalizeFirstLetter('ßtest')).toBe('SStest');
+  });
 });

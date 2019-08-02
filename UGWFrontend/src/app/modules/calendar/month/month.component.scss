@@ -1,7 +1,7 @@
 @import "../../../../colors";
 .calendar {
   display: grid;
-  grid: auto / auto auto auto auto auto auto auto;
+  grid: auto / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   max-width: 900px;
   width: 97%;
   margin: 10px auto 0;
@@ -14,17 +14,50 @@
   background: $light;
   margin: 1px;
   border-radius: 5px;
+  overflow: hidden;
+  padding: 3px;
   @media (min-width: 600px) {
     margin: 5px;
+  }
+  h4 {
+    margin: 4px 0;
+    text-align: center;
   }
   &.filler-item {
     opacity: 0;
   }
-
+  .event-hint {
+    cursor: pointer;
+    width: calc(100% - 6px);
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 0 auto 1px;
+    text-overflow: ellipsis;
+  }
   .frei {
     background: red;
   }
   .klausur {
     background: blue;
+  }
+}
+.heading {
+  display: grid;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  grid-template: auto / 1fr 5fr 1fr;
+  i {
+    opacity: 0.6;
+    text-align: center;
+    font-size: 2.5rem;
+    transition: opacity 0.1s linear;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  h1 {
+    margin: 0;
   }
 }
