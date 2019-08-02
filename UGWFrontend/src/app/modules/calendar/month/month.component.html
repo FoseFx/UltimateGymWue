@@ -3,7 +3,11 @@
   <i class="material-icons block">add</i>
 </app-fab>
 
-<h1 class="center-text">{{now | date: 'MMMM'}}</h1>
+<div class="heading">
+  <i class="material-icons" (click)="showPrevMonth()" [ngStyle]="{'visibility': showPrevArrow ? 'initial' : 'hidden'}" >arrow_back</i>
+  <h1 class="center-text" >{{now | date: 'MMMM yyyy'}}</h1>
+  <i class="material-icons" (click)="showNextMonth()" [ngStyle]="{'visibility': showNextArrow ? 'initial' : 'hidden'}">arrow_forward</i>
+</div>
 
 <div class="calendar">
 

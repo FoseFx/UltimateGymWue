@@ -1,0 +1,8 @@
+<app-month
+  *ngIf="show"
+  (changeMonth)="monthChanged($event)"
+  [now]="date"
+  [showNextArrow]="monthDelta !== MAXIMUM_DELTA"
+  [showPrevArrow]="monthDelta !== MINIMUM_DELTA">
+
+</app-month>

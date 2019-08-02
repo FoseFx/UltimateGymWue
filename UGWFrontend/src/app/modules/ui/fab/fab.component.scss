@@ -10,4 +10,10 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.6);
+  transition: box-shadow 0.3s ease-out;
+  cursor: pointer;
+}
+div:hover {
+  box-shadow: 2px 2px 10px 0 rgba(0,0,0,0.6);
 }

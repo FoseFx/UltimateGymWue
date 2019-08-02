@@ -236,4 +236,18 @@ describe('MonthComponent', () => {
     });
   });
 
+  it('should showNextMonth', () => {
+    const spy = spyOn(component.changeMonth, 'emit').and.callFake((arg) => {
+      expect(arg).toBe(MonthComponent.EVENT_NEXT_MONTH);
+    });
+    component.showNextMonth();
+    expect(spy).toHaveBeenCalled();
+  });
+  it('should showPrevMonth', () => {
+    const spy = spyOn(component.changeMonth, 'emit').and.callFake((arg) => {
+      expect(arg).toBe(MonthComponent.EVENT_PREV_MONTH);
+    });
+    component.showPrevMonth();
+    expect(spy).toHaveBeenCalled();
+  });
 });

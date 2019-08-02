@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SchoolEvent} from '../../../../types/Event';
+
 
 @Component({
   selector: 'app-month',
@@ -11,12 +12,18 @@ import {SchoolEvent} from '../../../../types/Event';
 })
 export class MonthComponent implements AfterViewInit, OnInit {
 
+  public static EVENT_PREV_MONTH = 0;
+  public static EVENT_NEXT_MONTH = 1;
+
   constructor(public http: HttpClient, public appQuery: AppQuery) { }
 
   currentEvent: SchoolEvent = null;
   offset: number;
-  now = new Date();
+  @Input() now = new Date();
+  @Input() showPrevArrow = true;
+  @Input() showNextArrow = true;
   month: SchoolEvent[][] = [];
+  @Output() changeMonth: EventEmitter<number> = new EventEmitter();
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
@@ -109,6 +116,13 @@ export class MonthComponent implements AfterViewInit, OnInit {
     const year = this.now.getFullYear();
     const month = this.now.getMonth() + 1;
     return `${year}-${month.toString().length === 1 ? '0' : ''}${month}`;
+  }
+
+  showNextMonth() {
+    this.changeMonth.emit(MonthComponent.EVENT_NEXT_MONTH);
+  }
+  showPrevMonth() {
+    this.changeMonth.emit(MonthComponent.EVENT_PREV_MONTH);
   }
 }
 

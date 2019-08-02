@@ -1,5 +1,5 @@
 <app-popup (close)="close.emit()" *ngIf="!!event">
-  <div style="padding: 20px">
+  <div class="inner">
     <h4>Von: {{event.by.name}}</h4>
     <h1>{{event.name}}</h1>
     <h2 style="display: inline">{{capitalizeFL(event.typ)}}&nbsp;</h2>
@@ -34,7 +34,7 @@
       </tr>
     </table>
     <!-- /Votes -->
-    <button>Änderung einreichen</button>
+    <a href="#">Änderung einreichen</a>
   </div>
 
 </app-popup>
