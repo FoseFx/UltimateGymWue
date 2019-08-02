@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SchoolEvent} from '../../../../types/Event';
+import {KeyService} from '../../../services/key.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -10,12 +12,12 @@ import {SchoolEvent} from '../../../../types/Event';
   templateUrl: './month.component.html',
   styleUrls: ['./month.component.scss']
 })
-export class MonthComponent implements AfterViewInit, OnInit {
+export class MonthComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public static EVENT_PREV_MONTH = 0;
   public static EVENT_NEXT_MONTH = 1;
 
-  constructor(public http: HttpClient, public appQuery: AppQuery) { }
+  constructor(public http: HttpClient, public appQuery: AppQuery, public keyService: KeyService) { }
 
   currentEvent: SchoolEvent = null;
   offset: number;
@@ -24,6 +26,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
   @Input() showNextArrow = true;
   month: SchoolEvent[][] = [];
   @Output() changeMonth: EventEmitter<number> = new EventEmitter();
+  keySub: Subscription = null;
 
   public static isLeapYear(date: Date): boolean { // this is the algorithm visible on the wikipedia page of a leap year
     const year = date.getFullYear();
@@ -70,6 +73,7 @@ export class MonthComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (!this.appQuery.hasCredentials()) { return; } // only for the tests
+    this.keySub = this.keyService.leftRightlistener$.subscribe(this.onKeyEvent);
     const query = this.query();
 
     this.http.get(environment.urls.getEvents + query, {
@@ -111,6 +115,21 @@ export class MonthComponent implements AfterViewInit, OnInit {
       }
     );
   }
+
+  onKeyEvent(event: number) {
+    if (event === KeyService.LEFT_EVENT) {
+      this.showPrevMonth();
+    } else if (event === KeyService.RIGHT_EVENT) {
+      this.showNextMonth();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.keySub) {
+      this.keySub.unsubscribe();
+    }
+  }
+
 
   query(): string {
     const year = this.now.getFullYear();

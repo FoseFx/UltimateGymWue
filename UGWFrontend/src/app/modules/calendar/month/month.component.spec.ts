@@ -8,6 +8,7 @@ import {environment} from '../../../../environments/environment';
 import {of} from 'rxjs';
 import {ShowEventComponent} from '../show-event/show-event.component';
 import {UiModule} from '../../ui/ui.module';
+import {KeyService} from '../../../services/key.service';
 
 describe('MonthComponent', () => {
   let component: MonthComponent;
@@ -17,7 +18,7 @@ describe('MonthComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, UiModule],
       declarations: [ MonthComponent, ShowEventComponent ],
-      providers: [AppQuery, AppStore]
+      providers: [AppQuery, AppStore, KeyService]
     })
     .compileComponents();
   }));
@@ -243,11 +244,21 @@ describe('MonthComponent', () => {
     component.showNextMonth();
     expect(spy).toHaveBeenCalled();
   });
+
   it('should showPrevMonth', () => {
     const spy = spyOn(component.changeMonth, 'emit').and.callFake((arg) => {
       expect(arg).toBe(MonthComponent.EVENT_PREV_MONTH);
     });
     component.showPrevMonth();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should callShowNextMonth or showPrevMonth on KeyEvent', () => {
+    const spyPrev = spyOn(component, 'showPrevMonth');
+    component.onKeyEvent(KeyService.LEFT_EVENT);
+    expect(spyPrev).toHaveBeenCalled();
+    const spyNext = spyOn(component, 'showNextMonth');
+    component.onKeyEvent(KeyService.RIGHT_EVENT);
+    expect(spyNext).toHaveBeenCalled();
   });
 });
