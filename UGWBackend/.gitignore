@@ -5,3 +5,4 @@ run_dev.sh
 test_dev.sh
 build_prod.sh
 run_prod.sh
+.idea
