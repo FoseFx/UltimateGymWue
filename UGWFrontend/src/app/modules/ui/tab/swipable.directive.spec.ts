@@ -44,6 +44,17 @@ describe('SwipableDirective', () => {
       expect(dir.startedAtX).toEqual(10);
       expect(dir.startedAtY).toEqual(20);
     });
+    it('should not set values', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const event = new TouchEvent('touchstart', {targetTouches: [], touches: []});
+      const dir = new SwipableDirective({nativeElement: el});
+      const spy = spyOn(dir.active, 'emit');
+      dir.touchStart(event);
+      expect(dir.startedAtX).toBe(undefined);
+      expect(dir.startedAtY).toBe(undefined);
+      expect(spy).not.toHaveBeenCalled();
+    });
   });
 
   describe('touchEnd', () => {
@@ -78,6 +89,149 @@ describe('SwipableDirective', () => {
       expect(dir.newPercent).toEqual(undefined);
       expect(dir.moved).toEqual(false);
     });
+    it('should return when not moved', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchend', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.moved = false;
+      dir.newPercent = undefined;
+      dir.touchEnd(event);
+      expect(dir.newPercent).toBe(undefined); // must have returned
+    });
+    it('should set newPercent', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchend', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.moved = true;
+      dir.newPercent = undefined;
+      dir.percentAtStart = 20;
+      dir.touchEnd(event);
+      expect(dir.newPercent).toBe(dir.percentAtStart);
+    });
+    it('should snap to ', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchend', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.moved = true;
+      dir.newPercent = 0.5;
+      dir.percentAtStart = 0.1;
+      dir.percentPerPage = 0.1;
+      dir.index = 1;
+      dir.touchEnd(event);
+      expect(dir.index).toBe(0);
+    });
+  });
+
+  it('should cancel', () => {
+    const el = document.createElement('div');
+    el.style.transform = 'translateX(-10.2%)';
+    const touch = new Touch({
+      clientX: 10,
+      clientY: 20,
+      identifier: 1,
+      target: el
+    });
+    const event = new TouchEvent('touchstart', {targetTouches: [touch], touches: [touch]});
+    const dir = new SwipableDirective({nativeElement: el});
+    const spy = spyOn(dir, 'touchEnd');
+    // @ts-ignore
+    dir.touchCancel('test');
+    expect(spy).toHaveBeenCalled();
+
+  });
+
+  describe('touchmove', () => {
+    it('should return', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchmove', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.moved = false;
+      dir.startedAtX = undefined;
+      dir.touchMove(event);
+      expect(dir.moved).toBe(false);
+    });
+    it('should return no touch', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const event = new TouchEvent('touchmove', {targetTouches: [], touches: []});
+      const dir = new SwipableDirective({nativeElement: el});
+      dir.moved = false;
+      dir.startedAtX = undefined;
+      dir.touchMove(event);
+      expect(dir.moved).toBe(false);
+    });
+    it('should execute on firstMove', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchmove', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      const spy = spyOn(dir.allowScroll, 'emit');
+      dir.moved = false;
+      dir.firstMove = true;
+      dir.startedAtX = 12;
+      dir.startedAtY = 20;
+      dir.touchMove(event);
+      expect(dir.moved).toBe(true);
+      expect(dir.firstMove).toBe(false);
+      expect(spy).toHaveBeenCalled();
+    });
+    it('should execute on firstMove and block', () => {
+      const el = document.createElement('div');
+      el.style.transform = 'translateX(-10.2%)';
+      const touch = new Touch({
+        clientX: 10,
+        clientY: 20,
+        identifier: 1,
+        target: el
+      });
+      const event = new TouchEvent('touchmove', {targetTouches: [touch], touches: [touch]});
+      const dir = new SwipableDirective({nativeElement: el});
+      const spy = spyOn(dir.allowScroll, 'emit');
+      dir.moved = false;
+      dir.firstMove = true;
+      dir.startedAtX = 12;
+      dir.startedAtY = 0;
+      dir.touchMove(event);
+      expect(dir.moved).toBe(true);
+      expect(dir.firstMove).toBe(true);
+      expect(spy).not.toHaveBeenCalled();
+      expect(dir.startedAtX).toBe(undefined);
+    });
+
   });
 
 });
