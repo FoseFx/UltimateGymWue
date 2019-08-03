@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {SetupQuery} from '../../state/setup.query';
@@ -13,7 +13,7 @@ import {SetupService} from '../../state/setup.service';
   templateUrl: './insta.component.html',
   styleUrls: ['./insta.component.scss']
 })
-export class InstaComponent implements OnInit {
+export class InstaComponent  {
 
   loading = false;
   error: string;
@@ -24,34 +24,16 @@ export class InstaComponent implements OnInit {
               private router: Router,
               private setupService: SetupService) { }
 
-  ngOnInit() {
-  }
-
   onClick() {
     this.error = undefined;
-    const left = (screen.width / 2) - (600 / 2);
-    const top = (screen.height / 2) - (600 / 2);
-    const child = window.open(environment.urls.registerInstaRediect, 'popup', `top=${top},left=${left},width=${600},height=${600}`);
+
+    const child = this.createPopup(window.screen);
 
     if (child === null) {
+      // popup blocked?
       return;
     }
-    const interv = setInterval(() => {
-      console.log('closed', child.closed);
-      if (child.closed) {
-        clearInterval(interv);
-      }
-
-      const href = child.location.href;
-      console.log('href', href);
-
-      if (/^.*\/assets\/insta-redirect.html.*$/.test(href)) {
-        this.loading = true;
-        child.close();
-        clearInterval(interv);
-        this.onData(href);
-      }
-    }, 500);
+    this.startInterval(child);
   }
 
   onData(href: string) {
@@ -93,4 +75,32 @@ export class InstaComponent implements OnInit {
 
   }
 
+  createPopup(screen: Screen): Window {
+    const left = (screen.width / 2) - (600 / 2);
+    const top = (screen.height / 2) - (600 / 2);
+    return window.open(
+      environment.urls.registerInstaRediect,
+      'popup',
+      `top=${top},left=${left},width=${600},height=${600}`
+    );
+  }
+
+  startInterval(child: Window) {
+    const interv = setInterval(() => {
+      console.log('closed', child.closed);
+      if (child.closed) {
+        clearInterval(interv);
+      }
+
+      const href = child.location.href;
+      console.log('href', href);
+
+      if (/^.*\/assets\/insta-redirect.html.*$/.test(href)) {
+        this.loading = true;
+        child.close();
+        clearInterval(interv);
+        this.onData(href);
+      }
+    }, 500);
+  }
 }
