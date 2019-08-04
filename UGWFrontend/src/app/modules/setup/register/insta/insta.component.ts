@@ -13,10 +13,7 @@ import {SetupService} from '../../state/setup.service';
   templateUrl: './insta.component.html',
   styleUrls: ['./insta.component.scss']
 })
-export class InstaComponent  {
-
-  loading = false;
-  error: string;
+export class InstaComponent implements InstaComponentInterface{
 
   constructor(public http: HttpClient,
               public query: SetupQuery,
@@ -24,50 +21,10 @@ export class InstaComponent  {
               public router: Router,
               public setupService: SetupService) { }
 
-  onClick() {
-    this.error = undefined;
+  loading = false;
+  error: string;
 
-    const child = this.createPopup(window.screen);
-
-    if (child === null) {
-      // popup blocked?
-      return;
-    }
-    this.startInterval(child);
-  }
-
-  onData(href: string) {
-    const firstPart = href.split('?')[0];
-    const queries = this.extractQueries(href);
-
-    if (!!queries.error) {
-      this.error = decodeURIComponent(queries.error_description).replace(/\+/g, ' ');
-      this.loading = false;
-      return;
-    }
-
-    if (!queries.code) {
-      this.error = 'Instagram hat nicht wie erwartet geantwortet.';
-      this.loading = false;
-      return;
-    }
-
-    const code = queries.code;
-    this.http.post(environment.urls.registerInsta, {code, href: firstPart, fullname: this.query.getValue().name}).subscribe(
-
-      (data: LoginResponse) => {
-        console.log(data);
-        this.setupService.justRegistered();
-        this.service.onLogin(data);
-        this.router.navigate(['/setup/basics']);
-
-      },
-      (error) => handleError(this, error)
-    );
-
-  }
-
-  createPopup(screen: Screen): Window {
+  static createPopup(screen: Screen): Window {
     const left = (screen.width / 2) - (600 / 2);
     const top = (screen.height / 2) - (600 / 2);
     return window.open(
@@ -77,7 +34,36 @@ export class InstaComponent  {
     );
   }
 
-  startInterval(child: Window) {
+  static preRequest(component: InstaComponentInterface, href: string): {code: string, firstPart: string} {
+    const firstPart = href.split('?')[0];
+    const queries = InstaComponent.extractQueries(href);
+
+    if (!!queries.error) {
+      component.error = decodeURIComponent(queries.error_description).replace(/\+/g, ' ');
+      component.loading = false;
+      return null;
+    }
+
+    if (!queries.code) {
+      component.error = 'Instagram hat nicht wie erwartet geantwortet.';
+      component.loading = false;
+      return null;
+    }
+    const code = queries.code;
+    return {code, firstPart};
+  }
+
+  static extractQueries(href: string): {code?: string, error?: string, error_description?: string, error_reason?: string}  {
+    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
+    const querys = {};
+    queryStrings.forEach((pair: string) => {
+      const query = pair.split('=');
+      querys[query[0]] = query[1];
+    });
+    return querys;
+  }
+
+  static startInterval(component: InstaComponentInterface, child: Window) {
     let interv = -1;
     interv = window.setInterval(() => {
       console.log('closed', child.closed);
@@ -89,21 +75,47 @@ export class InstaComponent  {
       console.log('href', href);
 
       if (/^.*\/assets\/insta-redirect.html.*$/.test(href)) {
-        this.loading = true;
+        component.loading = true;
         child.close();
         clearInterval(interv);
-        this.onData(href);
+        component.onData(href);
       }
     }, 500);
   }
 
-  extractQueries(href: string): {code?: string, error?: string, error_description?: string, error_reason?: string}  {
-    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
-    const querys = {};
-    queryStrings.forEach((pair: string) => {
-      const query = pair.split('=');
-      querys[query[0]] = query[1];
-    });
-    return querys;
+  onClick() {
+    this.error = undefined;
+
+    const child = InstaComponent.createPopup(window.screen);
+
+    if (child === null) {
+      // popup blocked?
+      return;
+    }
+    InstaComponent.startInterval(this, child);
   }
+
+  onData(href: string) {
+    const pr = InstaComponent.preRequest(this, href);
+    if (pr === null) {
+      return;
+    }
+    const {code, firstPart} = pr;
+    this.http.post(environment.urls.registerInsta, {code, href: firstPart, fullname: this.query.getValue().name}).subscribe(
+      (data: LoginResponse) => {
+        console.log(data);
+        this.setupService.justRegistered();
+        this.service.onLogin(data);
+        this.router.navigate(['/setup/basics']);
+
+      },
+      (error) => handleError(this, error)
+    );
+
+  }
+}
+export interface InstaComponentInterface {
+  error: string;
+  loading: boolean;
+  onData(href: string);
 }
