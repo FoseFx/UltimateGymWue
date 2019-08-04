@@ -44,13 +44,13 @@ describe('InstaComponent', () => {
       expect(target).toBe('popup');
       expect(feat).toBe('top=240,left=660,width=600,height=600');
     });
-    component.createPopup(fakeScreen);
+    InstaComponent.createPopup(fakeScreen);
     expect(spy).toHaveBeenCalled();
   });
 
   it('should handle onClick', () => {
-    const spy = spyOn(component, 'createPopup');
-    const spy2 = spyOn(component, 'startInterval');
+    const spy = spyOn(InstaComponent, 'createPopup');
+    const spy2 = spyOn(InstaComponent, 'startInterval');
     component.error = 'test';
     component.onClick();
     expect(component.error).toBe(undefined);
@@ -58,8 +58,8 @@ describe('InstaComponent', () => {
     expect(spy2).toHaveBeenCalled();
   });
   it('should handle blocked popup', () => {
-    const spy = spyOn(component, 'createPopup').and.returnValue(null);
-    const spy2 = spyOn(component, 'startInterval');
+    const spy = spyOn(InstaComponent, 'createPopup').and.returnValue(null);
+    const spy2 = spyOn(InstaComponent, 'startInterval');
     component.error = 'test';
     component.onClick();
     expect(component.error).toBe(undefined);
@@ -77,7 +77,7 @@ describe('InstaComponent', () => {
       next();
     });
     // @ts-ignore
-    component.startInterval({closed: true, location: {href: 'some-str'}});
+    InstaComponent.startInterval(component, {closed: true, location: {href: 'some-str'}});
   });
 
   it('should close window', (next) => {
@@ -96,12 +96,12 @@ describe('InstaComponent', () => {
       next();
     });
     // @ts-ignore
-    component.startInterval({closed: true, location: {href: 'https://sub.domain.test.com/assets/insta-redirect.html'}, close: () => called = true});
+    InstaComponent.startInterval(component, {closed: true, location: {href: 'https://sub.domain.test.com/assets/insta-redirect.html'}, close: () => called = true});
   });
 
-  describe('inData', () => {
+  describe('onData', () => {
     it('should show error', () => {
-      spyOn(component, 'extractQueries').and.returnValue({error: true, error_description: 'some-str'});
+      spyOn(InstaComponent, 'extractQueries').and.returnValue({error: true, error_description: 'some-str'});
       component.error = undefined;
       component.loading = true;
       component.onData('stubbed');
@@ -110,7 +110,7 @@ describe('InstaComponent', () => {
     });
 
     it('should show error when invalid', () => {
-      spyOn(component, 'extractQueries').and.returnValue({});
+      spyOn(InstaComponent, 'extractQueries').and.returnValue({});
       component.error = undefined;
       component.loading = true;
       component.onData('stubbed');
@@ -119,7 +119,7 @@ describe('InstaComponent', () => {
     });
 
     it('should request', () => {
-      spyOn(component, 'extractQueries').and.returnValue({code: 'some-code'});
+      spyOn(InstaComponent, 'extractQueries').and.returnValue({code: 'some-code'});
       spyOn(component.query, 'getValue').and.returnValue({name: 'some-name'});
       spyOn(component.setupService, 'justRegistered');
       spyOn(component.service, 'onLogin');
@@ -138,7 +138,7 @@ describe('InstaComponent', () => {
 
   it('should extractQueries', () => {
     const href = 'https://some-str.com/assets/insta-redirect.html?error=true&error_description=some%20message&error_reason=reason&code=code';
-    const obj = component.extractQueries(href);
+    const obj = InstaComponent.extractQueries(href);
     expect(obj.code).toBe('code');
     expect(obj.error).toBe('true');
     expect(obj.error_description).toBe('some%20message');
