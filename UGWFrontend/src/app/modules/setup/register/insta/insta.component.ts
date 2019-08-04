@@ -18,11 +18,11 @@ export class InstaComponent  {
   loading = false;
   error: string;
 
-  constructor(private http: HttpClient,
-              private query: SetupQuery,
-              private service: AppService,
-              private router: Router,
-              private setupService: SetupService) { }
+  constructor(public http: HttpClient,
+              public query: SetupQuery,
+              public service: AppService,
+              public router: Router,
+              public setupService: SetupService) { }
 
   onClick() {
     this.error = undefined;
@@ -38,29 +38,21 @@ export class InstaComponent  {
 
   onData(href: string) {
     const firstPart = href.split('?')[0];
-    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
-    const querys: {code?: string, error?: string, error_description?: string, error_reason?: string} = {};
+    const queries = this.extractQueries(href);
 
-    queryStrings.forEach((pair: string) => {
-      const query = pair.split('=');
-      querys[query[0]] = query[1];
-    });
-    console.log(querys);
-
-
-    if (!!querys.error) {
-      this.error = decodeURIComponent(querys.error_description).replace(/\+/g, ' ');
+    if (!!queries.error) {
+      this.error = decodeURIComponent(queries.error_description).replace(/\+/g, ' ');
       this.loading = false;
       return;
     }
 
-    if (!querys.code) {
+    if (!queries.code) {
       this.error = 'Instagram hat nicht wie erwartet geantwortet.';
       this.loading = false;
       return;
     }
 
-    const code = querys.code;
+    const code = queries.code;
     this.http.post(environment.urls.registerInsta, {code, href: firstPart, fullname: this.query.getValue().name}).subscribe(
 
       (data: LoginResponse) => {
@@ -86,7 +78,8 @@ export class InstaComponent  {
   }
 
   startInterval(child: Window) {
-    const interv = setInterval(() => {
+    let interv = -1;
+    interv = window.setInterval(() => {
       console.log('closed', child.closed);
       if (child.closed) {
         clearInterval(interv);
@@ -102,5 +95,15 @@ export class InstaComponent  {
         this.onData(href);
       }
     }, 500);
+  }
+
+  extractQueries(href: string): {code?: string, error?: string, error_description?: string, error_reason?: string}  {
+    const queryStrings = href.split('/assets/insta-redirect.html?')[1].split('&');
+    const querys = {};
+    queryStrings.forEach((pair: string) => {
+      const query = pair.split('=');
+      querys[query[0]] = query[1];
+    });
+    return querys;
   }
 }
