@@ -13,22 +13,17 @@ import {Router} from '@angular/router';
 export class KlausurenComponent implements OnInit {
 
   constructor(private setupQuery: SetupQuery,
-              private appQuery: AppQuery,
-              private appService: AppService,
-              private router: Router) { }
+              public appQuery: AppQuery,
+              public appService: AppService,
+              public router: Router) { }
 
   active: boolean[] = [];
-  kurse: Kurse =
-    (!!this.appQuery.getValue().basics
-        ? this.appQuery.getValue().basics.kurse
-        : this.setupQuery.getSelectedKurse()
-    ).filter(k => k.fach !== 'Frei');
+  kurse: Kurse = this.initialKurse();
 
   save() {
     const klausuren = [];
     this.kurse.forEach(
-      (k, i) =>
-        !!this.active[i] ? klausuren.push(k.fach) : null
+      (k, i) => !!this.active[i] ? klausuren.push(k.fach) : null
     );
     this.appService.setKlausuren(klausuren);
     this.router.navigate(['/']);
@@ -45,6 +40,12 @@ export class KlausurenComponent implements OnInit {
     }
   }
 
+  initialKurse(): Kurse {
+    return (!!this.appQuery.getValue().basics
+        ? this.appQuery.getValue().basics.kurse
+        : this.setupQuery.getSelectedKurse()
+    ).filter(k => k.fach !== 'Frei');
+  }
 
 
 }
