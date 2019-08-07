@@ -101,7 +101,7 @@ export class GoogleSigninComponent implements AfterViewInit {
 
   times = 0;
 
-  private clientId = '945920838122-ms73bj0tvdfcjijt1dqis687f98m167v.apps.googleusercontent.com';
+  private clientId = environment.googleClientId;
 
   private scope = [
     'profile',
@@ -147,7 +147,6 @@ export class GoogleSigninComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.checkAndInit();
-
   }
 
   checkAndInit() {

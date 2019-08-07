@@ -22,5 +22,6 @@ export const environment = {
     getEvents: `${backendHost}/api/events/`,
     newPushSub: `${backendHost}/api/basics/notifications/subscribe`
   },
-  pushPublicKey: ''
+  pushPublicKey: '',
+  googleClientId: '945920838122-ms73bj0tvdfcjijt1dqis687f98m167v.apps.googleusercontent.com'
 };
