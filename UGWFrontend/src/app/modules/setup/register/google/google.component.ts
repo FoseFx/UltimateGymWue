@@ -30,12 +30,12 @@ export class GoogleComponent implements OnInit {
   error: string;
   loading = false;
 
-  constructor(private http: HttpClient,
-              private query: SetupQuery,
+  constructor(public http: HttpClient,
+              public query: SetupQuery,
               private service: SetupService,
-              private changedetectionRef: ChangeDetectorRef,
-              private loginService: LoginService,
-              private router: Router) { }
+              public changedetectionRef: ChangeDetectorRef,
+              public loginService: LoginService,
+              public router: Router) { }
 
 
   ngOnInit() {
@@ -53,37 +53,37 @@ export class GoogleComponent implements OnInit {
     };
     console.log(payload);
     this.http.post(environment.urls.registerGoogle, payload).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.loginService.googleLogin(payload.token).subscribe(
-          (loginData) => {
-            this.router.navigate(['/setup/basics']);
-            console.log(loginData);
-          }, // next
-          (error) => {
-            if (!!error.error.msg) {
-              this.error = error.error.msg;
-            } else {
-              this.error = error.message;
-            }
-            this.error = 'Nach erfolgreicher Registrierung: ' + this.error;
-            this.changedetectionRef.detectChanges();
-          } // error
-        ); // googleLogin()
-
-        this.changedetectionRef.detectChanges();
-      }, // next
-      (error: HttpErrorResponse) => {
-        this.loading = false;
-        console.log(error);
-        if (!!error.error.msg) {
-          this.error = error.error.msg;
-        } else {
-          this.error = error.message;
-        }
-        this.changedetectionRef.detectChanges();
-      } // error
+      (data: any) => this.handleSuccess(data, payload), // next
+      (error: HttpErrorResponse) => this.handleError(error) // error
     ); // post
+  }
+
+  handleSuccess(data, payload) {
+    console.log(data);
+    this.loginService.googleLogin(payload.token).subscribe(
+      (loginData) => {
+        this.router.navigate(['/setup/basics']);
+        console.log(loginData);
+      }, // next
+      (error) => this.handleError(error, true) // error
+    ); // googleLogin()
+
+    this.changedetectionRef.detectChanges();
+
+  }
+
+  handleError(error: HttpErrorResponse, afterReg = false) {
+    this.loading = false;
+    console.log(error);
+    if (!!error.error.msg) {
+      this.error = error.error.msg;
+    } else {
+      this.error = error.message;
+    }
+    if (afterReg) {
+      this.error = 'Nach erfolgreicher Registrierung: ' + this.error;
+    }
+    this.changedetectionRef.detectChanges();
   }
 
 }
@@ -101,7 +101,7 @@ export class GoogleSigninComponent implements AfterViewInit {
 
   times = 0;
 
-  private clientId = '945920838122-ms73bj0tvdfcjijt1dqis687f98m167v.apps.googleusercontent.com';
+  private clientId = environment.googleClientId;
 
   private scope = [
     'profile',
@@ -147,7 +147,6 @@ export class GoogleSigninComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.checkAndInit();
-
   }
 
   checkAndInit() {
