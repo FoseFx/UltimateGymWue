@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SnackbarService} from '../../services/snackbar.service';
 import {SnackbarAnimations} from './snackbar.animations';
 

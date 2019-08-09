@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShowEventComponent } from './show-event.component';
+import {ShowEventComponent} from './show-event.component';
 import {UiModule} from '../../ui/ui.module';
 
 describe('ShowEventComponent', () => {

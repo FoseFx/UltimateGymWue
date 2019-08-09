@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppState, AppStore, AppStoreBasics, VertretungsDatum, VertretungsPlanSeite} from './app.store';
+import {AppStore, AppStoreBasics, VertretungsDatum, VertretungsPlanSeite} from './app.store';
 import {AppQuery} from './app.query';
 import {LoginResponse} from '../modules/setup/login/login.service';
 import {serviceInCypress} from '../util';

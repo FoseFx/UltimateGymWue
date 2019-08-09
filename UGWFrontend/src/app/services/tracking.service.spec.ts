@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TrackingService } from './tracking.service';
+import {TrackingService} from './tracking.service';
 import {SnackbarService} from './snackbar.service';
 
 describe('TrackingService', () => {

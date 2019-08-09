@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {SnackbarService} from './snackbar.service';
 
 declare global {

@@ -17,7 +17,7 @@ import {UiModule} from './modules/ui/ui.module';
 import {NeedsSetupGuard} from './guards/needs-setup.guard';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {KeyService} from './services/key.service';
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import {SnackbarComponent} from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
 import {TrackingService} from './services/tracking.service';
 import {NotificationService} from './services/notification.service';

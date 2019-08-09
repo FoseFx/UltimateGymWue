@@ -14,7 +14,7 @@ import {ExtractStyleTagsPipe} from './components/stufe-vertretung/extract-style-
 import {BasicsPopupComponent} from './components/basics-popup/basics-popup.component';
 import {TimetableComponent} from './components/timetable/timetable.component';
 import {HiddenNonKurseComponent} from './components/hidden-non-kurse/hidden-non-kurse.component';
-import { NotificationComponent } from './components/notification/notification.component';
+import {NotificationComponent} from './components/notification/notification.component';
 
 @NgModule({
   declarations: [

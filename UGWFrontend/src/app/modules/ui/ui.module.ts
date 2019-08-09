@@ -12,7 +12,7 @@ import {SwipableDirective} from './tab/swipable.directive';
 import {PopupComponent} from './popup/popup.component';
 import {NotSwipableDirective} from './tab/not-swipable.directive';
 import {PopupButtonComponent} from './popup/popup-button/popup-button.component';
-import { FabComponent } from './fab/fab.component';
+import {FabComponent} from './fab/fab.component';
 
 @NgModule({
   declarations: [

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, Observable, OperatorFunction, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
 import {tap} from 'rxjs/internal/operators/tap';
 import {animate, state, style, transition, trigger} from '@angular/animations';

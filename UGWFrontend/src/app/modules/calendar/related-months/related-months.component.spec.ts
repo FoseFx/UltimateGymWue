@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RelatedMonthsComponent } from './related-months.component';
+import {RelatedMonthsComponent} from './related-months.component';
 import {MonthComponent} from '../month/month.component';
 import {UiModule} from '../../ui/ui.module';
 import {AppQuery} from '../../../state/app.query';

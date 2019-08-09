@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {environment} from '../../../../../environments/environment';
 import {LoginService} from '../login.service';
 import {Router} from '@angular/router';
 import {InstaComponent, InstaComponentInterface} from '../../register/insta/insta.component';
