@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   nameValid$: Observable<boolean>;      // used in html
   private nameValid: boolean;           // used in this file
   name$ = new BehaviorSubject('');
-  private name: string;
+  name: string;
   allowTracking = true;
 
   constructor(private setupService: SetupService, private router: Router, public trackingService: TrackingService) { }

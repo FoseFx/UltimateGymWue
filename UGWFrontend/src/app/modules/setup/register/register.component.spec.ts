@@ -159,5 +159,16 @@ describe('RegisterComponent', () => {
 
   });
 
+  it('should newName', () => {
+    component.name$.next('');
+    component.name = undefined;
+    const target: HTMLInputElement = {
+      value: ' some value  \t\n',
+    } as HTMLInputElement;
+    const event = {target};
+    component.newName(event);
+    expect(component.name$.getValue()).toEqual('some value');
+    expect(component.name).toEqual('some value');
+  });
 
 });
