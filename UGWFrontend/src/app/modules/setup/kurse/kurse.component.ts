@@ -19,11 +19,11 @@ import {Router} from '@angular/router';
 export class KurseComponent implements OnInit {
 
   constructor(public setupQuery: SetupQuery,
-              private http: HttpClient,
-              private appQuery: AppQuery,
+              public http: HttpClient,
+              public appQuery: AppQuery,
               public setupService: SetupService,
-              private stundenplanService: StundenplanService,
-              private router: Router) { }
+              public stundenplanService: StundenplanService,
+              public router: Router) { }
 
   loading = false;
   error: string;
