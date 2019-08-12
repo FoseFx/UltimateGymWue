@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HiddenNonKurseComponent {
 
-  constructor(public appQuery: AppQuery, private appService: AppService, private router: Router) { }
+  constructor(public appQuery: AppQuery, public appService: AppService, public router: Router) { }
 
   allowed = {};
 

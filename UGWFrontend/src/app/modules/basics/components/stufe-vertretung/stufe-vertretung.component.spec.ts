@@ -24,4 +24,16 @@ describe('StufeVertretungComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set vertretungsdaten', () => {
+    component.vertretungsdaten = {infos: ['rmme'], vp: []};
+    expect(component.Svertretungsdaten).toEqual({infos: [], vp: []});
+
+    component.vertretungsdaten = {infos: ['rmme'], vp: [
+      {nd: 1, date: '', fach: '', info: '', newRaum: '', oldRaum: '', stunde: '', typ: ''},
+      {date: '1', fach: '1', info: '1', newRaum: '1', oldRaum: '1', stunde: '1', typ: '1'}
+    ]};
+    expect(component.Svertretungsdaten).toEqual({infos: [], vp: [{nd: 1, date: '', fach: '', info: '', newRaum: '', oldRaum: '', stunde: '', typ: ''}]});
+
+  });
 });

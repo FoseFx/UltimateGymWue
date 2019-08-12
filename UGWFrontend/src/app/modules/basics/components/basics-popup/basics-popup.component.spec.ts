@@ -32,4 +32,21 @@ describe('BasicsPopupComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should closePopup', () => {
+    const spy = spyOn(component.basicsService, 'closePopup');
+    component.closePopup();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should hideNonKurse', () => {
+    // @ts-ignore
+    component.stunde = {name: 'sth'};
+    const spy = spyOn(component.appService, 'hideNonKurs');
+    const spy2 = spyOn(component, 'closePopup');
+    component.hideNonKurse();
+    expect(spy).toHaveBeenCalled();
+    expect(spy2).toHaveBeenCalled();
+  });
+
 });

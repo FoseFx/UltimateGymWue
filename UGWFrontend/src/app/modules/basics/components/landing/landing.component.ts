@@ -4,8 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {AppService} from '../../../../state/app.service';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
-import {BasicsQuery} from '../../state/basics.query';
-import {BasicsService} from '../../state/basics.service';
 import {KeyService} from '../../../../services/key.service';
 import {Subscription} from 'rxjs';
 import {HasNetworkService} from '../../../../services/has-network.service';
@@ -20,12 +18,10 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = false;
 
   constructor(public readonly appQuery: AppQuery,
-              private appService: AppService,
-              private http: HttpClient,
-              public basicsQuery: BasicsQuery,
+              public appService: AppService,
+              public http: HttpClient,
               public hasNtwkService: HasNetworkService,
-              private basicsService: BasicsService,
-              private keyService: KeyService) { }
+              public keyService: KeyService) { }
 
   activeTab = 0;
   subscriptions: Subscription[] = [];

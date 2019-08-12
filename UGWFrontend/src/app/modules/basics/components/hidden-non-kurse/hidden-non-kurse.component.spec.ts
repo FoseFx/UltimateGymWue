@@ -29,4 +29,18 @@ describe('HiddenNonKurseComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should save', () => {
+    component.allowed = {
+      whatever: true,
+      elssth: false,
+    };
+    const spy = spyOn(component.appService, 'unHideNonKurse').and.callFake((key) => {
+      expect(key).toEqual('whatever');
+    });
+    const routerSpy = spyOn(component.router, 'navigate');
+    component.save();
+    expect(spy).toHaveBeenCalled();
+    expect(routerSpy).toHaveBeenCalled();
+  });
 });

@@ -14,7 +14,7 @@ import {AppService} from '../../../../state/app.service';
 })
 export class BasicsPopupComponent {
 
-  constructor(private basicsService: BasicsService, public basicsQuery: BasicsQuery, private appService: AppService) { }
+  constructor(public basicsService: BasicsService, public basicsQuery: BasicsQuery, public appService: AppService) { }
 
   popupData$: Observable<PopupData> = this.basicsQuery.popupData$;
 

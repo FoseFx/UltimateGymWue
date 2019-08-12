@@ -17,6 +17,8 @@ import {BasicsPopupComponent} from '../basics-popup/basics-popup.component';
 import {KeyService} from '../../../../services/key.service';
 import {HasNetworkService} from '../../../../services/has-network.service';
 import {SnackbarService} from '../../../../services/snackbar.service';
+import {of} from "rxjs";
+import {map} from "rxjs/operators";
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -61,4 +63,31 @@ describe('LandingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should listen to key events', () => {
+    component.activeTab = 0;
+    component.keyService.leftRightlistener$ = of(KeyService.RIGHT_EVENT);
+    component.ngOnInit();
+    expect(component.activeTab).toEqual(1);
+  });
+
+  it('should call onAfterViewInit', () => {
+    component.loading = false;
+    const spy = spyOn(component.http, 'get').and.returnValue(of());
+    // @ts-ignore
+    component.appQuery = {getValue: () => ({loginData: true, basics: {stufe: 'st'}}), logintoken: 'token', credentialsToken: 'nah'};
+    component.ngAfterViewInit();
+    expect(spy).toHaveBeenCalled();
+    expect(component.loading).toEqual(true);
+
+    const stub = spyOn(component.appService, 'setVertretungsplan');
+    spy.and.returnValue(of({}));
+    component.ngAfterViewInit();
+    expect(component.loading).toEqual(false);
+    expect(stub).toHaveBeenCalled();
+
+    spy.and.returnValue(of({}).pipe(map(_ => {throw new Error('unlucky'); } )));
+    component.ngAfterViewInit();
+  });
+
 });
