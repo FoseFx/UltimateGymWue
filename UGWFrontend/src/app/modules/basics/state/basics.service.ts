@@ -5,7 +5,7 @@ import {TimeTableField} from '../../../../types/TT';
 @Injectable()
 export class BasicsService {
 
-  constructor(private store: BasicsStore) { }
+  constructor(public store: BasicsStore) { }
 
   newPopup(pl: {stunde: TimeTableField}) {
     this.store.update({

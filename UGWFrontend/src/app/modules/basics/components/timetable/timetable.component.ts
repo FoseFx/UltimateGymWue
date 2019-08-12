@@ -12,53 +12,14 @@ import {Subscription} from 'rxjs';
 })
 export class TimetableComponent implements OnInit, OnDestroy {
 
-  constructor(private appQuery: AppQuery, private keyService: KeyService) { }
+  constructor(public appQuery: AppQuery, public keyService: KeyService) { }
 
   subscriptions: Subscription[] = [];
   activeTab = 0;
 
 
 
-  s$ = this.appQuery.tt$.pipe(map(
-    (tt: TimeTable) => {
-      if (tt === null) {
-        return [[[{}]], [[{}]]];
-      }
-      // @ts-ignore
-      const newTT: DisplayableTimeTable = [];
-      tt.forEach((woche: TimeTableWeek) => {
-        const newTTforWeek: DisplayableTimeTableStunde[] = [];
-        woche.forEach((tag: TimeTableDay, tagIndex: number) => {
-          let deepness = 0;
-          tag.forEach((field: TimeTableField, fieldIndex: number) => {
-            if (!newTTforWeek[fieldIndex]) { // add stunde, if not set yet
-              newTTforWeek[fieldIndex] = [];
-              if (deepness > 1) { // padding
-                for (let i = 0; i <= deepness; i++) {
-                  newTTforWeek[fieldIndex].push(null);
-                }
-              }
-            }
-            newTTforWeek[fieldIndex].push(field);
-            deepness = newTTforWeek[fieldIndex].length;
-
-          });
-          for (let i = tag.length; i !== newTTforWeek.length; i++) {
-            newTTforWeek.forEach((s) => {
-              if (!s[tagIndex]) {
-                s[tagIndex] = null;
-              }
-            });
-          }
-
-        });
-        newTT.push(newTTforWeek);
-      });
-
-      console.log(newTT);
-      return newTT;
-    }
-  ));
+  s$ = this.appQuery.tt$.pipe(sMap());
 
   ngOnInit(): void {
     // listen to key Events
@@ -83,6 +44,46 @@ type DisplayableTimeTable = [DisplayableTimeTableStunde[], DisplayableTimeTableS
 type DisplayableTimeTableStunde = DisplayableTimeTableTag[];
 type DisplayableTimeTableTag = TimeTableField;
 
+export const sMap = () => map(
+  (tt: TimeTable) => {
+    if (tt === null) {
+      return [[[{}]], [[{}]]];
+    }
+    // @ts-ignore
+    const newTT: DisplayableTimeTable = [];
+    tt.forEach((woche: TimeTableWeek) => {
+      const newTTforWeek: DisplayableTimeTableStunde[] = [];
+      woche.forEach((tag: TimeTableDay, tagIndex: number) => {
+        let deepness = 0;
+        tag.forEach((field: TimeTableField, fieldIndex: number) => {
+          if (!newTTforWeek[fieldIndex]) { // add stunde, if not set yet
+            newTTforWeek[fieldIndex] = [];
+            if (deepness > 1) { // padding
+              for (let i = 0; i <= deepness; i++) {
+                newTTforWeek[fieldIndex].push(null);
+              }
+            }
+          }
+          newTTforWeek[fieldIndex].push(field);
+          deepness = newTTforWeek[fieldIndex].length;
+
+        });
+        for (let i = tag.length; i !== newTTforWeek.length; i++) {
+          newTTforWeek.forEach((s) => {
+            if (!s[tagIndex]) {
+              s[tagIndex] = null;
+            }
+          });
+        }
+
+      });
+      newTT.push(newTTforWeek);
+    });
+
+    console.log(newTT);
+    return newTT;
+  }
+);
 /*
 
 

@@ -20,9 +20,6 @@ export class StufeVertretungComponent {
 
     this.Svertretungsdaten.infos.shift(); // dont display day (first item)
 
-    if (!value.vp) {
-      return;
-    }
     value.vp.forEach((vd: VertretungsDatum) => {
       if (vd.nd === 1) {
         this.Svertretungsdaten.vp.push(vd);
