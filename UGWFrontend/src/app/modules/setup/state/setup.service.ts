@@ -6,7 +6,7 @@ import {serviceInCypress} from '../../../util';
 
 @Injectable()
 export class SetupService {
-  constructor(private store: SetupStore, protected query: SetupQuery) {
+  constructor(public store: SetupStore, public query: SetupQuery) {
     serviceInCypress(this);
   }
   lockName(name: string) {
