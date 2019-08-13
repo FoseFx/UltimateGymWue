@@ -6,7 +6,7 @@ import {serviceInCypress} from '../../../util';
 
 @Injectable()
 export class SetupService {
-  constructor(private store: SetupStore, protected query: SetupQuery) {
+  constructor(public store: SetupStore, public query: SetupQuery) {
     serviceInCypress(this);
   }
   lockName(name: string) {
@@ -20,17 +20,7 @@ export class SetupService {
   }
   setAvailableKurse(kurse: Kurse) {
     // sort array based on title field, where LKs are higher up than GKs
-    kurse = kurse.sort((a: Kurs, b: Kurs) => {
-      const AisLK = /^LK/.test(a.title);
-      const BisLK = /^LK/.test(b.title);
-      if (AisLK && !BisLK) {
-        return -1;
-      } else if (BisLK && !AisLK) {
-        return 1;
-      } else {
-        return (a.title > b.title) ? 1 : ((a.title === b.title) ? 0 : -1);
-      }
-    });
+    kurse = kurse.sort(kurseSortFn);
 
     // convert to object
 
@@ -68,6 +58,17 @@ export class SetupService {
   justRegistered() {
     this.store.update({justRegistered: true});
   }
-
 }
 
+// sort array based on title field, where LKs are higher up than GKs
+export const kurseSortFn = (a: Kurs, b: Kurs) => {
+  const AisLK = /^LK/.test(a.title);
+  const BisLK = /^LK/.test(b.title);
+  if (AisLK && !BisLK) {
+    return -1;
+  } else if (BisLK && !AisLK) {
+    return 1;
+  } else { // !AisLK && !BisLK
+    return (a.title > b.title) ? 1 : ((a.title === b.title) ? 0 : -1);
+  }
+};
