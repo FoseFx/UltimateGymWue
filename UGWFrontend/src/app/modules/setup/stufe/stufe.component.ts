@@ -6,6 +6,7 @@ import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
 import {Router} from '@angular/router';
 import {StundenplanService} from '../services/stundenplan.service';
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-stufe',
@@ -18,11 +19,11 @@ export class StufeComponent implements OnInit {
   error: string;
 
   constructor(public setupQuery: SetupQuery,
-              private http: HttpClient,
-              private appQuery: AppQuery,
-              private setupService: SetupService,
-              private router: Router,
-              private stundenplanService: StundenplanService) { }
+              public http: HttpClient,
+              public appQuery: AppQuery,
+              public setupService: SetupService,
+              public router: Router,
+              public stundenplanService: StundenplanService) { }
 
   async ngOnInit() {
     if (!this.appQuery.hasCredentials()) {return; }
@@ -35,7 +36,8 @@ export class StufeComponent implements OnInit {
       }
     }
 
-    const sub = this.http.get(
+    let sub = of().subscribe();
+    sub = this.http.get(
       environment.urls.getStufen,
       {headers: {Authorization: this.appQuery.loginToken, 'x-gw-auth': this.appQuery.credentialsToken}}
     )
@@ -61,7 +63,6 @@ export class StufeComponent implements OnInit {
   }
 
   next(stufe: string) {
-    console.log(stufe, !!stufe);
     if (!stufe) {
       return;
     }
@@ -70,22 +71,14 @@ export class StufeComponent implements OnInit {
   }
 
   fetchBasics(): Promise<boolean> {
-    return new Promise((resolve) => {
-
-      this.stundenplanService.getSp().subscribe(
-        (_) => {
-          this.router.navigate(['/setup/basics/klausuren']);
-          resolve(true);
-        },
-        (error) => {
-          console.log(error);
-          resolve(false);
-        }
-      );
-
-
+    return this.stundenplanService.getSp().toPromise()
+      .then(_ => {
+        this.router.navigate(['/setup/basics/klausuren']);
+        return true;
+      }).catch(err => {
+        console.error(err);
+        return false;
     });
-
   }
 
 }
