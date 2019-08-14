@@ -12,21 +12,23 @@ import {TimeTable} from '../../../../types/TT';
 
 @Injectable()
 export class StundenplanService {
-    constructor(private appService: AppService, private setupQuery: SetupQuery, private appQuery: AppQuery, private http: HttpClient) {}
+  constructor(public appService: AppService,
+              public setupQuery: SetupQuery,
+              public appQuery: AppQuery,
+              public http: HttpClient) {}
 
-    getSp(): Observable<DataResponse<any>> {
-
-        return this.http.get(environment.urls.getStundenplan, {
-            headers: {
-                Authorization: this.appQuery.loginToken,
-                'x-gw-auth': this.appQuery.credentialsToken
-            }
-        }).pipe(
-            tap((next: DataResponse<{kurse: Kurse, sp: TimeTable, stufe: string}>) => {
-                const {kurse, sp, stufe} = next.data;
-                console.log(next);
-                this.appService.setKurseStufeStundenplan(kurse, stufe, sp);
-            })
-        );
-    }
+  getSp(): Observable<DataResponse<any>> {
+    return this.http.get(environment.urls.getStundenplan, {
+        headers: {
+          Authorization: this.appQuery.loginToken,
+          'x-gw-auth': this.appQuery.credentialsToken
+        }
+      }).pipe(
+        tap((next: DataResponse<{kurse: Kurse, sp: TimeTable, stufe: string}>) => {
+          const {kurse, sp, stufe} = next.data;
+          console.log(next);
+          this.appService.setKurseStufeStundenplan(kurse, stufe, sp);
+      })
+    );
+  }
 }

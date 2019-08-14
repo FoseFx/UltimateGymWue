@@ -15,7 +15,9 @@ export class GoogleLoginComponent implements OnInit {
   error: string;
   loading = false;
 
-  constructor(private router: Router, private loginService: LoginService, private cdref: ChangeDetectorRef) { }
+  constructor(public router: Router,
+              public loginService: LoginService,
+              private cdref: ChangeDetectorRef) { }
 
   ngOnInit() {
     addGoogleScript();

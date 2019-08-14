@@ -9,6 +9,8 @@ import {AppService} from '../../../../state/app.service';
 import {AppStore} from '../../../../state/app.store';
 import {AppQuery} from '../../../../state/app.query';
 import {HttpClientModule} from '@angular/common/http';
+import {of} from "rxjs";
+import {map} from "rxjs/operators";
 
 describe('GoogleLoginComponent', () => {
   let component: GoogleLoginComponent;
@@ -31,5 +33,19 @@ describe('GoogleLoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should handle Ok', () => {
+    component.loading = false;
+    const spy = spyOn(component.loginService, 'googleLogin').and.returnValue(of({}));
+    const spy2 = spyOn(component.router, 'navigate');
+    // @ts-ignore
+    component.onOk({getAuthResponse: () => ({id_token: 't'})});
+    expect(spy).toHaveBeenCalled();
+    expect(spy2).toHaveBeenCalled();
+    spy.and.returnValue(of({}).pipe(map(_ => {throw new Error('unlucky'); })))
+    // @ts-ignore
+    component.onOk({getAuthResponse: () => ({id_token: 't'})});
+
   });
 });
