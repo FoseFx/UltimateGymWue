@@ -7,7 +7,7 @@ import {AppService} from '../../../state/app.service';
 
 @Injectable()
 export class LoginService {
-  constructor(private http: HttpClient, private appService: AppService) {}
+  constructor(public http: HttpClient, public appService: AppService) {}
 
   normalLogin(email: string, password: string): Observable <LoginResponse> {
     return (this.http.post(environment.urls.loginNormal, {

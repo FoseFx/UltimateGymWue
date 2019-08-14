@@ -9,6 +9,8 @@ import {AppStore} from '../../../state/app.store';
 import {HttpClientModule} from '@angular/common/http';
 import {SetupQuery} from '../state/setup.query';
 import {SetupStore} from '../state/setup.store';
+import {of} from "rxjs";
+import {map} from "rxjs/operators";
 
 describe('CredentialsComponent', () => {
   let component: CredentialsComponent;
@@ -31,5 +33,34 @@ describe('CredentialsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should init', () => {
+    spyOn(component.query, 'getValue').and.returnValue({loginData: 's'});
+    spyOn(component.setupQuery, 'getValue').and.returnValue({justRegistered: false});
+    const spy = spyOn(component.http, 'get').and.returnValue(of({}));
+    spyOn(component.service, 'addCreds');
+    spyOn(component.router, 'navigate');
+    component.loading = false;
+    component.ngOnInit();
+
+    spy.and.returnValue(of({}).pipe(map(_ => { throw new Error(); })));
+    component.ngOnInit();
+  });
+
+  it('should handle click', () => {
+    component.loading = false;
+    // @ts-ignore
+    component.query = {loginToken: ''};
+    spyOn(component.router, 'navigate');
+    spyOn(component.service, 'addCreds');
+    const httpSpy = spyOn(component.http, 'post').and.returnValue(of({}));
+    // @ts-ignore
+    component.onClick({}, {});
+    expect(component.loading).toEqual(true);
+
+    httpSpy.and.returnValue(of({}).pipe(map(_ => { throw new Error(); })));
+    // @ts-ignore
+    component.onClick({}, {});
   });
 });

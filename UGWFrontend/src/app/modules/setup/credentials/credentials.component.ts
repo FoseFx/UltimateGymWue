@@ -7,6 +7,7 @@ import {environment} from '../../../../environments/environment';
 import {AppService} from '../../../state/app.service';
 import {handleError} from 'src/app/util';
 import {SetupQuery} from '../state/setup.query';
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-credentials',
@@ -19,11 +20,11 @@ export class CredentialsComponent implements OnInit {
   error: string;
 
   constructor(
-    private router: Router,
-    private query: AppQuery,
-    private http: HttpClient,
-    private service: AppService,
-    private setupQuery: SetupQuery) { }
+    public router: Router,
+    public query: AppQuery,
+    public http: HttpClient,
+    public service: AppService,
+    public setupQuery: SetupQuery) { }
 
   ngOnInit() {
     if (this.query.getValue().loginData === null) {return; } // this line is only for the tests
@@ -31,7 +32,8 @@ export class CredentialsComponent implements OnInit {
       return; // no possibility user has credentials saved already
     }
     this.loading = true;
-    const sub = this.http.get(
+    let sub = of().subscribe();
+    sub = this.http.get(
       environment.urls.fetchCredentials,
       {headers: {Authorization: this.query.loginToken}}
     ).subscribe(
@@ -56,7 +58,8 @@ export class CredentialsComponent implements OnInit {
       return;
     }
     this.loading = true;
-    const sub = this.http.post(
+    let sub = of().subscribe();
+    sub = this.http.post(
       environment.urls.addCredentials,
       {username: user.value, password: passw.value, lehrer: false},
       {headers: {Authorization: this.query.loginToken}}
