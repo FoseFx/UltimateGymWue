@@ -1,7 +1,4 @@
 <app-show-event [event]="currentEvent" (close)="currentEvent = null"></app-show-event>
-<app-fab>
-  <i class="material-icons block">add</i>
-</app-fab>
 
 <div class="heading">
   <i class="material-icons" (click)="showPrevMonth()" [ngStyle]="{'visibility': showPrevArrow ? 'initial' : 'hidden'}" >arrow_back</i>

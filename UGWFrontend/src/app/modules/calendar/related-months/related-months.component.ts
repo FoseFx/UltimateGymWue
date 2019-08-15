@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MonthComponent} from '../month/month.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-related-months',
@@ -7,12 +8,18 @@ import {MonthComponent} from '../month/month.component';
   styleUrls: ['./related-months.component.scss']
 })
 export class RelatedMonthsComponent {
+
+
+  constructor(public router: Router) {
+  }
+
   MINIMUM_DELTA = -4;
   MAXIMUM_DELTA = 24;
   currentMonth = new Date().getMonth(); // 0 indexed
   currentYear = new Date().getFullYear();
   monthDelta = 0; // 0 = this month, -1 = prev month, 1 = next month and so on
   show = true;
+
   monthChanged(type: number) {
     const newDelta = Math.min( // use Maximum or smaller
       Math.max( // use Minimum or bigger
@@ -42,5 +49,9 @@ export class RelatedMonthsComponent {
       }
     }
     return new Date(newYear, newMonth);
+  }
+
+  routeToNewEventComp() {
+    this.router.navigate(['/calendar/new']);
   }
 }

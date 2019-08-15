@@ -7,9 +7,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {ShowEventComponent} from './show-event/show-event.component';
 import {UiModule} from "../ui/ui.module";
 import {RelatedMonthsComponent} from './related-months/related-months.component';
+import { NewEventComponent } from './new-event/new-event.component';
 
 @NgModule({
-  declarations: [MonthComponent, ShowEventComponent, RelatedMonthsComponent],
+  declarations: [MonthComponent, ShowEventComponent, RelatedMonthsComponent, NewEventComponent],
   imports: [
     CommonModule,
     CalendarRoutingModule,

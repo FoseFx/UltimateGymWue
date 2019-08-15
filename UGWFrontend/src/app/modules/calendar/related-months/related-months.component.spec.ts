@@ -7,6 +7,7 @@ import {AppQuery} from '../../../state/app.query';
 import {AppStore} from '../../../state/app.store';
 import {ShowEventComponent} from '../show-event/show-event.component';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('RelatedMonthsComponent', () => {
   let component: RelatedMonthsComponent;
@@ -14,7 +15,7 @@ describe('RelatedMonthsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, UiModule],
+      imports: [HttpClientModule, UiModule, RouterTestingModule],
       declarations: [ RelatedMonthsComponent, MonthComponent, ShowEventComponent ],
       providers: [AppQuery, AppStore]
     })
@@ -95,5 +96,10 @@ describe('RelatedMonthsComponent', () => {
       expect(component.monthDelta).toBe(3);
       expect(component.show).toBe(false);
     });
+  });
+  it('should route to /calendar/new', () => {
+    const spy = spyOn(component.router, 'navigate').and.callFake((arr) => expect(arr[0]).toEqual('/calendar/new'));
+    component.routeToNewEventComp();
+    expect(spy).toHaveBeenCalled();
   });
 });
