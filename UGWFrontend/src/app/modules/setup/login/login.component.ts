@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {handleError} from 'src/app/util';
 import {TrackingService} from '../../../services/tracking.service';
+import {SnackbarService} from "../../../services/snackbar.service";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnDestroy {
   loading = false;
   allowTracking = true;
 
-  constructor(public loginService: LoginService, public router: Router, public trackingService: TrackingService) { }
+  constructor(public loginService: LoginService, public router: Router, public trackingService: TrackingService, public snack: SnackbarService) { }
 
 
   allow(email: InputComponent, password: InputComponent) {

@@ -4,15 +4,9 @@
   <form>
 
     <h3 class="warning" *ngIf="!!error">Fehler: {{error}}</h3>
-
+    <p style="font-weight: bold; color: red">DEMO: You can use any email/psw.</p>
     <app-input #email     type="email"    (enter)="onSubmit(email, password)">Email</app-input>
     <app-input #password  type="password" (enter)="onSubmit(email, password)">Passwort</app-input>
-
-    <br>
-    <label class="center-button">
-      <input type="checkbox" [checked]="allowTracking" (change)="allowTracking = !allowTracking">
-      Verhaltensanalyse zulassen, siehe <a routerLink="/setup/legal">Dateschutzerklärung</a>
-    </label>
     <br>
     <app-button
       [accent]="true"
@@ -29,7 +23,8 @@
     <div id="third-parties">
 
       <app-button
-        (click)="route(['/setup/login/google'])"
+        [disabled]="true"
+        (click)="snack.demoAlert()"
         class="center-button"
       >
         <span style="display: block">Login mit</span>
@@ -37,7 +32,8 @@
       </app-button>
 
       <app-button
-        (click)="route(['/setup/login/insta'])"
+        [disabled]="true"
+        (click)="snack.demoAlert()"
         class="center-button">
         <span style="display: block">Weiter mit</span>
         <img style="height: 50px; margin-top: 10px" alt="Instagram" src="/assets/instagram.png">

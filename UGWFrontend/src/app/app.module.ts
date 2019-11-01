@@ -21,7 +21,6 @@ import {SnackbarComponent} from './components/snackbar/snackbar.component';
 import {SnackbarService} from './services/snackbar.service';
 import {TrackingService} from './services/tracking.service';
 import {NotificationService} from './services/notification.service';
-import {HttpClientModule} from '@angular/common/http';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -38,8 +37,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     AppRoutingModule,
     UiModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    HttpClientModule
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     {provide: LOCALE_ID,  useValue: 'de-DE'},

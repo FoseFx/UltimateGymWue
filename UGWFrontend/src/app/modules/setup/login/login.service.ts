@@ -1,66 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import {AppService} from '../../../state/app.service';
 
 @Injectable()
 export class LoginService {
-  constructor(public http: HttpClient, public appService: AppService) {}
+  constructor(public appService: AppService) {}
 
-  normalLogin(email: string, password: string): Observable <LoginResponse> {
-    return (this.http.post(environment.urls.loginNormal, {
-      email,
-      password
-    }) as Observable<LoginResponse>).pipe(
-      map(res => {
-        if (res.error) {
-          throw new Error(res.msg);
-        }
-        return res;
-      }),
-      tap((res) => {
-        this.appService.onLogin(res);
-      })
-    );
+  normalLogin(_: string, __: string): Observable <LoginResponse> {
+      this.appService.onLogin({error: false});
+      return of({error: false});
   }
-
-  googleLogin(token: string): Observable<LoginResponse> {
-    return (
-      this.http.post(environment.urls.loginGoogle, {token}
-    ) as Observable<LoginResponse>).pipe(
-      map(res => {
-        if (res.error) {
-          throw new Error(res.msg);
-        }
-        return res;
-      }),
-      tap((res) => {
-        this.appService.onLogin(res);
-      })
-    );
-  }
-
-
-  instaLogin(code: string, href: string): Observable<LoginResponse> {
-    return (
-      this.http.post(environment.urls.loginInsta, {code, href}
-    ) as Observable<LoginResponse>).pipe(
-      map(res => {
-        if (res.error) {
-          throw new Error(res.msg);
-        }
-        return res;
-      }),
-      tap((res) => {
-        this.appService.onLogin(res);
-      })
-    );
-  }
-
-
-
 }
 
 export class LoginResponse {

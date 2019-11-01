@@ -2,6 +2,7 @@
   <h1>Ultimate Gym Wue</h1>
 </div>
 
-<button [routerLink]="['/legal']">Legal</button>
-<app-button [routerLink]="['/setup/register']">Let's get started</app-button>
+<h1 style="color: red; font-weight: bold">DEMO MODE</h1>
+<button disabled (click)="snack.demoAlert()">Legal</button>
+<app-button [disabled]="true" (click)="snack.demoAlert()">Let's get started</app-button>
 <app-button [routerLink]="['/setup/login']" [swap]="true">Login</app-button>

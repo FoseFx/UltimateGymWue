@@ -1,6 +1,4 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SchoolEvent} from '../../../../types/Event';
 import {KeyService} from '../../../services/key.service';
@@ -17,7 +15,7 @@ export class MonthComponent implements AfterViewInit, OnInit, OnDestroy {
   public static EVENT_PREV_MONTH = 0;
   public static EVENT_NEXT_MONTH = 1;
 
-  constructor(public http: HttpClient, public appQuery: AppQuery, public keyService: KeyService) { }
+  constructor(public appQuery: AppQuery, public keyService: KeyService) { }
 
   currentEvent: SchoolEvent = null;
   offset: number;
@@ -76,44 +74,33 @@ export class MonthComponent implements AfterViewInit, OnInit, OnDestroy {
     this.keySub = this.keyService.leftRightlistener$.subscribe(this.onKeyEvent);
     const query = this.query();
 
-    this.http.get(environment.urls.getEvents + query, {
-      headers: {
-        Authorization: this.appQuery.loginToken
+    const data: SchoolEvent[] = [{name: 'Demo Event 1', typ: 'ferientag', format: 'fullday', votes: 10, by: {name: 'Demo User', uid: 'DEMOUID'}, begin: +new Date()}];
+    console.log(data);
+    data.forEach((event: SchoolEvent) => {
+
+      if (event.format === 'fullday') {
+        const date = new Date(event.begin);
+        const day = date.getDate();
+        this.month[day - 1 + this.offset].push(event);
+      } else if (event.format === 'ferien' || event.format === 'time') {
+        const begin = new Date(event.begin).getDate();
+        const end = new Date(event.end).getDate();
+        for (let i = begin; i <= end; i++) {
+          this.month[i - 1 + this.offset].push(event);
+        }
+      } else if (event.format === 'schule') {
+        const l = event.begin.toString().length;
+        const beginH = +event.begin.toString().substr(0, l === 12 ? 1 : 2);
+        const date = new Date(+(event.begin.toString().substr(l === 12 ? 1 : 2) + '0' + (l === 12 ? '0' : '')));
+        const day = date.getDate();
+        event.beginSchulStunde = beginH;
+        event.begin = +date;
+        this.month[day - 1 + this.offset].push(event);
       }
-    }).subscribe(
-      (d: {data: SchoolEvent[], error: boolean}) => {
-        const data = d.data;
-        console.log(data);
-        data.forEach((event: SchoolEvent) => {
 
-          if (event.format === 'fullday') {
-            const date = new Date(event.begin);
-            const day = date.getDate();
-            this.month[day - 1 + this.offset].push(event);
-          } else if (event.format === 'ferien' || event.format === 'time') {
-            const begin = new Date(event.begin).getDate();
-            const end = new Date(event.end).getDate();
-            for (let i = begin; i <= end; i++) {
-              this.month[i - 1 + this.offset].push(event);
-            }
-          } else if (event.format === 'schule') {
-            const l = event.begin.toString().length;
-            const beginH = +event.begin.toString().substr(0, l === 12 ? 1 : 2);
-            const date = new Date(+(event.begin.toString().substr(l === 12 ? 1 : 2) + '0' + (l === 12 ? '0' : '')));
-            const day = date.getDate();
-            event.beginSchulStunde = beginH;
-            event.begin = +date;
-            this.month[day - 1 + this.offset].push(event);
-          }
+    });
 
-        });
-
-        console.log('month.month', this.month);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    console.log('month.month', this.month);
   }
 
   onKeyEvent(event: number) {

@@ -4,7 +4,6 @@ import {LandingComponent} from './components/landing/landing.component';
 import {BasicsRoutingModule} from './basics-routing.module';
 import {HomeTableComponent} from './components/home-table/home-table.component';
 import {UiModule} from '../ui/ui.module';
-import {HttpClientModule} from '@angular/common/http';
 import {StufeVertretungComponent} from './components/stufe-vertretung/stufe-vertretung.component';
 import {BasicsQuery} from './state/basics.query';
 import {BasicsStore} from './state/basics.store';
@@ -36,7 +35,6 @@ import {NotificationComponent} from './components/notification/notification.comp
   imports: [
     CommonModule,
     BasicsRoutingModule,
-    HttpClientModule,
     UiModule
   ]
 })

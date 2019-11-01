@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SetupQuery} from '../state/setup.query';
-import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AppQuery} from '../../../state/app.query';
 import {SetupService} from '../state/setup.service';
@@ -19,7 +18,6 @@ import {Router} from '@angular/router';
 export class KurseComponent implements OnInit {
 
   constructor(public setupQuery: SetupQuery,
-              public http: HttpClient,
               public appQuery: AppQuery,
               public setupService: SetupService,
               public stundenplanService: StundenplanService,
@@ -33,19 +31,9 @@ export class KurseComponent implements OnInit {
   ngOnInit() {
     if (this.setupQuery.getStufe() === null) { return; } // for the tests, should be captured by router guard
     this.loading = true;
-    this.http.get(
-      `${environment.urls.getKurse}/${this.setupQuery.getStufe()}`,
-      {headers: {Authorization: this.appQuery.loginToken, 'x-gw-auth': this.appQuery.credentialsToken}}
-    ).subscribe(
-      (next: {error: boolean, msg?: string, data?: Kurse}) => {
-        console.log(next);
-        if (!next.error) {
-          this.setupService.setAvailableKurse(next.data);
-        }
-        this.loading = false;
-      },
-      (error) => handleError(this, error)
-    );
+    const data: Kurse = [];
+    this.setupService.setAvailableKurse(data);
+    this.loading = false;
   }
 
   onSetKurse() {
@@ -54,20 +42,9 @@ export class KurseComponent implements OnInit {
     }
     this.loading = true;
     const selectedKurse = this.setupQuery.getSelectedKurse();
-    this.http.put(
-      environment.urls.setBasics,
-      {kurse: selectedKurse, stufe: this.setupQuery.getStufe()},
-      {headers: {Authorization: this.appQuery.loginToken}}
-    ).subscribe(
-      (next: {error: boolean, msg: string}) => {
-        console.log(next);
-        this.stundenplanService.getSp().subscribe(_ => {
-          this.router.navigate(['/setup/basics/klausuren']);
-        }, error => handleError(this, error));
-      },
-      (error) => handleError(this, error)
-    );
-
+    this.stundenplanService.getSp().subscribe(_ => {
+      this.router.navigate(['/setup/basics/klausuren']);
+    }, error => handleError(this, error));
   }
 
 }

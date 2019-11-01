@@ -25,10 +25,8 @@ export class HomeTableComponent {
     console.log(value);
     for (const v of value) {
       if (!!v) { // ignore null
-        if (v.infos[0] === `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear()}`) {
           this.Svd = v;
           return;
-        }
       }
     }
     if (value[0] !== null && value[1] !== null) {

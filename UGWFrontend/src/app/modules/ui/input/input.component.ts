@@ -20,6 +20,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @Input() type: 'text'|'email'|'number'|'password'|'dropdown' = 'text';
   @Input() allowBadPsw = false;
+  @Input('value') preFilledValue = '';
   @Input('dropdownOptions')
   set dropdownOptions(val: string[] ) {
     this.ddOptions = val;

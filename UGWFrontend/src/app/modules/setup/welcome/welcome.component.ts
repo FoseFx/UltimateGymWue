@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {SnackbarService} from "../../../services/snackbar.service";
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public snack: SnackbarService) { }
 
   ngOnInit() {
   }
-
 }

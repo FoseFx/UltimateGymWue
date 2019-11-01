@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {tap} from "rxjs/operators";
+import {BehaviorSubject} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {WARN} from '@angular/compiler-cli/ngcc/src/logging/console_logger';
 
 
 export class SnackbarRef {
@@ -40,7 +41,7 @@ export interface SnackbarActions {
 export type SnackbarType = 'note'|'alert'|'warning';
 
 export const defaultActions: SnackbarActions = {
-  'Schließen': ref => { clearTimeout(ref.setTimeout); ref.close(); }
+  Schließen: ref => { clearTimeout(ref.setTimeout); ref.close(); }
 };
 @Injectable()
 export class SnackbarService {
@@ -71,5 +72,9 @@ export class SnackbarService {
       }
     }, this.snackQueue[0].ttl);
     return this.snackQueue[0];
+  }
+
+  demoAlert() {
+    this.addSnackbar('THIS DOES NOT WORK IN DEMO MODE', 5000, 'alert');
   }
 }

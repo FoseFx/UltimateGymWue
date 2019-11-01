@@ -15,14 +15,9 @@ import {SetupQuery} from './state/setup.query';
 import {SetupService} from './state/setup.service';
 import {NormalComponent} from './register/normal/normal.component';
 import {RegistersteptwoGuard} from './guards/registersteptwo.guard';
-import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from './login/login.service';
 import {LoginGuard} from './guards/login.guard';
 import {LoginnedGuard} from './guards/loginned.guard';
-import {GoogleComponent, GoogleSigninComponent} from './register/google/google.component';
-import {GoogleLoginComponent} from './login/google-login/google-login.component';
-import {InstaComponent} from './register/insta/insta.component';
-import {InstaLoginComponent} from './login/insta-login/insta-login.component';
 import {CredentialsComponent} from './credentials/credentials.component';
 import {HasCredsGuard} from './guards/has-creds.guard';
 import {HasStufeGuard} from './guards/has-stufe.guard';
@@ -40,11 +35,6 @@ import {HasKurseGuard} from './guards/has-kurse.guard';
     StufeComponent,
     KurseComponent,
     NormalComponent,
-    GoogleComponent,
-    GoogleSigninComponent,
-    GoogleLoginComponent,
-    InstaComponent,
-    InstaLoginComponent,
     CredentialsComponent,
     KurseSelectRowComponent,
     KlausurenComponent
@@ -53,7 +43,6 @@ import {HasKurseGuard} from './guards/has-kurse.guard';
     CommonModule,
     FormsModule,
     SetupRoutingModule,
-    HttpClientModule,
     UiModule
   ],
   providers: [

@@ -16,57 +16,24 @@ export class AppService {
   changeMenuState() {
     this.store.update({menuOpen: !this.query.getValue().menuOpen});
   }
-  onLogin(loginData: LoginResponse) {
-
-    const provider = getProvider(loginData);
-
-    if (isNormal(loginData)) {
-      this.store.update({
-        loginData: {
-          uid: loginData.data.claim.uid,
-          token: loginData.data.token,
-          provider,
-          google: null,
-          insta: null,
-          normal: {
-            email: loginData.data.claim.normal.email,
-            email_verified: loginData.data.claim.normal.email_verified,
-          }
-        }
-      });
-    }
-
-    if (isGoogle(loginData)) {
-      this.store.update({
-        loginData: {
-          uid: loginData.data.claim.uid,
-          token: loginData.data.token,
-          provider,
-          normal: null,
-          insta: null,
-          google: loginData.data.claim.google
-        }
-      });
-    }
-
-
-
-    if (isInsta(loginData)) {
-      this.store.update({
-        loginData: {
-          uid: loginData.data.claim.uid,
-          token: loginData.data.token,
-          provider,
-          normal: null,
-          google: null,
-          insta: loginData.data.claim.insta
-        }
-      });
-    }
-
+  onLogin(_: LoginResponse) {
 
     this.store.update({
-      fullname: loginData.data.claim.fullname
+      loginData: {
+        uid: 'DEMOUUID',
+        token: 'DEMOTOKEN',
+        provider: ['normal'],
+        google: null,
+        insta: null,
+        normal: {
+          email: 'demo@demo.com',
+          email_verified: true,
+        }
+      }
+    });
+
+    this.store.update({
+      fullname: 'DEMO USER'
     });
 
     this._save();
@@ -76,7 +43,7 @@ export class AppService {
     this.store.update({
       credentials: {
         token,
-        has_lehrer: tokenHasLehrer(token)
+        has_lehrer: false
       }
     });
     this._save();
@@ -109,6 +76,7 @@ export class AppService {
     const basics = this._getMutableBasicObject();
     // old information gets discarded
     const newPlan: TimeTable = JSON.parse(JSON.stringify(basics.stundenplan));
+    console.log('np', newPlan);
     basics.vertretungsplan = vp;
     // Write VD into SPwithInfos
     basics.vertretungsplan.forEach((day: VertretungsPlanSeite) => {
@@ -118,6 +86,7 @@ export class AppService {
             return;
           }
           const {index, abIndex} = dateSplitToDayOfWeekAndABWoche(datum.date);
+          console.log(index, abIndex, +datum.stunde - 1);
           if (newPlan[abIndex][index][+datum.stunde - 1].name === datum.fach || this._isMyKlausur(datum)) {
             if (!newPlan[abIndex][index][+datum.stunde - 1].vd) { // set if empty
               newPlan[abIndex][index][+datum.stunde - 1].vd = datum;

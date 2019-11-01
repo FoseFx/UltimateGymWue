@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AppQuery} from '../../../../state/app.query';
-import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {AppService} from '../../../../state/app.service';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
@@ -19,7 +18,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(public readonly appQuery: AppQuery,
               public appService: AppService,
-              public http: HttpClient,
               public hasNtwkService: HasNetworkService,
               public keyService: KeyService) { }
 
@@ -43,18 +41,13 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     if (!this.appQuery.getValue().loginData) { return; } // only for the tests, guard should not allow this
     this.loading = true;
-    this.http.get(environment.urls.getVertretung + this.appQuery.getValue().basics.stufe, {
-      headers: {
-        Authorization: this.appQuery.loginToken,
-        'X-GW-Auth': this.appQuery.credentialsToken
-      }
-    }).subscribe((o: {error: boolean, msg?: string, data: VertretungsPlanSeite[]}) => {
-      this.appService.setVertretungsplan(o.data);
-      this.loading = false;
-    }, (err) => {
-      this.loading = false;
-      console.log(err);
-    });
+    const now = new Date();
+    const m = now.getMonth() + 1;
+    const day = now.getDate();
+    const date = `${day}.${m}.`;
+    const data: VertretungsPlanSeite[] = [{infos: [`${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`, '(Fake Data, you\'re in Demo-Mode)'], vp: [{typ: 'e', stunde: '1', oldRaum: '1', newRaum: '---', info: 'Demo', fach: 'Demo', date},{typ: 'e', stunde: '1', oldRaum: '1', newRaum: '---', info: 'Demo', fach: 'Demo', date, nd: 1}]}, {infos: [''], vp: []}];
+    this.appService.setVertretungsplan(data);
+    this.loading = false;
   }
 
   ngOnDestroy(): void {

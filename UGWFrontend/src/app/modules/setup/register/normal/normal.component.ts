@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {SetupQuery} from '../../state/setup.query';
 import {InputComponent} from '../../../ui/input/input.component';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../environments/environment';
 import {SetupService} from '../../state/setup.service';
 import {LoginService} from '../../login/login.service';
 import {Router} from '@angular/router';
@@ -18,7 +16,6 @@ export class NormalComponent {
 
   constructor(public query: SetupQuery,
               public service: SetupService,
-              public http: HttpClient,
               public loginService: LoginService,
               public router: Router) { }
 
@@ -29,21 +26,11 @@ export class NormalComponent {
     if (this.invalid(email, passw, passwwdh)) {
       return;
     }
-    this.loading = true;
-    let sub = null;
-    sub = this.http.post(environment.urls.registerNormal, {
-      fullname: this.query.getValue().name,
-      email: email.value,
-      password: passw.value
-    }).subscribe(
-      (data: string) => this.onSuccess(data, sub, email, passw),
-      (error) => handleError(this, error)
-    );
+    const data = '';
+    this.onSuccess(data, null, email, passw);
   }
 
-  onSuccess(data: string, sub: Subscription, email: InputComponent, passw: InputComponent) {
-    sub.unsubscribe();
-    console.log(data);
+  onSuccess(_: string, __: null, email: InputComponent, passw: InputComponent) {
     this.loginService.normalLogin(email.value, passw.value).subscribe((_) => {
         this.service.justRegistered();
         this.router.navigate(['/setup/basics']);
