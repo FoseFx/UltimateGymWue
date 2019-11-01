@@ -3,6 +3,28 @@
 </div>
 
 <h1 style="color: red; font-weight: bold">DEMO MODE</h1>
-<button disabled (click)="snack.demoAlert()">Legal</button>
-<app-button [disabled]="true" (click)="snack.demoAlert()">Let's get started</app-button>
-<app-button [routerLink]="['/setup/login']" [swap]="true">Login</app-button>
+<p style="width: 95%; margin: 0 auto;max-width: 700px">
+  As BGW's main intent was to provide a code base that theoretically
+  could be picked up by anyone that knows how to spin up a node server
+  UGW's intent was to create an ultimate platform. My plans included notifications
+  for changes on the substitution plans, a collective calendar and so on.
+  The backend was written in rust and node and also did the analysis needed.
+  This enabled heavy caching which brought response times down to 5ms on the same machine.
+  This project died because of the same reason BGW did. For the first time I took testing seriously
+  and came up with a 95.5% coverage. In hindsight rocket.rs was the wrong framework for rust, Actix-Web is way better.
+  <i>This demo version of the app mocks every backend connection.</i>
+</p>
+<br>
+
+<p style="width: 95%; text-align: center"><i>Swiping works best on mobile.</i></p>
+
+<br>
+
+<a style="text-align: center; width: 100%; display: block" href="https://github.com/FoseFx/UltimateGymWue" target="_blank" referrerpolicy="no-referrer">This project on Github</a>
+
+<br>
+<div style="margin: 0 auto; width: 400px">
+  <button disabled (click)="snack.demoAlert()">Legal</button>
+  <app-button [disabled]="true" (click)="snack.demoAlert()">Let's get started</app-button>
+  <app-button [routerLink]="['/setup/login']" [swap]="true">Login</app-button>
+</div>

@@ -3,8 +3,6 @@ import {AppQuery} from '../../../state/app.query';
 import {Observable} from 'rxjs';
 import {LoginData} from '../../../state/app.store';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +11,7 @@ import {environment} from 'src/environments/environment';
 })
 export class UserComponent {
 
-  constructor(public appQuery: AppQuery, public router: Router, public http: HttpClient) { }
+  constructor(public appQuery: AppQuery, public router: Router) { }
 
   showLogoutPopup = false;
   logoutOrAccountRemoval = 0; // 0 = logout, 1 = account removal
@@ -38,14 +36,6 @@ export class UserComponent {
   }
 
   removeAcc() {
-    this.http.delete(environment.urls.removeAccount, {headers: {
-      authorization: this.appQuery.loginToken
-    }}).subscribe((res) => {
-      console.log(res);
-      this.logout();
-    },
-    (err) => {
-      console.error(err);
-    });
+
   }
 }

@@ -6,6 +6,7 @@
   <ng-template [ngIf]="notificationService.canPush()" [ngIfElse]="elseBlock">
     <p class="center-text">Werde informiert, sobald der UGW Server Veränderungen bezüglich deinem Vertretungsplan erfasst.</p>
     <app-button
+      [disabled]="true"
       *ngIf="!notificationService.isSubscribed()"
       (click)="notificationService.subscribeToPush()"
       class="center-button">

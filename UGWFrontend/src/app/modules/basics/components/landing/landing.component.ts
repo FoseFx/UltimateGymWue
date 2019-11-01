@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AppQuery} from '../../../../state/app.query';
-import {environment} from '../../../../../environments/environment';
 import {AppService} from '../../../../state/app.service';
 import {VertretungsPlanSeite} from '../../../../state/app.store';
 import {KeyService} from '../../../../services/key.service';
